@@ -1,5 +1,5 @@
 ---
-name: feature
+name: "\U0001F331feature"
 about: 새로운 기능 또는 개선 요청을 위한 템플릿
 title: "[feature]"
 labels: "feature\U0001F331"
