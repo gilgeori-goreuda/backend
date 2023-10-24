@@ -44,9 +44,8 @@ jacocoTestReport {
         xml.required.set(true)
         csv.required.set(false)
 
-        xml.destination file("${buildDir}/jacoco/index.xml")
-        csv.destination file("${buildDir}/jacoco/index.csv")
-        html.destination file("${buildDir}/jacoco/index.html")
+        xml.destination file("${buildDir}/jacoco/test/jacocoTestReport.xml")
+        html.destination file("${buildDir}/jacoco/test/jacocoTestReport.html")
     }
 
     afterEvaluate {
@@ -55,7 +54,7 @@ jacocoTestReport {
                     fileTree(dir: it, includes: [
                             "**/*Controller",
                             "**/*Service",
-                            "**/*Repository ",
+                            "**/*Repository",
                     ])
                 })
         )
