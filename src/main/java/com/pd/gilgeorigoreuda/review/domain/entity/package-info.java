@@ -1,1 +1,0 @@
-package com.pd.gilgeorigoreuda.review.domain.entity;
