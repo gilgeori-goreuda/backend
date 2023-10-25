@@ -37,6 +37,9 @@ public class StoreLocation {
 	@Column(name = "store_address", nullable = false, length = 20)
 	private String storeAddress;
 
+	@Column(name = "detail_location", nullable = false, length = 100)
+	private String detailLocation;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_location_store_id"))
 	private Store store;

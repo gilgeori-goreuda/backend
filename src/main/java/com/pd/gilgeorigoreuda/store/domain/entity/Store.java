@@ -1,6 +1,7 @@
 package com.pd.gilgeorigoreuda.store.domain.entity;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 
@@ -37,14 +38,11 @@ public class Store extends BaseTimeEntity {
 	@Enumerated(EnumType.STRING)
 	private StoreType storeType;
 
-	@Column(name = "store_number", nullable = false, length = 20)
+	@Column(name = "store_number", length = 20)
 	private String storeNumber;
 
 	@Column(nullable = false, length = 200)
 	private String introduction;
-
-	@Column(name = "detail_location", nullable = false, length = 100)
-	private String detailLocation;
 
 	@Column(name = "store_average_rating", nullable = false)
 	@Builder.Default
@@ -54,10 +52,10 @@ public class Store extends BaseTimeEntity {
 	private String businessDate;
 
 	@Column(name = "open_time", length = 5)
-	private String openTime;
+	private LocalTime openTime;
 
 	@Column(name = "close_time", length = 5)
-	private String closeTime;
+	private LocalTime closeTime;
 
 	@Column(name = "purchase_type", nullable = false)
 	@Enumerated(EnumType.STRING)
