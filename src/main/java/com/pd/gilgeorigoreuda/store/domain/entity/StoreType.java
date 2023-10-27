@@ -11,8 +11,8 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum StoreType {
 
-	FOOD_TRUCK("FOODTRUCK"),
-	FOOD_STALL("FOODSTALL"),
+	FOOD_TRUCK("푸드트럭"),
+	FOOD_STALL("포장마차"),
 	;
 
 	private final String storeTypeName;

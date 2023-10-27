@@ -16,6 +16,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "join r.images " +
 //            "on ri.review.id = r.id " +
             "where r.store.id = :storeId " +
-            "and r.user.id = :userId")
-    List<ReviewResponse> findByReview(@Param("storeId") Long storeId, Long userId);
+            "and r.member.id= :memberId")
+    List<ReviewResponse> findByReview(@Param("storeId") Long storeId, Long memberId);
 }

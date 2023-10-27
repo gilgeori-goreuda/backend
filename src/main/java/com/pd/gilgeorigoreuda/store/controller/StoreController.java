@@ -1,2 +1,4 @@
-package com.pd.gilgeorigoreuda.store.controller;public class StoreController {
+package com.pd.gilgeorigoreuda.store.controller;
+
+public class StoreController {
 }

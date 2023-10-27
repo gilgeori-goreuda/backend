@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/review")
 public class ReviewController {
+
     private final ReviewService reviewService;
 
     @PostMapping("{storeId}")

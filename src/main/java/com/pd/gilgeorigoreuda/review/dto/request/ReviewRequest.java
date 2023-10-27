@@ -1,7 +1,6 @@
 package com.pd.gilgeorigoreuda.review.dto.request;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +13,6 @@ public class ReviewRequest {
     private String content;
     private Double reviewRating;
     private Integer likeCount;
-    private Long userId;
+    private Long memberId;
     private List<String> imageUrls;
 }
