@@ -6,6 +6,7 @@ import com.pd.gilgeorigoreuda.statistics.repository.KeywordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -26,6 +27,7 @@ public class KeywordService {
                 .build());
     }
 
+    @Scheduled(fixedDelay = 1800000)
     public void getKeyword() {
         List<Object[]> top10Keywords = keywordRepository.findTop10Keywords();
 
