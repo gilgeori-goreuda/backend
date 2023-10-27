@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.store.controller;
 
-import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.store.service.SearchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
