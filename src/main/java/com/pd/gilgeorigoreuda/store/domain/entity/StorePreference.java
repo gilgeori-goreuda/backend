@@ -1,7 +1,12 @@
 package com.pd.gilgeorigoreuda.store.domain.entity;
 
+import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
+import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -21,19 +26,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "store_visit_count")
-public class StoreVisitCount {
+@Table(name = "Store_favorites")
+public class StorePreference extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "visit_count", nullable = false)
-	@Builder.Default
-	private Integer visitCount = 0;
+	@Column(name = "preference_type", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private StorePreferenceType preferenceType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_visit_count_store_id"))
+	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_favorites_store_id"))
 	private Store store;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_favorites_member_id"))
+	private Member member;
 
 }
