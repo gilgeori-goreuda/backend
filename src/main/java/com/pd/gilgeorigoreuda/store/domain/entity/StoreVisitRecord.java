@@ -1,5 +1,8 @@
 package com.pd.gilgeorigoreuda.store.domain.entity;
 
+import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
+import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -21,19 +24,22 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "store_visit_count")
-public class StoreVisitCount {
+@Table(name = "store_visit_records")
+public class StoreVisitRecord extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "visit_count", nullable = false)
-	@Builder.Default
-	private Integer visitCount = 0;
+	@Column(name = "walking_distance")
+	private Integer walkingDistance;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_visit_count_store_id"))
+	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_visit_records_store_id"))
 	private Store store;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_visit_records_member_id"))
+	private Member member;
 
 }

@@ -11,9 +11,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum PurchaseType {
 
-	CARD("CARD"),
-	CASH("CASH"),
-	ACCOUNT_TRANSFER("ACCOUNTTRANSFER"),
+	CARD("카드"),
+	CASH("현글"),
+	ACCOUNT_TRANSFER("계좌이체"),
 	;
 
 	private final String purchaseTypeName;
