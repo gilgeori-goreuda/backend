@@ -12,7 +12,7 @@ import lombok.Getter;
 public enum PurchaseType {
 
 	CARD("카드"),
-	CASH("현글"),
+	CASH("현금"),
 	ACCOUNT_TRANSFER("계좌이체"),
 	;
 

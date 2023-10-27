@@ -83,8 +83,8 @@ public class Store extends BaseTimeEntity {
 	@Builder.Default
 	private Integer totalVisitCount = 0;
 
-	@Column(name = "last_modified_user_id")
-	private Long lastModifiedUserId;
+	@Column(name = "last_modified_member_nickname", length = 10)
+	private String lastModifiedMemberNickname;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_member_id"))

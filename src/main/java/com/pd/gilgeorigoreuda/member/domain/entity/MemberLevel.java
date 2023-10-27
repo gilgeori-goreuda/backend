@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum UserLevel {
+public enum MemberLevel {
 
 	BEGINNER("길알못"),
 	INTERMEDIATE("길좀알"),

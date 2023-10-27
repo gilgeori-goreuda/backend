@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "Store_favorites")
+@Table(name = "Store_preference")
 public class StorePreference extends BaseTimeEntity {
 
 	@Id

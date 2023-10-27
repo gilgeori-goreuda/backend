@@ -3,6 +3,7 @@ package com.pd.gilgeorigoreuda.store.domain.entity;
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -33,9 +34,6 @@ public class StoreReportHistory extends BaseTimeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_report_histories_member_id"))
 	private Member member;
-
-	@Column(name = "detail_location", nullable = false, length = 100)
-	private String detailLocation;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_report_histories_store_id"))
