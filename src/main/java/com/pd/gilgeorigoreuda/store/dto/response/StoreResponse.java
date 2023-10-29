@@ -23,12 +23,14 @@ public class StoreResponse {
 	private Integer totalVisitCount;
 	private String lastModifiedMemberNickname;
 
-	private StoreMemberResponse lastModifiedMember;
+	private ReporterResponse reporterInfo;
+
+	private StoreReviewListResponse reviews;
 
 	public StoreResponse(final Long id, final String storeName, final String storeType, final String detailLocation, final Double averageRating,
 		final String businessDates, final String openTime, final String closeTime, final String purchaseType, final String imageUrl, final Double lat,
 		final Double lng, final String streetAddress, final Integer totalVisitCount, final String lastModifiedMemberNickname,
-		final StoreMemberResponse lastModifiedMember) {
+		final ReporterResponse reporterInfo, final StoreReviewListResponse reviews) {
 		this.id = id;
 		this.storeName = storeName;
 		this.storeType = storeType;
@@ -44,6 +46,8 @@ public class StoreResponse {
 		this.streetAddress = streetAddress;
 		this.totalVisitCount = totalVisitCount;
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
-		this.lastModifiedMember = lastModifiedMember;
+		this.reporterInfo = reporterInfo;
+		this.reviews = reviews;
 	}
+
 }

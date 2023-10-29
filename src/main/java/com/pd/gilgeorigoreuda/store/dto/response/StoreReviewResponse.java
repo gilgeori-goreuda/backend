@@ -10,8 +10,6 @@ public class StoreReviewResponse {
 	private Long reviewId;
 	private String content;
 	private Double reviewRating;
-	private Integer likeCount;
-	private Integer hateCount;
 	private String memberId;
 	private String memberNickname;
 	private String memberProfileImageUrl;
@@ -21,8 +19,6 @@ public class StoreReviewResponse {
 			final Long reviewId,
 			final String content,
 			final Double reviewRating,
-			final Integer likeCount,
-			final Integer hateCount,
 			final String memberId,
 			final String memberNickname,
 			final String memberProfileImageUrl,
@@ -30,8 +26,6 @@ public class StoreReviewResponse {
 		this.reviewId = reviewId;
 		this.content = content;
 		this.reviewRating = reviewRating;
-		this.likeCount = likeCount;
-		this.hateCount = hateCount;
 		this.memberId = memberId;
 		this.memberNickname = memberNickname;
 		this.memberProfileImageUrl = memberProfileImageUrl;

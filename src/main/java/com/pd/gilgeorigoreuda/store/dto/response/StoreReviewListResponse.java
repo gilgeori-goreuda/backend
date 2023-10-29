@@ -9,6 +9,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StoreReviewListResponse {
 
-	private List<StoreReviewResponse> reviews;
+	private List<StoreReviewResponse> storeReviewResponses;
+
+	public StoreReviewListResponse(List<StoreReviewResponse> storeReviewResponses) {
+		this.storeReviewResponses = storeReviewResponses;
+	}
 
 }
