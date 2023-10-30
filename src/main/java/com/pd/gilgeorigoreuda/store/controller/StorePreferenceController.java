@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/store")
 public class StorePreferenceController {
-    private static final Long TEST_USER_ID = 1L;
+    private static final Long TEST_USER_ID = 2L;
 
     private final StorePreferenceService storePreferenceService;
 
