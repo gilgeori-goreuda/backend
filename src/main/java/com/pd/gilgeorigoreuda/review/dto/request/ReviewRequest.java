@@ -13,6 +13,5 @@ public class ReviewRequest {
     private String content;
     private Double reviewRating;
     private Integer likeCount;
-    private Long memberId;
     private List<String> imageUrls;
 }
