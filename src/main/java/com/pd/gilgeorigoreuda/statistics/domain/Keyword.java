@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.statistics.domain;
 
+import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import lombok.*;
 @Builder
 @Getter
 @Table(name = "keywords")
-public class Keyword {
+public class Keyword extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
