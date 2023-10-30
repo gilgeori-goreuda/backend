@@ -1,7 +1,6 @@
 package com.pd.gilgeorigoreuda.statistics.schedule;
 
 import com.pd.gilgeorigoreuda.statistics.domain.HotPlace;
-import com.pd.gilgeorigoreuda.statistics.repository.HotPlaceRepository;
 import com.pd.gilgeorigoreuda.statistics.repository.KeywordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,7 +16,6 @@ import java.util.Map;
 public class KeywordSchedule {
 
     private final KeywordRepository keywordRepository;
-    private final HotPlaceRepository hotPlaceRepository;
 
     @Transactional
     @Scheduled(fixedDelay = 1000)
@@ -30,10 +28,6 @@ public class KeywordSchedule {
         for (Map<String, Long> top10Keyword : top10Keywords) {
             String keyword = String.valueOf(top10Keyword.get("keyword"));
             HotPlace hotPlace = HotPlace.builder().hotPlace(keyword).build();
-            hotPlaceRepository.save(hotPlace);
-
-            // Long count = top10Keyword.get("count");
-            // System.out.println("Keyword: " + keyword + ", Count: " + count);
 
         }
     }
