@@ -5,12 +5,12 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ReporterResponse {
+public class StoreOwnerResponse {
 
 	private Long memberId;
 	private String memberNickname;
 
-	public ReporterResponse(final Long memberId, final String memberNickname) {
+	public StoreOwnerResponse(final Long memberId, final String memberNickname) {
 		this.memberId = memberId;
 		this.memberNickname = memberNickname;
 	}

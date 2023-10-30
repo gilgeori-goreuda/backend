@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 public class StoreResponse {
 
 	private Long id;
-	private String storeName;
+	private String name;
 	private String storeType;
 	private String detailLocation;
 	private Double averageRating;
@@ -22,17 +22,27 @@ public class StoreResponse {
 	private String streetAddress;
 	private Integer totalVisitCount;
 	private String lastModifiedMemberNickname;
+	private StoreOwnerResponse owner;
 
-	private ReporterResponse reporterInfo;
-
-	private StoreReviewListResponse reviews;
-
-	public StoreResponse(final Long id, final String storeName, final String storeType, final String detailLocation, final Double averageRating,
-		final String businessDates, final String openTime, final String closeTime, final String purchaseType, final String imageUrl, final Double lat,
-		final Double lng, final String streetAddress, final Integer totalVisitCount, final String lastModifiedMemberNickname,
-		final ReporterResponse reporterInfo, final StoreReviewListResponse reviews) {
+	public StoreResponse(
+			final Long id,
+			final String name,
+			final String storeType,
+			final String detailLocation,
+			final Double averageRating,
+			final String businessDates,
+			final String openTime,
+			final String closeTime,
+			final String purchaseType,
+			final String imageUrl,
+			final Double lat,
+			final Double lng,
+			final String streetAddress,
+			final Integer totalVisitCount,
+			final String lastModifiedMemberNickname,
+			final StoreOwnerResponse owner) {
 		this.id = id;
-		this.storeName = storeName;
+		this.name = name;
 		this.storeType = storeType;
 		this.detailLocation = detailLocation;
 		this.averageRating = averageRating;
@@ -46,8 +56,7 @@ public class StoreResponse {
 		this.streetAddress = streetAddress;
 		this.totalVisitCount = totalVisitCount;
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
-		this.reporterInfo = reporterInfo;
-		this.reviews = reviews;
+		this.owner = owner;
 	}
 
 }
