@@ -11,6 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -22,38 +24,51 @@ public class ReviewService {
     public void createReview(Long storeId, Long memberId, ReviewRequest request) {
         Review review = Review.builder()
                 .content(request.getContent())
-                .reviewRating(request.getReviewRating())
-                .likeCount(request.getLikeCount())
                 .store(Store.builder().id(storeId).build())
                 .member(Member.builder().id(memberId).build())
-                .images(request.getImageUrls().stream()
-                        .map(image -> ReviewImage.builder().imageUrl(image).build()
-                        ).toList())
                 .build();
 
-        for (String imageUrl : request.getImageUrls()) {
-            ReviewImage image = ReviewImage.builder()
-                    .imageUrl(imageUrl)
-                    .build();
-            ReviewImage reviewImage = image;
-            imageRepository.save(reviewImage);
-        }
-        reviewRepository.save(review);
+        Review savedReview = reviewRepository.save(review);
+
+        List<ReviewImage> reviewImages = request.getImageUrls()
+                .stream()
+                .map(
+                        image -> ReviewImage.builder()
+                                .imageUrl(image)
+                                .review(Review.builder().id(savedReview.getId()).build())
+                                .build()
+                )
+                .toList();
+
+        imageRepository.saveAll(reviewImages);
     }
 
     public void updateReview(Long reviewId, Long memberId, ReviewRequest reviewRequest) {
-        Review review = reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
+        Review review = getReview(reviewId);
 
         // 리뷰의 작성자와 현재 사용자가 일치하는지 확인
-        if (!review.getMember().getId().equals(memberId)) {
-            throw new RuntimeException("Mismatched Review");
-        }
+        review.checkAuthor(memberId);
+
         // 기존 리뷰 내용 업데이트
         review.updateContent(reviewRequest.getContent());
         review.updateReviewRating(review.getReviewRating());
         
         reviewRepository.save(review);
+    }
 
+    public void deleteReview(Long reviewId, Long memberId) {
+        Review review = getReview(reviewId);
+
+        // 리뷰의 작성자와 현재 사용자가 일치하는지 확인
+        review.checkAuthor(memberId);
+
+        reviewRepository.deleteById(reviewId);
+    }
+
+    private Review getReview(Long reviewId) {
+        Review review = reviewRepository.findById(reviewId)
+                .orElseThrow(() -> new RuntimeException("Review not found"));
+
+        return review;
     }
 }

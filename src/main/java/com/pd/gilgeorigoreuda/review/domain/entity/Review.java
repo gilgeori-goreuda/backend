@@ -54,4 +54,11 @@ public class Review extends BaseTimeEntity {
 	public void updateReviewRating(Double reviewRating) {
 		this.reviewRating = reviewRating;
 	}
+
+	public void checkAuthor(Long memberId) {
+		if (this.member.getId() == memberId) {
+			throw new RuntimeException("Mismatched Review");
+		}
+	}
+
 }
