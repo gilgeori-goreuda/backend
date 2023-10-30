@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.statistics.schedule;
 
-import com.pd.gilgeorigoreuda.statistics.domain.HotPlace;
 import com.pd.gilgeorigoreuda.statistics.repository.KeywordRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -24,11 +23,5 @@ public class KeywordSchedule {
         LocalDateTime endDayTime = LocalDateTime.now();
 
         List<Map<String, Long>> top10Keywords = keywordRepository.findTop10Keywords(startDayTime, endDayTime);
-
-        for (Map<String, Long> top10Keyword : top10Keywords) {
-            String keyword = String.valueOf(top10Keyword.get("keyword"));
-            HotPlace hotPlace = HotPlace.builder().hotPlace(keyword).build();
-
-        }
     }
 }
