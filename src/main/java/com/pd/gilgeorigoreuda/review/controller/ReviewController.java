@@ -19,5 +19,12 @@ public class ReviewController {
         reviewService.createReview(storeId, memberId, request);
     }
 
+    @PutMapping("{reviewId}/{memberId}")
+    public void updateReview(@PathVariable("reviewId") Long reviewId,
+                             @PathVariable("memberId") Long memberId,
+                             @RequestBody ReviewRequest reviewRequest) {
+        reviewService.updateReview(reviewId, memberId, reviewRequest);
+
+    }
 }
 
