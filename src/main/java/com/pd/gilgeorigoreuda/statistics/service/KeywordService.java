@@ -3,21 +3,22 @@ package com.pd.gilgeorigoreuda.statistics.service;
 import com.pd.gilgeorigoreuda.statistics.domain.Keyword;
 import com.pd.gilgeorigoreuda.statistics.event.KeywordEvent;
 import com.pd.gilgeorigoreuda.statistics.repository.KeywordRepository;
+import com.pd.gilgeorigoreuda.statistics.schedule.KeywordSchedule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
 public class KeywordService {
-    HashMap<String, Long> keywords = new HashMap<String, Long>();
+
     private final KeywordRepository keywordRepository;
+    private final KeywordSchedule keywordSchedule;
+
     @Async
     @EventListener
     public void save(KeywordEvent event){
@@ -27,14 +28,12 @@ public class KeywordService {
                 .build());
     }
 
-    @Scheduled(fixedDelay = 1800000)
     public void getKeyword() {
-        List<Object[]> top10Keywords = keywordRepository.findTop10Keywords();
-
-        for (Object[] row : top10Keywords) {
-            String keyword = (String) row[0];
-            Long count = (Long) row[1];
-            keywords.put(keyword, count);
-        }
+        keywordSchedule.schedule();
+//        for (Map<String, Long> top10Keyword : schedule) {
+//            String keyword = String.valueOf(top10Keyword.get("keyword"));
+//            Long count = top10Keyword.get("count");
+//            System.out.println("Keyword: " + keyword + ", Count: " + count);
+//        }
     }
 }
