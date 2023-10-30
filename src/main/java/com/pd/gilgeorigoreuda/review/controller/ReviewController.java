@@ -26,5 +26,11 @@ public class ReviewController {
         reviewService.updateReview(reviewId, memberId, reviewRequest);
 
     }
+
+    @DeleteMapping("{reviewId}/{memberId}")
+    public void deleteReview(@PathVariable("reviewId") Long reviewId,
+                             @PathVariable("memberId") Long memberId) {
+        reviewService.deleteReview(reviewId, memberId);
+    }
 }
 
