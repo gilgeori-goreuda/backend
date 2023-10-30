@@ -12,11 +12,19 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
-    @PostMapping("{storeId}")
+    @PostMapping("{storeId}/{memberId}")
     public void save(@PathVariable("storeId") Long storeId,
+                     @PathVariable("memberId") Long memberId,
                      @RequestBody ReviewRequest request) {
-        reviewService.createReview(storeId, request);
+        reviewService.createReview(storeId, memberId, request);
     }
 
+    @PutMapping("{reviewId}/{memberId}")
+    public void updateReview(@PathVariable("reviewId") Long reviewId,
+                             @PathVariable("memberId") Long memberId,
+                             @RequestBody ReviewRequest reviewRequest) {
+        reviewService.updateReview(reviewId, memberId, reviewRequest);
+
+    }
 }
 
