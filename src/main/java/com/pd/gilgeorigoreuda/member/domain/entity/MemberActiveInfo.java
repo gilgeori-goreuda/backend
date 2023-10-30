@@ -1,9 +1,9 @@
-package com.pd.gilgeorigoreuda.store.domain.entity;
+package com.pd.gilgeorigoreuda.member.domain.entity;
 
-import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
-import com.pd.gilgeorigoreuda.user.domain.entity.User;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -23,19 +23,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "Store_favorites")
-public class StoreFavorite extends BaseTimeEntity {
+@Table(name = "member_active_info")
+public class MemberActiveInfo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_favorites_store_id"))
-	private Store store;
+	@Enumerated(EnumType.STRING)
+	@Builder.Default
+	private MemberLevel memberLevel = MemberLevel.BEGINNER;
+
+	@Column(name = "total_walking_distance", nullable = false)
+	@Builder.Default
+	private Integer totalWalkingDistance = 0;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "fk_store_favorites_user_id"))
-	private User user;
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_member_active_info_member_id"))
+	private Member member;
 
 }

@@ -8,40 +8,55 @@ import lombok.NoArgsConstructor;
 public class StoreResponse {
 
 	private Long id;
-	private String storeName;
+	private String name;
 	private String storeType;
-	private String storeNumber;
-	private String introduction;
+	private String detailLocation;
+	private Double averageRating;
+	private String businessDates;
 	private String openTime;
 	private String closeTime;
 	private String purchaseType;
-	private String storeImageUrl;
-	private String businessDates;
-	private StoreLocationResponse storeLocation;
+	private String imageUrl;
+	private Double lat;
+	private Double lng;
+	private String streetAddress;
+	private Integer totalVisitCount;
+	private String lastModifiedMemberNickname;
+	private StoreOwnerResponse owner;
 
 	public StoreResponse(
 			final Long id,
-			final String storeName,
+			final String name,
 			final String storeType,
-			final String storeNumber,
-			final String introduction,
+			final String detailLocation,
+			final Double averageRating,
+			final String businessDates,
 			final String openTime,
 			final String closeTime,
 			final String purchaseType,
-			final String storeImageUrl,
-			final String businessDates,
-			final StoreLocationResponse storeLocation) {
+			final String imageUrl,
+			final Double lat,
+			final Double lng,
+			final String streetAddress,
+			final Integer totalVisitCount,
+			final String lastModifiedMemberNickname,
+			final StoreOwnerResponse owner) {
 		this.id = id;
-		this.storeName = storeName;
+		this.name = name;
 		this.storeType = storeType;
-		this.storeNumber = storeNumber;
-		this.introduction = introduction;
+		this.detailLocation = detailLocation;
+		this.averageRating = averageRating;
+		this.businessDates = businessDates;
 		this.openTime = openTime;
 		this.closeTime = closeTime;
 		this.purchaseType = purchaseType;
-		this.storeImageUrl = storeImageUrl;
-		this.businessDates = businessDates;
-		this.storeLocation = storeLocation;
+		this.imageUrl = imageUrl;
+		this.lat = lat;
+		this.lng = lng;
+		this.streetAddress = streetAddress;
+		this.totalVisitCount = totalVisitCount;
+		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
+		this.owner = owner;
 	}
 
 }

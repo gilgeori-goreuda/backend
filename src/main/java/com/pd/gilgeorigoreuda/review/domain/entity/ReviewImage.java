@@ -2,6 +2,7 @@ package com.pd.gilgeorigoreuda.review.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -29,10 +30,11 @@ public class ReviewImage extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "image_url", length = 512)
 	private String imageUrl;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_image_review"))
+	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_image_review_id"))
 	private Review review;
 
 }
