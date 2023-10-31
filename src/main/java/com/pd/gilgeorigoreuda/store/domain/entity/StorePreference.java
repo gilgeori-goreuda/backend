@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "Store_preference")
+@Table(name = "store_preferences")
 public class StorePreference extends BaseTimeEntity {
 
 	@Id
@@ -38,11 +38,11 @@ public class StorePreference extends BaseTimeEntity {
 	private StorePreferenceType preferenceType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_favorites_store_id"))
+	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_preferences_store_id"))
 	private Store store;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_favorites_member_id"))
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_preferences_member_id"))
 	private Member member;
 
 }
