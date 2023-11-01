@@ -15,7 +15,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ReviewCommentService commentService;
 
-    @PostMapping("{storeId}/{memberId}")
+    @PostMapping("/store/{storeId}/member/{memberId}")
     public void save(@PathVariable("storeId") Long storeId,
                      @PathVariable("memberId") Long memberId,
                      @RequestBody ReviewRequest request) {
@@ -36,7 +36,7 @@ public class ReviewController {
         reviewService.deleteReview(reviewId, memberId);
     }
 
-    @PostMapping("{reviewId}/comment/{memberId}")
+    @PostMapping("{reviewId}/comment/member/{memberId}")
     public void saveComment(@PathVariable("reviewId") Long reviewId,
                             @PathVariable("memberId") Long memberId,
                             @RequestBody ReviewCommentRequest commentRequest) {
