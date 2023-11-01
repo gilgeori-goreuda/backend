@@ -2,9 +2,13 @@ package com.pd.gilgeorigoreuda.review.controller;
 
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentRequest;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewRequest;
+import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentResponse;
 import com.pd.gilgeorigoreuda.review.service.ReviewCommentService;
 import com.pd.gilgeorigoreuda.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,5 +47,14 @@ public class ReviewController {
 
         commentService.saveComment(reviewId, memberId, commentRequest);
     }
-}
 
+    @GetMapping("{reviewId}/comment")
+    public Page<ReviewCommentResponse> findAllComment(
+            @PathVariable("reviewId") Long reviewId,
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") Integer size
+            ) {
+        Pageable pageable = PageRequest.of(page, size);
+        return commentService.findCommentsByReviewId(reviewId, pageable);
+    }
+}
