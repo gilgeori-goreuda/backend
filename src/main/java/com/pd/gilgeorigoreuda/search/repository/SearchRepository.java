@@ -9,10 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface SearchRepository extends JpaRepository<Store, Long> {
-//    @Query("select s from Store s " +
-//            "left join fetch s.categories " +
-//        "where s.lat = :lat and s.lng = :lng")
-//    List<Store> findStoreByAddress(@Param("lat") Double lat, @Param("lng") Double lng);
 
     @Query("select s from Store s " +
             "left join fetch s.categories " +

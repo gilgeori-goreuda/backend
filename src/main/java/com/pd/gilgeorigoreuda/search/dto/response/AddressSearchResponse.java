@@ -36,7 +36,6 @@ public class AddressSearchResponse {
                 store.getCategories()
                         .stream()
                         .map(FoodCategoryResponse::of)
-//                        .map(foodCategory -> FoodCategoryResponse.of(foodCategory))
                         .toList()
         );
     }
