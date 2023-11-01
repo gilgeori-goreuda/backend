@@ -9,8 +9,5 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
-    @Query("select s from StorePreference p " +
-            "left join p.store s " +
-            "where p.member.id = :memberId and p.preferenceType = 'PREFERRED'")
-    List<Store> findAllByMemberIdAndLike(@Param("memberId") Long memberId);
+
 }

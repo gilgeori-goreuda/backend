@@ -3,24 +3,14 @@ package com.pd.gilgeorigoreuda.store.domain.entity;
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Index;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -89,5 +79,8 @@ public class Store extends BaseTimeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_member_id"))
 	private Member member;
+
+	@OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE, orphanRemoval = true)
+	private List<FoodCategory> foodCategories;
 
 }

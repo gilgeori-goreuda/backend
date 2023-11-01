@@ -5,6 +5,7 @@ import com.pd.gilgeorigoreuda.review.domain.entity.ReviewImage;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -16,6 +17,7 @@ public class MemberReviewResponse {
     private Double reviewRating;
     private Integer likeCount;
     private Integer hateCount;
+    private LocalDateTime createdAt;
     private List<String> imageUrl;
 
     private MemberReviewStoreResponse storeInfo;
@@ -26,6 +28,7 @@ public class MemberReviewResponse {
             final Double reviewRating,
             final Integer likeCount,
             final Integer hateCount,
+            final LocalDateTime createdAt,
             final List<String> imageUrl,
             final MemberReviewStoreResponse storeInfo) {
         this.reviewId = reviewId;
@@ -33,23 +36,19 @@ public class MemberReviewResponse {
         this.reviewRating = reviewRating;
         this.likeCount = likeCount;
         this.hateCount = hateCount;
+        this.createdAt = createdAt;
         this.imageUrl = imageUrl;
         this.storeInfo = storeInfo;
     }
 
-    public static MemberReviewResponse of(Review review) {
-//        List<ReviewImage> images = review.getImages();
-//        List<String> imageUrls = new ArrayList<>();
-//        for (ReviewImage image : images) {
-//            imageUrls.add(image.getImageUrl());
-//        }
-
+    public static MemberReviewResponse of(final Review review) {
         return new MemberReviewResponse(
                 review.getId(),
                 review.getContent(),
                 review.getReviewRating(),
                 review.getLikeCount(),
                 review.getHateCount(),
+                review.getCreatedAt(),
                 review.getImages()
                         .stream()
                         .map(ReviewImage::getImageUrl)

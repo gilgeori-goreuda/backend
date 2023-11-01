@@ -9,7 +9,7 @@ import java.util.List;
 @NoArgsConstructor
 public class MemberReviewListResponse {
 
-    List<MemberReviewResponse> reviews;
+    private List<MemberReviewResponse> reviews;
 
     private MemberReviewListResponse(final List<MemberReviewResponse> reviews) {
         this.reviews = reviews;
