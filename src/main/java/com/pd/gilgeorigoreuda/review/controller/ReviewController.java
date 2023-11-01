@@ -1,6 +1,8 @@
 package com.pd.gilgeorigoreuda.review.controller;
 
+import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentRequest;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewRequest;
+import com.pd.gilgeorigoreuda.review.service.ReviewCommentService;
 import com.pd.gilgeorigoreuda.review.service.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -11,8 +13,9 @@ import org.springframework.web.bind.annotation.*;
 public class ReviewController {
 
     private final ReviewService reviewService;
+    private final ReviewCommentService commentService;
 
-    @PostMapping("{storeId}/{memberId}")
+    @PostMapping("/store/{storeId}/member/{memberId}")
     public void save(@PathVariable("storeId") Long storeId,
                      @PathVariable("memberId") Long memberId,
                      @RequestBody ReviewRequest request) {
@@ -31,6 +34,14 @@ public class ReviewController {
     public void deleteReview(@PathVariable("reviewId") Long reviewId,
                              @PathVariable("memberId") Long memberId) {
         reviewService.deleteReview(reviewId, memberId);
+    }
+
+    @PostMapping("{reviewId}/comment/member/{memberId}")
+    public void saveComment(@PathVariable("reviewId") Long reviewId,
+                            @PathVariable("memberId") Long memberId,
+                            @RequestBody ReviewCommentRequest commentRequest) {
+
+        commentService.saveComment(reviewId, memberId, commentRequest);
     }
 }
 
