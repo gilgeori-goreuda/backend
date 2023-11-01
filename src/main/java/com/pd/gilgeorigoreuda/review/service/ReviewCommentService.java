@@ -4,8 +4,12 @@ import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewComment;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentRequest;
+import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentListResponse;
+import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentResponse;
 import com.pd.gilgeorigoreuda.review.repository.ReviewCommentRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewCommentService {
     
     private final ReviewCommentRepository commentRepository;
-
     @Transactional
     public void saveComment(Long reviewId, Long memberId , ReviewCommentRequest request) {
         ReviewComment comment = ReviewComment.builder()
@@ -25,5 +28,10 @@ public class ReviewCommentService {
                 .build();
         commentRepository.save(comment);
     }
-    
+
+    public ReviewCommentListResponse findCommentsByReviewId(Long reviewId, Pageable pageable) {
+        Page<ReviewComment> reviewCommentPage = commentRepository.findAllByReviewId(reviewId, pageable);
+
+        return ReviewCommentListResponse.of(reviewCommentPage);
+    }
 }
