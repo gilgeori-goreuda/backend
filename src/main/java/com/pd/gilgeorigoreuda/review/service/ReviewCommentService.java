@@ -4,6 +4,7 @@ import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewComment;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentRequest;
+import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentListResponse;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentResponse;
 import com.pd.gilgeorigoreuda.review.repository.ReviewCommentRepository;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,9 @@ public class ReviewCommentService {
         commentRepository.save(comment);
     }
 
-    public Page<ReviewCommentResponse> findCommentsByReviewId(Long reviewId, Pageable pageable) {
-        Page<ReviewComment> comments = commentRepository.findByReview_Id(reviewId, pageable);
-        return comments.map(comment -> new ReviewCommentResponse(comment));
+    public ReviewCommentListResponse findCommentsByReviewId(Long reviewId, Pageable pageable) {
+        Page<ReviewComment> reviewCommentPage = commentRepository.findAllByReviewId(reviewId, pageable);
+
+        return ReviewCommentListResponse.of(reviewCommentPage);
     }
 }
