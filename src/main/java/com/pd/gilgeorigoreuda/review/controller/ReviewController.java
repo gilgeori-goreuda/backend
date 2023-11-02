@@ -62,4 +62,11 @@ public class ReviewController {
                 .ok()
                 .body(response);
     }
+
+    @PutMapping("/comment/{commentId}/member/{memberId}")
+    public void updateReviewComment(@PathVariable("commentId") Long commentId,
+                                    @PathVariable("memberId") Long memberId,
+                                    @RequestBody ReviewCommentRequest commentRequest) {
+        commentService.updateComment(commentId, memberId, commentRequest);
+    }
 }
