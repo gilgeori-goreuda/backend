@@ -1,5 +1,11 @@
 package com.pd.gilgeorigoreuda.store.dto.response;
 
+import java.util.List;
+
+import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
+import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
+import com.pd.gilgeorigoreuda.store.domain.entity.Store;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -23,6 +29,7 @@ public class StoreResponse {
 	private Integer totalVisitCount;
 	private String lastModifiedMemberNickname;
 	private StoreOwnerResponse owner;
+	private List<String> foodCategories;
 
 	public StoreResponse(
 			final Long id,
@@ -40,7 +47,8 @@ public class StoreResponse {
 			final String streetAddress,
 			final Integer totalVisitCount,
 			final String lastModifiedMemberNickname,
-			final StoreOwnerResponse owner) {
+			final StoreOwnerResponse owner,
+			final List<String> foodCategories) {
 		this.id = id;
 		this.name = name;
 		this.storeType = storeType;
@@ -57,6 +65,33 @@ public class StoreResponse {
 		this.totalVisitCount = totalVisitCount;
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
 		this.owner = owner;
+		this.foodCategories = foodCategories;
+	}
+
+	public static StoreResponse of(Store store) {
+		return new StoreResponse(
+				store.getId(),
+				store.getName(),
+				store.getStoreType().toString(),
+				store.getDetailLocation(),
+				store.getAverageRating(),
+				store.getBusinessDate(),
+				store.getOpenTime().toString(),
+				store.getCloseTime().toString(),
+				store.getPurchaseType().toString(),
+				store.getImageUrl(),
+				store.getLat(),
+				store.getLng(),
+				store.getStreetAddress(),
+				store.getTotalVisitCount(),
+				store.getLastModifiedMemberNickname(),
+				StoreOwnerResponse.of(store.getMember()),
+				store.getFoodCategories()
+					.stream()
+					.map(FoodCategory::getFoodType)
+					.map(FoodType::getFoodName)
+					.toList()
+		);
 	}
 
 }

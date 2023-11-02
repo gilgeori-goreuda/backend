@@ -5,6 +5,7 @@ import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -56,7 +57,7 @@ public class Review extends BaseTimeEntity {
 	}
 
 	public void checkAuthor(Long memberId) {
-		if (this.member.getId() == memberId) {
+		if (Objects.equals(this.member.getId(), memberId)) {
 			throw new RuntimeException("Mismatched Review");
 		}
 	}

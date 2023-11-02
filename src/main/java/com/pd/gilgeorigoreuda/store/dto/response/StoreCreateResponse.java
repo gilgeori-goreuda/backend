@@ -9,8 +9,12 @@ public class StoreCreateResponse {
 
 	private Long id;
 
-	public StoreCreateResponse(final Long id) {
+	private StoreCreateResponse(final Long id) {
 		this.id = id;
+	}
+
+	public static StoreCreateResponse of(final Long id) {
+		return new StoreCreateResponse(id);
 	}
 
 }

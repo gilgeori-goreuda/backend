@@ -18,7 +18,7 @@ public enum PurchaseType {
 
 	private final String purchaseTypeName;
 
-	private static PurchaseType of(String purchaseType) {
+	public static PurchaseType of(String purchaseType) {
 		return Arrays.stream(values())
 			.filter(pt -> pt.getPurchaseTypeName().equals(purchaseType.toUpperCase()))
 			.findFirst()

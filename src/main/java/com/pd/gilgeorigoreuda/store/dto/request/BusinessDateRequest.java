@@ -22,7 +22,7 @@ public class BusinessDateRequest {
 	private Boolean saturday = true;
 	private Boolean sunday = true;
 
-	public static BusinessDateRequest from(final String availableDatesString) {
+	public static BusinessDateRequest of(final String availableDatesString) {
 		final BusinessDateRequest businessDateRequest = new BusinessDateRequest();
 		setFields(businessDateRequest, availableDatesString);
 
@@ -64,6 +64,7 @@ public class BusinessDateRequest {
 
 	private List<String> getAvailableDates(final Field[] fields) {
 		final List<String> availableDates = new ArrayList<>();
+
 		for (final Field field : fields) {
 			field.setAccessible(true);
 			final Boolean value = getValue(field);
