@@ -69,4 +69,10 @@ public class ReviewController {
                                     @RequestBody ReviewCommentRequest commentRequest) {
         commentService.updateComment(commentId, memberId, commentRequest);
     }
+
+    @DeleteMapping("/comment/{commentId}/member/{memberId}")
+    public void deleteReviewComment(@PathVariable("commentId") Long commentId,
+                             @PathVariable("memberId") Long memberId) {
+        commentService.deleteReviewComment(commentId, memberId);
+    }
 }

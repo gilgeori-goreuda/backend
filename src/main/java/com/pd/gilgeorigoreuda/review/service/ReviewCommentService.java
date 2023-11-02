@@ -13,12 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 @RequiredArgsConstructor
 public class ReviewCommentService {
     
     private final ReviewCommentRepository commentRepository;
-    @Transactional
     public void saveComment(Long reviewId, Long memberId , ReviewCommentRequest request) {
         ReviewComment comment = ReviewComment.builder()
                 .content(request.getContent())
@@ -27,20 +26,26 @@ public class ReviewCommentService {
                 .build();
         commentRepository.save(comment);
     }
-
+    @Transactional(readOnly = true)
     public ReviewCommentListResponse findCommentsByReviewId(Long reviewId, Pageable pageable) {
         Page<ReviewComment> reviewCommentPage = commentRepository.findAllByReviewId(reviewId, pageable);
 
         return ReviewCommentListResponse.of(reviewCommentPage);
     }
 
-    @Transactional
     public void updateComment(Long commentId, Long memberId, ReviewCommentRequest commentRequest) {
         ReviewComment reviewComment = getReviewComment(commentId);
         reviewComment.validateCommentAuthor(memberId);
         reviewComment.updateReviewComment(commentRequest.getContent());
 
         commentRepository.save(reviewComment);
+    }
+
+    public void deleteReviewComment(Long commentId, Long memberId) {
+        ReviewComment reviewComment = getReviewComment(commentId);
+        reviewComment.validateCommentAuthor(memberId);
+
+        commentRepository.deleteById(commentId);
     }
 
     private ReviewComment getReviewComment(Long commentId) {
