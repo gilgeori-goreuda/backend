@@ -5,7 +5,6 @@ import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewComment;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentRequest;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentListResponse;
-import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentResponse;
 import com.pd.gilgeorigoreuda.review.repository.ReviewCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,5 +32,21 @@ public class ReviewCommentService {
         Page<ReviewComment> reviewCommentPage = commentRepository.findAllByReviewId(reviewId, pageable);
 
         return ReviewCommentListResponse.of(reviewCommentPage);
+    }
+
+    @Transactional
+    public void updateComment(Long commentId, Long memberId, ReviewCommentRequest commentRequest) {
+        ReviewComment reviewComment = getReviewComment(commentId);
+        reviewComment.validateCommentAuthor(memberId);
+        reviewComment.updateReviewComment(commentRequest.getContent());
+
+        commentRepository.save(reviewComment);
+    }
+
+    private ReviewComment getReviewComment(Long commentId) {
+        ReviewComment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new RuntimeException("ReviewComment not found"));
+
+        return comment;
     }
 }
