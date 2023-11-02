@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum StorePreferenceType {
 
 	PREFERRED("선호"),
+	NONE("무관"),
 	NOT_PREFERRED("비선호");
 
 	private final String value;
