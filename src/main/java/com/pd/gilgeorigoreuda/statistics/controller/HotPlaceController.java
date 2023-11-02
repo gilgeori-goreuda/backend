@@ -1,6 +1,7 @@
 package com.pd.gilgeorigoreuda.statistics.controller;
 
 import com.pd.gilgeorigoreuda.statistics.domain.HotPlace;
+import com.pd.gilgeorigoreuda.statistics.dto.response.HotPlaceListResponse;
 import com.pd.gilgeorigoreuda.statistics.service.HotPlaceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,7 @@ import java.util.List;
 public class HotPlaceController {
     private final HotPlaceService hotPlaceService;
     @GetMapping
-    public List<HotPlace> getAllHotPlace(){
+    public HotPlaceListResponse getAllHotPlace(){
         return hotPlaceService.getAllHotPlace();
     }
 }
