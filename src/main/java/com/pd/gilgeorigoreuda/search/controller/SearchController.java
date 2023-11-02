@@ -2,6 +2,7 @@ package com.pd.gilgeorigoreuda.search.controller;
 
 import com.pd.gilgeorigoreuda.search.dto.response.AddressSearchListResponse;
 import com.pd.gilgeorigoreuda.search.service.SearchService;
+import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,12 +20,13 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping("/address")
-    public ResponseEntity<AddressSearchListResponse> addressSearch(
-            @RequestParam(required = false,defaultValue = "0",name = "lat") Double lat,
-            @RequestParam(required = false,defaultValue = "0",name = "lng") Double lng
-    ){
+    public ResponseEntity<AddressSearchListResponse> addressAndCategorySearch(
+            @RequestParam(required = false,name = "lat") Double lat,
+            @RequestParam(required = false,name = "lng") Double lng,
+            @RequestParam(required = false,name = "foodType") FoodType foodType
+            ){
 
-        AddressSearchListResponse response = searchService.getStoreByAddress(lat, lng);
+        AddressSearchListResponse response = searchService.getStoreByAddressAndFoodType(lat, lng, foodType);
 
         return ResponseEntity
                 .ok()
