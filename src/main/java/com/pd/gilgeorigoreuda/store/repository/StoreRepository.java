@@ -9,9 +9,12 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
+
     @Query("SELECT s " +
             "FROM Store s " +
-            "where s.createdAt >= :startDay and s.createdAt <= :endDay")
+            "where s.createdAt >= :startDay and s.createdAt <= :endDay " +
+            "order by s.createdAt desc " +
+            "limit 10")
     List<Store> findAllByBetweenDay(@Param("startDay") LocalDateTime startDay,
                                     @Param("endDay") LocalDateTime endDay);
 
@@ -20,6 +23,6 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
             "ORDER BY ((0.713 * (s.averageRating / 5)) + (0.287 * (s.totalVisitCount * 0.01))) " +
             "DESC " +
             "limit 10")
-
     List<Store> findStoresByWeightedAverageRating();
+
 }

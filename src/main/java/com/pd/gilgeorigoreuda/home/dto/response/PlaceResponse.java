@@ -6,7 +6,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class HotPlaceResponse {
+public class PlaceResponse {
+
     private Long id;
     private String imageUrl;
     private String streetAddress;
@@ -15,13 +16,13 @@ public class HotPlaceResponse {
     private String openTime;
     private String closeTime;
 
-    private HotPlaceResponse(Long id,
-                            String imageUrl,
-                            String streetAddress,
-                            String detailLocation,
-                            String name,
-                            String openTime,
-                            String closeTime) {
+    private PlaceResponse(Long id,
+                          String imageUrl,
+                          String streetAddress,
+                          String detailLocation,
+                          String name,
+                          String openTime,
+                          String closeTime) {
         this.id = id;
         this.imageUrl = imageUrl;
         this.streetAddress = streetAddress;
@@ -31,8 +32,8 @@ public class HotPlaceResponse {
         this.closeTime = closeTime;
     }
 
-    public static HotPlaceResponse of(Store store) {
-        return new HotPlaceResponse(
+    public static PlaceResponse of(Store store) {
+        return new PlaceResponse(
                 store.getId(),
                 store.getImageUrl(),
                 store.getStreetAddress(),
@@ -42,4 +43,5 @@ public class HotPlaceResponse {
                 store.getCloseTime()
         );
     }
+
 }
