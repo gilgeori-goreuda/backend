@@ -1,10 +1,12 @@
-package com.pd.gilgeorigoreuda.review.domain.entity;
+package com.pd.gilgeorigoreuda.store.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -24,22 +26,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "review_comments")
-public class ReviewComment extends BaseTimeEntity {
+@Table(name = "store_preferences")
+public class StorePreference extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "content", length = 200)
-	private String content;
+	@Column(name = "preference_type", nullable = false)
+	@Enumerated(EnumType.STRING)
+	private StorePreferenceType preferenceType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_comment_review_id"))
-	private Review review;
+	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_preferences_store_id"))
+	private Store store;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_review_comment_member_id"))
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_preferences_member_id"))
 	private Member member;
 
 }

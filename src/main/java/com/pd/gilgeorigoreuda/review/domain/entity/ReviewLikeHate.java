@@ -5,6 +5,8 @@ import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -24,22 +26,23 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "review_comments")
-public class ReviewComment extends BaseTimeEntity {
+@Table(name = "review_likes_hates")
+public class ReviewLikeHate extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "content", length = 200)
-	private String content;
+	@Enumerated(EnumType.STRING)
+	@Column(name = "preference_type", nullable = false)
+	private ReviewPreferenceType preferenceType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_comment_review_id"))
-	private Review review;
-
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_review_comment_member_id"))
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_review_likes_hates_member_id"))
 	private Member member;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_likes_hates_review_id"))
+	private Review review;
 
 }
