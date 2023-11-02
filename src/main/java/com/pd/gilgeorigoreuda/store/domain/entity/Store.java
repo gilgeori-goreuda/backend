@@ -66,7 +66,7 @@ public class Store extends BaseTimeEntity {
 	@Column(nullable = false)
 	private Double lng;
 
-	@Column(name = "street_address", nullable = false, length = 128)
+	@Embedded
 	private String streetAddress;
 
 	@Column(name = "total_visit_count")
