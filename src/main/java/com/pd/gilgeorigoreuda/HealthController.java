@@ -11,4 +11,9 @@ public class HealthController {
 		return "OK";
 	}
 
+	@GetMapping("/hana")
+	public String hana() {
+		return "hana-heo";
+	}
+
 }
