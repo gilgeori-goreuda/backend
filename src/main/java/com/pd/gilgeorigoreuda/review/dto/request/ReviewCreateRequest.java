@@ -26,6 +26,6 @@ public class ReviewCreateRequest {
 
     private Integer likeCount;
 
-    private List<@URL(message = "잘못된 이미지 URL입니다.") String> imageUrls;
+    //private List<@URL(message = "잘못된 이미지 URL입니다.") String> imageUrls;
 
 }
