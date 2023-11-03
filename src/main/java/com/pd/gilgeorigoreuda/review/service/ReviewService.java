@@ -25,6 +25,7 @@ public class ReviewService {
     public void createReview(final Long storeId, final Long memberId, final ReviewCreateRequest request) {
         Review review = Review.builder()
                 .content(request.getContent())
+                .reviewRating(request.getReviewRating())
                 .store(Store.builder().id(storeId).build())
                 .member(Member.builder().id(memberId).build())
                 .build();
