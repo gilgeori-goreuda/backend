@@ -42,4 +42,13 @@ public class ReviewComment extends BaseTimeEntity {
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_review_comment_member_id"))
 	private Member member;
 
+	public void validateCommentAuthor(Long memberId) {
+		if (!this.member.getId().equals(memberId)) {
+			throw new RuntimeException("Mismatched Review");
+		}
+	}
+
+	public void updateReviewComment(String content) {
+		this.content = content;
+	}
 }
