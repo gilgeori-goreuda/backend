@@ -18,8 +18,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "where r.member.id = :memberId")
     List<Review> findAllByMemberId(@Param("memberId") Long memberId);
 
-public interface ReviewRepository extends JpaRepository<Review, Long> {
-
     @Query("SELECT DISTINCT r FROM Review r " +
             "LEFT JOIN FETCH r.images ")
     Page<ReviewResponse> findAllReviewsWithImagesOrderByRecent(Pageable pageable);

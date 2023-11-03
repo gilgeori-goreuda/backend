@@ -24,8 +24,7 @@ public class SearchController {
             @RequestParam(required = false,name = "lat") Double lat,
             @RequestParam(required = false,name = "lng") Double lng,
             @RequestParam(required = false,name = "foodType") FoodType foodType
-            ){
-
+    ){
         AddressSearchListResponse response = searchService.getStoreByAddressAndFoodType(lat, lng, foodType);
 
         return ResponseEntity

@@ -14,7 +14,7 @@ public class MemberReviewResponse {
 
     private Long reviewId;
     private String content;
-    private Double reviewRating;
+    private Integer reviewRating;
     private Integer likeCount;
     private Integer hateCount;
     private LocalDateTime createdAt;
@@ -25,7 +25,7 @@ public class MemberReviewResponse {
     private MemberReviewResponse(
             final Long reviewId,
             final String content,
-            final Double reviewRating,
+            final Integer reviewRating,
             final Integer likeCount,
             final Integer hateCount,
             final LocalDateTime createdAt,

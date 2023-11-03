@@ -31,9 +31,9 @@ public class AddressSearchResponse {
         this.imageUrl = store.getImageUrl();
         this.lat = store.getLat();
         this.lng = store.getLng();
-        this.streetAddress = store.getStreetAddress();
+        this.streetAddress = store.getStreetAddress().toString();
         this.storeCategories = FoodCategoryListResponse.of(
-                store.getCategories()
+                store.getFoodCategories()
                         .stream()
                         .map(FoodCategoryResponse::of)
                         .toList()
