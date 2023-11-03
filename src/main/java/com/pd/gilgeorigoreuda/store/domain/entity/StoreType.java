@@ -17,7 +17,7 @@ public enum StoreType {
 
 	private final String storeTypeName;
 
-	private static StoreType of(String storeType) {
+	public static StoreType of(String storeType) {
 		return Arrays.stream(values())
 			.filter(st -> st.getStoreTypeName().equals(storeType.toUpperCase()))
 			.findFirst()

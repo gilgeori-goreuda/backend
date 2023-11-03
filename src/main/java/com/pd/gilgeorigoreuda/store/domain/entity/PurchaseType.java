@@ -12,13 +12,13 @@ import lombok.Getter;
 public enum PurchaseType {
 
 	CARD("카드"),
-	CASH("현글"),
+	CASH("현금"),
 	ACCOUNT_TRANSFER("계좌이체"),
 	;
 
 	private final String purchaseTypeName;
 
-	private static PurchaseType of(String purchaseType) {
+	public static PurchaseType of(String purchaseType) {
 		return Arrays.stream(values())
 			.filter(pt -> pt.getPurchaseTypeName().equals(purchaseType.toUpperCase()))
 			.findFirst()

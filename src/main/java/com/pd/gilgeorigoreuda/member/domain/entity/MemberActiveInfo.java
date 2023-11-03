@@ -32,7 +32,7 @@ public class MemberActiveInfo {
 
 	@Enumerated(EnumType.STRING)
 	@Builder.Default
-	private UserLevel userLevel = UserLevel.BEGINNER;
+	private MemberLevel memberLevel = MemberLevel.BEGINNER;
 
 	@Column(name = "total_walking_distance", nullable = false)
 	@Builder.Default
@@ -41,4 +41,5 @@ public class MemberActiveInfo {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_member_active_info_member_id"))
 	private Member member;
+
 }

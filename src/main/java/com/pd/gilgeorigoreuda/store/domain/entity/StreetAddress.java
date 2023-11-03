@@ -20,9 +20,9 @@ public class StreetAddress {
 	private String smallAddress;
 
 	private StreetAddress(
-		final String largeAddress,
-		final String mediumAddress,
-		final String smallAddress) {
+			final String largeAddress,
+			final String mediumAddress,
+			final String smallAddress) {
 		this.largeAddress = largeAddress;
 		this.mediumAddress = mediumAddress;
 		this.smallAddress = smallAddress;
@@ -35,6 +35,11 @@ public class StreetAddress {
 
 	public static String[] splitAddress(final String fullStreetAddress) {
 		return fullStreetAddress.split(" ", 3);
+	}
+
+	@Override
+	public String toString() {
+		return largeAddress + " " + mediumAddress + " " + smallAddress;
 	}
 
 }
