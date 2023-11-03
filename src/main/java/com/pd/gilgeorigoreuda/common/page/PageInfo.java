@@ -20,7 +20,7 @@ public class PageInfo {
         this.totalSize = totalSize;
     }
 
-    public static PageInfo of(Page<?> data) {
+    public static PageInfo of(final Page<?> data) {
         int currentPage = data.getPageable().getPageNumber() + 1;
         int totalPages = data.getTotalPages();
         int pageSize = data.getPageable().getPageSize();

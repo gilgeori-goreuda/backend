@@ -24,6 +24,7 @@ public class ReviewCommentService {
                 .review(Review.builder().id(reviewId).build())
                 .member(Member.builder().id(memberId).build())
                 .build();
+
         commentRepository.save(comment);
     }
     @Transactional(readOnly = true)

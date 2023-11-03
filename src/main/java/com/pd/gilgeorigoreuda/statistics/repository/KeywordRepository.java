@@ -11,10 +11,11 @@ import java.util.Map;
 
 public interface KeywordRepository extends JpaRepository<Keyword,Long> {
 
-    @Query(value = "SELECT keyword, COUNT(*) as count " +
-            "FROM (SELECT keyword, created_at From Keywords WHERE created_at >= :startDayTime AND created_at <= :endDayTime) as finltered_data " +
-            "GROUP BY keyword, DATE(created_at), HOUR(created_at) " +
-            "ORDER BY count DESC, keyword ASC " +
-            "LIMIT 10", nativeQuery = true)
+    @Query(value = "select keyword, count(*) as count " +
+            "from (select keyword, created_at from Keywords where created_at >= :startDayTime and created_at <= :endDayTime) as finltered_data " +
+            "group by keyword, DATE(created_at), HOUR(created_at) " +
+            "order by count desc, keyword asc " +
+            "limit 10"
+		, nativeQuery = true)
     List<Map<String, Long>> findTop10Keywords(@Param("startDayTime") LocalDateTime startDayTime, @Param("endDayTime") LocalDateTime endDayTime);
 }

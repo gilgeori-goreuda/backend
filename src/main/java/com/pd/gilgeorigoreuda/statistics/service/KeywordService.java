@@ -23,4 +23,5 @@ public class KeywordService {
                 .keyword(event.getKeyword())
                 .build());
     }
+
 }

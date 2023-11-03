@@ -8,6 +8,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 public class HotPlaceListResponse {
+
     private List<HotPlaceResponse> hotPlaceResponses;
 
     private HotPlaceListResponse(List<HotPlaceResponse> hotPlaceResponses) {
