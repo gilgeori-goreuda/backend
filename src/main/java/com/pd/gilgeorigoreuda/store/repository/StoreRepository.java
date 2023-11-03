@@ -1,5 +1,7 @@
 package com.pd.gilgeorigoreuda.store.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -13,6 +15,12 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 		+ "left join fetch s.member m "
 		+ "left join fetch s.foodCategories fc "
 		+ "where s.id = :storeId")
-	Store findByStoreId(@Param("storeId") Long storeId);
+	Optional<Store> findStoreWithMemberAndCategories(@Param("storeId") Long storeId);
+
+	@Query("select s "
+		+ "from Store s "
+		+ "left join fetch s.member m "
+		+ "where s.id = :storeId")
+	Optional<Store> findStoreWithMember(@Param("storeId") Long storeId);
 
 }

@@ -16,7 +16,8 @@ import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
-import com.pd.gilgeorigoreuda.store.dto.response.UpdateStoreResponse;
+import com.pd.gilgeorigoreuda.store.dto.response.StoreUpdateResponse;
+import com.pd.gilgeorigoreuda.store.service.StoreService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -55,16 +56,16 @@ public class StoreController {
 
 	// todo: 권한 확인
 	@PutMapping("/{storeId}")
-	public ResponseEntity<UpdateStoreResponse> updateStore(
+	public ResponseEntity<StoreUpdateResponse> updateStore(
 		// todo: 유저 정보
 		@Valid @RequestBody final StoreUpdateRequest storeUpdateRequest,
 		@PathVariable final Long storeId
 	) {
-		UpdateStoreResponse updateStoreResponse = storeService.updateStore(1L, storeId, storeUpdateRequest);
+		StoreUpdateResponse storeUpdateResponse = storeService.updateStore(1L, storeId, storeUpdateRequest);
 
 		return ResponseEntity
 			.ok()
-			.body(updateStoreResponse);
+			.body(storeUpdateResponse);
 	}
 
 	// todo: 권한 확인

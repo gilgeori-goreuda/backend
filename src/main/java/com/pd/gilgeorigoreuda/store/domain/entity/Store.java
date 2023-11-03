@@ -1,12 +1,15 @@
 package com.pd.gilgeorigoreuda.store.domain.entity;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+import com.pd.gilgeorigoreuda.store.dto.request.BusinessDateRequest;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,7 +37,7 @@ import lombok.NoArgsConstructor;
 @Table(
 	name = "stores",
 	indexes = {
-		@Index(name = "idx_store_lat_lng", columnList = "lat, lng")
+		@Index(name = "idx_store_large_medium_address_lat_lng", columnList = "large_address, medium_address, lat, lng"),
 	}
 )
 public class Store extends BaseTimeEntity {
@@ -60,12 +63,11 @@ public class Store extends BaseTimeEntity {
 	@Column(name = "business_date", nullable = false, length = 20)
 	private String businessDate;
 
-	// todo: open, close time 자료형 변경
 	@Column(name = "open_time", length = 5)
-	private String openTime;
+	private LocalTime openTime;
 
 	@Column(name = "close_time", length = 5)
-	private String closeTime;
+	private LocalTime closeTime;
 
 	@Column(name = "purchase_type", nullable = false)
 	@Enumerated(EnumType.STRING)
@@ -80,8 +82,8 @@ public class Store extends BaseTimeEntity {
 	@Column(nullable = false)
 	private Double lng;
 
-	@Column(name = "street_address", nullable = false, length = 128)
-	private String streetAddress;
+	@Embedded
+	private StreetAddress streetAddress;
 
 	@Column(name = "total_visit_count")
 	@Builder.Default
@@ -96,5 +98,40 @@ public class Store extends BaseTimeEntity {
 
 	@OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<FoodCategory> foodCategories;
+
+	public void addFoodCategories(final List<FoodCategory> foodCategories) {
+		if (!this.foodCategories.isEmpty()) {
+			this.foodCategories.clear();
+		}
+
+		this.foodCategories.addAll(foodCategories);
+	}
+
+	public void updateBasicInfo(
+			final String name,
+			final String storeType,
+			final LocalTime openTime,
+			final LocalTime closeTime,
+			final String purchaseType,
+			final String businessDates,
+			final Double lat,
+			final Double lng,
+			final String streetAddress,
+			final String lastModifiedMemberNickname) {
+		this.name = name;
+		this.storeType = StoreType.of(storeType);
+		this.openTime = openTime;
+		this.closeTime = closeTime;
+		this.purchaseType = PurchaseType.of(purchaseType);
+		this.businessDate = BusinessDateRequest.of(businessDates).toString();
+		this.lat = lat;
+		this.lng = lng;
+		this.streetAddress = StreetAddress.of(streetAddress);
+		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
+	}
+
+	public boolean isOwner(Long memberId) {
+		return this.member.getId().equals(memberId);
+	}
 
 }

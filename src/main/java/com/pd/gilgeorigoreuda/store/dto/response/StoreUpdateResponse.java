@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class StoreResponse {
+public class StoreUpdateResponse {
 
 	private Long id;
 	private String name;
@@ -31,7 +31,7 @@ public class StoreResponse {
 	private StoreOwnerResponse owner;
 	private List<String> foodCategories;
 
-	public StoreResponse(
+	public StoreUpdateResponse(
 			final Long id,
 			final String name,
 			final String storeType,
@@ -68,29 +68,29 @@ public class StoreResponse {
 		this.foodCategories = foodCategories;
 	}
 
-	public static StoreResponse of(Store store) {
-		return new StoreResponse(
-				store.getId(),
-				store.getName(),
-				store.getStoreType().toString(),
-				store.getDetailLocation(),
-				store.getAverageRating(),
-				store.getBusinessDate(),
-				store.getOpenTime().toString(),
-				store.getCloseTime().toString(),
-				store.getPurchaseType().toString(),
-				store.getImageUrl(),
-				store.getLat(),
-				store.getLng(),
-				store.getStreetAddress().toString(),
-				store.getTotalVisitCount(),
-				store.getLastModifiedMemberNickname(),
-				StoreOwnerResponse.of(store.getMember()),
-				store.getFoodCategories()
-					.stream()
-					.map(FoodCategory::getFoodType)
-					.map(FoodType::getFoodName)
-					.toList()
+	public static StoreUpdateResponse of(Store store) {
+		return new StoreUpdateResponse(
+			store.getId(),
+			store.getName(),
+			store.getStoreType().toString(),
+			store.getDetailLocation(),
+			store.getAverageRating(),
+			store.getBusinessDate(),
+			store.getOpenTime().toString(),
+			store.getCloseTime().toString(),
+			store.getPurchaseType().toString(),
+			store.getImageUrl(),
+			store.getLat(),
+			store.getLng(),
+			store.getStreetAddress().toString(),
+			store.getTotalVisitCount(),
+			store.getLastModifiedMemberNickname(),
+			StoreOwnerResponse.of(store.getMember()),
+			store.getFoodCategories()
+				.stream()
+				.map(FoodCategory::getFoodType)
+				.map(FoodType::getFoodName)
+				.toList()
 		);
 	}
 
