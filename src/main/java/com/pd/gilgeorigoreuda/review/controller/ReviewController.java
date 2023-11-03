@@ -1,15 +1,14 @@
 package com.pd.gilgeorigoreuda.review.controller;
 
-import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentRequest;
-import com.pd.gilgeorigoreuda.review.dto.request.ReviewRequest;
+import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentCreateRequest;
+import com.pd.gilgeorigoreuda.review.dto.request.ReviewCreateRequest;
+import com.pd.gilgeorigoreuda.review.dto.request.ReviewUpdateRequest;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentListResponse;
-import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentResponse;
 import com.pd.gilgeorigoreuda.review.service.ReviewCommentService;
 import com.pd.gilgeorigoreuda.review.service.ReviewService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,16 +21,16 @@ public class ReviewController {
     private final ReviewCommentService commentService;
 
     @PostMapping("/store/{storeId}/member/{memberId}")
-    public void save(@PathVariable("storeId") Long storeId,
-                     @PathVariable("memberId") Long memberId,
-                     @RequestBody ReviewRequest request) {
+    public void createReview(@PathVariable("storeId") Long storeId,
+                             @PathVariable("memberId") Long memberId,
+                             @RequestBody @Valid ReviewCreateRequest request) {
         reviewService.createReview(storeId, memberId, request);
     }
 
     @PutMapping("{reviewId}/{memberId}")
     public void updateReview(@PathVariable("reviewId") Long reviewId,
                              @PathVariable("memberId") Long memberId,
-                             @RequestBody ReviewRequest reviewRequest) {
+                             @RequestBody ReviewUpdateRequest reviewRequest) {
         reviewService.updateReview(reviewId, memberId, reviewRequest);
 
     }
@@ -45,7 +44,7 @@ public class ReviewController {
     @PostMapping("{reviewId}/comment/member/{memberId}")
     public void saveComment(@PathVariable("reviewId") Long reviewId,
                             @PathVariable("memberId") Long memberId,
-                            @RequestBody ReviewCommentRequest commentRequest) {
+                            @RequestBody @Valid ReviewCommentCreateRequest commentRequest) {
 
         commentService.saveComment(reviewId, memberId, commentRequest);
     }
@@ -66,7 +65,7 @@ public class ReviewController {
     @PutMapping("/comment/{commentId}/member/{memberId}")
     public void updateReviewComment(@PathVariable("commentId") Long commentId,
                                     @PathVariable("memberId") Long memberId,
-                                    @RequestBody ReviewCommentRequest commentRequest) {
+                                    @RequestBody ReviewCommentCreateRequest commentRequest) {
         commentService.updateComment(commentId, memberId, commentRequest);
     }
 
