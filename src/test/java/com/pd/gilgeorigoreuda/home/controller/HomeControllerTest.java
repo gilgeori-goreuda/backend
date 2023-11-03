@@ -4,11 +4,15 @@ import com.pd.gilgeorigoreuda.home.dto.response.PlaceListResponse;
 import com.pd.gilgeorigoreuda.home.dto.response.PlaceResponse;
 import com.pd.gilgeorigoreuda.settings.ControllerTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
+import com.pd.gilgeorigoreuda.store.domain.entity.StreetAddress;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
+
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -23,13 +27,24 @@ class HomeControllerTest extends ControllerTest {
 
         Store store1 = Store.builder()
                 .id(1L)
+                .imageUrl("https://image.com")
+                .streetAddress(StreetAddress.of("서울시 마포구 독막로 324"))
+                .detailLocation("어쩌구 저쩌구")
                 .name("store1")
+                .openTime(LocalTime.of(9, 0))
+                .closeTime(LocalTime.of(18, 0))
                 .averageRating(4.5)
                 .totalVisitCount(50)
                 .build();
 
         Store store2 = Store.builder()
                 .id(2L)
+                .imageUrl("https://image2.com")
+                .streetAddress(StreetAddress.of("서울시 광진구 독막로 324"))
+                .detailLocation("어쩌구 저쩌구")
+                .name("store1")
+                .openTime(LocalTime.of(9, 0))
+                .closeTime(LocalTime.of(18, 0))
                 .name("store2")
                 .averageRating(3.5)
                 .totalVisitCount(10)
@@ -37,6 +52,12 @@ class HomeControllerTest extends ControllerTest {
 
         Store store3 = Store.builder()
                 .id(3L)
+                .imageUrl("https://image.com")
+                .streetAddress(StreetAddress.of("서울시 강남구 독막로 324"))
+                .detailLocation("어쩌구 저쩌구")
+                .name("store1")
+                .openTime(LocalTime.of(9, 0))
+                .closeTime(LocalTime.of(18, 0))
                 .name("store3")
                 .averageRating(4.7)
                 .totalVisitCount(25)
