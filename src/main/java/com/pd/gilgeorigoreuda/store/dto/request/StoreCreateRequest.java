@@ -10,6 +10,7 @@ import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.store.domain.entity.PurchaseType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.store.domain.entity.StoreType;
+import com.pd.gilgeorigoreuda.store.domain.entity.StreetAddress;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -94,7 +95,7 @@ public class StoreCreateRequest {
 			.businessDate(BusinessDateRequest.of(businessDates).toString())
 			.lat(lat)
 			.lng(lng)
-			.streetAddress(streetAddress)
+			.streetAddress(StreetAddress.of(streetAddress))
 			.member(
 				Member.builder()
 					.id(memberId)

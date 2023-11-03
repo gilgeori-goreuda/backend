@@ -6,13 +6,17 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+import com.pd.gilgeorigoreuda.member.exception.NoSuchMemberException;
+import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
+import com.pd.gilgeorigoreuda.store.domain.entity.StreetAddress;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
-import com.pd.gilgeorigoreuda.store.dto.response.UpdateStoreResponse;
+import com.pd.gilgeorigoreuda.store.dto.response.StoreUpdateResponse;
 import com.pd.gilgeorigoreuda.store.exception.AlreadyExistInBoundaryException;
 import com.pd.gilgeorigoreuda.store.exception.NoSuchStoreException;
 import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
@@ -27,6 +31,7 @@ public class StoreService {
 
 	private final StoreRepository storeRepository;
 	private final StoreNativeQueryRepository storeNativeQueryRepository;
+	private final MemberRepository memberRepository;
 
 	private static final Integer BOUNDARY = 10;
 
@@ -34,8 +39,11 @@ public class StoreService {
 	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest request) {
 		Double lat = request.getLat();
 		Double lng = request.getLng();
+		StreetAddress streetAddress = StreetAddress.of(request.getStreetAddress());
+		String largeAddress = streetAddress.getLargeAddress();
+		String mediumAddress = streetAddress.getMediumAddress();
 
-		checkIsAlreadyExistInBoundary(lat, lng);
+		checkIsAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress);
 
 		Store store = request.toEntity(memberId);
 
@@ -57,12 +65,38 @@ public class StoreService {
 	}
 
 	@Transactional
-	public UpdateStoreResponse updateStore(final Long memberId, final Long storeId, final StoreUpdateRequest request) {
+	public StoreUpdateResponse updateStore(final Long memberId, final Long storeId, final StoreUpdateRequest request) {
 		Store storeForUpdate = findStore(storeId);
+		Member member = findMember(memberId);
 
-		storeForUpdate.updateBasicInfo();
+		StreetAddress streetAddress = StreetAddress.of(request.getStreetAddress());
+		Double lat = request.getLat();
+		Double lng = request.getLng();
+		String largeAddress = streetAddress.getLargeAddress();
+		String mediumAddress = streetAddress.getMediumAddress();
 
-		return null;
+		checkIsAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress);
+
+		List<FoodCategory> foodCategories = request
+			.getFoodCategories()
+			.toEntities();
+
+		storeForUpdate.updateBasicInfo(
+			request.getName(),
+			request.getStoreType(),
+			request.getOpenTime(),
+			request.getCloseTime(),
+			request.getPurchaseType(),
+			request.getBusinessDates(),
+			request.getLat(),
+			request.getLng(),
+			request.getStreetAddress(),
+			member.getNickname()
+		);
+
+		storeForUpdate.addFoodCategories(foodCategories);
+
+		return StoreUpdateResponse.of(storeForUpdate);
 	}
 
 	@Transactional
@@ -70,8 +104,8 @@ public class StoreService {
 
 	}
 
-	private void checkIsAlreadyExistInBoundary(final Double lat, final Double lng) {
-		Optional<Long> isAlreadyExistInBoundary = storeNativeQueryRepository.isAlreadyExistInBoundary(lat, lng, BOUNDARY);
+	private void checkIsAlreadyExistInBoundary(final Double lat, final Double lng, final String largeAddress, final String mediumAddress) {
+		Optional<Long> isAlreadyExistInBoundary = storeNativeQueryRepository.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY);
 
 		if (isAlreadyExistInBoundary.isPresent()) {
 			throw new AlreadyExistInBoundaryException();
@@ -81,6 +115,11 @@ public class StoreService {
 	private Store findStore(Long storeId) {
 		return storeRepository.findByStoreId(storeId)
 			.orElseThrow(NoSuchStoreException::new);
+	}
+
+	private Member findMember(Long memberId) {
+		return memberRepository.findById(memberId)
+			.orElseThrow(NoSuchMemberException::new);
 	}
 
 }

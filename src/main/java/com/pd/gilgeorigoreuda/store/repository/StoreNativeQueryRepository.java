@@ -17,6 +17,10 @@ public interface StoreNativeQueryRepository extends JpaRepository<Store, Long> {
 		"SELECT s.id "
 			+ "FROM stores s "
 			+ "WHERE "
+			+ 	"s.large_address = :largeAddress "
+			+   "AND "
+			+   "s.medium_address = :mediumAddress "
+			+ 	"AND "
 			+ 	"FLOOR(6371 * 1000 * acos("
 			+ 		"cos(radians(:lat)) * cos(radians(s.lat)) * cos(radians(:lng) - radians(s.lng)) +"
 			+ 		"sin(radians(:lat)) * sin(radians(s.lat))"
@@ -24,6 +28,6 @@ public interface StoreNativeQueryRepository extends JpaRepository<Store, Long> {
 			+ ") <= :boundary "
 			+ "LIMIT 1",
 		nativeQuery = true)
-	Optional<Long> isAlreadyExistInBoundary(@Param("lat") Double lat, @Param("lng") Double lng, @Param("boundary") Integer boundary);
+	Optional<Long> isAlreadyExistInBoundary(@Param("lat") Double lat, @Param("lng") Double lng, @Param("largeAddress") String largeAddress, @Param("mediumAddress") String mediumAddress, @Param("boundary") Integer boundary);
 
 }

@@ -47,4 +47,6 @@ public class StoreUpdateRequest {
 	@NotBlank(message = "도로명 주소를 입력해주세요.")
 	private String streetAddress;
 
+	private FoodCategoryRequest foodCategories;
+
 }

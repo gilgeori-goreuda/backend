@@ -14,14 +14,15 @@ import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 class StoreRepositoryTest {
 
 	@Autowired
-	private StoreRepository storeRepository;
+	private StoreNativeQueryRepository storeNativeQueryRepository;
 
 	@Test
 	void test() {
-		Optional<Store> byStoreId = storeRepository.findByStoreId(1L);
-		byStoreId.ifPresent(store -> {
-			System.out.println(store.getFoodCategories().size());
-		});
+		Optional<Long> alreadyExistInBoundary = storeNativeQueryRepository.isAlreadyExistInBoundary(37.54006651056828,
+			127.0691658275643, "123", "마포구", 10);
+
+		System.out.println(alreadyExistInBoundary.get());
+
 	}
 
 }
