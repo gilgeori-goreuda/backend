@@ -16,4 +16,7 @@ public interface StorePreferenceRepository extends JpaRepository<StorePreference
             "where p.member.id = :memberId and p.preferenceType = 'PREFERRED'")
     List<StorePreference> findMyPreferredStores(@Param("memberId") Long memberId);
 
+    @Query(value = "select * from store_preferences where store_id = :storeId and member_id = :memberId", nativeQuery = true)
+    Optional<StorePreference> findByStoreIdAndMemberId(@Param("storeId") Long storeId, @Param("memberId") Long memberId);
+
 }

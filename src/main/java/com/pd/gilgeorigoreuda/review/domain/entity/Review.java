@@ -5,6 +5,7 @@ import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
 import java.util.List;
+import java.util.Objects;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -26,7 +27,7 @@ public class Review extends BaseTimeEntity {
 
 	@Column(name = "review_rating")
 	@Builder.Default
-	private Double reviewRating = 0.0;
+	private Integer reviewRating = 0;
 
 	@Column(name = "like_count")
 	@Builder.Default
@@ -51,12 +52,12 @@ public class Review extends BaseTimeEntity {
 		this.content = content;
 	}
 
-	public void updateReviewRating(Double reviewRating) {
+	public void updateReviewRating(Integer reviewRating) {
 		this.reviewRating = reviewRating;
 	}
 
 	public void checkAuthor(Long memberId) {
-		if (this.member.getId() == memberId) {
+		if (Objects.equals(this.member.getId(), memberId)) {
 			throw new RuntimeException("Mismatched Review");
 		}
 	}

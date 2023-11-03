@@ -3,7 +3,8 @@ package com.pd.gilgeorigoreuda.review.service;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewImage;
-import com.pd.gilgeorigoreuda.review.dto.request.ReviewRequest;
+import com.pd.gilgeorigoreuda.review.dto.request.ReviewCreateRequest;
+import com.pd.gilgeorigoreuda.review.dto.request.ReviewUpdateRequest;
 import com.pd.gilgeorigoreuda.review.repository.ImageRepository;
 import com.pd.gilgeorigoreuda.review.repository.ReviewRepository;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
@@ -21,7 +22,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final ImageRepository imageRepository;
 
-    public void createReview(Long storeId, Long memberId, ReviewRequest request) {
+    public void createReview(Long storeId, Long memberId, ReviewCreateRequest request) {
         Review review = Review.builder()
                 .content(request.getContent())
                 .store(Store.builder().id(storeId).build())
@@ -43,7 +44,7 @@ public class ReviewService {
         imageRepository.saveAll(reviewImages);
     }
 
-    public void updateReview(Long reviewId, Long memberId, ReviewRequest reviewRequest) {
+    public void updateReview(Long reviewId, Long memberId, ReviewUpdateRequest reviewRequest) {
         Review review = getReview(reviewId);
 
         // 리뷰의 작성자와 현재 사용자가 일치하는지 확인
