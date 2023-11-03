@@ -20,7 +20,7 @@ import java.util.List;
 @Table(
 	name = "stores",
 	indexes = {
-		@Index(name = "idx_store_lat_lng", columnList = "lat, lng")
+		@Index(name = "idx_store_large_medium_address_lat_lng", columnList = "large_address, medium_address, lat, lng"),
 	}
 )
 public class Store extends BaseTimeEntity {
@@ -66,7 +66,7 @@ public class Store extends BaseTimeEntity {
 	@Column(nullable = false)
 	private Double lng;
 
-	@Column(name = "street_address", nullable = false, length = 128)
+	@Embedded
 	private String streetAddress;
 
 	@Column(name = "total_visit_count")
