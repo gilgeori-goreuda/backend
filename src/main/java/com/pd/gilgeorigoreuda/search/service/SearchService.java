@@ -17,7 +17,7 @@ import java.util.List;
 public class SearchService {
 
     private final SearchRepository searchRepository;
-    private final Double DISTANCE_1KM =0.00012754530697130809;
+    private static final Double DISTANCE_1KM =0.00012754530697130809;
 
     public AddressSearchListResponse getStoreByAddressAndFoodType(Double lat, Double lng, FoodType foodType){
         List<AddressSearchResponse> results = searchRepository.getStoreByAddressAndFoodType(lat, lng, foodType,DISTANCE_1KM)

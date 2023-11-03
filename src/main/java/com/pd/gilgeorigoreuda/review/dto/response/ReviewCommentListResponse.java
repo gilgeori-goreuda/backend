@@ -15,16 +15,18 @@ public class ReviewCommentListResponse {
     private List<ReviewCommentResponse> reviewComments;
     private PageInfo pageInfo;
 
-    private ReviewCommentListResponse(List<ReviewCommentResponse> reviewComments,PageInfo pageInfo) {
+    private ReviewCommentListResponse(
+            final List<ReviewCommentResponse> reviewComments,
+            final PageInfo pageInfo) {
         this.reviewComments = reviewComments;
         this.pageInfo = pageInfo;
     }
 
-    public static ReviewCommentListResponse of(Page<ReviewComment> reviewCommentPage) {
+    public static ReviewCommentListResponse of(final Page<ReviewComment> reviewCommentPage) {
         return new ReviewCommentListResponse(
                 reviewCommentPage.getContent()
                         .stream()
-                        .map(ReviewCommentResponse::new)
+                        .map(ReviewCommentResponse::of)
                         .toList(),
                 PageInfo.of(reviewCommentPage)
         );

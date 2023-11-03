@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class HotPlaceResponse {
+
     private Long rank;
     private String name;
 

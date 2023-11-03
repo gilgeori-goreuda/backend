@@ -14,4 +14,5 @@ public interface ReviewCommentRepository extends JpaRepository<ReviewComment, Lo
             "left join fetch rc.member " +
             "where rc.review.id = :reviewId")
     Page<ReviewComment> findAllByReviewId(@Param("reviewId") Long reviewId, Pageable pageable);
+
 }

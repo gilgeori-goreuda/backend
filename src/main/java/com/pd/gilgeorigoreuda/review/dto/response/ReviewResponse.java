@@ -3,13 +3,13 @@ package com.pd.gilgeorigoreuda.review.dto.response;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewImage;
 import lombok.Getter;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
-@ToString
+@NoArgsConstructor
 public class ReviewResponse {
 
     private Long reviewId;
@@ -23,17 +23,45 @@ public class ReviewResponse {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
 
-    public ReviewResponse(Review review) {
-        this.reviewId = review.getId();
-        this.content = review.getContent();
-        this.reviewRating = review.getReviewRating();
-        this.likeCount = review.getLikeCount();
-        this.hateCount = review.getHateCount();
-        this.memberId = review.getMember().getId();
-        this.storeId = review.getStore().getId();
-        this.imageUrls = review.getImages().stream().map(ReviewImage::getImageUrl).toList();
-        this.createdAt = review.getCreatedAt();
-        this.modifiedAt = review.getModifiedAt();
+    public ReviewResponse(
+            final Long reviewId,
+            final String content,
+            final Integer reviewRating,
+            final Integer likeCount,
+            final Integer hateCount,
+            final Long memberId,
+            final Long storeId,
+            final List<String> imageUrls,
+            final LocalDateTime createdAt,
+            final LocalDateTime modifiedAt) {
+        this.reviewId = reviewId;
+        this.content = content;
+        this.reviewRating = reviewRating;
+        this.likeCount = likeCount;
+        this.hateCount = hateCount;
+        this.memberId = memberId;
+        this.storeId = storeId;
+        this.imageUrls = imageUrls;
+        this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
+    }
+
+    public static ReviewResponse of(final Review review) {
+        return new ReviewResponse(
+                review.getId(),
+                review.getContent(),
+                review.getReviewRating(),
+                review.getLikeCount(),
+                review.getHateCount(),
+                review.getMember().getId(),
+                review.getStore().getId(),
+                review.getImages()
+                        .stream()
+                        .map(ReviewImage::getImageUrl)
+                        .toList(),
+                review.getCreatedAt(),
+                review.getModifiedAt()
+        );
     }
 
 }

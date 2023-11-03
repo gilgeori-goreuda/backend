@@ -25,18 +25,17 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 		+ "where s.id = :storeId")
 	Optional<Store> findStoreWithMember(@Param("storeId") Long storeId);
 
-	@Query("SELECT s " +
-		"FROM Store s " +
+	@Query("select s " +
+		"from Store s " +
 		"where s.createdAt >= :startDay and s.createdAt <= :endDay " +
 		"order by s.createdAt desc " +
 		"limit 10")
-	List<Store> findAllByBetweenDay(@Param("startDay") LocalDateTime startDay,
-		@Param("endDay") LocalDateTime endDay);
+	List<Store> findAllByBetweenDay(@Param("startDay") LocalDateTime startDay, @Param("endDay") LocalDateTime endDay);
 
-	@Query("SELECT s " +
-		"FROM Store s " +
-		"ORDER BY ((0.713 * (s.averageRating / 5)) + (0.287 * (s.totalVisitCount * 0.01))) " +
-		"DESC " +
+	@Query("select s " +
+		"from Store s " +
+		"order by ((0.713 * (s.averageRating / 5)) + (0.287 * (s.totalVisitCount * 0.01))) " +
+		"desc " +
 		"limit 10")
 	List<Store> findStoresByWeightedAverageRating();
 
