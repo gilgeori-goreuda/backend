@@ -130,4 +130,8 @@ public class Store extends BaseTimeEntity {
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
 	}
 
+	public boolean isOwner(Long memberId) {
+		return this.member.getId().equals(memberId);
+	}
+
 }

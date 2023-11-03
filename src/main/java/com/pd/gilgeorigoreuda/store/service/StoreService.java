@@ -18,6 +18,7 @@ import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreUpdateResponse;
 import com.pd.gilgeorigoreuda.store.exception.AlreadyExistInBoundaryException;
+import com.pd.gilgeorigoreuda.store.exception.NoOwnerMemberException;
 import com.pd.gilgeorigoreuda.store.exception.NoSuchStoreException;
 import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
 import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
@@ -59,14 +60,14 @@ public class StoreService {
 	}
 
 	public StoreResponse getStore(final Long storeId) {
-		Store store = findStore(storeId);
+		Store store = findStoreWithMemberAndCategories(storeId);
 
 		return StoreResponse.of(store);
 	}
 
 	@Transactional
 	public StoreUpdateResponse updateStore(final Long memberId, final Long storeId, final StoreUpdateRequest request) {
-		Store storeForUpdate = findStore(storeId);
+		Store storeForUpdate = findStoreWithMemberAndCategories(storeId);
 		Member member = findMember(memberId);
 
 		StreetAddress streetAddress = StreetAddress.of(request.getStreetAddress());
@@ -101,7 +102,13 @@ public class StoreService {
 
 	@Transactional
 	public void deleteStore(final Long memberId, final Long storeId) {
+		Store storeForDelete = findStoreWithMember(storeId);
 
+		if (!storeForDelete.isOwner(memberId)) {
+			throw new NoOwnerMemberException();
+		}
+
+		storeRepository.deleteById(storeForDelete.getId());
 	}
 
 	private void checkIsAlreadyExistInBoundary(final Double lat, final Double lng, final String largeAddress, final String mediumAddress) {
@@ -112,14 +119,19 @@ public class StoreService {
 		}
 	}
 
-	private Store findStore(Long storeId) {
-		return storeRepository.findByStoreId(storeId)
+	private Store findStoreWithMemberAndCategories(Long storeId) {
+		return storeRepository.findStoreWithMemberAndCategories(storeId)
 			.orElseThrow(NoSuchStoreException::new);
 	}
 
 	private Member findMember(Long memberId) {
 		return memberRepository.findById(memberId)
 			.orElseThrow(NoSuchMemberException::new);
+	}
+
+	private Store findStoreWithMember(Long storeId) {
+		return storeRepository.findStoreWithMember(storeId)
+			.orElseThrow(NoSuchStoreException::new);
 	}
 
 }
