@@ -26,7 +26,7 @@ public class Review extends BaseTimeEntity {
 
 	@Column(name = "review_rating")
 	@Builder.Default
-	private Double reviewRating = 0.0;
+	private Integer reviewRating = 0;
 
 	@Column(name = "like_count")
 	@Builder.Default
@@ -51,7 +51,7 @@ public class Review extends BaseTimeEntity {
 		this.content = content;
 	}
 
-	public void updateReviewRating(Double reviewRating) {
+	public void updateReviewRating(Integer reviewRating) {
 		this.reviewRating = reviewRating;
 	}
 

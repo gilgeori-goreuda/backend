@@ -14,7 +14,7 @@ public class ReviewResponse {
 
     private Long reviewId;
     private String content;
-    private Double reviewRating;
+    private Integer reviewRating;
     private Integer likeCount;
     private Integer hateCount;
     private Long memberId;
