@@ -2,6 +2,7 @@ package com.pd.gilgeorigoreuda.home.controller;
 
 import com.pd.gilgeorigoreuda.home.dto.response.PlaceListResponse;
 import com.pd.gilgeorigoreuda.home.dto.response.PlaceResponse;
+import com.pd.gilgeorigoreuda.home.service.HomeService;
 import com.pd.gilgeorigoreuda.settings.ControllerTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.store.domain.entity.StreetAddress;
@@ -9,6 +10,7 @@ import com.pd.gilgeorigoreuda.store.domain.entity.StreetAddress;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -21,6 +23,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.hamcrest.Matchers.*;
 
 class HomeControllerTest extends ControllerTest {
+
+    @MockBean
+    private HomeService homeService;
 
     private List<Store> getMockStores() {
         List<Store> stores = new ArrayList<>();
