@@ -11,8 +11,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,13 +25,17 @@ public class ReviewController {
 	private final ReviewService reviewService;
 	private final ReviewCommentService commentService;
 
-	@PostMapping("/store/{storeId}/member/{memberId}")
+	@PostMapping(value = "/store/{storeId}/member/{memberId}",
+				consumes = {MediaType.APPLICATION_JSON_VALUE,
+							MediaType.MULTIPART_FORM_DATA_VALUE}
+	)
 	public void createReview(
-		@PathVariable("storeId") Long storeId,
-		@PathVariable("memberId") Long memberId,
-		@RequestBody @Valid ReviewCreateRequest request
-	) {
-		reviewService.createReview(storeId, memberId, request);
+			@PathVariable("storeId") Long storeId,
+			@PathVariable("memberId") Long memberId,
+			@RequestPart ReviewCreateRequest request,
+			@RequestPart List<MultipartFile> files
+			) {
+		reviewService.createReview(storeId, memberId, request, files);
 	}
 
 	@PutMapping("{reviewId}/member/{memberId}")

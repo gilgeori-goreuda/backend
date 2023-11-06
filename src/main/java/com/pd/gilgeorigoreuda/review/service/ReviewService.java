@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.review.service;
 
+import com.pd.gilgeorigoreuda.fileUpload.service.FileUploadService;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewImage;
@@ -11,7 +12,7 @@ import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @Service
@@ -21,8 +22,15 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ReviewImageRepository reviewImageRepository;
+    private final FileUploadService fileUploadService;
 
-    public void createReview(final Long storeId, final Long memberId, final ReviewCreateRequest request) {
+
+    @Transactional
+    public void createReview(final Long storeId,
+                             final Long memberId,
+                             final ReviewCreateRequest request,
+                             final List<MultipartFile> files) {
+
         Review review = Review.builder()
                 .content(request.getContent())
                 .reviewRating(request.getReviewRating())
@@ -32,17 +40,17 @@ public class ReviewService {
 
         Review savedReview = reviewRepository.save(review);
 
-        List<ReviewImage> reviewImages = request.getImageUrls()
-                .stream()
-                .map(
-                        image -> ReviewImage.builder()
-                                .imageUrl(image)
-                                .review(Review.builder().id(savedReview.getId()).build())
-                                .build()
-                )
-                .toList();
+        List<String> fileNames = fileUploadService.fileUpload(files);
 
-        reviewImageRepository.saveAll(reviewImages);
+        fileNames.forEach(name -> {
+            reviewImageRepository.save(
+                    ReviewImage
+                        .builder()
+                        .imageUrl(name)
+                        .review(Review.builder().id(savedReview.getId()).build())
+                        .build());
+        });
+
     }
 
     public void updateReview(final Long reviewId, final Long memberId, final ReviewUpdateRequest reviewRequest) {
@@ -52,7 +60,7 @@ public class ReviewService {
 
         review.updateContent(reviewRequest.getContent());
         review.updateReviewRating(review.getReviewRating());
-        
+
         reviewRepository.save(review);
     }
 
@@ -65,7 +73,7 @@ public class ReviewService {
     }
 
     private Review getReview(final Long reviewId) {
-		return reviewRepository.findById(reviewId)
+        return reviewRepository.findById(reviewId)
                 .orElseThrow(() -> new RuntimeException("Review not found"));
     }
 }

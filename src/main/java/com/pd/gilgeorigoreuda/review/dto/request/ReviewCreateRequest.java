@@ -7,9 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.URL;
-
-import java.util.List;
 
 @Getter
 @AllArgsConstructor
@@ -25,7 +22,5 @@ public class ReviewCreateRequest {
     private Integer reviewRating;
 
     private Integer likeCount;
-
-    private List<@URL(message = "잘못된 이미지 URL입니다.") String> imageUrls;
 
 }
