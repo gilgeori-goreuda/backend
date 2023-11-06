@@ -178,7 +178,5 @@ class StoreControllerTest extends ControllerTest {
 
     }
 
-    @Test
-    @DisplayName()
 
 }
