@@ -1,6 +1,8 @@
 package com.pd.gilgeorigoreuda.common.exception;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -32,6 +34,20 @@ public class GlobalControllerAdvice {
 
 		return ResponseEntity.internalServerError()
 			.body(new ErrorResponse(errorCode, message));
+	}
+
+	@ExceptionHandler(MethodArgumentNotValidException.class)
+	public ResponseEntity<ErrorResponse> methodArgumentNotValidException(MethodArgumentNotValidException e) {
+		log.info(String.format("MethodArgumentNotValidException : %s", e));
+
+		FieldError firstFieldError = e.getFieldErrors().get(0);
+		String errorCode = firstFieldError.getCode();
+		String errorMessage = String.format(INVALID_DTO_FIELD_ERROR_MESSAGE_FORMAT, firstFieldError.getField(),
+				firstFieldError.getDefaultMessage(), firstFieldError.getRejectedValue());
+
+		return ResponseEntity
+				.badRequest()
+				.body(new ErrorResponse(errorCode, errorMessage));
 	}
 
 }
