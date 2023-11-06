@@ -4,8 +4,6 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.pd.gilgeorigoreuda.review.domain.entity.Review;
-import com.pd.gilgeorigoreuda.review.domain.entity.ReviewImage;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -24,11 +22,9 @@ import java.util.UUID;
 public class FileUploadService {
     UUID uuid = UUID.randomUUID();
 
-
-
     private final AmazonS3Client amazonS3Client;
 
-    @Value("aaaaabbbbucket")
+    @Value("g-reviewimages")
     private String bucket;
 
     public List<String> fileUpload(final List<MultipartFile> files) {

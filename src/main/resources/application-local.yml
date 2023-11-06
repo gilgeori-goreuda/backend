@@ -17,8 +17,8 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: abb
-      secretKey: abb
+      accessKey: AKIAYEKHUA7HVZMVYI7T
+      secretKey: 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
     region:
       static: ap-northeast-2
     stack:
