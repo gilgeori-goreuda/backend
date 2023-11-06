@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FoodCategoryRequest {
 
-	@NotEmpty(message = "장소의 카테고리를 입력해주세요.")
+	@NotEmpty(message = "장소의 카테고리를 1개 이상 선택해주세요.")
 	private List<String> foodCategories;
 
 	public FoodCategoryRequest(final List<String> foodCategories) {

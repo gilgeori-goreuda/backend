@@ -1,8 +1,10 @@
 package com.pd.gilgeorigoreuda.store.dto.response;
 
 import java.math.BigDecimal;
+import java.time.LocalTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
@@ -20,8 +22,13 @@ public class StoreResponse {
 	private String detailLocation;
 	private Double averageRating;
 	private String businessDates;
-	private String openTime;
-	private String closeTime;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	private LocalTime openTime;
+
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	private LocalTime closeTime;
+	
 	private String purchaseType;
 	private String imageUrl;
 	private BigDecimal lat;
@@ -39,8 +46,8 @@ public class StoreResponse {
 			final String detailLocation,
 			final Double averageRating,
 			final String businessDates,
-			final String openTime,
-			final String closeTime,
+			final LocalTime openTime,
+			final LocalTime closeTime,
 			final String purchaseType,
 			final String imageUrl,
 			final BigDecimal lat,
@@ -77,8 +84,8 @@ public class StoreResponse {
 				store.getDetailLocation(),
 				store.getAverageRating(),
 				store.getBusinessDate(),
-				store.getOpenTime().toString(),
-				store.getCloseTime().toString(),
+				store.getOpenTime(),
+				store.getCloseTime(),
 				store.getPurchaseType().toString(),
 				store.getImageUrl(),
 				store.getLat(),

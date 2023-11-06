@@ -22,11 +22,9 @@ public class StoreUpdateRequest {
 	@NotBlank(message = "가게 타입을 선택해주세요.")
 	private String storeType;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime openTime;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime closeTime;
 
@@ -36,10 +34,12 @@ public class StoreUpdateRequest {
 	private String businessDates;
 
 	@NotNull(message = "위도를 입력해주세요.")
+	@Positive(message = "음수 값은 허용되지 않습니다.")
 	@Digits(integer = 3, fraction = 38)
 	private BigDecimal lat;
 
 	@NotNull(message = "경도를 입력해주세요.")
+	@Positive(message = "음수 값은 허용되지 않습니다.")
 	@Digits(integer = 3, fraction = 38)
 	private BigDecimal lng;
 

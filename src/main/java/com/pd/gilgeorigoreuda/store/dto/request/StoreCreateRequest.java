@@ -3,11 +3,11 @@ package com.pd.gilgeorigoreuda.store.dto.request;
 import java.math.BigDecimal;
 import java.time.LocalTime;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.store.domain.entity.PurchaseType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
@@ -29,33 +29,34 @@ public class StoreCreateRequest {
 	@NotBlank(message = "가게 타입을 선택해주세요.")
 	private String storeType;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime openTime;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime closeTime;
 
 	@NotBlank(message = "결제방식을 선택해주세요.")
 	private String purchaseType;
 
-	@URL(message = "유효한 URL을 입력해주세요.")
+	@URL(message = "유효한 URL을 입력해주세요.", regexp = "^(http|https)://(www\\.)?.*")
 	private String imageUrl;
 
 	private String businessDates;
 
 	@NotNull(message = "위도를 입력해주세요.")
+	@Positive(message = "음수 값은 허용되지 않습니다.")
 	@Digits(integer = 3, fraction = 38)
 	private BigDecimal lat;
 
 	@NotNull(message = "경도를 입력해주세요.")
+	@Positive(message = "음수 값은 허용되지 않습니다.")
 	@Digits(integer = 3, fraction = 38)
 	private BigDecimal lng;
 
 	@NotBlank(message = "도로명 주소를 입력해주세요.")
 	private String streetAddress;
 
+	@Valid
 	private FoodCategoryRequest foodCategories;
 
 	public StoreCreateRequest(
