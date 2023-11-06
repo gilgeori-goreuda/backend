@@ -10,6 +10,7 @@ import com.pd.gilgeorigoreuda.review.repository.ReviewImageRepository;
 import com.pd.gilgeorigoreuda.review.repository.ReviewRepository;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +25,8 @@ public class ReviewService {
     private final ReviewImageRepository reviewImageRepository;
     private final FileUploadService fileUploadService;
 
+    @Value("g-reviewimages")
+    private String bucket;
 
     @Transactional
     public void createReview(final Long storeId,
@@ -40,7 +43,7 @@ public class ReviewService {
 
         Review savedReview = reviewRepository.save(review);
 
-        List<String> fileNames = fileUploadService.fileUpload(files);
+        List<String> fileNames = fileUploadService.fileUpload(bucket, files);
 
         fileNames.forEach(name -> {
             reviewImageRepository.save(
