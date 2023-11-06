@@ -1,14 +1,13 @@
 package com.pd.gilgeorigoreuda.store.dto.request;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -36,13 +35,13 @@ public class StoreUpdateRequest {
 
 	private String businessDates;
 
-	@NotBlank(message = "위도를 입력해주세요.")
-	@Pattern(regexp = "^-?\\d{1,2}\\.\\d{1,6}$", message = "위도는 소수점 6자리까지 입력 가능합니다.")
-	private Double lat;
+	@NotNull(message = "위도를 입력해주세요.")
+	@Digits(integer = 3, fraction = 38)
+	private BigDecimal lat;
 
-	@NotBlank(message = "경도를 입력해주세요.")
-	@Pattern(regexp = "^-?\\d{1,3}\\.\\d{1,6}$", message = "경도는 소수점 6자리까지 입력 가능합니다.")
-	private Double lng;
+	@NotNull(message = "경도를 입력해주세요.")
+	@Digits(integer = 3, fraction = 38)
+	private BigDecimal lng;
 
 	@NotBlank(message = "도로명 주소를 입력해주세요.")
 	private String streetAddress;

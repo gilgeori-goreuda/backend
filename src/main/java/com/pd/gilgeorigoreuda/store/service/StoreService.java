@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,8 +39,8 @@ public class StoreService {
 
 	@Transactional
 	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest request) {
-		Double lat = request.getLat();
-		Double lng = request.getLng();
+		BigDecimal lat = request.getLat();
+		BigDecimal lng = request.getLng();
 		StreetAddress streetAddress = StreetAddress.of(request.getStreetAddress());
 		String largeAddress = streetAddress.getLargeAddress();
 		String mediumAddress = streetAddress.getMediumAddress();
@@ -71,8 +72,8 @@ public class StoreService {
 		Member member = findMember(memberId);
 
 		StreetAddress streetAddress = StreetAddress.of(request.getStreetAddress());
-		Double lat = request.getLat();
-		Double lng = request.getLng();
+		BigDecimal lat = request.getLat();
+		BigDecimal lng = request.getLng();
 		String largeAddress = streetAddress.getLargeAddress();
 		String mediumAddress = streetAddress.getMediumAddress();
 
@@ -111,7 +112,7 @@ public class StoreService {
 		storeRepository.deleteById(storeForDelete.getId());
 	}
 
-	private void checkIsAlreadyExistInBoundary(final Double lat, final Double lng, final String largeAddress, final String mediumAddress) {
+	private void checkIsAlreadyExistInBoundary(final BigDecimal lat, final BigDecimal lng, final String largeAddress, final String mediumAddress) {
 		Optional<Long> isAlreadyExistInBoundary = storeNativeQueryRepository.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY);
 
 		if (isAlreadyExistInBoundary.isPresent()) {

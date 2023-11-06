@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/store")
+@RequestMapping("/api/v1/stores")
 public class StoreController {
 
 	private final StoreService storeService;
@@ -38,7 +38,7 @@ public class StoreController {
 		StoreCreateResponse storeCreateResponse = storeService.saveStore(1L, storeCreateRequest);
 
 		return ResponseEntity
-			.created(URI.create("/api/v1/store/" + storeCreateResponse.getId()))
+			.created(URI.create("/api/v1/stores/" + storeCreateResponse.getId()))
 			.build();
 	}
 

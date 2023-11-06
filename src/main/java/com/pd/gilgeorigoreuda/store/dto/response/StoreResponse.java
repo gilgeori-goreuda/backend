@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.dto.response;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
@@ -23,8 +24,8 @@ public class StoreResponse {
 	private String closeTime;
 	private String purchaseType;
 	private String imageUrl;
-	private Double lat;
-	private Double lng;
+	private BigDecimal lat;
+	private BigDecimal lng;
 	private String streetAddress;
 	private Integer totalVisitCount;
 	private String lastModifiedMemberNickname;
@@ -42,8 +43,8 @@ public class StoreResponse {
 			final String closeTime,
 			final String purchaseType,
 			final String imageUrl,
-			final Double lat,
-			final Double lng,
+			final BigDecimal lat,
+			final BigDecimal lng,
 			final String streetAddress,
 			final Integer totalVisitCount,
 			final String lastModifiedMemberNickname,

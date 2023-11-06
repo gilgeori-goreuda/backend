@@ -26,9 +26,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 
 @WebMvcTest({
-//	ReviewController.class,
-//	StoreController.class,
-	HomeController.class
+	StoreController.class,
 })
 @Import(RestDocsConfiguration.class)
 @ExtendWith(RestDocumentationExtension.class)
