@@ -19,51 +19,68 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/review")
+@RequestMapping("/api/v1/reviews")
 public class ReviewController {
 
 	private final ReviewService reviewService;
 	private final ReviewCommentService commentService;
 
-	@PostMapping(value = "/store/{storeId}/member/{memberId}",
+	@PostMapping(value = "/stores/{storeId}/members/{memberId}",
 				consumes = {MediaType.APPLICATION_JSON_VALUE,
 							MediaType.MULTIPART_FORM_DATA_VALUE}
 	)
-	public void createReview(
+	public ResponseEntity<Void> createReview(
 			@PathVariable("storeId") Long storeId,
 			@PathVariable("memberId") Long memberId,
 			@RequestPart ReviewCreateRequest request,
 			@RequestPart List<MultipartFile> files
-			) {
+	) {
 		reviewService.createReview(storeId, memberId, request, files);
+
+		return ResponseEntity
+				.ok()
+				.build();
 	}
 
-	@PutMapping("{reviewId}/member/{memberId}")
-	public void updateReview(
+	@PutMapping("{reviewId}/members/{memberId}")
+	public ResponseEntity<Void> updateReview(
 		@PathVariable("reviewId") Long reviewId,
 		@PathVariable("memberId") Long memberId,
 		@RequestBody ReviewUpdateRequest reviewRequest
 	) {
 		reviewService.updateReview(reviewId, memberId, reviewRequest);
+
+		return ResponseEntity
+				.ok()
+				.build();
 	}
 
-	@DeleteMapping("{reviewId}/member/{memberId}")
-	public void deleteReview(
+	@DeleteMapping("{reviewId}/members/{memberId}")
+	public ResponseEntity<Void> deleteReview(
 		@PathVariable("reviewId") Long reviewId,
 		@PathVariable("memberId") Long memberId
 	) {
 		reviewService.deleteReview(reviewId, memberId);
+
+		return ResponseEntity
+				.ok()
+				.build();
 	}
 
-	@PostMapping("{reviewId}/comment/member/{memberId}")
-	public void saveComment(@PathVariable("reviewId") Long reviewId,
+	@PostMapping("{reviewId}/members/{memberId}/comments")
+	public ResponseEntity<Void> saveComment(
+		@PathVariable("reviewId") Long reviewId,
 		@PathVariable("memberId") Long memberId,
 		@RequestBody @Valid ReviewCommentCreateRequest commentRequest
 	) {
 		commentService.saveComment(reviewId, memberId, commentRequest);
+
+		return ResponseEntity
+				.ok()
+				.build();
 	}
 
-	@GetMapping("{reviewId}/comment")
+	@GetMapping("{reviewId}/comments")
 	public ResponseEntity<ReviewCommentListResponse> findAllComment(
 		@PathVariable("reviewId") Long reviewId,
 		@RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
@@ -77,19 +94,27 @@ public class ReviewController {
 			.body(response);
 	}
 
-	@PutMapping("/comment/{commentId}/member/{memberId}")
-	public void updateReviewComment(@PathVariable("commentId") Long commentId,
+	@PutMapping("/comments/{commentId}/members/{memberId}")
+	public ResponseEntity<Void> updateReviewComment(@PathVariable("commentId") Long commentId,
 		@PathVariable("memberId") Long memberId,
 		@RequestBody ReviewCommentCreateRequest commentRequest
 	) {
 		commentService.updateComment(commentId, memberId, commentRequest);
+
+		return ResponseEntity
+				.ok()
+				.build();
 	}
 
-	@DeleteMapping("/comment/{commentId}/member/{memberId}")
-	public void deleteReviewComment(
+	@DeleteMapping("/comments/{commentId}/members/{memberId}")
+	public ResponseEntity<Void> deleteReviewComment(
 		@PathVariable("commentId") Long commentId,
 		@PathVariable("memberId") Long memberId
 	) {
 		commentService.deleteReviewComment(commentId, memberId);
+
+		return ResponseEntity
+				.ok()
+				.build();
 	}
 }
