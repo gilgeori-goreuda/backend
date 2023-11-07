@@ -14,10 +14,10 @@ public interface SearchRepository extends JpaRepository<Store, Long> {
             "left join fetch s.foodCategories fc " +
             "where POW(s.lat - :lat, 2) + POW(s.lng - :lng, 2) <= :distance " +
             "and (:foodType is null or fc.foodType = :foodType)")
-    List<Store> getStoreByAddressAndFoodType(@Param("lat") Double lat,
-                                             @Param("lng") Double lng,
-                                             @Param("foodType") FoodType foodType,
-                                             @Param("distance") Double distance);
+    List<Store> getStoreByAddressAndFoodType(@Param("lat") final Double lat,
+                                             @Param("lng") final Double lng,
+                                             @Param("foodType") final FoodType foodType,
+                                             @Param("distance") final Double distance);
 
 }
 

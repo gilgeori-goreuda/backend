@@ -30,18 +30,18 @@ public class ReviewController {
 							MediaType.MULTIPART_FORM_DATA_VALUE}
 	)
 	public void createReview(
-			@PathVariable("storeId") Long storeId,
-			@PathVariable("memberId") Long memberId,
-			@RequestPart ReviewCreateRequest request,
-			@RequestPart List<MultipartFile> files
-			) {
+			@PathVariable("storeId") final Long storeId,
+			@PathVariable("memberId") final Long memberId,
+			@RequestPart final ReviewCreateRequest request,
+			@RequestPart final List<MultipartFile> files
+	) {
 		reviewService.createReview(storeId, memberId, request, files);
 	}
 
 	@PutMapping("{reviewId}/member/{memberId}")
 	public void updateReview(
-		@PathVariable("reviewId") Long reviewId,
-		@PathVariable("memberId") Long memberId,
+		@PathVariable("reviewId") final Long reviewId,
+		@PathVariable("memberId") final Long memberId,
 		@RequestBody ReviewUpdateRequest reviewRequest
 	) {
 		reviewService.updateReview(reviewId, memberId, reviewRequest);
@@ -49,25 +49,26 @@ public class ReviewController {
 
 	@DeleteMapping("{reviewId}/member/{memberId}")
 	public void deleteReview(
-		@PathVariable("reviewId") Long reviewId,
-		@PathVariable("memberId") Long memberId
+		@PathVariable("reviewId") final Long reviewId,
+		@PathVariable("memberId") final Long memberId
 	) {
 		reviewService.deleteReview(reviewId, memberId);
 	}
 
 	@PostMapping("{reviewId}/comment/member/{memberId}")
-	public void saveComment(@PathVariable("reviewId") Long reviewId,
-		@PathVariable("memberId") Long memberId,
-		@RequestBody @Valid ReviewCommentCreateRequest commentRequest
+	public void saveComment(
+		@PathVariable("reviewId") final Long reviewId,
+		@PathVariable("memberId") final Long memberId,
+		@RequestBody @Valid final ReviewCommentCreateRequest commentRequest
 	) {
 		commentService.saveComment(reviewId, memberId, commentRequest);
 	}
 
 	@GetMapping("{reviewId}/comment")
 	public ResponseEntity<ReviewCommentListResponse> findAllComment(
-		@PathVariable("reviewId") Long reviewId,
-		@RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-		@RequestParam(name = "size", required = false, defaultValue = "10") Integer size
+		@PathVariable("reviewId") final Long reviewId,
+		@RequestParam(name = "page", required = false, defaultValue = "0") final Integer page,
+		@RequestParam(name = "size", required = false, defaultValue = "10") final Integer size
 	) {
 		ReviewCommentListResponse response = commentService.findCommentsByReviewId(reviewId,
 			PageRequest.of(page, size));
@@ -78,17 +79,18 @@ public class ReviewController {
 	}
 
 	@PutMapping("/comment/{commentId}/member/{memberId}")
-	public void updateReviewComment(@PathVariable("commentId") Long commentId,
-		@PathVariable("memberId") Long memberId,
-		@RequestBody ReviewCommentCreateRequest commentRequest
+	public void updateReviewComment(
+		@PathVariable("commentId") final Long commentId,
+		@PathVariable("memberId") final Long memberId,
+		@RequestBody final ReviewCommentCreateRequest commentRequest
 	) {
 		commentService.updateComment(commentId, memberId, commentRequest);
 	}
 
 	@DeleteMapping("/comment/{commentId}/member/{memberId}")
 	public void deleteReviewComment(
-		@PathVariable("commentId") Long commentId,
-		@PathVariable("memberId") Long memberId
+		@PathVariable("commentId") final Long commentId,
+		@PathVariable("memberId") final Long memberId
 	) {
 		commentService.deleteReviewComment(commentId, memberId);
 	}
