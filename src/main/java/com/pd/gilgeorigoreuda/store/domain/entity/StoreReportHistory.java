@@ -31,6 +31,9 @@ public class StoreReportHistory extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(name = "content", length = 500)
+	private String content;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_report_histories_member_id"))
 	private Member member;
