@@ -12,7 +12,7 @@ import lombok.Getter;
 public enum StoreType {
 
 	FOOD_TRUCK("푸드트럭"),
-	FOOD_STALL("포장마차"),
+	FOOD_STALL("포장마차")
 	;
 
 	private final String storeTypeName;

@@ -82,9 +82,9 @@ public class ReviewController {
 
 	@GetMapping("{reviewId}/comments")
 	public ResponseEntity<ReviewCommentListResponse> findAllComment(
-		@PathVariable("reviewId") Long reviewId,
-		@RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-		@RequestParam(name = "size", required = false, defaultValue = "10") Integer size
+		@PathVariable("reviewId") final Long reviewId,
+		@RequestParam(name = "page", required = false, defaultValue = "0") final Integer page,
+		@RequestParam(name = "size", required = false, defaultValue = "10") final Integer size
 	) {
 		ReviewCommentListResponse response = commentService.findCommentsByReviewId(reviewId,
 			PageRequest.of(page, size));

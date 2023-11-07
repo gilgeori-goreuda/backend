@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -29,13 +30,22 @@ public class KeywordSchedule {
         LocalDateTime endDayTime = LocalDateTime.now();
 
         List<Map<String, Long>> top10Keywords = keywordRepository.findTop10Keywords(startDayTime, endDayTime);
+        List<HotPlace> hotPlaces = new ArrayList<>();
 
         for (Map<String, Long> top10Keyword : top10Keywords) {
             String keyword = String.valueOf(top10Keyword.get("keyword"));
-            HotPlace hotPlace = HotPlace.builder().id(rank).hotPlace(keyword).build();
-            hotPlaceRepository.save(hotPlace);
+
+            HotPlace hotPlace = HotPlace.builder()
+                    .id(rank)
+                    .place(keyword)
+                    .build();
+
+            hotPlaces.add(hotPlace);
+
             rank++;
         }
+
+        hotPlaceRepository.saveAll(hotPlaces);
 
     }
 }
