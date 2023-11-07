@@ -877,4 +877,28 @@ class StoreControllerTest extends ControllerTest {
                 );
     }
 
+    @Test
+    @DisplayName("회원은 가게 정보를 삭제할 수 있다.")
+    void deleteStore() throws Exception {
+        // given
+        doNothing().when(storeService).deleteStore(anyLong(), anyLong());
+
+        // when
+        ResultActions resultActions = performDeleteRequest(1L);
+
+        // then
+        verify(storeService).deleteStore(anyLong(), eq(1L));
+
+        resultActions
+                .andExpect(status().isNoContent())
+                .andDo(
+                        restDocs.document(
+                                pathParameters(
+                                        parameterWithName("storeId")
+                                                .description("가게 ID")
+                                )
+                        )
+                );
+    }
+
 }

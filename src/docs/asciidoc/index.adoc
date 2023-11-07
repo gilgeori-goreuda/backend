@@ -70,3 +70,13 @@ include::{snippets}/store-controller-test/update-store/request-fields.adoc[]
 
 ==== Response
 include::{snippets}/store-controller-test/update-store/http-response.adoc[]
+
+
+=== 가게 삭제 (DELETE /stores/{storeId})
+
+==== Request
+include::{snippets}/store-controller-test/delete-store/http-request.adoc[]
+include::{snippets}/store-controller-test/delete-store/path-parameters.adoc[]
+
+==== Response
+include::{snippets}/store-controller-test/delete-store/http-response.adoc[]
