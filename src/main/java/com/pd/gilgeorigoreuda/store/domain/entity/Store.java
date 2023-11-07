@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.domain.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -80,10 +81,10 @@ public class Store extends BaseTimeEntity {
 	private String imageUrl;
 
 	@Column(nullable = false)
-	private Double lat;
+	private BigDecimal lat;
 
 	@Column(nullable = false)
-	private Double lng;
+	private BigDecimal lng;
 
 	@Embedded
 	private StreetAddress streetAddress;
@@ -117,8 +118,8 @@ public class Store extends BaseTimeEntity {
 			final LocalTime closeTime,
 			final String purchaseType,
 			final String businessDates,
-			final Double lat,
-			final Double lng,
+			final BigDecimal lat,
+			final BigDecimal lng,
 			final String streetAddress,
 			final String lastModifiedMemberNickname) {
 		this.name = name;

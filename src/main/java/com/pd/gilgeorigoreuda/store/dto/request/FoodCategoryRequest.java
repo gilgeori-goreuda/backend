@@ -5,7 +5,7 @@ import java.util.List;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class FoodCategoryRequest {
 
-	private List<@NotBlank(message = "카테고리를 하나 이상 지정해주세요.") String> foodCategories;
+	@NotEmpty(message = "장소의 카테고리를 1개 이상 선택해주세요.")
+	private List<String> foodCategories;
 
 	public FoodCategoryRequest(final List<String> foodCategories) {
 		this.foodCategories = foodCategories;

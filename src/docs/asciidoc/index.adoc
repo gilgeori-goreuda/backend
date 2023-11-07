@@ -1,5 +1,8 @@
 = gilgeori-goreuda
+:doctype: book
+:icons: font
 :toc: left
+:toclevels: 3
 :source-highlighter: highlightjs
 :sectlinks:
 
@@ -33,3 +36,47 @@
 | `500 Internal Server Error`
 | 서버 에러
 |===
+
+== 가게 API
+
+=== 가게 제보(생성) (POST /stores)
+
+==== Request
+include::{snippets}/store-controller-test/create-store/http-request.adoc[]
+include::{snippets}/store-controller-test/create-store/request-fields.adoc[]
+
+==== Response
+include::{snippets}/store-controller-test/create-store/http-response.adoc[]
+include::{snippets}/store-controller-test/create-store/response-headers.adoc[]
+
+
+=== 가게 단일 조회 (GET /stores/{storeId})
+
+==== Request
+include::{snippets}/store-controller-test/get-store/http-request.adoc[]
+include::{snippets}/store-controller-test/get-store/path-parameters.adoc[]
+
+==== Response
+include::{snippets}/store-controller-test/get-store/http-response.adoc[]
+include::{snippets}/store-controller-test/get-store/response-fields.adoc[]
+
+
+=== 가게 수정 (PUT /stores/{storeId})
+
+==== Request
+include::{snippets}/store-controller-test/update-store/http-request.adoc[]
+include::{snippets}/store-controller-test/update-store/path-parameters.adoc[]
+include::{snippets}/store-controller-test/update-store/request-fields.adoc[]
+
+==== Response
+include::{snippets}/store-controller-test/update-store/http-response.adoc[]
+
+
+=== 가게 삭제 (DELETE /stores/{storeId})
+
+==== Request
+include::{snippets}/store-controller-test/delete-store/http-request.adoc[]
+include::{snippets}/store-controller-test/delete-store/path-parameters.adoc[]
+
+==== Response
+include::{snippets}/store-controller-test/delete-store/http-response.adoc[]
