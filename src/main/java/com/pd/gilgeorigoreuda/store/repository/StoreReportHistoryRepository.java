@@ -10,11 +10,12 @@ import java.util.Optional;
 
 public interface StoreReportHistoryRepository extends JpaRepository<StoreReportHistory, Long> {
 
-	@Query("select s "
-		+ "from Store s "
-		+ "left join fetch s.member m "
-		+ "left join fetch s.foodCategories fc "
-		+ "where s.id = :storeId")
-	Optional<Store> findStoreWithMemberAndCategories(@Param("storeId") Long storeId);
+
+	@Query("select sr "
+			+ "from StoreReportHistory sr "
+			+ "left join fetch sr.member m "
+			+ "where sr.id = :reportId "
+	)
+	Optional<StoreReportHistory> findReportWithMember(@Param("reportId") Long reportId);
 
 }
