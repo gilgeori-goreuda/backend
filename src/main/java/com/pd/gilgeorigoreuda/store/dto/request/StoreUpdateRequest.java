@@ -6,8 +6,6 @@ import java.time.LocalTime;
 import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -47,5 +45,28 @@ public class StoreUpdateRequest {
 	private String streetAddress;
 
 	private FoodCategoryRequest foodCategories;
+
+	public StoreUpdateRequest(
+			final String name,
+			final String storeType,
+			final LocalTime openTime,
+			final LocalTime closeTime,
+			final String purchaseType,
+			final String businessDates,
+			final BigDecimal lat,
+			final BigDecimal lng,
+			final String streetAddress,
+			final FoodCategoryRequest foodCategories) {
+		this.name = name;
+		this.storeType = storeType;
+		this.openTime = openTime;
+		this.closeTime = closeTime;
+		this.purchaseType = purchaseType;
+		this.businessDates = businessDates;
+		this.lat = lat;
+		this.lng = lng;
+		this.streetAddress = streetAddress;
+		this.foodCategories = foodCategories;
+	}
 
 }

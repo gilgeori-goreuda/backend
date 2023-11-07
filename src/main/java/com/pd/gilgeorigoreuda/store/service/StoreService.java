@@ -17,7 +17,6 @@ import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
-import com.pd.gilgeorigoreuda.store.dto.response.StoreUpdateResponse;
 import com.pd.gilgeorigoreuda.store.exception.AlreadyExistInBoundaryException;
 import com.pd.gilgeorigoreuda.store.exception.NoOwnerMemberException;
 import com.pd.gilgeorigoreuda.store.exception.NoSuchStoreException;
@@ -67,7 +66,7 @@ public class StoreService {
 	}
 
 	@Transactional
-	public StoreUpdateResponse updateStore(final Long memberId, final Long storeId, final StoreUpdateRequest request) {
+	public void updateStore(final Long memberId, final Long storeId, final StoreUpdateRequest request) {
 		Store storeForUpdate = findStoreWithMemberAndCategories(storeId);
 		Member member = findMember(memberId);
 
@@ -97,8 +96,6 @@ public class StoreService {
 		);
 
 		storeForUpdate.addFoodCategories(foodCategories);
-
-		return StoreUpdateResponse.of(storeForUpdate);
 	}
 
 	@Transactional
