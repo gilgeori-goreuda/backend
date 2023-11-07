@@ -15,7 +15,7 @@ public class MemberPreferenceStoreListResponse {
         this.preferences = preferences;
     }
 
-    public static MemberPreferenceStoreListResponse of(List<MemberPreferenceStoreResponse> preferences) {
+    public static MemberPreferenceStoreListResponse of(final List<MemberPreferenceStoreResponse> preferences) {
         return new MemberPreferenceStoreListResponse(preferences);
     }
 

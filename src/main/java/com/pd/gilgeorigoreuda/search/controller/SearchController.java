@@ -21,9 +21,9 @@ public class SearchController {
 
     @GetMapping("/address")
     public ResponseEntity<AddressSearchListResponse> addressAndCategorySearch(
-            @RequestParam(required = false,name = "lat") Double lat,
-            @RequestParam(required = false,name = "lng") Double lng,
-            @RequestParam(required = false,name = "foodType") FoodType foodType
+            @RequestParam(required = false,name = "lat") final Double lat,
+            @RequestParam(required = false,name = "lng") final Double lng,
+            @RequestParam(required = false,name = "foodType") final FoodType foodType
     ){
         AddressSearchListResponse response = searchService.getStoreByAddressAndFoodType(lat, lng, foodType);
 

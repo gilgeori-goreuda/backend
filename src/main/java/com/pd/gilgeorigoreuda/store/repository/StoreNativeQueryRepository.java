@@ -29,6 +29,10 @@ public interface StoreNativeQueryRepository extends JpaRepository<Store, Long> {
 			+ ") <= :boundary "
 			+ "LIMIT 1",
 		nativeQuery = true)
-	Optional<Long> isAlreadyExistInBoundary(@Param("lat") BigDecimal lat, @Param("lng") BigDecimal lng, @Param("largeAddress") String largeAddress, @Param("mediumAddress") String mediumAddress, @Param("boundary") Integer boundary);
+	Optional<Long> isAlreadyExistInBoundary(@Param("lat") final BigDecimal lat,
+											@Param("lng") final BigDecimal lng,
+											@Param("largeAddress") final String largeAddress,
+											@Param("mediumAddress") final String mediumAddress,
+											@Param("boundary") final Integer boundary);
 
 }

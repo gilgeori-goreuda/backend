@@ -28,7 +28,7 @@ public class MemberPreferenceStoreResponse {
         this.preferredStoreInfo = preferredStoreInfo;
     }
 
-    public static MemberPreferenceStoreResponse of(StorePreference storePreference) {
+    public static MemberPreferenceStoreResponse of(final StorePreference storePreference) {
         return new MemberPreferenceStoreResponse(
                 storePreference.getId(),
                 storePreference.getCreatedAt(),

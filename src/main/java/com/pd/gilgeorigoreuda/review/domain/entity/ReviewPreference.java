@@ -26,8 +26,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "review_likes_hates")
-public class ReviewLikeHate extends BaseTimeEntity {
+@Table(name = "review_preferences")
+public class ReviewPreference extends BaseTimeEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,11 +38,11 @@ public class ReviewLikeHate extends BaseTimeEntity {
 	private ReviewPreferenceType preferenceType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_review_likes_hates_member_id"))
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_review_preferences_member_id"))
 	private Member member;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_likes_hates_review_id"))
+	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_preferences_review_id"))
 	private Review review;
 
 }

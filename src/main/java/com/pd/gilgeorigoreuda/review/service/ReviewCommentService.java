@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class ReviewCommentService {
     
     private final ReviewCommentRepository commentRepository;
-    public void saveComment(Long reviewId, Long memberId , ReviewCommentCreateRequest request) {
+    public void saveComment(final Long reviewId, final Long memberId , final ReviewCommentCreateRequest request) {
         ReviewComment comment = ReviewComment.builder()
                 .content(request.getContent())
                 .review(Review.builder().id(reviewId).build())
@@ -28,13 +28,13 @@ public class ReviewCommentService {
         commentRepository.save(comment);
     }
     @Transactional(readOnly = true)
-    public ReviewCommentListResponse findCommentsByReviewId(Long reviewId, Pageable pageable) {
+    public ReviewCommentListResponse findCommentsByReviewId(final Long reviewId, final Pageable pageable) {
         Page<ReviewComment> reviewCommentPage = commentRepository.findAllByReviewId(reviewId, pageable);
 
         return ReviewCommentListResponse.of(reviewCommentPage);
     }
 
-    public void updateComment(Long commentId, Long memberId, ReviewCommentCreateRequest commentRequest) {
+    public void updateComment(final Long commentId, final Long memberId, final ReviewCommentCreateRequest commentRequest) {
         ReviewComment reviewComment = getReviewComment(commentId);
         reviewComment.validateCommentAuthor(memberId);
         reviewComment.updateReviewComment(commentRequest.getContent());
@@ -42,14 +42,14 @@ public class ReviewCommentService {
         commentRepository.save(reviewComment);
     }
 
-    public void deleteReviewComment(Long commentId, Long memberId) {
+    public void deleteReviewComment(final Long commentId, final Long memberId) {
         ReviewComment reviewComment = getReviewComment(commentId);
         reviewComment.validateCommentAuthor(memberId);
 
         commentRepository.deleteById(commentId);
     }
 
-    private ReviewComment getReviewComment(Long commentId) {
+    private ReviewComment getReviewComment(final Long commentId) {
         ReviewComment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new RuntimeException("ReviewComment not found"));
 

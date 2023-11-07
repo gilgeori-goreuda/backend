@@ -15,10 +15,10 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "left join fetch r.store " +
             "left join fetch r.images " +
             "where r.member.id = :memberId")
-    List<Review> findAllByMemberId(@Param("memberId") Long memberId);
+    List<Review> findAllByMemberId(@Param("memberId") final Long memberId);
 
     @Query("select distinct r from Review r " +
             "left join fetch r.images i")
-    Page<Review> findAllReviewsWithImagesOrderByRecent(Pageable pageable);
+    Page<Review> findAllReviewsWithImagesOrderByRecent(final Pageable pageable);
 
 }

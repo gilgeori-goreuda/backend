@@ -16,7 +16,7 @@ public class Keyword extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "keyword", nullable = false, length = 50)
+    @Column(name = "keyword", nullable = false, length = 100)
     private String keyword;
 
 }
