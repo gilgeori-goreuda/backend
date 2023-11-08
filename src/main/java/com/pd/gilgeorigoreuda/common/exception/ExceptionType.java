@@ -21,6 +21,7 @@ public enum ExceptionType {
 	NO_OWNER_MEMBER_EXCEPTION("S005", "해당 가게의 제보자가 아닙니다.", NoOwnerMemberException.class),
 	NO_REPOTER_MEMBER_EXCEPTION("S006", "해당 가게의 신고자가 아닙니다.", NoRepoterMemberException.class),
 	ALREADY_EXIST_IN_BOUNDARY_EXCEPTION("S006", "해당 위치에 이미 존재하는 가게가 있습니다.", AlreadyExistInBoundaryException.class),
+	NO_SUCH_REPORT_EXCEPTION("S001", "존재하지 않는 신고입니다.", NoSuchReportException.class)
 
 	;
 
