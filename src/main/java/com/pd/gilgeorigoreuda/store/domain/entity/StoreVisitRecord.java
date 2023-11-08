@@ -49,16 +49,8 @@ public class StoreVisitRecord extends BaseTimeEntity {
 	public static StoreVisitRecord from (final Long memberId, final Long storeId, final Integer walkingDistance) {
 		return StoreVisitRecord.builder()
 				.walkingDistance(walkingDistance)
-				.member(
-					Member.builder()
-						.id(memberId)
-						.build()
-				)
-				.store(
-					Store.builder()
-						.id(storeId)
-						.build()
-				)
+				.member(Member.builder().id(memberId).build())
+				.store(Store.builder().id(storeId).build())
 				.build();
 	}
 
