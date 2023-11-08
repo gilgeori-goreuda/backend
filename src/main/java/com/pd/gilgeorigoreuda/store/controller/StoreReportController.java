@@ -40,11 +40,21 @@ public class StoreReportController {
                 .build();
     }
 
-    @GetMapping("/stores")
+    @GetMapping("/stores/memberCheck")
     public ResponseEntity<StoreReportHistoryListResponse> checkMemberReportList(
 
     ){
         StoreReportHistoryListResponse storeReportHistoryListResponse = storeReportService.checkMemberReportList(TEST_USER_ID);
+        return ResponseEntity
+                .ok()
+                .body(storeReportHistoryListResponse);
+    }
+
+    @GetMapping("/stores/storeCheck/{storeId}")
+    public ResponseEntity<StoreReportHistoryListResponse> checkStoreReportList(
+        @PathVariable("storeId") Long storeId
+    ){
+        StoreReportHistoryListResponse storeReportHistoryListResponse = storeReportService.checkStoreReportList(storeId);
         return ResponseEntity
                 .ok()
                 .body(storeReportHistoryListResponse);

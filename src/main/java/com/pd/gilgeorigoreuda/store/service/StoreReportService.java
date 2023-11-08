@@ -52,6 +52,14 @@ public class StoreReportService {
 
         return StoreReportHistoryListResponse.of(results);
     }
+    public StoreReportHistoryListResponse checkStoreReportList(final Long storeId){
+        List<StoreReportHistoryResponse> results = storeReportRepository.findReportWithMemberConditionStoreId(storeId)
+                .stream()
+                .map(StoreReportHistoryResponse::of)
+                .toList();
+
+        return StoreReportHistoryListResponse.of(results);
+    }
 
 
 }

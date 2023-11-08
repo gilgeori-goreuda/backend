@@ -26,4 +26,13 @@ public interface StoreReportHistoryRepository extends JpaRepository<StoreReportH
 			+ "where sr.member.id = :memberId ")
 	List<StoreReportHistory> findReportWithMemberConditionMemberId(@Param("memberId") Long memberId);
 
+	@Query("select sr "
+				+ "from StoreReportHistory sr "
+				+ "left join fetch sr.store s"
+				+ "left join fetch sr.member "
+				+ "where sr.store.id = :storeId ")
+	List<StoreReportHistory> findReportWithMemberConditionStoreId(@Param("storeId") Long storeId);
+
+
+
 }
