@@ -83,7 +83,7 @@ public class StoreResponse {
 		this.owner = owner;
 	}
 
-	public static StoreResponse of(Store store) {
+	public static StoreResponse of(final Store store) {
 		return new StoreResponse(
 				store.getId(),
 				store.getName(),

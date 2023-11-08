@@ -1,6 +1,7 @@
 package com.pd.gilgeorigoreuda.store.controller;
 
 import com.pd.gilgeorigoreuda.store.dto.request.ReportCreateRequest;
+import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryListResponse;
 import com.pd.gilgeorigoreuda.store.service.StorePreferenceService;
 import com.pd.gilgeorigoreuda.store.service.StoreReportService;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +38,30 @@ public class StoreReportController {
         return ResponseEntity
                 .noContent()
                 .build();
+    }
+
+    @GetMapping("/stores/memberCheck")
+    public ResponseEntity<StoreReportHistoryListResponse> checkMemberReportList(
+
+    ){
+        StoreReportHistoryListResponse storeReportHistoryListResponse =
+                storeReportService.checkMemberReportList(TEST_USER_ID);
+
+        return ResponseEntity
+                .ok()
+                .body(storeReportHistoryListResponse);
+    }
+
+    @GetMapping("/stores/storeCheck/{storeId}")
+    public ResponseEntity<StoreReportHistoryListResponse> checkStoreReportList(
+        @PathVariable("storeId") Long storeId
+    ){
+        StoreReportHistoryListResponse storeReportHistoryListResponse =
+                storeReportService.checkStoreReportList(storeId);
+
+        return ResponseEntity
+                .ok()
+                .body(storeReportHistoryListResponse);
     }
 
 }
