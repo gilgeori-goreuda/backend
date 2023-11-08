@@ -31,8 +31,12 @@ public class StoreVisitRecord extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "walking_distance")
+	@Column(name = "walking_distance", nullable = false)
 	private Integer walkingDistance;
+
+	@Column(name = "is_visited", nullable = false)
+	@Builder.Default
+	private Boolean isVisited = false;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_visit_records_store_id"))
@@ -41,5 +45,13 @@ public class StoreVisitRecord extends BaseTimeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_visit_records_member_id"))
 	private Member member;
+
+	public static StoreVisitRecord from (final Long memberId, final Long storeId, final Integer walkingDistance) {
+		return StoreVisitRecord.builder()
+				.walkingDistance(walkingDistance)
+				.member(Member.builder().id(memberId).build())
+				.store(Store.builder().id(storeId).build())
+				.build();
+	}
 
 }
