@@ -13,7 +13,7 @@ public class StoreReportStoreResponse {
 	private String name;
 	private String imageUrl;
 
-	public StoreReportStoreResponse(Long id, String name, String imageUrl) {
+	public StoreReportStoreResponse(final Long id, String name, final String imageUrl) {
 		this.id = id;
 		this.name = name;
 		this.imageUrl = imageUrl;

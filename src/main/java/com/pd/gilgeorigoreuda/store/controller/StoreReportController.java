@@ -44,7 +44,9 @@ public class StoreReportController {
     public ResponseEntity<StoreReportHistoryListResponse> checkMemberReportList(
 
     ){
-        StoreReportHistoryListResponse storeReportHistoryListResponse = storeReportService.checkMemberReportList(TEST_USER_ID);
+        StoreReportHistoryListResponse storeReportHistoryListResponse =
+                storeReportService.checkMemberReportList(TEST_USER_ID);
+
         return ResponseEntity
                 .ok()
                 .body(storeReportHistoryListResponse);
@@ -54,7 +56,9 @@ public class StoreReportController {
     public ResponseEntity<StoreReportHistoryListResponse> checkStoreReportList(
         @PathVariable("storeId") Long storeId
     ){
-        StoreReportHistoryListResponse storeReportHistoryListResponse = storeReportService.checkStoreReportList(storeId);
+        StoreReportHistoryListResponse storeReportHistoryListResponse =
+                storeReportService.checkStoreReportList(storeId);
+
         return ResponseEntity
                 .ok()
                 .body(storeReportHistoryListResponse);
