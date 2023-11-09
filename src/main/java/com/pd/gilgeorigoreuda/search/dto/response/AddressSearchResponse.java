@@ -5,6 +5,8 @@ import com.pd.gilgeorigoreuda.store.domain.entity.StoreType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Getter
 @NoArgsConstructor
 public class AddressSearchResponse {
@@ -16,8 +18,8 @@ public class AddressSearchResponse {
     private Double averageRating;
     private String businessDate;
     private String imageUrl;
-    private Double lat;
-    private Double lng;
+    private BigDecimal lat;
+    private BigDecimal lng;
     private String streetAddress;
     private FoodCategoryListResponse storeCategories;
 

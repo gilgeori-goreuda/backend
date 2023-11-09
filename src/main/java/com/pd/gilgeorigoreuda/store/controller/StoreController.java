@@ -16,7 +16,6 @@ import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
-import com.pd.gilgeorigoreuda.store.dto.response.StoreUpdateResponse;
 import com.pd.gilgeorigoreuda.store.service.StoreService;
 
 import jakarta.validation.Valid;
@@ -24,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/store")
+@RequestMapping("/api/v1/stores")
 public class StoreController {
 
 	private final StoreService storeService;
@@ -38,7 +37,7 @@ public class StoreController {
 		StoreCreateResponse storeCreateResponse = storeService.saveStore(1L, storeCreateRequest);
 
 		return ResponseEntity
-			.created(URI.create("/api/v1/store/" + storeCreateResponse.getId()))
+			.created(URI.create("/api/v1/stores/" + storeCreateResponse.getId()))
 			.build();
 	}
 
@@ -56,16 +55,16 @@ public class StoreController {
 
 	// todo: 권한 확인
 	@PutMapping("/{storeId}")
-	public ResponseEntity<StoreUpdateResponse> updateStore(
+	public ResponseEntity<Void> updateStore(
 		// todo: 유저 정보
 		@Valid @RequestBody final StoreUpdateRequest storeUpdateRequest,
 		@PathVariable final Long storeId
 	) {
-		StoreUpdateResponse storeUpdateResponse = storeService.updateStore(1L, storeId, storeUpdateRequest);
+		storeService.updateStore(1L, storeId, storeUpdateRequest);
 
 		return ResponseEntity
-			.ok()
-			.body(storeUpdateResponse);
+				.noContent()
+				.build();
 	}
 
 	// todo: 권한 확인

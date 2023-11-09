@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306/gilgeorigoreuda?characterEncoding=UTF-8
+        url: jdbc:mysql://34.64.193.39:3306/gilgeorigoreuda?characterEncoding=UTF-8
         username: root
-        password: 1234
+        password: rlatnehd@123
 
     jpa:
       hibernate:

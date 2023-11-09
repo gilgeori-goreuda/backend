@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -28,6 +29,10 @@ public interface StoreNativeQueryRepository extends JpaRepository<Store, Long> {
 			+ ") <= :boundary "
 			+ "LIMIT 1",
 		nativeQuery = true)
-	Optional<Long> isAlreadyExistInBoundary(@Param("lat") Double lat, @Param("lng") Double lng, @Param("largeAddress") String largeAddress, @Param("mediumAddress") String mediumAddress, @Param("boundary") Integer boundary);
+	Optional<Long> isAlreadyExistInBoundary(@Param("lat") final BigDecimal lat,
+											@Param("lng") final BigDecimal lng,
+											@Param("largeAddress") final String largeAddress,
+											@Param("mediumAddress") final String mediumAddress,
+											@Param("boundary") final Integer boundary);
 
 }

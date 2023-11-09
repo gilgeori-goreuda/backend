@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.domain.entity;
 
+import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -30,8 +31,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
@@ -49,14 +48,14 @@ public class Store extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "name", nullable = false, length = 50)
+	@Column(name = "name", nullable = false, length = 100)
 	private String name;
 
 	@Column(name = "store_type", nullable = false)
 	@Enumerated(EnumType.STRING)
 	private StoreType storeType;
 
-	@Column(name = "detail_location", length = 100)
+	@Column(name = "detail_location", length = 300)
 	private String detailLocation;
 
 	@Column(name = "average_rating", nullable = false)
@@ -66,10 +65,10 @@ public class Store extends BaseTimeEntity {
 	@Column(name = "business_date", nullable = false, length = 20)
 	private String businessDate;
 
-	@Column(name = "open_time", length = 5)
+	@Column(name = "open_time", length = 10)
 	private LocalTime openTime;
 
-	@Column(name = "close_time", length = 5)
+	@Column(name = "close_time", length = 10)
 	private LocalTime closeTime;
 
 	@Column(name = "purchase_type", nullable = false)
@@ -79,11 +78,11 @@ public class Store extends BaseTimeEntity {
 	@Column(name = "image_url", length = 512)
 	private String imageUrl;
 
-	@Column(nullable = false)
-	private Double lat;
+	@Column(name = "lat", nullable = false)
+	private BigDecimal lat;
 
-	@Column(nullable = false)
-	private Double lng;
+	@Column(name = "lng", nullable = false)
+	private BigDecimal lng;
 
 	@Embedded
 	private StreetAddress streetAddress;
@@ -96,7 +95,7 @@ public class Store extends BaseTimeEntity {
 	private String lastModifiedMemberNickname;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_member_id"))
+	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_stores_member_id"))
 	private Member member;
 
 	@OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE, orphanRemoval = true)
@@ -117,8 +116,8 @@ public class Store extends BaseTimeEntity {
 			final LocalTime closeTime,
 			final String purchaseType,
 			final String businessDates,
-			final Double lat,
-			final Double lng,
+			final BigDecimal lat,
+			final BigDecimal lng,
 			final String streetAddress,
 			final String lastModifiedMemberNickname) {
 		this.name = name;
@@ -133,7 +132,7 @@ public class Store extends BaseTimeEntity {
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
 	}
 
-	public boolean isOwner(Long memberId) {
+	public boolean isOwner(final Long memberId) {
 		return this.member.getId().equals(memberId);
 	}
 

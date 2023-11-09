@@ -11,13 +11,15 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/member")
+@RequestMapping("/api/v1/members")
 public class MemberController {
 
     private final MemberService memberService;
 
     @GetMapping("/{memberId}/reviews")
-    public ResponseEntity<MemberReviewListResponse> getMyReviews(@PathVariable("memberId") Long memberId) {
+    public ResponseEntity<MemberReviewListResponse> getMyReviews(
+            @PathVariable("memberId") final Long memberId
+    ) {
         MemberReviewListResponse response = memberService.getMyReviews(memberId);
 
         return ResponseEntity
@@ -26,7 +28,9 @@ public class MemberController {
     }
 
     @GetMapping("/{memberId}/preferences")
-    public ResponseEntity<MemberPreferenceStoreListResponse> getMyPreference(@PathVariable("memberId") Long memberId) {
+    public ResponseEntity<MemberPreferenceStoreListResponse> getMyPreference(
+            @PathVariable("memberId") final Long memberId
+    ) {
         MemberPreferenceStoreListResponse response = memberService.getMyPreference(memberId);
 
         return ResponseEntity

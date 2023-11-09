@@ -1,7 +1,11 @@
 package com.pd.gilgeorigoreuda.store.dto.response;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
@@ -19,17 +23,26 @@ public class StoreResponse {
 	private String detailLocation;
 	private Double averageRating;
 	private String businessDates;
-	private String openTime;
-	private String closeTime;
+
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	private LocalTime openTime;
+
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	private LocalTime closeTime;
+	
 	private String purchaseType;
 	private String imageUrl;
-	private Double lat;
-	private Double lng;
+	private BigDecimal lat;
+	private BigDecimal lng;
 	private String streetAddress;
 	private Integer totalVisitCount;
+
+//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	private LocalDateTime createdAt;
+
+	private List<String> foodCategories;
 	private String lastModifiedMemberNickname;
 	private StoreOwnerResponse owner;
-	private List<String> foodCategories;
 
 	public StoreResponse(
 			final Long id,
@@ -38,17 +51,18 @@ public class StoreResponse {
 			final String detailLocation,
 			final Double averageRating,
 			final String businessDates,
-			final String openTime,
-			final String closeTime,
+			final LocalTime openTime,
+			final LocalTime closeTime,
 			final String purchaseType,
 			final String imageUrl,
-			final Double lat,
-			final Double lng,
+			final BigDecimal lat,
+			final BigDecimal lng,
 			final String streetAddress,
 			final Integer totalVisitCount,
+			final LocalDateTime createdAt,
+			final List<String> foodCategories,
 			final String lastModifiedMemberNickname,
-			final StoreOwnerResponse owner,
-			final List<String> foodCategories) {
+			final StoreOwnerResponse owner) {
 		this.id = id;
 		this.name = name;
 		this.storeType = storeType;
@@ -63,9 +77,10 @@ public class StoreResponse {
 		this.lng = lng;
 		this.streetAddress = streetAddress;
 		this.totalVisitCount = totalVisitCount;
+		this.createdAt = createdAt;
+		this.foodCategories = foodCategories;
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
 		this.owner = owner;
-		this.foodCategories = foodCategories;
 	}
 
 	public static StoreResponse of(Store store) {
@@ -76,21 +91,22 @@ public class StoreResponse {
 				store.getDetailLocation(),
 				store.getAverageRating(),
 				store.getBusinessDate(),
-				store.getOpenTime().toString(),
-				store.getCloseTime().toString(),
+				store.getOpenTime(),
+				store.getCloseTime(),
 				store.getPurchaseType().toString(),
 				store.getImageUrl(),
 				store.getLat(),
 				store.getLng(),
 				store.getStreetAddress().toString(),
 				store.getTotalVisitCount(),
-				store.getLastModifiedMemberNickname(),
-				StoreOwnerResponse.of(store.getMember()),
+				store.getCreatedAt(),
 				store.getFoodCategories()
-					.stream()
-					.map(FoodCategory::getFoodType)
-					.map(FoodType::getFoodName)
-					.toList()
+						.stream()
+						.map(FoodCategory::getFoodType)
+						.map(FoodType::getFoodName)
+						.toList(),
+				store.getLastModifiedMemberNickname(),
+				StoreOwnerResponse.of(store.getMember())
 		);
 	}
 

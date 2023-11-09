@@ -48,15 +48,15 @@ public class Review extends BaseTimeEntity {
 	@OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<ReviewImage> images;
 
-	public void updateContent(String content) {
+	public void updateContent(final String content) {
 		this.content = content;
 	}
 
-	public void updateReviewRating(Integer reviewRating) {
+	public void updateReviewRating(final Integer reviewRating) {
 		this.reviewRating = reviewRating;
 	}
 
-	public void checkAuthor(Long memberId) {
+	public void checkAuthor(final Long memberId) {
 		if (Objects.equals(this.member.getId(), memberId)) {
 			throw new RuntimeException("Mismatched Review");
 		}
