@@ -4,6 +4,10 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import com.pd.gilgeorigoreuda.store.exception.*;
+import com.pd.gilgeorigoreuda.visit.exception.NoSuchStoreVisitRecordException;
+import com.pd.gilgeorigoreuda.visit.exception.OutOfBoundaryException;
+import com.pd.gilgeorigoreuda.visit.exception.TimeOutException;
+import com.pd.gilgeorigoreuda.visit.exception.TooLongDistanceException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -20,7 +24,10 @@ public enum ExceptionType {
 	NO_SUCH_FOOD_TYPE_EXCEPTION("S004", "존재하지 않는 음식 타입입니다.", NoSuchFoodTypeException.class),
 	NO_OWNER_MEMBER_EXCEPTION("S005", "해당 가게의 제보자가 아닙니다.", NoOwnerMemberException.class),
 	ALREADY_EXIST_IN_BOUNDARY_EXCEPTION("S006", "해당 위치에 이미 존재하는 가게가 있습니다.", AlreadyExistInBoundaryException.class),
-
+	OUT_OF_BOUNDARY_EXCEPTION("S007", "인증 가능 범위가 아닙니다.", OutOfBoundaryException.class),
+	NO_SUCH_STORE_VISIT_RECORD_EXCEPTION("S008", "존재하지 않는 가게 방문 기록입니다.", NoSuchStoreVisitRecordException.class),
+	TIME_OUT_EXCEPTION("S009", "인증 시간이 초과되었습니다. 2시간이 지난 방문 기록입니다.", TimeOutException.class),
+	TOO_LONG_DISTANCE_EXCEPTION("S010", "방문하기에 너무 먼 거리에 있습니다. 근처에 가서 다시 시도해주세요.", TooLongDistanceException.class)
 	;
 
 	private final String errorCode;
