@@ -3,6 +3,7 @@ package com.pd.gilgeorigoreuda.common.exception;
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.pd.gilgeorigoreuda.auth.exception.EmailDuplicatedException;
 import com.pd.gilgeorigoreuda.store.exception.*;
 import com.pd.gilgeorigoreuda.visit.exception.NoSuchStoreVisitRecordException;
 import com.pd.gilgeorigoreuda.visit.exception.OutOfBoundaryException;
@@ -16,6 +17,8 @@ import lombok.Getter;
 public enum ExceptionType {
 
 	UNKNOWN_EXCEPTION("X001", "알 수 없는 서버 에러입니다."),
+
+	EMAIL_DUPLICATED_EXCEPTION("M001", "중복된 이메일 입니다.", EmailDuplicatedException.class),
 	INVALID_DATE_TIME_FORMAT("X002", "유효하지 않은 날짜 형식입니다. (00:00-23:59)"),
 
 	NO_SUCH_STORE_EXCEPTION("S001", "존재하지 않는 가게입니다.", NoSuchStoreException.class),
