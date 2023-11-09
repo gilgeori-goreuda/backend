@@ -2,6 +2,7 @@ package com.pd.gilgeorigoreuda.store.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+import com.pd.gilgeorigoreuda.visit.exception.TimeOutException;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,12 +20,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import java.time.LocalDateTime;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
 @Getter
 @Table(name = "store_visit_records")
+@DynamicUpdate
 public class StoreVisitRecord extends BaseTimeEntity {
 
 	@Id
@@ -52,6 +58,19 @@ public class StoreVisitRecord extends BaseTimeEntity {
 				.member(Member.builder().id(memberId).build())
 				.store(Store.builder().id(storeId).build())
 				.build();
+	}
+
+	public void checkTimeOut(int validTime) {
+		LocalDateTime startVisitTime = this.getCreatedAt();
+		LocalDateTime endVisitTime = LocalDateTime.now();
+
+		if (startVisitTime.plusHours(validTime).isBefore(endVisitTime)) {
+			throw new TimeOutException();
+		}
+	}
+
+	public void verifyVisit() {
+		this.isVisited = true;
 	}
 
 }
