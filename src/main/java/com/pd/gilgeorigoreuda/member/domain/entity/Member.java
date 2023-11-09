@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @Table(
 	name = "members",
 	indexes = {
-		@Index(name = "idx_members_email", columnList = "email")
+		@Index(name = "idx_members_id", columnList = "id")
 	}
 )
 public class Member extends BaseTimeEntity {
@@ -32,16 +32,13 @@ public class Member extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, length = 10)
-	private String name;
-
-	@Column(nullable = false, length = 50, unique = true)
-	private String email;
-
 	@Column(nullable = false, length = 10, unique = true)
 	private String nickname;
 
 	@Column(name = "profile_image_url", length = 512)
 	private String profileImageUrl;
+
+	@Column(name = "provider_id", length = 512)
+	private String providerId;
 
 }
