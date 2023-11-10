@@ -78,11 +78,12 @@ public class Store extends BaseTimeEntity {
 	@Column(name = "image_url", length = 512)
 	private String imageUrl;
 
-	@Column(name = "lat", nullable = false)
+	@Column(name = "lat", precision = 22, scale = 16, nullable = false)
 	private BigDecimal lat;
 
-	@Column(name = "lng", nullable = false)
+	@Column(name = "lng", precision = 22, scale = 16, nullable = false)
 	private BigDecimal lng;
+
 
 	@Embedded
 	private StreetAddress streetAddress;

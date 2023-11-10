@@ -40,8 +40,9 @@ public interface StoreReportHistoryRepository extends JpaRepository<StoreReportH
 	)
 	Optional<StoreReportHistory> findReportAlreadyReported(@Param("storeId") Long storeId, @Param("memberId") Long memberId);
 
-//	@Query("select sr "
-//			+ "from StoreReportHistory  sr"
-//
-//	)
+	@Query("select s "
+			+ "from Store s "
+			+ "where s.id = :storeId"
+	)
+	Optional<Store> findReportLimitDistance(@Param("storeId") Long storeId);
 }

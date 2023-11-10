@@ -1,17 +1,18 @@
 package com.pd.gilgeorigoreuda.store.service;
 
+import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
+import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.store.domain.entity.StoreReportHistory;
 import com.pd.gilgeorigoreuda.store.dto.request.ReportCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryListResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryResponse;
-import com.pd.gilgeorigoreuda.store.exception.AlreadyReporterMemberException;
-import com.pd.gilgeorigoreuda.store.exception.NoRepoterMemberException;
-import com.pd.gilgeorigoreuda.store.exception.NoSuchReportException;
+import com.pd.gilgeorigoreuda.store.exception.*;
 import com.pd.gilgeorigoreuda.store.repository.StoreReportHistoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,12 +31,22 @@ public class StoreReportService {
 
         if (reportAlreadyReported.isPresent()) {
             throw new AlreadyReporterMemberException();
-        }else {
-
-            // 위치 100m 넘어서 신고하면 못하도록 하는 로직 짜기
         }
 
+        BigDecimal memberLat = reportCreateRequest.lat();
+        BigDecimal memberLng = reportCreateRequest.lng();
+        
+        Optional<Store> reportLimitDistance = storeReportRepository.findReportLimitDistance(storeId);
+        if (!reportLimitDistance.isPresent()) {
+            throw new NoSuchStoreException();
+        }
+        BigDecimal storeLat = reportLimitDistance.get().getLat();
+        BigDecimal storeLng = reportLimitDistance.get().getLng();
 
+        int betweenDistance = DistanceCalculator.calculateDistance(memberLat, memberLng, storeLat, storeLng);
+        if(betweenDistance > 100) {
+            throw new LimitDistanceReportException();
+        }
 
         storeReportRepository.save(reportCreateRequest.toEntity(storeId, memberId));
     }
