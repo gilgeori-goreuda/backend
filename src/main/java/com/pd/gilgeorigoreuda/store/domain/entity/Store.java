@@ -84,6 +84,7 @@ public class Store extends BaseTimeEntity {
 	@Column(name = "lng", precision = 22, scale = 16, nullable = false)
 	private BigDecimal lng;
 
+
 	@Embedded
 	private StreetAddress streetAddress;
 
