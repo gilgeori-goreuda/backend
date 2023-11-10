@@ -1,12 +1,10 @@
 package com.pd.gilgeorigoreuda.store.service;
 
-import com.pd.gilgeorigoreuda.search.dto.response.AddressSearchListResponse;
-import com.pd.gilgeorigoreuda.search.dto.response.AddressSearchResponse;
-import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import com.pd.gilgeorigoreuda.store.domain.entity.StoreReportHistory;
 import com.pd.gilgeorigoreuda.store.dto.request.ReportCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryListResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryResponse;
+import com.pd.gilgeorigoreuda.store.exception.AlreadyReporterMemberException;
 import com.pd.gilgeorigoreuda.store.exception.NoRepoterMemberException;
 import com.pd.gilgeorigoreuda.store.exception.NoSuchReportException;
 import com.pd.gilgeorigoreuda.store.repository.StoreReportHistoryRepository;
@@ -15,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -26,6 +25,18 @@ public class StoreReportService {
     @Transactional
     public void addStoreReport(ReportCreateRequest reportCreateRequest, Long storeId,
                                 Long memberId) {
+        Optional<StoreReportHistory> reportAlreadyReported =
+                storeReportRepository.findReportAlreadyReported(storeId, memberId);
+
+        if (reportAlreadyReported.isPresent()) {
+            throw new AlreadyReporterMemberException();
+        }else {
+
+            // 위치 100m 넘어서 신고하면 못하도록 하는 로직 짜기
+        }
+
+
+
         storeReportRepository.save(reportCreateRequest.toEntity(storeId, memberId));
     }
 

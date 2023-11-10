@@ -19,9 +19,10 @@ public enum ExceptionType {
 	NO_SUCH_PURCHASE_TYPE_EXCEPTION("S003", "존재하지 않는 결제 타입입니다.", NoSuchPurchaseTypeException.class),
 	NO_SUCH_FOOD_TYPE_EXCEPTION("S004", "존재하지 않는 음식 타입입니다.", NoSuchFoodTypeException.class),
 	NO_OWNER_MEMBER_EXCEPTION("S005", "해당 가게의 제보자가 아닙니다.", NoOwnerMemberException.class),
-	NO_REPOTER_MEMBER_EXCEPTION("S006", "해당 가게의 신고자가 아닙니다.", NoRepoterMemberException.class),
+	NO_REPORTER_MEMBER_EXCEPTION("S006", "해당 가게의 신고자가 아닙니다.", NoRepoterMemberException.class),
 	ALREADY_EXIST_IN_BOUNDARY_EXCEPTION("S006", "해당 위치에 이미 존재하는 가게가 있습니다.", AlreadyExistInBoundaryException.class),
-	NO_SUCH_REPORT_EXCEPTION("S001", "존재하지 않는 신고입니다.", NoSuchReportException.class)
+	ALREADY_REPORTER_MEMBER_EXCEPTION("S007", "이미 신고한 가게입니다.", AlreadyReporterMemberException.class),
+	NO_SUCH_REPORT_EXCEPTION("S008", "존재하지 않는 신고입니다.", NoSuchReportException.class)
 
 	;
 

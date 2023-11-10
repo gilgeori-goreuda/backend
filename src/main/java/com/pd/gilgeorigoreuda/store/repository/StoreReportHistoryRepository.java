@@ -27,12 +27,21 @@ public interface StoreReportHistoryRepository extends JpaRepository<StoreReportH
 	List<StoreReportHistory> findReportWithMemberConditionMemberId(@Param("memberId") Long memberId);
 
 	@Query("select sr "
-				+ "from StoreReportHistory sr "
-				+ "left join fetch sr.store s"
-				+ "left join fetch sr.member "
-				+ "where sr.store.id = :storeId ")
+			+ "from StoreReportHistory sr "
+			+ "left join fetch sr.store s"
+			+ "left join fetch sr.member "
+			+ "where sr.store.id = :storeId ")
 	List<StoreReportHistory> findReportWithMemberConditionStoreId(@Param("storeId") Long storeId);
 
+	@Query("select sr "
+			+ "from StoreReportHistory  sr "
+			+ "where sr.store.id = :storeId and "
+			+ "sr.member.id = :memberId"
+	)
+	Optional<StoreReportHistory> findReportAlreadyReported(@Param("storeId") Long storeId, @Param("memberId") Long memberId);
 
-
+//	@Query("select sr "
+//			+ "from StoreReportHistory  sr"
+//
+//	)
 }
