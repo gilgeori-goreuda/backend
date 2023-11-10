@@ -11,11 +11,11 @@ public class AddressSearchListResponse {
 
     private List<AddressSearchResponse> results;
 
-    private AddressSearchListResponse(List<AddressSearchResponse> results) {
+    private AddressSearchListResponse(final List<AddressSearchResponse> results) {
         this.results = results;
     }
 
-    public static AddressSearchListResponse of(List<AddressSearchResponse> results) {
+    public static AddressSearchListResponse of(final List<AddressSearchResponse> results) {
         return new AddressSearchListResponse(results);
     }
 

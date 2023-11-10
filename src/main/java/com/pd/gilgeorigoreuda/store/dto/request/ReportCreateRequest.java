@@ -10,7 +10,6 @@ public record ReportCreateRequest(
         String content,
         BigDecimal lat,
         BigDecimal lng
-
 ) {
     public StoreReportHistory toEntity(Long storeId, Long memberId){
         return StoreReportHistory.builder()

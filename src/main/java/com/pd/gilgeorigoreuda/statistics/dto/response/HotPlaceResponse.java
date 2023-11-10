@@ -11,15 +11,15 @@ public class HotPlaceResponse {
     private Long rank;
     private String name;
 
-    private HotPlaceResponse(Long id, String name) {
+    private HotPlaceResponse(final Long id, final String name) {
         this.rank = id;
         this.name = name;
     }
 
-    public static HotPlaceResponse of(HotPlace hotPlace) {
+    public static HotPlaceResponse of(final HotPlace hotPlace) {
         return new HotPlaceResponse(
                 hotPlace.getId(),
-                hotPlace.getHotPlace()
+                hotPlace.getPlace()
         );
     }
 

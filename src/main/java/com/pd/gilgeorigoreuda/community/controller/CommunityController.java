@@ -17,9 +17,9 @@ public class CommunityController {
 
     @GetMapping("/reviews")
     public ResponseEntity<ReviewListResponse> findAllReview(
-            @RequestParam(name = "page", required = false, defaultValue = "0") Integer page,
-            @RequestParam(name = "size", required = false, defaultValue = "10") Integer size,
-            @RequestParam(name = "sort", required = false, defaultValue = "createdAt") String sort
+            @RequestParam(name = "page", required = false, defaultValue = "0") final Integer page,
+            @RequestParam(name = "size", required = false, defaultValue = "10") final Integer size,
+            @RequestParam(name = "sort", required = false, defaultValue = "createdAt") final String sort
     ) {
         ReviewListResponse response = communityService.findAll(PageRequest.of(page, size, Sort.by(sort)));
 

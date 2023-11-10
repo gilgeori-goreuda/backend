@@ -15,7 +15,7 @@ public class MemberReviewListResponse {
         this.reviews = reviews;
     }
 
-    public static MemberReviewListResponse of(List<MemberReviewResponse> reviews) {
+    public static MemberReviewListResponse of(final List<MemberReviewResponse> reviews) {
         return new MemberReviewListResponse(reviews);
     }
 

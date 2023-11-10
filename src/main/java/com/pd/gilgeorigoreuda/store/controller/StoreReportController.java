@@ -21,8 +21,6 @@ public class StoreReportController {
     public ResponseEntity<Void> addStoreReport(
             @PathVariable final Long storeId,
             @RequestBody final ReportCreateRequest reportCreateRequest
-
-
     ){
         storeReportService.addStoreReport(reportCreateRequest, storeId, TEST_USER_ID);
 
