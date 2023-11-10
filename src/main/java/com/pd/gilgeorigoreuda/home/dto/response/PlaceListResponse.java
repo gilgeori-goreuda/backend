@@ -11,11 +11,11 @@ public class PlaceListResponse {
 
     private List<PlaceResponse> recommendPlace;
 
-    private PlaceListResponse(List<PlaceResponse> recommendPlace) {
+    private PlaceListResponse(final List<PlaceResponse> recommendPlace) {
         this.recommendPlace = recommendPlace;
     }
 
-    public static PlaceListResponse of(List<PlaceResponse> recommendPlace) {
+    public static PlaceListResponse of(final List<PlaceResponse> recommendPlace) {
         return new PlaceListResponse(recommendPlace);
     }
 }

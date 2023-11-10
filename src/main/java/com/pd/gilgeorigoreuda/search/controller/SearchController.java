@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -21,9 +22,9 @@ public class SearchController {
 
     @GetMapping("/address")
     public ResponseEntity<AddressSearchListResponse> addressAndCategorySearch(
-            @RequestParam(required = false,name = "lat") Double lat,
-            @RequestParam(required = false,name = "lng") Double lng,
-            @RequestParam(required = false,name = "foodType") FoodType foodType
+            @RequestParam(required = false,name = "lat") final BigDecimal lat,
+            @RequestParam(required = false,name = "lng") final BigDecimal lng,
+            @RequestParam(required = false,name = "foodType") final FoodType foodType
     ){
         AddressSearchListResponse response = searchService.getStoreByAddressAndFoodType(lat, lng, foodType);
 

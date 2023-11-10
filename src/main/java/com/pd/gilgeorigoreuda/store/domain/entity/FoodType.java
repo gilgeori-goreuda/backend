@@ -27,7 +27,7 @@ public enum FoodType {
 	DALGONA("달고나"),
 	KUNOKSUSU("군옥수수"),
 	TANGHURU("탕후루"),
-	FIRED("튀김"),
+	FIRED("튀김")
 	;
 
 	private final String foodName;

@@ -16,7 +16,7 @@ public class MemberReviewStoreResponse {
         this.storeName = storeName;
     }
 
-    public static MemberReviewStoreResponse of(Store store) {
+    public static MemberReviewStoreResponse of(final Store store) {
         return new MemberReviewStoreResponse(store.getId(), store.getName());
     }
 

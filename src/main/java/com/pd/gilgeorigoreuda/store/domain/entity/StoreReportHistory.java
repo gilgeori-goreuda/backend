@@ -31,7 +31,7 @@ public class StoreReportHistory extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "content", length = 500)
+	@Column(name = "content", nullable = false, length = 500)
 	private String content;
 
 	@ManyToOne(fetch = FetchType.LAZY)

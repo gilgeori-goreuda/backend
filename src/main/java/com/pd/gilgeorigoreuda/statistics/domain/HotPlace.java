@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.statistics.domain;
 
+import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,13 +9,13 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "hotplaces")
-public class HotPlace {
+@Table(name = "hot_places")
+public class HotPlace extends BaseTimeEntity {
 
     @Id
     private Long id;
 
-    @Column(name = "hot_place", nullable = false, length = 50)
-    private String hotPlace;
+    @Column(name = "place", nullable = false, length = 100)
+    private String place;
 
 }

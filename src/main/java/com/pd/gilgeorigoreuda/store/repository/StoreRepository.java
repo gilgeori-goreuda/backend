@@ -17,20 +17,20 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 		+ "left join fetch s.member m "
 		+ "left join fetch s.foodCategories fc "
 		+ "where s.id = :storeId")
-	Optional<Store> findStoreWithMemberAndCategories(@Param("storeId") Long storeId);
+	Optional<Store> findStoreWithMemberAndCategories(@Param("storeId") final Long storeId);
 
 	@Query("select s "
 		+ "from Store s "
 		+ "left join fetch s.member m "
 		+ "where s.id = :storeId")
-	Optional<Store> findStoreWithMember(@Param("storeId") Long storeId);
+	Optional<Store> findStoreWithMember(@Param("storeId") final Long storeId);
 
 	@Query("select s " +
 		"from Store s " +
 		"where s.createdAt >= :startDay and s.createdAt <= :endDay " +
 		"order by s.createdAt desc " +
 		"limit 10")
-	List<Store> findAllByBetweenDay(@Param("startDay") LocalDateTime startDay, @Param("endDay") LocalDateTime endDay);
+	List<Store> findAllByBetweenDay(@Param("startDay") final LocalDateTime startDay, @Param("endDay") final LocalDateTime endDay);
 
 	@Query("select s " +
 		"from Store s " +
