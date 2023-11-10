@@ -21,7 +21,8 @@ public class CommunityController {
             @RequestParam(name = "size", required = false, defaultValue = "10") final Integer size,
             @RequestParam(name = "sort", required = false, defaultValue = "createdAt") final String sort
     ) {
-        ReviewListResponse response = communityService.findAll(PageRequest.of(page, size, Sort.by(sort)));
+        ReviewListResponse response = communityService.findAll(
+                PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, sort)));
 
         return ResponseEntity
             .ok()
