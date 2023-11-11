@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.review.service;
 
-import com.pd.gilgeorigoreuda.fileUpload.service.FileUploadService;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewImage;
@@ -19,11 +18,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional
-public class ReviewService {
+public class  ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ReviewImageRepository reviewImageRepository;
-    private final FileUploadService fileUploadService;
+//    private final FileUploadService fileUploadService;
 
     @Value("g-reviewimages")
     private String bucket;
@@ -43,16 +42,16 @@ public class ReviewService {
 
         Review savedReview = reviewRepository.save(review);
 
-        List<String> fileNames = fileUploadService.fileUpload(bucket, files);
+//        List<String> fileNames = fileUploadService.fileUpload(bucket, files);
 
-        fileNames.forEach(name -> {
-            reviewImageRepository.save(
-                    ReviewImage
-                        .builder()
-                        .imageUrl(name)
-                        .review(Review.builder().id(savedReview.getId()).build())
-                        .build());
-        });
+//        fileNames.forEach(name -> {
+//            reviewImageRepository.save(
+//                    ReviewImage
+//                        .builder()
+//                        .imageUrl(name)
+//                        .review(Review.builder().id(savedReview.getId()).build())
+//                        .build());
+//        });
 
     }
 
