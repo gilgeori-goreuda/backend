@@ -1,4 +1,4 @@
-package com.pd.gilgeorigoreuda.image;
+package com.pd.gilgeorigoreuda.image.domain;
 
 import com.pd.gilgeorigoreuda.image.exception.FileImageNameHashException;
 import com.pd.gilgeorigoreuda.image.exception.ImageNullException;

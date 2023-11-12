@@ -3,6 +3,7 @@ package com.pd.gilgeorigoreuda.image;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.pd.gilgeorigoreuda.image.domain.ImageFile;
 import com.pd.gilgeorigoreuda.image.exception.InvalidImageFileException;
 import com.pd.gilgeorigoreuda.image.exception.InvalidImagePathException;
 import lombok.RequiredArgsConstructor;

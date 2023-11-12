@@ -1,12 +1,11 @@
 package com.pd.gilgeorigoreuda.image.service;
 
-import com.pd.gilgeorigoreuda.image.ImageFile;
+import com.pd.gilgeorigoreuda.image.domain.ImageFile;
 import com.pd.gilgeorigoreuda.image.ImageUploader;
 import com.pd.gilgeorigoreuda.image.dto.response.ImagesResponse;
 import com.pd.gilgeorigoreuda.image.exception.EmptyImageListException;
 import com.pd.gilgeorigoreuda.image.exception.ExceedImageListSizeException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
