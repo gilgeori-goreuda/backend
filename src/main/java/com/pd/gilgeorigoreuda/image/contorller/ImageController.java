@@ -24,10 +24,7 @@ public class ImageController {
     public ResponseEntity<ImagesResponse> uploadImages(@RequestPart final List<MultipartFile> images) {
         final ImagesResponse imagesResponse = imageService.save(images);
 
-        final String firstImageName = imagesResponse.getImageNames()
-                .stream()
-                .findFirst()
-                .toString();
+        final String firstImageName = imagesResponse.getImageNames().get(0);
 
         return ResponseEntity
                 .created(URI.create(firstImageName))

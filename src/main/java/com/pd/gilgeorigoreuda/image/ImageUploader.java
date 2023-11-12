@@ -6,6 +6,7 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.pd.gilgeorigoreuda.image.exception.InvalidImageFileException;
 import com.pd.gilgeorigoreuda.image.exception.InvalidImagePathException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -14,6 +15,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class ImageUploader {
 
@@ -43,9 +45,11 @@ public class ImageUploader {
 
         try (final InputStream inputStream = imageFile.getInputStream()) {
             s3Client.putObject(bucket, path, inputStream, metadata);
-        } catch (final AmazonServiceException e) {
+        } catch (AmazonServiceException e) {
+            log.error("AmazonServiceException: {}", e.getMessage());
             throw new InvalidImagePathException();
-        } catch (final IOException e) {
+        } catch (IOException e) {
+            log.error("AmazonServiceException: {}", e.getMessage());
             throw new InvalidImageFileException();
         }
         return imageFile.getHashedName();

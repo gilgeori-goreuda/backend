@@ -15,13 +15,13 @@ spring:
 
 cloud:
   aws:
-    #    credentials:
-    #      accessKey: AKIAYEKHUA7HVZMVYI7T
-    #      secretKey: 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
+    credentials:
+      accessKey: AKIAYEKHUA7HSDWVE5HD
+      secretKey: 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
     region:
       static: ap-northeast-2
     stack:
       auto: false
     s3:
       bucket: gilgeorigoreuda
-      folder: dev
+      folder: dev/
