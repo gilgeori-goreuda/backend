@@ -1,6 +1,7 @@
 package com.pd.gilgeorigoreuda.review.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
+import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
@@ -60,6 +61,14 @@ public class Review extends BaseTimeEntity {
 		if (Objects.equals(this.member.getId(), memberId)) {
 			throw new RuntimeException("Mismatched Review");
 		}
+	}
+
+	public void addImages(final List<ReviewImage> images) {
+		if (!this.images.isEmpty()) {
+			this.images.clear();
+		}
+
+		this.images.addAll(images);
 	}
 
 }

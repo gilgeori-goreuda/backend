@@ -1,15 +1,19 @@
 package com.pd.gilgeorigoreuda.review.service;
 
-import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewCreateRequest;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewUpdateRequest;
+import com.pd.gilgeorigoreuda.review.dto.response.ReviewCreateResponse;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewListResponse;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewResponse;
 import com.pd.gilgeorigoreuda.review.repository.ReviewImageRepository;
 import com.pd.gilgeorigoreuda.review.repository.ReviewRepository;
-import com.pd.gilgeorigoreuda.store.domain.entity.Store;
+
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,31 +25,33 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 @Transactional
+@RequiredArgsConstructor
 public class  ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ReviewImageRepository reviewImageRepository;
 
-    @Value("g-reviewimages")
-    private String bucket;
-
     @Transactional
-    public void createReview(final Long storeId,
-                             final Long memberId,
-                             final ReviewCreateRequest request,
-                             final List<MultipartFile> files) {
+    public ReviewCreateResponse createReview(final Long storeId,
+                                             final Long memberId,
+                                             final ReviewCreateRequest reviewCreateRequest) {
 
-        Review review = Review.builder()
-                .content(request.getContent())
-                .reviewRating(request.getReviewRating())
-                .store(Store.builder().id(storeId).build())
-                .member(Member.builder().id(memberId).build())
-                .build();
+        Review review = reviewCreateRequest.toEntity(memberId, storeId);
 
+        List<ReviewImage> reviewImages = makeImages(reviewCreateRequest);
+
+        review.addImages(reviewImages);
         Review savedReview = reviewRepository.save(review);
 
+        return ReviewCreateResponse.of(savedReview.getId());
+    }
+
+    private static List<ReviewImage> makeImages(final ReviewCreateRequest reviewCreateRequest) {
+        return reviewCreateRequest.getImageUrls()
+                .stream()
+                .map(ReviewImage::new)
+                .toList();
     }
 
     public void updateReview(final Long reviewId, final Long memberId, final ReviewUpdateRequest reviewRequest) {

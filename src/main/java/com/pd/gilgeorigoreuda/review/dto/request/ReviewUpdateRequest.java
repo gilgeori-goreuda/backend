@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,5 +22,7 @@ public class ReviewUpdateRequest {
     @Min(value = 1, message = "평점은 1~5 사이여야 합니다.")
     @Max(value = 5, message = "평점은 1~5 사이여야 합니다.")
     private Integer reviewRating;
+
+    private List<String> imageUrls;
 
 }
