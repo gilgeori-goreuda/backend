@@ -38,3 +38,9 @@ out/
 
 ### Mac OS ###
 .DS_Store
+
+### RestDocs ###
+src/main/resources/static/docs/
+
+## log files ##
+./logs
