@@ -3,6 +3,7 @@ package com.pd.gilgeorigoreuda.review.domain.entity;
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
+import com.pd.gilgeorigoreuda.store.domain.entity.StorePreferenceType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -44,5 +45,9 @@ public class ReviewPreference extends BaseTimeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_preferences_review_id"))
 	private Review review;
+
+	public void changePreference(ReviewPreferenceType preferenceType) {
+		this.preferenceType = preferenceType;
+	}
 
 }
