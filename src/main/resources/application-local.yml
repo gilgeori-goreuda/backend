@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: jdbc:mysql://localhost:3306/gilgeorigoreuda?characterEncoding=UTF-8
+        url: jdbc:mysql://34.64.193.39:3306/gilgeorigoreuda?characterEncoding=UTF-8
         username: root
-        password: 1q2w3e4r!!
+        password: rlatnehd@123
 
     jpa:
       hibernate:
@@ -16,9 +16,12 @@ spring:
 cloud:
   aws:
     credentials:
-      accessKey: AKIAYEKHUA7HVZMVYI7T
-      secretKey: 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
+      accessKey: AKIAYEKHUA7HSDWVE5HD
+      secretKey: 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
     region:
       static: ap-northeast-2
     stack:
       auto: false
+    s3:
+      bucket: gilgeorigoreuda
+      folder: dev/

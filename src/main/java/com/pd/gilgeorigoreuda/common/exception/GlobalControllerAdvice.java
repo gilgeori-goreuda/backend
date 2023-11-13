@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.common.exception;
 
+import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -38,7 +39,7 @@ public class GlobalControllerAdvice {
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ErrorResponse> methodArgumentNotValidException(MethodArgumentNotValidException e) {
-		log.info(String.format("MethodArgumentNotValidException : %s", e));
+		log.error(String.format("MethodArgumentNotValidException : %s", e));
 
 		FieldError firstFieldError = e.getFieldErrors().get(0);
 		String errorCode = firstFieldError.getCode();
@@ -47,6 +48,19 @@ public class GlobalControllerAdvice {
 
 		return ResponseEntity
 				.badRequest()
+				.body(new ErrorResponse(errorCode, errorMessage));
+	}
+
+	@ExceptionHandler(SizeLimitExceededException.class)
+	public ResponseEntity<ErrorResponse> handleSizeLimitExceededException(final SizeLimitExceededException e) {
+		log.warn(e.getMessage(), e);
+
+		String errorCode = ExceptionType.EXCEED_IMAGE_CAPACITY_EXCEPTION.getErrorCode();
+		String errorMessage = ExceptionType.EXCEED_IMAGE_CAPACITY_EXCEPTION.getErrorMessage()
+				+ " 입력된 이미지 용량은 " + e.getActualSize() + " byte 입니다. "
+				+ "(제한 용량: " + e.getPermittedSize() + " byte)";
+
+		return ResponseEntity.badRequest()
 				.body(new ErrorResponse(errorCode, errorMessage));
 	}
 
