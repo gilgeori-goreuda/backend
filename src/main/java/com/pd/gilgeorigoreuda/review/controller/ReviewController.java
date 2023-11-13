@@ -6,6 +6,7 @@ import com.pd.gilgeorigoreuda.review.dto.request.ReviewUpdateRequest;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewCommentListResponse;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewListResponse;
 import com.pd.gilgeorigoreuda.review.service.ReviewCommentService;
+import com.pd.gilgeorigoreuda.review.service.ReviewPreferenceService;
 import com.pd.gilgeorigoreuda.review.service.ReviewService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -129,4 +130,5 @@ public class ReviewController {
                 .ok()
                 .body(response);
     }
+
 }

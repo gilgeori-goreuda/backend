@@ -76,4 +76,5 @@ public class  ReviewService {
         Page<Review> reviewPage = reviewRepository.findAllByStoreIdWithImages(storeId, pageable);
         return ReviewListResponse.of(reviewPage);
     }
+
 }
