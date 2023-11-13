@@ -37,4 +37,12 @@ public class ReviewImage extends BaseTimeEntity {
 	@JoinColumn(name = "review_id", foreignKey = @ForeignKey(name = "fk_review_image_review_id"))
 	private Review review;
 
+	public ReviewImage(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+
+	public void setReview(Review review) {
+		this.review = review;
+	}
+
 }
