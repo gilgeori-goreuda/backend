@@ -17,7 +17,7 @@ public class ReviewResponse {
     private Integer reviewRating;
     private Integer likeCount;
     private Integer hateCount;
-    private Long memberId;
+    private ReviewMemberResponse member;
     private Long storeId;
     private List<String> imageUrls;
     private LocalDateTime createdAt;
@@ -29,7 +29,7 @@ public class ReviewResponse {
             final Integer reviewRating,
             final Integer likeCount,
             final Integer hateCount,
-            final Long memberId,
+            final ReviewMemberResponse member,
             final Long storeId,
             final List<String> imageUrls,
             final LocalDateTime createdAt,
@@ -39,7 +39,7 @@ public class ReviewResponse {
         this.reviewRating = reviewRating;
         this.likeCount = likeCount;
         this.hateCount = hateCount;
-        this.memberId = memberId;
+        this.member = member;
         this.storeId = storeId;
         this.imageUrls = imageUrls;
         this.createdAt = createdAt;
@@ -53,7 +53,7 @@ public class ReviewResponse {
                 review.getReviewRating(),
                 review.getLikeCount(),
                 review.getHateCount(),
-                review.getMember().getId(),
+                ReviewMemberResponse.of(review.getMember()),
                 review.getStore().getId(),
                 review.getImages()
                         .stream()
@@ -63,5 +63,4 @@ public class ReviewResponse {
                 review.getModifiedAt()
         );
     }
-
 }
