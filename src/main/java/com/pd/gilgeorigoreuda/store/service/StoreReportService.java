@@ -29,6 +29,10 @@ public class StoreReportService {
         Optional<StoreReportHistory> reportAlreadyReported =
                 storeReportRepository.findReportAlreadyReported(storeId, memberId);
 
+        if (reportCreateRequest.content() == null || reportCreateRequest.content().isEmpty()) {
+            throw new NullReportException();
+        }
+
         if (reportAlreadyReported.isPresent()) {
             throw new AlreadyReporterMemberException();
         }
