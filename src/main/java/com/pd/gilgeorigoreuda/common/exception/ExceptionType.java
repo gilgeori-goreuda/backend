@@ -36,6 +36,7 @@ public enum ExceptionType {
 	TIME_OUT_EXCEPTION("S009", "인증 시간이 초과되었습니다. 2시간이 지난 방문 기록입니다.", TimeOutException.class),
 	TOO_LONG_DISTANCE_EXCEPTION("S010", "방문하기에 너무 먼 거리에 있습니다. 근처에 가서 다시 시도해주세요.", TooLongDistanceException.class),
 	LIMIT_DISTANCE_REPORT_EXCEPTION("S011", "신고하려는 가게와 사용자의 위치가 100m를 초과했습니다.", LimitDistanceReportException.class),
+	NULL_REPORT_EXCEPTION("S012", "신고내용이 없습니다.", NullReportException.class),
 
 	IMAGE_NULL_EXCEPTION("I001", "업로드할 이미지 파일이 없습니다.", ImageNullException.class),
 	INVALID_IMAGE_PATH_EXCEPTION("I002", "이미지를 저장할 경로가 올바르지 않습니다.", InvalidImagePathException.class),
