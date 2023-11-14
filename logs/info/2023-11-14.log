@@ -764,3 +764,797 @@
 
 [2023-11-14 15:30:55.116] INFO  [NO REQUEST ID] 24996 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
 
+[2023-11-14 15:42:37.428] INFO  [NO REQUEST ID]  --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.pd.gilgeorigoreuda.store.controller.StoreControllerTest]: StoreControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+
+[2023-11-14 15:42:37.721] INFO  [NO REQUEST ID]  --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.pd.gilgeorigoreuda.GilgeoriGoreudaApplication for test class com.pd.gilgeorigoreuda.store.controller.StoreControllerTest
+
+[2023-11-14 15:42:38.655] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:38.656] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:39.342] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 7 ms.
+
+[2023-11-14 15:42:41.778] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:42.231] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:42.232] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:42.817] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:42.967] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:43.321] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:43.327] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:43.674] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:43.785] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:43.926] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:43.927] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:44.164] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:44.262] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:44.332] INFO  [NO REQUEST ID] 20852 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.pd.gilgeorigoreuda.store.controller.StoreControllerTest$storeCreateRequestValidationTest]: storeCreateRequestValidationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+
+[2023-11-14 15:42:44.347] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.pd.gilgeorigoreuda.GilgeoriGoreudaApplication for test class com.pd.gilgeorigoreuda.store.controller.StoreControllerTest$storeCreateRequestValidationTest
+
+[2023-11-14 15:42:44.456] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:44.457] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:44.799] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:44.896] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:45.072] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:45.073] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:45.277] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:45.363] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:45.501] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:45.501] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:45.748] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:45.895] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:46.115] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:46.116] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:46.346] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:46.445] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:46.561] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:46.563] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:46.791] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:46.946] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:47.073] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:47.074] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:47.266] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:47.329] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:47.432] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:47.433] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:47.590] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:47.632] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:47.704] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:47.704] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:47.951] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:47.996] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:48.087] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:48.088] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:48.246] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:48.290] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:48.383] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:48.384] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:48.618] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:48.664] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:48.727] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:48.728] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:48.910] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:48.959] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:49.027] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:49.028] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:49.211] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:49.270] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:49.396] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:49.397] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:49.544] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:49.598] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:49.674] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:49.674] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:49.836] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:49.877] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:49.935] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:49.936] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:50.079] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:50.117] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:50.179] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:50.179] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:50.394] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:50.442] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:50.500] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:50.500] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:50.642] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:50.693] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:50.763] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:50.763] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:50.985] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:51.030] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:51.091] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:51.092] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:51.212] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:51.286] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:51.367] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:51.367] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:51.573] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:51.644] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:51.774] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:51.775] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:51.957] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:52.003] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:52.081] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:52.081] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:52.328] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:52.382] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:52.455] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:52.455] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:52.617] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:52.661] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:52.729] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:52.730] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:52.937] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:52.984] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:53.077] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:53.077] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:53.217] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:53.260] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:53.356] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:53.357] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:53.577] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:53.607] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:53.720] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:53.721] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:53.866] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:53.892] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:53.952] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:53.952] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:54.078] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:54.120] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:54.183] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:54.184] INFO  [NO REQUEST ID] 20852 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:54.295] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:54.357] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:42:54.416] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : Starting StoreControllerTest.storeCreateRequestValidationTest using Java 17.0.8 with PID 20852 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:42:54.416] INFO  [NO REQUEST ID] 20852 --- [    Test worker] lerTest$storeCreateRequestValidationTest : The following 1 profile is active: "test"
+
+[2023-11-14 15:42:54.515] INFO  [NO REQUEST ID] 20852 --- [    Test worker] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 0 ms.
+
+[2023-11-14 15:42:54.555] INFO  [NO REQUEST ID] 20852 --- [    Test worker] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+
+[2023-11-14 15:44:20.423] INFO  [NO REQUEST ID]  --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.pd.gilgeorigoreuda.store.controller.StoreControllerTest]: StoreControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+
+[2023-11-14 15:44:20.727] INFO  [NO REQUEST ID]  --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.pd.gilgeorigoreuda.GilgeoriGoreudaApplication for test class com.pd.gilgeorigoreuda.store.controller.StoreControllerTest
+
+[2023-11-14 15:44:21.766] INFO  [NO REQUEST ID] 2544 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 2544 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:44:21.768] INFO  [NO REQUEST ID] 2544 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:44:26.315] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:26.315] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:26.317] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:26.384] INFO  [NO REQUEST ID] 2544 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Started StoreControllerTest in 5.502 seconds (process running for 8.222)
+
+[2023-11-14 15:44:26.450] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:26.451] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:26.452] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:26.837] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:26.838] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:26.840] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:27.322] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:27.323] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:27.325] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 2 ms
+
+[2023-11-14 15:44:27.460] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:27.461] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:27.462] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:27.832] INFO  [NO REQUEST ID] 2544 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.pd.gilgeorigoreuda.store.controller.StoreControllerTest$storeCreateRequestValidationTest]: storeCreateRequestValidationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+
+[2023-11-14 15:44:27.844] INFO  [NO REQUEST ID] 2544 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.pd.gilgeorigoreuda.GilgeoriGoreudaApplication for test class com.pd.gilgeorigoreuda.store.controller.StoreControllerTest$storeCreateRequestValidationTest
+
+[2023-11-14 15:44:27.862] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:27.862] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:27.864] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.059] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.059] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.062] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.108] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.108] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.109] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.194] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.194] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.196] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.244] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.245] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.256] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 7 ms
+
+[2023-11-14 15:44:28.305] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.306] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.310] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 2 ms
+
+[2023-11-14 15:44:28.355] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.355] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.358] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 2 ms
+
+[2023-11-14 15:44:28.403] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.403] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.406] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 2 ms
+
+[2023-11-14 15:44:28.454] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.454] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.455] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.501] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.501] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.503] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.539] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.539] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.549] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 9 ms
+
+[2023-11-14 15:44:28.583] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.583] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.589] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 4 ms
+
+[2023-11-14 15:44:28.630] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.631] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.632] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.672] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.672] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.674] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:44:28.715] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:44:28.715] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:44:28.717] INFO  [NO REQUEST ID] 2544 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:46:56.164] INFO  [NO REQUEST ID]  --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.pd.gilgeorigoreuda.store.controller.StoreControllerTest]: StoreControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+
+[2023-11-14 15:46:56.494] INFO  [NO REQUEST ID]  --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.pd.gilgeorigoreuda.GilgeoriGoreudaApplication for test class com.pd.gilgeorigoreuda.store.controller.StoreControllerTest
+
+[2023-11-14 15:46:57.367] INFO  [NO REQUEST ID] 9020 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Starting StoreControllerTest using Java 17.0.8 with PID 9020 (started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:46:57.369] INFO  [NO REQUEST ID] 9020 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : The following 1 profile is active: "test"
+
+[2023-11-14 15:47:01.639] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:01.640] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:01.642] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:01.713] INFO  [NO REQUEST ID] 9020 --- [    Test worker] c.p.g.s.c.StoreControllerTest            : Started StoreControllerTest in 5.07 seconds (process running for 7.674)
+
+[2023-11-14 15:47:01.778] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:01.778] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:01.779] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:02.096] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:02.096] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:02.098] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:02.558] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:02.558] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:02.559] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 0 ms
+
+[2023-11-14 15:47:02.657] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:02.657] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:02.658] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 0 ms
+
+[2023-11-14 15:47:03.004] INFO  [NO REQUEST ID] 9020 --- [    Test worker] t.c.s.AnnotationConfigContextLoaderUtils : Could not detect default configuration classes for test class [com.pd.gilgeorigoreuda.store.controller.StoreControllerTest$storeCreateRequestValidationTest]: storeCreateRequestValidationTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+
+[2023-11-14 15:47:03.013] INFO  [NO REQUEST ID] 9020 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Found @SpringBootConfiguration com.pd.gilgeorigoreuda.GilgeoriGoreudaApplication for test class com.pd.gilgeorigoreuda.store.controller.StoreControllerTest$storeCreateRequestValidationTest
+
+[2023-11-14 15:47:03.029] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.029] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.030] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.208] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.209] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.210] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.249] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.249] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.250] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.312] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.313] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.317] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 2 ms
+
+[2023-11-14 15:47:03.363] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.363] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.365] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.390] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.390] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.391] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 0 ms
+
+[2023-11-14 15:47:03.421] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.422] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.422] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 0 ms
+
+[2023-11-14 15:47:03.452] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.453] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.454] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.494] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.494] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.495] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.536] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.537] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.539] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.588] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.588] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.590] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.637] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.637] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.638] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 0 ms
+
+[2023-11-14 15:47:03.679] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.680] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.681] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.721] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.721] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.722] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:03.766] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+
+[2023-11-14 15:47:03.767] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Initializing Servlet ''
+
+[2023-11-14 15:47:03.768] INFO  [NO REQUEST ID] 9020 --- [    Test worker] o.s.t.w.s.TestDispatcherServlet          : Completed initialization in 1 ms
+
+[2023-11-14 15:47:33.782] INFO  [NO REQUEST ID] 13496 --- [           main] c.p.g.GilgeoriGoreudaApplication         : Starting GilgeoriGoreudaApplication using Java 17.0.8 with PID 13496 (C:\Users\jmg13\Desktop\Final\backend\build\classes\java\main started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:47:33.784] INFO  [NO REQUEST ID] 13496 --- [           main] c.p.g.GilgeoriGoreudaApplication         : The following 1 profile is active: "local"
+
+[2023-11-14 15:47:34.281] INFO  [NO REQUEST ID] 13496 --- [           main] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 12 ms.
+
+[2023-11-14 15:47:34.468] INFO  [NO REQUEST ID] 13496 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+
+[2023-11-14 15:47:34.557] INFO  [NO REQUEST ID] 13496 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85 ms. Found 13 JPA repository interfaces.
+
+[2023-11-14 15:47:35.055] INFO  [NO REQUEST ID] 13496 --- [           main] o.s.b.w.e.tomcat.TomcatWebServer         : Tomcat initialized with port(s): 8080 (http)
+
+[2023-11-14 15:47:35.064] INFO  [NO REQUEST ID] 13496 --- [           main] o.a.catalina.core.StandardService        : Starting service [Tomcat]
+
+[2023-11-14 15:47:35.064] INFO  [NO REQUEST ID] 13496 --- [           main] o.a.catalina.core.StandardEngine         : Starting Servlet engine: [Apache Tomcat/10.1.15]
+
+[2023-11-14 15:47:35.148] INFO  [NO REQUEST ID] 13496 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+
+[2023-11-14 15:47:35.149] INFO  [NO REQUEST ID] 13496 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1325 ms
+
+[2023-11-14 15:47:35.295] INFO  [NO REQUEST ID] 13496 --- [           main] o.h.jpa.internal.util.LogHelper          : HHH000204: Processing PersistenceUnitInfo [name: default]
+
+[2023-11-14 15:47:35.342] INFO  [NO REQUEST ID] 13496 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+
+[2023-11-14 15:47:35.344] INFO  [NO REQUEST ID] 13496 --- [           main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+
+[2023-11-14 15:47:35.612] INFO  [NO REQUEST ID] 13496 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+
+[2023-11-14 15:47:35.636] INFO  [NO REQUEST ID] 13496 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+
+[2023-11-14 15:47:35.902] INFO  [NO REQUEST ID] 13496 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1dd44289
+
+[2023-11-14 15:47:35.905] INFO  [NO REQUEST ID] 13496 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+
+[2023-11-14 15:47:37.016] INFO  [NO REQUEST ID] 13496 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+
+[2023-11-14 15:47:37.159] INFO  [NO REQUEST ID] 13496 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+
+[2023-11-14 15:47:37.401] INFO  [NO REQUEST ID] 13496 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+
+[2023-11-14 15:47:38.685] INFO  [NO REQUEST ID] 13496 --- [           main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+
+[2023-11-14 15:47:39.093] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+
+[2023-11-14 15:47:39.103] INFO  [NO REQUEST ID] 13496 --- [           main] o.quartz.core.SchedulerSignalerImpl      : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+[2023-11-14 15:47:39.103] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+
+[2023-11-14 15:47:39.104] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+
+[2023-11-14 15:47:39.104] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+[2023-11-14 15:47:39.104] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+
+[2023-11-14 15:47:39.104] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+
+[2023-11-14 15:47:39.104] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@2ca57834
+
+[2023-11-14 15:47:39.152] INFO  [NO REQUEST ID] 13496 --- [           main] o.s.b.w.e.tomcat.TomcatWebServer         : Tomcat started on port(s): 8080 (http) with context path ''
+
+[2023-11-14 15:47:39.153] INFO  [NO REQUEST ID] 13496 --- [           main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+
+[2023-11-14 15:47:39.154] INFO  [NO REQUEST ID] 13496 --- [           main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+
+[2023-11-14 15:47:39.163] INFO  [NO REQUEST ID] 13496 --- [           main] c.p.g.GilgeoriGoreudaApplication         : Started GilgeoriGoreudaApplication in 5.737 seconds (process running for 6.467)
+
+[2023-11-14 15:47:48.728] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+
+[2023-11-14 15:47:48.746] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+
+[2023-11-14 15:47:48.746] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+
+[2023-11-14 15:47:48.746] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+
+[2023-11-14 15:47:48.746] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+
+[2023-11-14 15:47:48.749] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+
+[2023-11-14 15:47:48.751] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+
+[2023-11-14 15:47:48.759] INFO  [NO REQUEST ID] 13496 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
+[2023-11-14 15:48:07.845] INFO  [NO REQUEST ID] 10084 --- [           main] c.p.g.GilgeoriGoreudaApplication         : Starting GilgeoriGoreudaApplication using Java 17.0.8 with PID 10084 (C:\Users\jmg13\Desktop\Final\backend\build\classes\java\main started by jmg13 in C:\Users\jmg13\Desktop\Final\backend)
+
+[2023-11-14 15:48:07.847] INFO  [NO REQUEST ID] 10084 --- [           main] c.p.g.GilgeoriGoreudaApplication         : The following 1 profile is active: "local"
+
+[2023-11-14 15:48:08.374] INFO  [NO REQUEST ID] 10084 --- [           main] o.s.b.c.c.annotation.BatchRegistrar      : Finished Spring Batch infrastructure beans configuration in 5 ms.
+
+[2023-11-14 15:48:08.607] INFO  [NO REQUEST ID] 10084 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+
+[2023-11-14 15:48:08.693] INFO  [NO REQUEST ID] 10084 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 13 JPA repository interfaces.
+
+[2023-11-14 15:48:09.162] INFO  [NO REQUEST ID] 10084 --- [           main] o.s.b.w.e.tomcat.TomcatWebServer         : Tomcat initialized with port(s): 8080 (http)
+
+[2023-11-14 15:48:09.171] INFO  [NO REQUEST ID] 10084 --- [           main] o.a.catalina.core.StandardService        : Starting service [Tomcat]
+
+[2023-11-14 15:48:09.171] INFO  [NO REQUEST ID] 10084 --- [           main] o.a.catalina.core.StandardEngine         : Starting Servlet engine: [Apache Tomcat/10.1.15]
+
+[2023-11-14 15:48:09.260] INFO  [NO REQUEST ID] 10084 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+
+[2023-11-14 15:48:09.261] INFO  [NO REQUEST ID] 10084 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1369 ms
+
+[2023-11-14 15:48:09.416] INFO  [NO REQUEST ID] 10084 --- [           main] o.h.jpa.internal.util.LogHelper          : HHH000204: Processing PersistenceUnitInfo [name: default]
+
+[2023-11-14 15:48:09.466] INFO  [NO REQUEST ID] 10084 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.2.13.Final
+
+[2023-11-14 15:48:09.469] INFO  [NO REQUEST ID] 10084 --- [           main] org.hibernate.cfg.Environment            : HHH000406: Using bytecode reflection optimizer
+
+[2023-11-14 15:48:09.704] INFO  [NO REQUEST ID] 10084 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+
+[2023-11-14 15:48:09.728] INFO  [NO REQUEST ID] 10084 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+
+[2023-11-14 15:48:09.996] INFO  [NO REQUEST ID] 10084 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@1dd44289
+
+[2023-11-14 15:48:09.999] INFO  [NO REQUEST ID] 10084 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+
+[2023-11-14 15:48:11.059] INFO  [NO REQUEST ID] 10084 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+
+[2023-11-14 15:48:11.203] INFO  [NO REQUEST ID] 10084 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+
+[2023-11-14 15:48:11.406] INFO  [NO REQUEST ID] 10084 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
+
+[2023-11-14 15:48:12.629] INFO  [NO REQUEST ID] 10084 --- [           main] o.s.b.c.r.s.JobRepositoryFactoryBean     : No database type set, using meta data indicating: MYSQL
+
+[2023-11-14 15:48:13.049] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+
+[2023-11-14 15:48:13.059] INFO  [NO REQUEST ID] 10084 --- [           main] o.quartz.core.SchedulerSignalerImpl      : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+
+[2023-11-14 15:48:13.059] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.2 created.
+
+[2023-11-14 15:48:13.060] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+
+[2023-11-14 15:48:13.060] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.2) 'quartzScheduler' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 10 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+
+[2023-11-14 15:48:13.061] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'quartzScheduler' initialized from an externally provided properties instance.
+
+[2023-11-14 15:48:13.061] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.2
+
+[2023-11-14 15:48:13.061] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.core.QuartzScheduler          : JobFactory set to: org.springframework.scheduling.quartz.SpringBeanJobFactory@11553864
+
+[2023-11-14 15:48:13.111] INFO  [NO REQUEST ID] 10084 --- [           main] o.s.b.w.e.tomcat.TomcatWebServer         : Tomcat started on port(s): 8080 (http) with context path ''
+
+[2023-11-14 15:48:13.112] INFO  [NO REQUEST ID] 10084 --- [           main] o.s.s.quartz.SchedulerFactoryBean        : Starting Quartz Scheduler now
+
+[2023-11-14 15:48:13.112] INFO  [NO REQUEST ID] 10084 --- [           main] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED started.
+
+[2023-11-14 15:48:13.124] INFO  [NO REQUEST ID] 10084 --- [           main] c.p.g.GilgeoriGoreudaApplication         : Started GilgeoriGoreudaApplication in 5.673 seconds (process running for 6.403)
+
+[2023-11-14 15:48:22.401] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+
+[2023-11-14 15:48:22.418] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] o.s.s.quartz.SchedulerFactoryBean        : Shutting down Quartz Scheduler
+
+[2023-11-14 15:48:22.418] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutting down.
+
+[2023-11-14 15:48:22.418] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED paused.
+
+[2023-11-14 15:48:22.418] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] org.quartz.core.QuartzScheduler          : Scheduler quartzScheduler_$_NON_CLUSTERED shutdown complete.
+
+[2023-11-14 15:48:22.422] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+
+[2023-11-14 15:48:22.423] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+
+[2023-11-14 15:48:22.431] INFO  [NO REQUEST ID] 10084 --- [ionShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+
