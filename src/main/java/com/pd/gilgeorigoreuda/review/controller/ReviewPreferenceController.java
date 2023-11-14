@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/preferences")
 public class ReviewPreferenceController {
 
-    private static final Long TEST_USER_ID = 2L;
+    private static final Long TEST_USER_ID = 1L;
 
     private final ReviewPreferenceService reviewPreferenceService;
     @PostMapping("/reviews/{reviewId}/like")

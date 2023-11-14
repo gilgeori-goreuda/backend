@@ -11,4 +11,6 @@ public interface ReviewPreferenceRepository extends JpaRepository<ReviewPreferen
 
     @Query(value = "select * from review_preferences where review_id = :reviewId and member_id = :memberId", nativeQuery = true)
     Optional<ReviewPreference> findByReviewIdAndMemberId(@Param("reviewId") final Long reviewId, @Param("memberId") final Long memberId);
+
+
 }
