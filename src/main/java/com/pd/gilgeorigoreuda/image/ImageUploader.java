@@ -53,6 +53,7 @@ public class ImageUploader {
             log.error("AmazonServiceException: {}", e.getMessage());
             throw new InvalidImageFileException();
         }
+
         return imageFile.getHashedName();
     }
 

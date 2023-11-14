@@ -39,6 +39,7 @@ public class ImageFile {
         final String name = image.getOriginalFilename();
         final String filenameExtension = EXTENSION_DELIMITER + StringUtils.getFilenameExtension(name);
         final String nameAndDate = name + LocalDateTime.now();
+
         try {
             final MessageDigest hashAlgorithm = MessageDigest.getInstance("SHA3-256");
             final byte[] hashBytes = hashAlgorithm.digest(nameAndDate.getBytes(StandardCharsets.UTF_8));
