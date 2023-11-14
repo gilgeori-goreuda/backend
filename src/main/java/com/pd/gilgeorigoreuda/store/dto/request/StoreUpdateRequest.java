@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalTime;
 
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
@@ -29,6 +30,9 @@ public class StoreUpdateRequest {
 	@NotBlank(message = "결제방식을 선택해주세요.")
 	private String purchaseType;
 
+	@URL(message = "유효한 URL을 입력해주세요.", regexp = "^(http|https)://(www\\.)?.*")
+	private String imageUrl;
+
 	private String businessDates;
 
 	@NotNull(message = "위도를 입력해주세요.")
@@ -52,6 +56,7 @@ public class StoreUpdateRequest {
 			final LocalTime openTime,
 			final LocalTime closeTime,
 			final String purchaseType,
+			final String imageUrl,
 			final String businessDates,
 			final BigDecimal lat,
 			final BigDecimal lng,
@@ -62,6 +67,7 @@ public class StoreUpdateRequest {
 		this.openTime = openTime;
 		this.closeTime = closeTime;
 		this.purchaseType = purchaseType;
+		this.imageUrl = imageUrl;
 		this.businessDates = businessDates;
 		this.lat = lat;
 		this.lng = lng;

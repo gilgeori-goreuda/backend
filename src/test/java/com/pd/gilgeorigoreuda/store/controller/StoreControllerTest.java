@@ -803,6 +803,7 @@ class StoreControllerTest extends ControllerTest {
                 LocalTime.of(10, 0),
                 LocalTime.of(20, 0),
                 "현금",
+                "https://www.image.com",
                 "월,수,금,토,일",
                 new BigDecimal("37.123456"),
                 new BigDecimal("127.123456"),
@@ -851,6 +852,11 @@ class StoreControllerTest extends ControllerTest {
                                                 .type(JsonFieldType.STRING)
                                                 .description("결제 방식 (EnumType: CARD, CASH, ACCOUNT_TRANSFER)")
                                                 .attributes(field("constraint", "현금, 카드, 계좌이체 중 복수 선택가능")),
+                                        fieldWithPath("imageUrl")
+                                                .type(JsonFieldType.STRING)
+                                                .description("이미지 URL")
+                                                .optional()
+                                                .attributes(field("constraint", "유효한 URL 형식")),
                                         fieldWithPath("businessDates")
                                                 .type(JsonFieldType.STRING)
                                                 .description("영업 요일")

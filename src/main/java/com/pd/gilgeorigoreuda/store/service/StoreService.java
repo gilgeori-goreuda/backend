@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import com.pd.gilgeorigoreuda.image.service.ImageService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,24 +34,24 @@ public class StoreService {
 	private final StoreRepository storeRepository;
 	private final StoreNativeQueryRepository storeNativeQueryRepository;
 	private final MemberRepository memberRepository;
+	private final ImageService imageService;
 
 	private static final Integer BOUNDARY = 10;
 
 	@Transactional
-	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest request) {
-		BigDecimal lat = request.getLat();
-		BigDecimal lng = request.getLng();
-		StreetAddress streetAddress = StreetAddress.of(request.getStreetAddress());
-		String largeAddress = streetAddress.getLargeAddress();
-		String mediumAddress = streetAddress.getMediumAddress();
+	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest storeCreateRequest) {
+		StreetAddress streetAddress = StreetAddress.of(storeCreateRequest.getStreetAddress());
 
-		checkIsAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress);
+		checkIsAlreadyExistInBoundary(
+				storeCreateRequest.getLat(),
+				storeCreateRequest.getLng(),
+				streetAddress.getLargeAddress(),
+				streetAddress.getMediumAddress()
+		);
 
-		Store store = request.toEntity(memberId);
+		Store store = storeCreateRequest.toEntity(memberId);
 
-		List<FoodCategory> foodCategories = request
-			.getFoodCategories()
-			.toEntities();
+		List<FoodCategory> foodCategories = storeCreateRequest.getFoodCategories().toEntities();
 
 		store.addFoodCategories(foodCategories);
 
@@ -59,43 +60,39 @@ public class StoreService {
 		return StoreCreateResponse.of(saveStore.getId());
 	}
 
-	public StoreResponse getStore(final Long storeId) {
-		Store store = findStoreWithMemberAndCategories(storeId);
-
-		return StoreResponse.of(store);
-	}
-
 	@Transactional
-	public void updateStore(final Long memberId, final Long storeId, final StoreUpdateRequest request) {
+	public void updateStore(final Long memberId, final Long storeId, final StoreUpdateRequest storeUpdateRequest) {
 		Store storeForUpdate = findStoreWithMemberAndCategories(storeId);
 		Member member = findMember(memberId);
 
-		StreetAddress streetAddress = StreetAddress.of(request.getStreetAddress());
-		BigDecimal lat = request.getLat();
-		BigDecimal lng = request.getLng();
-		String largeAddress = streetAddress.getLargeAddress();
-		String mediumAddress = streetAddress.getMediumAddress();
+		StreetAddress streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
 
-		checkIsAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress);
+		checkIsAlreadyExistInBoundary(
+				storeUpdateRequest.getLat(),
+				storeUpdateRequest.getLng(),
+				streetAddress.getLargeAddress(),
+				streetAddress.getMediumAddress()
+		);
 
-		List<FoodCategory> foodCategories = request
-			.getFoodCategories()
-			.toEntities();
+		List<FoodCategory> foodCategories = storeUpdateRequest.getFoodCategories().toEntities();
 
-		storeForUpdate.updateBasicInfo(
-			request.getName(),
-			request.getStoreType(),
-			request.getOpenTime(),
-			request.getCloseTime(),
-			request.getPurchaseType(),
-			request.getBusinessDates(),
-			request.getLat(),
-			request.getLng(),
-			request.getStreetAddress(),
-			member.getNickname()
+		storeForUpdate.updateStoreInfo(
+				storeUpdateRequest.getName(),
+				storeUpdateRequest.getStoreType(),
+				storeUpdateRequest.getOpenTime(),
+				storeUpdateRequest.getCloseTime(),
+				storeUpdateRequest.getPurchaseType(),
+				storeUpdateRequest.getBusinessDates(),
+				storeUpdateRequest.getImageUrl(),
+				storeUpdateRequest.getLat(),
+				storeUpdateRequest.getLng(),
+				storeUpdateRequest.getStreetAddress(),
+				member.getNickname()
 		);
 
 		storeForUpdate.addFoodCategories(foodCategories);
+
+		deleteOriginalImage(storeUpdateRequest, storeForUpdate);
 	}
 
 	@Transactional
@@ -107,6 +104,23 @@ public class StoreService {
 		}
 
 		storeRepository.deleteById(storeForDelete.getId());
+		deleteImage(storeForDelete);
+	}
+
+	private void deleteOriginalImage(final StoreUpdateRequest storeUpdateRequest, final Store storeForUpdate) {
+		if (!storeForUpdate.isSameImage(storeUpdateRequest.getImageUrl())) {
+			imageService.deleteSingleImage(storeForUpdate.getImageUrl());
+		}
+	}
+
+	private void deleteImage(final Store store) {
+		imageService.deleteSingleImage(store.getImageUrl());
+	}
+
+	public StoreResponse getStore(final Long storeId) {
+		Store store = findStoreWithMemberAndCategories(storeId);
+
+		return StoreResponse.of(store);
 	}
 
 	private void checkIsAlreadyExistInBoundary(final BigDecimal lat, final BigDecimal lng, final String largeAddress, final String mediumAddress) {

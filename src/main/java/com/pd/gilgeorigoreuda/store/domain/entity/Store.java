@@ -84,7 +84,6 @@ public class Store extends BaseTimeEntity {
 	@Column(name = "lng", precision = 22, scale = 16, nullable = false)
 	private BigDecimal lng;
 
-
 	@Embedded
 	private StreetAddress streetAddress;
 
@@ -110,13 +109,14 @@ public class Store extends BaseTimeEntity {
 		this.foodCategories.addAll(foodCategories);
 	}
 
-	public void updateBasicInfo(
+	public void updateStoreInfo(
 			final String name,
 			final String storeType,
 			final LocalTime openTime,
 			final LocalTime closeTime,
 			final String purchaseType,
 			final String businessDates,
+			final String imageUrl,
 			final BigDecimal lat,
 			final BigDecimal lng,
 			final String streetAddress,
@@ -127,6 +127,7 @@ public class Store extends BaseTimeEntity {
 		this.closeTime = closeTime;
 		this.purchaseType = PurchaseType.of(purchaseType);
 		this.businessDate = BusinessDateRequest.of(businessDates).toString();
+		this.imageUrl = imageUrl;
 		this.lat = lat;
 		this.lng = lng;
 		this.streetAddress = StreetAddress.of(streetAddress);
@@ -135,6 +136,10 @@ public class Store extends BaseTimeEntity {
 
 	public boolean isOwner(final Long memberId) {
 		return this.member.getId().equals(memberId);
+	}
+
+	public boolean isSameImage(final String newImageUrl) {
+		return this.imageUrl.equals(newImageUrl);
 	}
 
 }
