@@ -4,6 +4,7 @@ import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -46,7 +47,8 @@ public class Review extends BaseTimeEntity {
 	private Store store;
 
 	@OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ReviewImage> images;
+	@Builder.Default
+	private List<ReviewImage> images = new ArrayList<>();
 
 	public void updateReview(final String content, final Integer reviewRating) {
 		this.content = content;
