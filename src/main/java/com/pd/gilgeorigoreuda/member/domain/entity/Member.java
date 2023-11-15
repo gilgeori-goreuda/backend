@@ -32,7 +32,7 @@ public class Member extends BaseTimeEntity {
 	@Column(name = "profile_image_url", length = 512)
 	private String profileImageUrl;
 
-	@Column(name = "provider_id", length = 512)
-	private String providerId;
+	@Column(name = "social_id", length = 30, nullable = false)
+	private String socialId;
 
 }

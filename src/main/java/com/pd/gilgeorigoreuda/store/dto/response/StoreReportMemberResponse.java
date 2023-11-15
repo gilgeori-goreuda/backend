@@ -29,7 +29,7 @@ public class StoreReportMemberResponse {
 				member.getId(),
 				member.getNickname(),
 				member.getProfileImageUrl(),
-				member.getProviderId()
+				member.getSocialId()
 		);
 	}
 
