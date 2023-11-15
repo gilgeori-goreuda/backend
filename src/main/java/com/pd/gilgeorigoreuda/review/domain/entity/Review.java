@@ -66,7 +66,10 @@ public class Review extends BaseTimeEntity {
 			this.images.clear();
 		}
 
-		this.images.addAll(images);
+		for (ReviewImage image : images) {
+			this.images.add(image);
+			image.setReview(this);
+		}
 	}
 
 }
