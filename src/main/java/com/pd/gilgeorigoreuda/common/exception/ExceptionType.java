@@ -3,8 +3,8 @@ package com.pd.gilgeorigoreuda.common.exception;
 import java.util.Arrays;
 import java.util.Objects;
 
-import com.pd.gilgeorigoreuda.auth.exception.EmailDuplicatedException;
 import com.pd.gilgeorigoreuda.image.exception.*;
+import com.pd.gilgeorigoreuda.login.exception.*;
 import com.pd.gilgeorigoreuda.store.exception.*;
 import com.pd.gilgeorigoreuda.visit.exception.NoSuchStoreVisitRecordException;
 import com.pd.gilgeorigoreuda.visit.exception.OutOfBoundaryException;
@@ -19,7 +19,6 @@ public enum ExceptionType {
 
 	UNKNOWN_EXCEPTION("X001", "알 수 없는 서버 에러입니다."),
 
-	EMAIL_DUPLICATED_EXCEPTION("M001", "중복된 이메일 입니다.", EmailDuplicatedException.class),
 	INVALID_DATE_TIME_FORMAT("X002", "유효하지 않은 날짜 형식입니다. (00:00-23:59)"),
 
 	NO_SUCH_STORE_EXCEPTION("S001", "존재하지 않는 가게입니다.", NoSuchStoreException.class),
@@ -46,6 +45,15 @@ public enum ExceptionType {
 	EXCEED_IMAGE_CAPACITY_EXCEPTION("I006", "업로드 가능한 이미지 크기를 초과했습니다.", ExceedImageCapacityException.class),
 	EXCEED_IMAGE_LIST_SIZE_EXCEPTION("I006", "업로드 가능한 이미지 개수를 초과했습니다.", ExceedImageListSizeException.class),
 	EMPTY_IMAGE_LIST_EXCEPTION("I007", "최소 한 장 이상의 이미지를 업로드해야합니다.", EmptyImageListException.class),
+
+	NOT_SUPPORTED_OAUTH_SERVICE_EXCEPTION("O001", "지원하지 않는 소셜 로그인 서비스입니다.", NotSupportedOauthServiceException.class),
+	INVALID_AUTHORIZATION_CODE_EXCEPTION("O002", "유효하지 않은 인증 코드입니다.", InvalidAuthorizationCodeException.class),
+
+	EXPIRED_PERIOD_REFRESH_TOKEN_EXCEPTION("T001", "만료된 Refresh Token 입니다.", ExpiredPeriodRefreshTokenException.class),
+	EXPIRED_PERIOD_ACCESS_TOKEN_EXCEPTION("T002", "만료된 Access Token 입니다.", ExpiredPeriodAccessTokenException.class),
+	INVALID_REFRESH_TOKEN_EXCEPTION("T003", "유효하지 않은 Refresh Token 입니다.", InvalidRefreshTokenException.class),
+	INVALID_ACCESS_TOKEN_EXCEPTION("T004", "유효하지 않은 Access Token 입니다.", InvalidAccessTokenException.class),
+	VALIDATE_TOKEN_FAIL_EXCEPTION("T005", "Access Token 연장에 실패했습니다.", RenewalAccessTokenFailException.class),
 	;
 
 	private final String errorCode;
