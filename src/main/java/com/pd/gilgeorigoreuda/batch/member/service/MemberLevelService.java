@@ -13,4 +13,5 @@ public class MemberLevelService {
     public void updateMemberLevel() {
         memberActiveInfoRepository.updateMemberLevel();
     }
+
 }

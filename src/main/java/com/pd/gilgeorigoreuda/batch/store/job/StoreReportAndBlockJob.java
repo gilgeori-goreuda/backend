@@ -26,7 +26,6 @@ public class StoreReportAndBlockJob extends DefaultBatchConfiguration {
                 .start(updateAllStoreReportCountStep(jobRepository, platformTransactionManager))
                 .next(updateBlockedStoresStep(jobRepository, platformTransactionManager))
                 .build();
-
     }
 
     @Bean
@@ -41,7 +40,6 @@ public class StoreReportAndBlockJob extends DefaultBatchConfiguration {
         return new StepBuilder("updateBlockedStoresStep", jobRepository)
                 .tasklet(updateBlockedStoresTask(), platformTransactionManager)
                 .build();
-
     }
 
     public Tasklet updateReportTask() {

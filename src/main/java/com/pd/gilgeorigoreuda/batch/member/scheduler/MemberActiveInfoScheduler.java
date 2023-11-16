@@ -28,6 +28,7 @@ public class MemberActiveInfoScheduler {
     public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(){
         JobRegistryBeanPostProcessor jobProcessor = new JobRegistryBeanPostProcessor();
         jobProcessor.setJobRegistry(jobRegistry);
+
         return jobProcessor;
     }
 
@@ -43,6 +44,6 @@ public class MemberActiveInfoScheduler {
                  JobParametersInvalidException | JobRestartException e) {
             throw new RuntimeException(e);
         }
-
     }
+
 }

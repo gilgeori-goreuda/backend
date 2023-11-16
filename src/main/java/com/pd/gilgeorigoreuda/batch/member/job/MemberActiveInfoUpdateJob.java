@@ -14,6 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.batch.core.job.builder.JobBuilder;
 
+import java.util.UUID;
+
 @Configuration
 @RequiredArgsConstructor
 public class MemberActiveInfoUpdateJob extends DefaultBatchConfiguration {
@@ -27,7 +29,6 @@ public class MemberActiveInfoUpdateJob extends DefaultBatchConfiguration {
                 .next(updateMemberTotalVisitCountStep(jobRepository, platformTransactionManager))
                 .next(updateMemberExpStep(jobRepository, platformTransactionManager))
                 .build();
-
     }
 
     @Bean

@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.batch.store.scheduler;
 
-import com.pd.gilgeorigoreuda.batch.store.job.StoreReportAndBlockJob;
 import lombok.RequiredArgsConstructor;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.JobRegistry;
@@ -23,16 +22,18 @@ public class StoreReportUpdateScheduler {
     private final JobLauncher jobLauncher;
     private final JobRegistry jobRegistry;
 
-    @Bean
-    public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(){
-        JobRegistryBeanPostProcessor jobProcessor = new JobRegistryBeanPostProcessor();
-        jobProcessor.setJobRegistry(jobRegistry);
-        return jobProcessor;
-    }
+//    @Bean
+//    public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(){
+//        JobRegistryBeanPostProcessor jobProcessor = new JobRegistryBeanPostProcessor();
+//        jobProcessor.setJobRegistry(jobRegistry);
+//
+//        return jobProcessor;
+//    }
 
     @Scheduled(cron = "0/10 * * * * *")
     public void updateStoreReport() {
         String time = LocalDateTime.now().toString();
+
         try {
            Job job = jobRegistry.getJob("reportJob");
             JobParametersBuilder jobParam = new JobParametersBuilder().addString("time",time);
@@ -41,7 +42,6 @@ public class StoreReportUpdateScheduler {
                  JobParametersInvalidException | JobRestartException e) {
             throw new RuntimeException(e);
         }
-
     }
 
 }
