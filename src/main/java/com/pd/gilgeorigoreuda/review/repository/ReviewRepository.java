@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
 
@@ -18,9 +19,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "where r.member.id = :memberId")
     List<Review> findAllByMemberId(@Param("memberId") final Long memberId);
 
-    @Query("select distinct r from Review r " +
+    @Query("select r from Review r " +
             "left join fetch r.images i")
-    Page<Review> findAllReviewsWithImagesOrderByRecent(final Pageable pageable);
+    Page<Review> findAllReviewsWithImagesOrderByCondition(final Pageable pageable);
 
 
     @Query("select r from Review r " +
@@ -29,6 +30,12 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     Page<Review> findAllByStoreIdWithImages(@Param("storeId") Long storeId, Pageable pageable);
 
     @Modifying(clearAutomatically = true)
+    @Query("select r from Review r " +
+            "left join fetch r.images " +
+            "where r.id = :reviewId")
+    Optional<Review> findReviewWithReviewImages(final Long reviewId);
+
+    @Modifying
     @Query(nativeQuery = true,
             value = "UPDATE reviews " +
                     "SET like_count = COALESCE(( " +
@@ -63,6 +70,5 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
                     "    GROUP BY review_id)"
     )
     void updateAllReviewHateCount();
-
 
 }

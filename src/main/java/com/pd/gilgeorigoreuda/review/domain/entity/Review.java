@@ -1,10 +1,10 @@
 package com.pd.gilgeorigoreuda.review.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
-import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,13 +47,11 @@ public class Review extends BaseTimeEntity {
 	private Store store;
 
 	@OneToMany(mappedBy = "review", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<ReviewImage> images;
+	@Builder.Default
+	private List<ReviewImage> images = new ArrayList<>();
 
-	public void updateContent(final String content) {
+	public void updateReview(final String content, final Integer reviewRating) {
 		this.content = content;
-	}
-
-	public void updateReviewRating(final Integer reviewRating) {
 		this.reviewRating = reviewRating;
 	}
 
@@ -63,12 +61,15 @@ public class Review extends BaseTimeEntity {
 		}
 	}
 
-	public void addImages(final List<ReviewImage> images) {
+	public void addOrUpdateImages(final List<ReviewImage> images) {
 		if (!this.images.isEmpty()) {
 			this.images.clear();
 		}
 
-		this.images.addAll(images);
+		for (ReviewImage image : images) {
+			this.images.add(image);
+			image.setReview(this);
+		}
 	}
 
 }

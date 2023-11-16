@@ -19,7 +19,7 @@ public class CommunityService {
     private final ReviewRepository reviewRepository;
 
     public ReviewListResponse findAll(final Pageable pageable) {
-        Page<Review> reviewPage = reviewRepository.findAllReviewsWithImagesOrderByRecent(pageable);
+        Page<Review> reviewPage = reviewRepository.findAllReviewsWithImagesOrderByCondition(pageable);
         return ReviewListResponse.of(reviewPage);
     }
 

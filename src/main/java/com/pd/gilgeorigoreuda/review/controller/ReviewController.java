@@ -70,7 +70,7 @@ public class ReviewController {
 	public ResponseEntity<Void> saveComment(
 		@PathVariable("reviewId") final Long reviewId,
 		@PathVariable("memberId") final Long memberId,
-		@RequestBody @Valid ReviewCommentCreateRequest commentRequest
+		@RequestBody @Valid final ReviewCommentCreateRequest commentRequest
 	) {
 		commentService.saveComment(reviewId, memberId, commentRequest);
 
@@ -94,7 +94,8 @@ public class ReviewController {
 	}
 
 	@PutMapping("/comments/{commentId}/members/{memberId}")
-	public ResponseEntity<Void> updateReviewComment(@PathVariable("commentId") Long commentId,
+	public ResponseEntity<Void> updateReviewComment(
+		@PathVariable("commentId") final Long commentId,
 		@PathVariable("memberId") final Long memberId,
 		@RequestBody @Valid final ReviewCommentCreateRequest commentRequest
 	) {
@@ -119,7 +120,8 @@ public class ReviewController {
 
     @GetMapping("/stores/{storeId}")
     public ResponseEntity<ReviewListResponse> getReviewsByStoreId(
-            @PathVariable Long storeId, Pageable pageable
+        @PathVariable final Long storeId,
+		final Pageable pageable
     ) {
         ReviewListResponse response = reviewService.findReviewsByStoreId(storeId, pageable);
 
