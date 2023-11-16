@@ -101,6 +101,14 @@ public class Store extends BaseTimeEntity {
 	@OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<FoodCategory> foodCategories;
 
+	@Column(name = "total_report_count", nullable = false)
+	@Builder.Default
+	private Integer totalReportCount = 0;
+
+	@Column(name = "is_blocked", nullable = false)
+	@Builder.Default
+	private Boolean isBlocked = false;
+
 	public void addFoodCategories(final List<FoodCategory> foodCategories) {
 		if (!this.foodCategories.isEmpty()) {
 			this.foodCategories.clear();

@@ -12,6 +12,12 @@ spring:
         hibernate:
           format_sql: true
 
+    batch:
+      job:
+        enabled: false
+      jdbc:
+        initialize-schema: embedded
+
 cloud:
   aws:
     credentials:
