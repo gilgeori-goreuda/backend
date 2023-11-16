@@ -26,7 +26,7 @@ public class Member extends BaseTimeEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(nullable = false, length = 10, unique = true)
+	@Column(nullable = false, length = 30, unique = true)
 	private String nickname;
 
 	@Column(name = "profile_image_url", length = 512)
