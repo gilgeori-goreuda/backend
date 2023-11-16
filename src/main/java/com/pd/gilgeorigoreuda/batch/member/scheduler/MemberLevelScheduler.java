@@ -15,4 +15,5 @@ public class MemberLevelScheduler {
     public void runMemberLevelJob() {
         memberLevelJob.updateMemberLeverJob();
     }
+
 }

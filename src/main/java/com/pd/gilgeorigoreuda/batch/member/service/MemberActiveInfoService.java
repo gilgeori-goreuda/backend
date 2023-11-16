@@ -22,4 +22,5 @@ public class MemberActiveInfoService {
         final double VALUE = 0.01;
         memberActiveInfoRepository.updateMemberExp(VALUE);
     }
+
 }
