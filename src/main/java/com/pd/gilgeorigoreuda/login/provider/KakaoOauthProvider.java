@@ -50,6 +50,7 @@ public class KakaoOauthProvider implements OauthProvider {
         log.info("accessToken : {}", accessToken);
 
         HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         headers.setBearerAuth(accessToken);
 
         HttpEntity<MultiValueMap<String, String>> userInfoRequestEntity = new HttpEntity<>(headers);
@@ -60,11 +61,11 @@ public class KakaoOauthProvider implements OauthProvider {
                 userInfoRequestEntity,
                 KakaoUserInfo.class
         );
-
+        log.info("after getKakaoUserInfoResponseEntity");
         if (kakaoUserInfoResponse.getStatusCode().is2xxSuccessful()) {
             return kakaoUserInfoResponse.getBody();
         }
-
+        log.info("after getKakaoUserInfoResponseEntity");
         throw new NotSupportedOauthServiceException();
     }
 
@@ -91,6 +92,11 @@ public class KakaoOauthProvider implements OauthProvider {
         log.info("accessTokenResponse.getAccessToken : {}", accessTokenResponse.getBody().getAccessToken());
         log.info("accessTokenResponse.getRefreshToken : {}", accessTokenResponse.getBody().getRefreshToken());
 
+        OauthAccessToken oauthAccessToken = Optional.ofNullable(accessTokenResponse.getBody())
+                .orElseThrow(InvalidAuthorizationCodeException::new);
+
+        log.info("oauthAccessToken.getAccessToken : {}", oauthAccessToken.getAccessToken());
+
         return Optional.ofNullable(accessTokenResponse.getBody())
                 .orElseThrow(InvalidAuthorizationCodeException::new)
                 .getAccessToken();
@@ -102,6 +108,8 @@ public class KakaoOauthProvider implements OauthProvider {
             final HttpEntity<MultiValueMap<String, String>> requestEntity,
             final Class<? extends OauthUserInfo> responseType) {
         log.info("getKakaoUserInfoResponseEntity");
+        log.info("getKakaoUserInfoResponseEntity url : {}", url);
+        log.info("getKakaoUserInfoResponseEntity httpMethod : {}", httpMethod);
         return restTemplate.exchange(
                 url,
                 httpMethod,
@@ -116,6 +124,8 @@ public class KakaoOauthProvider implements OauthProvider {
             final HttpEntity<MultiValueMap<String, String>> accessTokenRequestEntity,
             final Class<OauthAccessToken> responseType) {
         log.info("getOauthAccessTokenResponseEntity");
+        log.info("getOauthAccessTokenResponseEntity url : {}", url);
+        log.info("getOauthAccessTokenResponseEntity httpMethod : {}", httpMethod);
         return restTemplate.exchange(
                 url,
                 httpMethod,

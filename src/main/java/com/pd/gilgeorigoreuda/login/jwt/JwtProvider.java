@@ -34,15 +34,15 @@ public class JwtProvider {
     }
 
     public MemberToken generateLoginToken(final String subject) {
-        final String refreshToken = createToken(EMPTY_SUBJECT, refreshExpirationTime);
-        final String accessToken = createToken(subject, accessExpirationTime);
+        String refreshToken = createToken(EMPTY_SUBJECT, refreshExpirationTime);
+        String accessToken = createToken(subject, accessExpirationTime);
 
         return MemberToken.of(refreshToken, accessToken);
     }
 
     private String createToken(final String subject, final Long expirationTime) {
-        final Date now = new Date();
-        final Date expiration = new Date(now.getTime() + expirationTime);
+        Date now = new Date();
+        Date expiration = new Date(now.getTime() + expirationTime);
 
         return Jwts.builder()
                 .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
@@ -98,6 +98,7 @@ public class JwtProvider {
         } catch (final JwtException e) {
             return true;
         }
+
         return false;
     }
 
@@ -105,6 +106,7 @@ public class JwtProvider {
         try {
             validateRefreshToken(refreshToken);
             validateAccessToken(accessToken);
+
             return true;
         } catch (final JwtException e) {
             return false;
