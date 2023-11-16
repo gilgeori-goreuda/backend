@@ -31,7 +31,7 @@ public class LoginTestController {
                 AccessTokenResponse.class
         );
 
-
+        System.out.println("accessToken : " + exchange.getBody().getAccessToken());
     }
 
 }

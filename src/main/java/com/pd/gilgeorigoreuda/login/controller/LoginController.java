@@ -30,10 +30,6 @@ public class LoginController {
             @RequestBody final LoginRequest loginRequest,
             final HttpServletResponse response
     ) {
-        log.info("provider : {}", provider);
-        log.info("code : {}", loginRequest.getCode());
-        log.info("response : {}", response);
-
         MemberToken memberTokens = loginService.login(provider, loginRequest.getCode());
 
         ResponseCookie cookie = ResponseCookie.from("refresh-token", memberTokens.getRefreshToken())
