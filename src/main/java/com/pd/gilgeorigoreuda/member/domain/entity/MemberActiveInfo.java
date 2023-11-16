@@ -38,6 +38,14 @@ public class MemberActiveInfo {
 	@Builder.Default
 	private Integer totalWalkingDistance = 0;
 
+	@Column(name = "total_visit_count", nullable = false)
+	@Builder.Default
+	private Integer totalVisitCount = 0;
+
+	@Column(name = "exp", nullable = false)
+	@Builder.Default
+	private Integer exp = 0;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_member_active_info_member_id"))
 	private Member member;
