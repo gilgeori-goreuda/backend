@@ -2,17 +2,14 @@ package com.pd.gilgeorigoreuda.login.controller;
 
 import com.pd.gilgeorigoreuda.login.dto.request.LoginRequest;
 import com.pd.gilgeorigoreuda.login.dto.response.AccessTokenResponse;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
-public class AuthCodeTestController {
+public class LoginTestController {
 
     @GetMapping("/oauth2/callback/kakao")
     public void test(
@@ -27,12 +24,14 @@ public class AuthCodeTestController {
         HttpEntity<LoginRequest> requestEntity = new HttpEntity<>(loginRequest, headers);
 
         RestTemplate restTemplate = new RestTemplate();
-        restTemplate.exchange(
+        ResponseEntity<AccessTokenResponse> exchange = restTemplate.exchange(
                 "http://localhost:8080/login/kakao",
                 HttpMethod.POST,
                 requestEntity,
                 AccessTokenResponse.class
         );
+
+
     }
 
 }

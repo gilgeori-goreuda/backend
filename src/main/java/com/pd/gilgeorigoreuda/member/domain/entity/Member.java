@@ -2,12 +2,7 @@ package com.pd.gilgeorigoreuda.member.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +14,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-@Table(name = "members")
+@Table(
+		name = "members",
+		indexes = {
+				@Index(name = "idx_member_social_id", columnList = "social_id", unique = true),
+				@Index(name = "idx_member_nickname", columnList = "nickname", unique = true)
+		}
+)
 public class Member extends BaseTimeEntity {
 
 	@Id

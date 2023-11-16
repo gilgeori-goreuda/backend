@@ -37,9 +37,9 @@ public class LoginService {
         log.info("profileImageUrl : {}", userInfo.getProfileImageUrl());
 
         Member member = findMemberOrElseCreateMember(
+                userInfo.getSocialId(),
                 userInfo.getNickname(),
-                userInfo.getProfileImageUrl(),
-                userInfo.getSocialId()
+                userInfo.getProfileImageUrl()
         );
 
         MemberToken memberToken = jwtProvider.generateLoginToken(member.getId().toString());
