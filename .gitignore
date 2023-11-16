@@ -44,3 +44,6 @@ src/main/resources/static/docs/
 
 ## log files ##
 logs/
+
+## application-local.yml ##
+src/main/resources/application-local.yml
