@@ -61,11 +61,11 @@ public class KakaoOauthProvider implements OauthProvider {
                 userInfoRequestEntity,
                 KakaoUserInfo.class
         );
-        log.info("after getKakaoUserInfoResponseEntity");
+        log.info("getKakaoUserInfoResponseEntity : {}", kakaoUserInfoResponse.getBody().toString());
         if (kakaoUserInfoResponse.getStatusCode().is2xxSuccessful()) {
             return kakaoUserInfoResponse.getBody();
         }
-        log.info("after getKakaoUserInfoResponseEntity");
+
         throw new NotSupportedOauthServiceException();
     }
 
