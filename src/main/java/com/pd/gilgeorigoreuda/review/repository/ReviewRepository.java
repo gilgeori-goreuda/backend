@@ -28,7 +28,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
             "where r.store.id = :storeId ")
     Page<Review> findAllByStoreIdWithImages(@Param("storeId") Long storeId, Pageable pageable);
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(nativeQuery = true,
             value = "UPDATE reviews " +
                     "SET like_count = COALESCE(( " +
@@ -46,7 +46,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     )
     void updateAllReviewLikeCount();
 
-    @Modifying
+    @Modifying(clearAutomatically = true)
     @Query(nativeQuery = true,
             value = "UPDATE reviews " +
                     "SET hate_count = COALESCE(( " +
@@ -63,4 +63,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
                     "    GROUP BY review_id)"
     )
     void updateAllReviewHateCount();
+
+
 }

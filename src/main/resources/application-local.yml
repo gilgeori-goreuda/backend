@@ -2,7 +2,7 @@ spring:
     datasource:
         url: jdbc:mysql://localhost:3306/gilgeorigoreuda?characterEncoding=UTF-8
         username: root
-        password: 1q2w3e4r!!
+        password: 1234
 
     jpa:
       hibernate:
@@ -12,6 +12,12 @@ spring:
       properties:
         hibernate:
           format_sql: true
+
+    batch:
+      job:
+        enabled: false
+      jdbc:
+        initialize-schema: embedded
 
 cloud:
   aws:
