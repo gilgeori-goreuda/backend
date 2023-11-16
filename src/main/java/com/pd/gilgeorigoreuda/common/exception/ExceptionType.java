@@ -3,6 +3,7 @@ package com.pd.gilgeorigoreuda.common.exception;
 import java.util.Arrays;
 import java.util.Objects;
 
+import com.pd.gilgeorigoreuda.auth.exception.RefreshTokenNotFoundException;
 import com.pd.gilgeorigoreuda.image.exception.*;
 import com.pd.gilgeorigoreuda.login.exception.*;
 import com.pd.gilgeorigoreuda.store.exception.*;
@@ -54,6 +55,7 @@ public enum ExceptionType {
 	INVALID_REFRESH_TOKEN_EXCEPTION("T003", "유효하지 않은 Refresh Token 입니다.", InvalidRefreshTokenException.class),
 	INVALID_ACCESS_TOKEN_EXCEPTION("T004", "유효하지 않은 Access Token 입니다.", InvalidAccessTokenException.class),
 	VALIDATE_TOKEN_FAIL_EXCEPTION("T005", "Access Token 연장에 실패했습니다.", RenewalAccessTokenFailException.class),
+	REFRESH_TOKEN_NOT_FOUND_EXCEPTION("T006", "Refresh Token이 존재하지 않습니다.", RefreshTokenNotFoundException.class),
 	;
 
 	private final String errorCode;

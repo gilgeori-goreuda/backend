@@ -36,6 +36,6 @@ public class MemberActiveInfoScheduler {
                  JobParametersInvalidException | JobRestartException e) {
             throw new RuntimeException(e);
         }
-
     }
+
 }

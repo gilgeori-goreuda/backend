@@ -1,6 +1,7 @@
 package com.pd.gilgeorigoreuda;
 
 
+import com.pd.gilgeorigoreuda.settings.ControllerTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(controllers = {HealthController.class})
 @Import(HealthController.class)
 @DisplayName("상태 체크용 API 테스트")
-public class HealthControllerTest {
+public class HealthControllerTest extends ControllerTest {
 
 	@Autowired
 	MockMvc mvc;
