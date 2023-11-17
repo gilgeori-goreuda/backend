@@ -2,6 +2,7 @@ package com.pd.gilgeorigoreuda.store.domain.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
@@ -98,8 +99,9 @@ public class Store extends BaseTimeEntity {
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_stores_member_id"))
 	private Member member;
 
-	@OneToMany(mappedBy = "store", cascade = CascadeType.REMOVE, orphanRemoval = true)
-	private List<FoodCategory> foodCategories;
+	@OneToMany(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+	@Builder.Default
+	private List<FoodCategory> foodCategories = new ArrayList<>();
 
 	@Column(name = "total_report_count", nullable = false)
 	@Builder.Default
@@ -114,7 +116,10 @@ public class Store extends BaseTimeEntity {
 			this.foodCategories.clear();
 		}
 
-		this.foodCategories.addAll(foodCategories);
+		for (FoodCategory foodCategory : foodCategories) {
+			this.foodCategories.add(foodCategory);
+			foodCategory.setStore(this);
+		}
 	}
 
 	public void updateStoreInfo(
