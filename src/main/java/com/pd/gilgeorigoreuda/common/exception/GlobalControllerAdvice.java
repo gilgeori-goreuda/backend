@@ -17,8 +17,8 @@ public class GlobalControllerAdvice {
 
 	private static final String INVALID_DTO_FIELD_ERROR_MESSAGE_FORMAT = "%s : %s (request value: %s)";
 
-	@ExceptionHandler(GilgeorigoreudaException.class)
-	public ResponseEntity<ErrorResponse> gilgeorigoreudaException(GilgeorigoreudaException e) {
+	@ExceptionHandler(GilgeoriGoreudaException.class)
+	public ResponseEntity<ErrorResponse> gilgeoriGoreudaException(GilgeoriGoreudaException e) {
 		return ResponseEntity.status(e.getStatus())
 				.body(new ErrorResponse(e.getErrorCode(), e.getErrorMessage()));
 	}

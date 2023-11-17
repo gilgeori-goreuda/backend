@@ -60,7 +60,7 @@ public enum ExceptionType {
 
 	private final String errorCode;
 	private final String errorMessage;
-	private Class<? extends GilgeorigoreudaException> classType;
+	private Class<? extends GilgeoriGoreudaException> classType;
 
 	ExceptionType(String errorCode, String errorMessage) {
 		this.errorCode = errorCode;
