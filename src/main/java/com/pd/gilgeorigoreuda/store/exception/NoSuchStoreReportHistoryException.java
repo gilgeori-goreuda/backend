@@ -1,9 +1,9 @@
 package com.pd.gilgeorigoreuda.store.exception;
 
-import com.pd.gilgeorigoreuda.common.exception.GilgeorigoreudaException;
+import com.pd.gilgeorigoreuda.common.exception.GilgeoriGoreudaException;
 import org.springframework.http.HttpStatus;
 
-public class NoSuchStoreReportHistoryException extends GilgeorigoreudaException {
+public class NoSuchStoreReportHistoryException extends GilgeoriGoreudaException {
 	public NoSuchStoreReportHistoryException() {
 		super(HttpStatus.NOT_FOUND);
 	}

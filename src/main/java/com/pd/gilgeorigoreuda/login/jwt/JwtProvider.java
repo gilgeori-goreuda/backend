@@ -93,9 +93,10 @@ public class JwtProvider {
 
     public boolean isValidRefreshButInvalidAccessToken(final String refreshToken, final String accessToken) {
         validateRefreshToken(refreshToken);
+
         try {
             validateAccessToken(accessToken);
-        } catch (final JwtException e) {
+        } catch (final ExpiredPeriodAccessTokenException e) {
             return true;
         }
 
