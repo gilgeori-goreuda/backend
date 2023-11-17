@@ -38,4 +38,8 @@ public class FoodCategory {
 	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_food_categories_store_id"))
 	private Store store;
 
+	public void setStore(final Store store) {
+		this.store = store;
+	}
+
 }
