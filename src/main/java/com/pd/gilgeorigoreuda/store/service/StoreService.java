@@ -39,7 +39,7 @@ public class StoreService {
 
 	private static final Integer BOUNDARY = 10;
 
-	@Transactional
+	@Transactional(readOnly = false)
 	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest storeCreateRequest) {
 		StreetAddress streetAddress = StreetAddress.of(storeCreateRequest.getStreetAddress());
 
@@ -118,6 +118,7 @@ public class StoreService {
 		imageService.deleteSingleImage(store.getImageUrl());
 	}
 
+	@Transactional(readOnly = true)
 	public StoreResponse getStore(final Long storeId, final BigDecimal memberlat, final BigDecimal memberlng) {
 		Store store = findStoreWithMemberAndCategories(storeId);
 
