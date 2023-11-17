@@ -38,7 +38,7 @@ public class StoreResponse {
 	private String streetAddress;
 	private Integer totalVisitCount;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createdAt;
 	private Integer distanceFromMember;
 
