@@ -12,6 +12,7 @@ import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @NoArgsConstructor
@@ -24,10 +25,10 @@ public class StoreResponse {
 	private Double averageRating;
 	private String businessDates;
 
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	@JsonFormat(pattern = "HH:mm")
 	private LocalTime openTime;
 
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm")
+	@JsonFormat(pattern = "HH:mm")
 	private LocalTime closeTime;
 	
 	private String purchaseType;
@@ -37,8 +38,9 @@ public class StoreResponse {
 	private String streetAddress;
 	private Integer totalVisitCount;
 
-//	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private LocalDateTime createdAt;
+	private Integer distanceFromMember;
 
 	private List<String> foodCategories;
 	private String lastModifiedMemberNickname;
@@ -60,6 +62,7 @@ public class StoreResponse {
 			final String streetAddress,
 			final Integer totalVisitCount,
 			final LocalDateTime createdAt,
+			final Integer distanceFromMember,
 			final List<String> foodCategories,
 			final String lastModifiedMemberNickname,
 			final StoreOwnerResponse owner) {
@@ -78,12 +81,13 @@ public class StoreResponse {
 		this.streetAddress = streetAddress;
 		this.totalVisitCount = totalVisitCount;
 		this.createdAt = createdAt;
+		this.distanceFromMember = distanceFromMember;
 		this.foodCategories = foodCategories;
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
 		this.owner = owner;
 	}
 
-	public static StoreResponse of(final Store store) {
+	public static StoreResponse of(final Store store, final Integer distanceFromMember) {
 		return new StoreResponse(
 				store.getId(),
 				store.getName(),
@@ -100,6 +104,7 @@ public class StoreResponse {
 				store.getStreetAddress().toString(),
 				store.getTotalVisitCount(),
 				store.getCreatedAt(),
+				distanceFromMember,
 				store.getFoodCategories()
 						.stream()
 						.map(FoodCategory::getFoodType)

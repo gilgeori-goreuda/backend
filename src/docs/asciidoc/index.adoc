@@ -55,6 +55,7 @@ include::{snippets}/store-controller-test/create-store/response-headers.adoc[]
 ==== Request
 include::{snippets}/store-controller-test/get-store/http-request.adoc[]
 include::{snippets}/store-controller-test/get-store/path-parameters.adoc[]
+include::{snippets}/store-controller-test/get-store/query-parameters.adoc[]
 
 ==== Response
 include::{snippets}/store-controller-test/get-store/http-response.adoc[]

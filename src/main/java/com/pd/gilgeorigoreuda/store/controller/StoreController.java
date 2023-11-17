@@ -1,16 +1,10 @@
 package com.pd.gilgeorigoreuda.store.controller;
 
+import java.math.BigDecimal;
 import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
@@ -44,9 +38,11 @@ public class StoreController {
 	@GetMapping("/{storeId}")
 	public ResponseEntity<StoreResponse> getStore(
 		// todo: 유저 정보
-		@PathVariable final Long storeId
+		@PathVariable final Long storeId,
+		@RequestParam(required = false, name = "lat") final BigDecimal lat,
+		@RequestParam(required = false, name = "lng") final BigDecimal lng
 	) {
-		StoreResponse storeResponse = storeService.getStore(storeId);
+		StoreResponse storeResponse = storeService.getStore(storeId, lat, lng);
 
 		return ResponseEntity
 			.ok()
