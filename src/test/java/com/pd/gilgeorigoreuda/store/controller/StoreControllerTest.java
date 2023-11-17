@@ -77,9 +77,11 @@ class StoreControllerTest extends ControllerTest {
         performPostRequest(storeCreateRequest);
     }
 
-    private ResultActions performGetRequest(final Long storeId) throws Exception {
+    private ResultActions performGetRequest(final Long storeId, final String lat, final String lng) throws Exception {
         return mockMvc.perform(
                 get("/api/v1/stores/{storeId}", storeId)
+                        .param("lat", lat)
+                        .param("lng", lng)
 //                .header(AUTHORIZATION, MEMBER_TOKENS.getAccessToken())
                         .contentType(APPLICATION_JSON)
         );
@@ -694,6 +696,7 @@ class StoreControllerTest extends ControllerTest {
                 "경기도 용인시 수지구 죽전동 123-456",
                 10,
                 LocalDateTime.of(2021, 8, 1, 0, 0, 0),
+                100,
                 List.of("붕어빵", "떡뽁이", "어묵"),
                 "testNickname",
                 new StoreOwnerResponse(
@@ -702,10 +705,10 @@ class StoreControllerTest extends ControllerTest {
                 )
         );
 
-        when(storeService.getStore(anyLong())).thenReturn(storeResponse);
+        when(storeService.getStore(anyLong(), any(BigDecimal.class), any(BigDecimal.class))).thenReturn(storeResponse);
 
         // when
-        ResultActions resultActions = performGetRequest(1L);
+        ResultActions resultActions = performGetRequest(1L, "37.123456", "127.123456");
 
         // then
         MvcResult mvcResult = resultActions
@@ -714,6 +717,10 @@ class StoreControllerTest extends ControllerTest {
                         restDocs.document(
                                 pathParameters(
                                         parameterWithName("storeId").description("가게 ID")
+                                ),
+                                queryParameters(
+                                        parameterWithName("lat").description("위도"),
+                                        parameterWithName("lng").description("경도")
                                 ),
                                 responseFields(
                                         fieldWithPath("id")
@@ -753,6 +760,9 @@ class StoreControllerTest extends ControllerTest {
                                                 .type(JsonFieldType.NUMBER)
                                                 .description("경도")
                                                 .attributes(field("constraint", "BigDecimal(3, 13)")),
+                                        fieldWithPath("distanceFromMember")
+                                                .type(JsonFieldType.NUMBER)
+                                                .description("회원과 가게 사이의 거리 (단위: m)"),
                                         fieldWithPath("streetAddress")
                                                 .type(JsonFieldType.STRING)
                                                 .description("도로명 주소")
@@ -764,7 +774,7 @@ class StoreControllerTest extends ControllerTest {
                                         fieldWithPath("createdAt")
                                                 .type(JsonFieldType.STRING)
                                                 .description("가게 생성 시간")
-                                                .attributes(field("constraint", "yyyy-MM-dd HH:mm:ss")),
+                                                .attributes(field("constraint", "yyyy-MM-dd")),
                                         fieldWithPath("detailLocation")
                                                 .type(JsonFieldType.STRING)
                                                 .description("가게 상세 주소")

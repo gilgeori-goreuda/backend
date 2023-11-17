@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
+import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.image.service.ImageService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -117,10 +118,12 @@ public class StoreService {
 		imageService.deleteSingleImage(store.getImageUrl());
 	}
 
-	public StoreResponse getStore(final Long storeId) {
+	public StoreResponse getStore(final Long storeId, final BigDecimal memberlat, final BigDecimal memberlng) {
 		Store store = findStoreWithMemberAndCategories(storeId);
 
-		return StoreResponse.of(store);
+		int distanceFromMember = getDistanceBetweenStoreAndMember(memberlat, memberlng, store.getLat(), store.getLng());
+
+		return StoreResponse.of(store, distanceFromMember);
 	}
 
 	private void checkIsAlreadyExistInBoundary(final BigDecimal lat, final BigDecimal lng, final String largeAddress, final String mediumAddress) {
@@ -144,6 +147,11 @@ public class StoreService {
 	private Store findStoreWithMember(Long storeId) {
 		return storeRepository.findStoreWithMember(storeId)
 			.orElseThrow(NoSuchStoreException::new);
+	}
+
+	private static int getDistanceBetweenStoreAndMember(final BigDecimal memberLat, final BigDecimal memberLng,
+														final BigDecimal targetStoreLat, final BigDecimal targetStoreLng) {
+		return DistanceCalculator.calculateDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
 	}
 
 }

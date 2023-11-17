@@ -84,7 +84,8 @@ public class StoreCreateRequest {
 		this.foodCategories = foodCategories;
 	}
 
-	public Store toEntity(Long memberId) {
+	public Store toEntity(final Long memberId) {
+		System.out.println(businessDates);
 		return Store.builder()
 			.name(name)
 			.storeType(StoreType.of(storeType))
