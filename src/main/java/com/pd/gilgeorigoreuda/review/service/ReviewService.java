@@ -9,21 +9,20 @@ import com.pd.gilgeorigoreuda.review.dto.response.ReviewCreateResponse;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewListResponse;
 import com.pd.gilgeorigoreuda.review.repository.ReviewImageRepository;
 import com.pd.gilgeorigoreuda.review.repository.ReviewRepository;
-
 import lombok.RequiredArgsConstructor;
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class  ReviewService {
+public class ReviewService {
 
     private final ReviewRepository reviewRepository;
     private final ReviewImageRepository reviewImageRepository;
@@ -65,7 +64,9 @@ public class  ReviewService {
     }
 
     public ReviewListResponse findReviewsByStoreId(final Long storeId, final Pageable pageable) {
-        Page<Review> reviewPage = reviewRepository.findAllByStoreIdWithImages(storeId, pageable);
+        Pageable sortedByDateDesc = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), Sort.by("createdAt").descending());
+
+        Page<Review> reviewPage = reviewRepository.findAllByStoreIdWithImages(storeId, sortedByDateDesc);
         return ReviewListResponse.of(reviewPage);
     }
 
