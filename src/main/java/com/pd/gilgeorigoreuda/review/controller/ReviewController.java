@@ -11,6 +11,7 @@ import com.pd.gilgeorigoreuda.review.service.ReviewService;
 
 import jakarta.validation.Valid;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.PageRequest;
@@ -68,10 +69,11 @@ public class ReviewController {
 
 	@PostMapping("{reviewId}/members/{memberId}/comments")
 	public ResponseEntity<Void> saveComment(
-		@PathVariable("reviewId") final Long reviewId,
-		@PathVariable("memberId") final Long memberId,
-		@RequestBody @Valid final ReviewCommentCreateRequest commentRequest
+			@PathVariable("reviewId") final Long reviewId,
+			@PathVariable("memberId") final Long memberId,
+			@RequestBody @Valid @NotBlank(message = "내용을 입력해주세요.") final String comment
 	) {
+		ReviewCommentCreateRequest commentRequest = new ReviewCommentCreateRequest(comment);
 		commentService.saveComment(reviewId, memberId, commentRequest);
 
 		return ResponseEntity
