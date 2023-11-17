@@ -22,14 +22,6 @@ public class StoreReportUpdateScheduler {
     private final JobLauncher jobLauncher;
     private final JobRegistry jobRegistry;
 
-//    @Bean
-//    public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(){
-//        JobRegistryBeanPostProcessor jobProcessor = new JobRegistryBeanPostProcessor();
-//        jobProcessor.setJobRegistry(jobRegistry);
-//
-//        return jobProcessor;
-//    }
-
     @Scheduled(cron = "0/10 * * * * *")
     public void updateStoreReport() {
         String time = LocalDateTime.now().toString();

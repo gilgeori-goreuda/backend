@@ -24,14 +24,6 @@ public class MemberActiveInfoScheduler {
     private final JobLauncher jobLauncher;
     private final JobRegistry jobRegistry;
 
-    @Bean
-    public JobRegistryBeanPostProcessor jobRegistryBeanPostProcessor(){
-        JobRegistryBeanPostProcessor jobProcessor = new JobRegistryBeanPostProcessor();
-        jobProcessor.setJobRegistry(jobRegistry);
-
-        return jobProcessor;
-    }
-
     @Scheduled(cron ="0/11 * * * * ?")
     public void runMemberLevelJob(){
         String time = LocalDateTime.now().toString();
