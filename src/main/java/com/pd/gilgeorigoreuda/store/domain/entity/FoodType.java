@@ -32,7 +32,7 @@ public enum FoodType {
 
 	private final String foodName;
 
-	public static FoodType of(String foodName) {
+	public static FoodType of(final String foodName) {
 		return Arrays.stream(values())
 			.filter(ft -> ft.getFoodName().equals(foodName))
 			.findFirst()

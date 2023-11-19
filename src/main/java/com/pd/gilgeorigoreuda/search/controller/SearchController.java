@@ -1,8 +1,7 @@
 package com.pd.gilgeorigoreuda.search.controller;
 
-import com.pd.gilgeorigoreuda.search.dto.response.AddressSearchListResponse;
+import com.pd.gilgeorigoreuda.search.dto.response.SearchStoreListResponse;
 import com.pd.gilgeorigoreuda.search.service.SearchService;
-import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +19,14 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping("/address")
-    public ResponseEntity<AddressSearchListResponse> addressAndCategorySearch(
-            @RequestParam(required = false, name = "lat") final BigDecimal lat,
-            @RequestParam(required = false, name = "lng") final BigDecimal lng,
-            @RequestParam(required = false, name = "foodType") final FoodType foodType
+    public ResponseEntity<SearchStoreListResponse> searchByLatLngAndFoodCategories(
+            @RequestParam(required = false, name = "m_lat") final BigDecimal mLat,
+            @RequestParam(required = false, name = "m_lng") final BigDecimal mLng,
+            @RequestParam(required = false, name = "r_lat") final BigDecimal rLat,
+            @RequestParam(required = false, name = "r_lng") final BigDecimal rLng,
+            @RequestParam(required = false, name = "foodTypes") final String foodTypes
     ) {
-        AddressSearchListResponse response = searchService.getStoreByAddressAndFoodType(lat, lng, foodType);
+        SearchStoreListResponse response = searchService.searchByLatLngAndFoodCategories(mLat, mLng, rLat, rLng, foodTypes);
 
         return ResponseEntity
                 .ok()
