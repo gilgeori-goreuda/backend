@@ -31,8 +31,12 @@ public class SearchParameter {
                 new BigDecimal(mLng),
                 new BigDecimal(rLat),
                 new BigDecimal(rLng),
-                foodType ! FoodType.of(foodType)
+                initFoodType(foodType)
         );
+    }
+
+    private static FoodType initFoodType(final String foodType) {
+        return foodType == null ? null : FoodType.of(foodType);
     }
 
 }
