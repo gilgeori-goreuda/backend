@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Getter
 @NoArgsConstructor
@@ -27,16 +28,24 @@ public class SearchParameter {
             final String foodType
     ) {
         return new SearchParameter(
-                new BigDecimal(mLat),
-                new BigDecimal(mLng),
-                new BigDecimal(rLat),
-                new BigDecimal(rLng),
+                initLatLng(mLat),
+                initLatLng(mLng),
+                initLatLng(rLat),
+                initLatLng(rLng),
                 initFoodType(foodType)
         );
     }
 
+    private static BigDecimal initLatLng(final String latLng) {
+        if (latLng == null || latLng.isBlank()) {
+            return BigDecimal.ZERO;
+        } else {
+            return new BigDecimal(latLng);
+        }
+    }
+
     private static FoodType initFoodType(final String foodType) {
-        return foodType == null ? null : FoodType.of(foodType);
+        return Objects.equals(foodType, "") ? null : FoodType.of(foodType);
     }
 
 }

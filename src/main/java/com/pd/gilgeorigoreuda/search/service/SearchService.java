@@ -27,10 +27,9 @@ public class SearchService {
             final BigDecimal memberLng,
             final BigDecimal referenceLat,
             final BigDecimal referenceLng,
-            final String streetAddress,
-            final String foodTypeString
+            final FoodType foodType
     ) {
-        FoodType foodType = getFoodType(foodTypeString);
+//        FoodType foodType = getFoodType(foodType);
 
         List<SearchStoreResponse> searchStoreResponse = searchRepository
                 .findStoresByLatLngAndFoodTypes(referenceLat, referenceLng, foodType, DISTANCE_1KM)

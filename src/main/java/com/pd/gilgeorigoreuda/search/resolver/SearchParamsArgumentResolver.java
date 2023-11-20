@@ -52,13 +52,14 @@ public class SearchParamsArgumentResolver implements HandlerMethodArgumentResolv
                 parameterMap.getOrDefault("m_lng", "0"),
                 parameterMap.getOrDefault("r_lat", "0"),
                 parameterMap.getOrDefault("r_lng", "0"),
-                parameterMap.getOrDefault("food_type", null)
+                parameterMap.getOrDefault("food_type", "")
         );
     }
 
-    private void keywordEventPublish(Map<String, String> parameterMap) {
-        if (parameterMap.get("street_address") != null && !parameterMap.get("street_address").isBlank()) {
-            publisher.publishEvent(new KeywordEvent(parameterMap.get("street_address")));
+    private void keywordEventPublish(final Map<String, String> parameterMap) {
+        String streetAddress = parameterMap.get("street_address");
+        if (streetAddress != null && !streetAddress.isBlank()) {
+            publisher.publishEvent(new KeywordEvent(streetAddress));
         }
     }
 
