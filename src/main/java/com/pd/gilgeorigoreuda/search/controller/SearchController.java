@@ -27,7 +27,8 @@ public class SearchController {
             @RequestParam(required = false, name = "street_address") final String streetAddress,
             @RequestParam(required = false, name = "food_type") final String foodType
     ) {
-        SearchStoreListResponse response = searchService.searchByLatLngAndFoodCategories(mLat, mLng, rLat, rLng, streetAddress, foodType);
+        SearchStoreListResponse response = searchService
+                .searchByLatLngAndFoodCategories(mLat, mLng, rLat, rLng, streetAddress, foodType);
 
         return ResponseEntity
                 .ok()
