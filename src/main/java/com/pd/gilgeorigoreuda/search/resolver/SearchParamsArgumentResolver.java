@@ -1,6 +1,9 @@
 package com.pd.gilgeorigoreuda.search.resolver;
 
+import com.pd.gilgeorigoreuda.statistics.event.KeywordEvent;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -13,7 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
+@RequiredArgsConstructor
 public class SearchParamsArgumentResolver implements HandlerMethodArgumentResolver {
+
+    private final ApplicationEventPublisher publisher;
 
     @Override
     public boolean supportsParameter(MethodParameter parameter) {
@@ -39,6 +45,8 @@ public class SearchParamsArgumentResolver implements HandlerMethodArgumentResolv
             parameterMap.put(name, nativeRequest.getParameter(name));
         }
 
+        keywordEventPublish(parameterMap);
+
         return SearchParameter.of(
                 parameterMap.getOrDefault("m_lat", "0"),
                 parameterMap.getOrDefault("m_lng", "0"),
@@ -46,6 +54,12 @@ public class SearchParamsArgumentResolver implements HandlerMethodArgumentResolv
                 parameterMap.getOrDefault("r_lng", "0"),
                 parameterMap.getOrDefault("food_type", null)
         );
+    }
+
+    private void keywordEventPublish(Map<String, String> parameterMap) {
+        if (parameterMap.get("street_address") != null && !parameterMap.get("street_address").isBlank()) {
+            publisher.publishEvent(new KeywordEvent(parameterMap.get("street_address")));
+        }
     }
 
 }
