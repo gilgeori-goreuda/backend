@@ -7,11 +7,8 @@ import com.pd.gilgeorigoreuda.login.service.LoginService;
 
 import lombok.RequiredArgsConstructor;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,11 +35,11 @@ public class LoginController {
     public ResponseEntity<AccessTokenResponse> extendLogin(
             @RequestHeader("Authorization") final String authorizationHeader
     ) {
-        final String renewalAccessToken = loginService.renewalAccessToken(authorizationHeader);
+        final String regeneratedAccessToken = loginService.regenerateAccessToken(authorizationHeader);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(AccessTokenResponse.of(renewalAccessToken));
+                .body(AccessTokenResponse.of(regeneratedAccessToken));
     }
 
     @DeleteMapping("/logout")

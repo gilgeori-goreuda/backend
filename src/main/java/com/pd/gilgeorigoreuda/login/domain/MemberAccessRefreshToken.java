@@ -8,16 +8,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class MemberAccessRefreshToken {
 
-    private String refreshToken;
     private String accessToken;
+    private String refreshToken;
 
-    private MemberAccessRefreshToken(final String refreshToken, final String accessToken) {
-        this.refreshToken = refreshToken;
+    private MemberAccessRefreshToken(final String accessToken, final String refreshToken) {
         this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 
-    public static MemberAccessRefreshToken of(final String refreshToken, final String accessToken) {
-        return new MemberAccessRefreshToken(refreshToken, accessToken);
+    public static MemberAccessRefreshToken of(final String accessToken, final String refreshToken) {
+        return new MemberAccessRefreshToken(accessToken, refreshToken);
     }
 
 }

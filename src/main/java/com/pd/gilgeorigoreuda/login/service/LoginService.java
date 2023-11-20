@@ -79,14 +79,17 @@ public class LoginService {
         );
     }
 
-    public String renewalAccessToken(final String authorizationHeader) {
+    public String regenerateAccessToken(final String authorizationHeader) {
         MemberToken memberToken = getMemberTokenByAccessToken(authorizationHeader);
 
         String accessToken = memberToken.getAccessToken();
         String refreshToken = memberToken.getRefreshToken();
 
         if (jwtProvider.isValidRefreshButInvalidAccessToken(refreshToken, accessToken)) {
-            return jwtProvider.regenerateAccessToken(memberToken.getMemberId().toString());
+            String regeneratedAccessToken = jwtProvider.regenerateAccessToken(memberToken.getMemberId().toString());
+            memberTokenRepository.updateAccessToken(memberToken.getMemberId(), regeneratedAccessToken);
+
+            return regeneratedAccessToken;
         }
 
         if (jwtProvider.isValidRefreshAndValidAccessToken(refreshToken, accessToken)) {

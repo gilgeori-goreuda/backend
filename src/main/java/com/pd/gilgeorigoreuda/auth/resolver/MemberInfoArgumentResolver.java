@@ -4,6 +4,8 @@ import com.pd.gilgeorigoreuda.auth.MemberInfo;
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.auth.exception.RefreshTokenNotFoundException;
 import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.exception.InvalidAccessTokenException;
 import com.pd.gilgeorigoreuda.login.jwt.BearerTokenExtractor;
 import com.pd.gilgeorigoreuda.login.jwt.JwtProvider;
 import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
@@ -43,33 +45,19 @@ public class MemberInfoArgumentResolver implements HandlerMethodArgumentResolver
             final NativeWebRequest webRequest,
             final WebDataBinderFactory binderFactory
     ) {
-        HttpServletRequest request = webRequest.getNativeRequest(HttpServletRequest.class);
-
-        String refreshToken = extractRefreshToken(request.getCookies());
         String accessToken = bearerTokenExtractor.extractAccessToken(webRequest.getHeader(HttpHeaders.AUTHORIZATION));
+        MemberToken memberToken = getMemberTokenByAccessToken(accessToken);
 
-        jwtProvider.validateTokens(MemberAccessRefreshToken.of(refreshToken, accessToken));
+        jwtProvider.validateTokens(MemberAccessRefreshToken.of(memberToken.getAccessToken(), accessToken));
 
         Long memberId = Long.valueOf(jwtProvider.getSubject(accessToken));
 
         return LoginMember.member(memberId);
     }
 
-    private String extractRefreshToken(final Cookie... cookies) {
-        if (cookies == null) {
-            throw new RefreshTokenNotFoundException();
-        }
-
-        return Arrays.stream(cookies)
-                .filter(this::isValidRefreshToken)
-                .findFirst()
-                .orElseThrow(RefreshTokenNotFoundException::new)
-                .getValue();
-    }
-
-    private boolean isValidRefreshToken(final Cookie cookie) {
-        return REFRESH_TOKEN.equals(cookie.getName()) &&
-                memberTokenRepository.existsById(cookie.getValue());
+    private MemberToken getMemberTokenByAccessToken(final String accessToken) {
+        return memberTokenRepository.findByAccessToken(accessToken)
+                .orElseThrow(InvalidAccessTokenException::new);
     }
 
 }
