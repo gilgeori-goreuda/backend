@@ -3,6 +3,7 @@ package com.pd.gilgeorigoreuda.auth;
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.auth.exception.UnAuthorizedException;
 import org.aspectj.lang.JoinPoint;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -21,6 +22,7 @@ class CheckIsMemberTest {
     private JoinPoint joinPoint;
 
     @Test
+    @DisplayName("MemberOnly 어노테이션이 붙은 메서드에 로그인한 회원이면 예외를 던지지 않는다.")
     @MemberOnly
     void checkWhenMemberIsLogInShouldNotThrowException() {
         // given
@@ -33,6 +35,7 @@ class CheckIsMemberTest {
     }
 
     @Test
+    @DisplayName("MemberOnly 어노테이션이 붙은 메서드에 로그인하지 않은 회원이면 예외를 던진다.")
     @MemberOnly
     void checkWhenMemberIsNotLogInShouldThrowUnAuthorizedException() {
         // given
@@ -45,6 +48,7 @@ class CheckIsMemberTest {
     }
 
     @Test
+    @DisplayName("MemberOnly 어노테이션이 붙은 메서드에 인자가 없으면 예외를 던지지 않는다.")
     void checkWhenNotAnnotatedWithMemberOnlyShouldNotThrowException() {
         // given
         when(joinPoint.getArgs()).thenReturn(new Object[]{});

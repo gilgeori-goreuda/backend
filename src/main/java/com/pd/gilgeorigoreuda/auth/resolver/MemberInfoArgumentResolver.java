@@ -29,8 +29,7 @@ public class MemberInfoArgumentResolver implements HandlerMethodArgumentResolver
 
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
-        return parameter.withContainingClass(Long.class)
-                .hasParameterAnnotation(MemberInfo.class);
+        return parameter.hasParameterAnnotation(MemberInfo.class);
     }
 
     @Override
