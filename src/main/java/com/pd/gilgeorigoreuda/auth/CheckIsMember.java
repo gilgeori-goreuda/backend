@@ -15,6 +15,10 @@ public class CheckIsMember {
 
     @Before("@annotation(com.pd.gilgeorigoreuda.auth.MemberOnly)")
     public void check(final JoinPoint joinPoint) {
+        if (joinPoint.getArgs().length == 0) {
+            return;
+        }
+
         Arrays.stream(joinPoint.getArgs())
                 .filter(LoginMember.class::isInstance)
                 .map(LoginMember.class::cast)
