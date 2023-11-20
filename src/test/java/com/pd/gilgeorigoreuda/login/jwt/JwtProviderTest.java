@@ -1,7 +1,6 @@
 package com.pd.gilgeorigoreuda.login.jwt;
 
-import com.pd.gilgeorigoreuda.common.exception.ExceptionType;
-import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodAccessTokenException;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodRefreshTokenException;
 import com.pd.gilgeorigoreuda.login.exception.InvalidAccessTokenException;
@@ -38,7 +37,7 @@ class JwtProviderTest {
     @Autowired
     JwtProvider jwtProvider;
 
-    private MemberToken getMemberToken() {
+    private MemberAccessRefreshToken getMemberToken() {
         return jwtProvider.generateLoginToken(SUBJECT);
     }
 
@@ -62,33 +61,23 @@ class JwtProviderTest {
     @DisplayName("AccessToken과 RefreshToken 생성")
     void generateLoginToken() {
         // given
-        MemberToken memberTokens = getMemberToken();
+        MemberAccessRefreshToken memberAccessRefreshTokens = getMemberToken();
 
         // when, then
-        assertThat(jwtProvider.getSubject(memberTokens.getAccessToken())).isEqualTo(SUBJECT);
-        assertThat(jwtProvider.getSubject(memberTokens.getRefreshToken())).isNull();
-    }
-
-    @DisplayName("AccessToken과 RefreshToken이 모두 유효한 토큰일 때 검증로직 성공")
-    @Test
-    void validateTokenSuccess() {
-        // given
-        final MemberToken memberToken = getMemberToken();
-
-        // when & then
-        assertDoesNotThrow(() -> jwtProvider.validateTokens(memberToken));
+        assertThat(jwtProvider.getSubject(memberAccessRefreshTokens.getAccessToken())).isEqualTo(SUBJECT);
+        assertThat(jwtProvider.getSubject(memberAccessRefreshTokens.getRefreshToken())).isNull();
     }
 
     @Test
     @DisplayName("RefreshToken의 기한이 만료되었을 때 예외 발생")
     void validateTokenExpiredPeriodRefreshToken() {
         // given
-        String refreshToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        String refreshToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(accessToken, refreshToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(ExpiredPeriodRefreshTokenException.class);
     }
 
@@ -96,12 +85,12 @@ class JwtProviderTest {
     @DisplayName("RefreshToken이 올바르지 않은 형식일 때 예외 발생")
     void validateTokenInvalidRefreshToken() {
         // given
-        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, INVALID_SECRET_KEY);
         String accessToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, INVALID_SECRET_KEY);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(accessToken, refreshToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(InvalidRefreshTokenException.class);
     }
 
@@ -109,12 +98,12 @@ class JwtProviderTest {
     @DisplayName("AccessToken의 기한이 만료되었을 때 예외 발생")
     void validateExpiredPeriodAccessToken() {
         // given
-        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(accessToken, refreshToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(ExpiredPeriodAccessTokenException.class);
     }
 
@@ -122,12 +111,12 @@ class JwtProviderTest {
     @DisplayName("AccessToken이 올바르지 않은 형식일 때 예외 발생")
     void validateTokenInvalidAccessToken() {
         // given
-        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRATION_TIME, SUBJECT, INVALID_SECRET_KEY);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(accessToken, refreshToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(InvalidAccessTokenException.class);
     }
 
@@ -135,11 +124,11 @@ class JwtProviderTest {
     @DisplayName("RefreshToken이 유효하고 AccessToken의 유효기간이 지났다면 true를 반환한다.")
     void isValidRefreshButInvalidAccessToken() {
         // given
-        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
+        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
 
         // when & then
-        assertThat(jwtProvider.isValidRefreshButInvalidAccessToken(refreshToken, accessToken))
+        assertThat(jwtProvider.isValidRefreshButInvalidAccessToken(accessToken, refreshToken))
                 .isTrue();
     }
 
@@ -147,11 +136,11 @@ class JwtProviderTest {
     @DisplayName("RefreshToken이 올바르지 않으면 예외 발생")
     void isValidRefreshButInvalidAccessWhenInvalidRefreshTokenShouldThrowException() {
         // given
-        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, INVALID_SECRET_KEY);
         String accessToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
+        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, INVALID_SECRET_KEY);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.isValidRefreshButInvalidAccessToken(refreshToken, accessToken))
+        assertThatThrownBy(() -> jwtProvider.isValidRefreshButInvalidAccessToken(accessToken, refreshToken))
                 .isInstanceOf(InvalidRefreshTokenException.class);
     }
 
@@ -159,11 +148,11 @@ class JwtProviderTest {
     @DisplayName("AccessToken이 올바르지 않으면 예외 발생")
     void isValidRefreshButInvalidAccessWhenInvalidAccessTokenShouldThrowException() {
         // given
-        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRED_TIME, SUBJECT, INVALID_SECRET_KEY);
+        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.isValidRefreshButInvalidAccessToken(refreshToken, accessToken))
+        assertThatThrownBy(() -> jwtProvider.isValidRefreshButInvalidAccessToken(accessToken, refreshToken))
                 .isInstanceOf(InvalidAccessTokenException.class);
     }
 
@@ -171,11 +160,11 @@ class JwtProviderTest {
     @DisplayName("RefreshToken이 만료되어 있으면 예외 발생")
     void isValidRefreshButInvalidAccessWhenExpiredRefreshTokenShouldThrowException() {
         // given
-        String refreshToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRED_TIME, SUBJECT, INVALID_SECRET_KEY);
+        String refreshToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.isValidRefreshButInvalidAccessToken(refreshToken, accessToken))
+        assertThatThrownBy(() -> jwtProvider.isValidRefreshButInvalidAccessToken(accessToken, refreshToken))
                 .isInstanceOf(ExpiredPeriodRefreshTokenException.class);
     }
 
@@ -183,12 +172,22 @@ class JwtProviderTest {
     @DisplayName("RefreshToken과 AccessToken이 모두 유효하면 true를 반환한다.")
     void isValidRefreshAndValidAccessToken() {
         // given
-        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
+        String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
 
         // when & then
-        assertThat(jwtProvider.isValidRefreshAndValidAccessToken(refreshToken, accessToken))
+        assertThat(jwtProvider.isValidRefreshAndValidAccessToken(accessToken, refreshToken))
                 .isTrue();
+    }
+
+    @Test
+    @DisplayName("AccessToken과 RefreshToken이 모두 유효한 토큰일 때 검증로직 성공")
+    void validateTokenSuccess() {
+        // given
+        final MemberAccessRefreshToken memberAccessRefreshToken = getMemberToken();
+
+        // when & then
+        assertDoesNotThrow(() -> jwtProvider.validateTokens(memberAccessRefreshToken));
     }
 
 }

@@ -15,7 +15,7 @@ public interface KeywordRepository extends JpaRepository<Keyword, Long> {
             "select keyword, count(*) as count " +
             "from " +
             "(select keyword, created_at " +
-                "from Keywords " +
+                "from keywords " +
                 "where created_at >= :startDayTime " +
                 "and created_at <= :endDayTime) as finltered_data " +
             "group by keyword, DATE(created_at), HOUR(created_at) " +

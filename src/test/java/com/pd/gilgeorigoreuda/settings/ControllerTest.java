@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pd.gilgeorigoreuda.auth.resolver.MemberInfoArgumentResolver;
 import com.pd.gilgeorigoreuda.login.jwt.BearerTokenExtractor;
 import com.pd.gilgeorigoreuda.login.jwt.JwtProvider;
-import com.pd.gilgeorigoreuda.login.repository.RefreshTokenRepository;
+import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
 import com.pd.gilgeorigoreuda.settings.restdocs.RestDocsConfiguration;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -51,7 +51,7 @@ public abstract class ControllerTest {
 	protected JwtProvider jwtProvider;
 
 	@MockBean
-	protected RefreshTokenRepository refreshTokenRepository;
+	protected MemberTokenRepository memberTokenRepository;
 
 	@MockBean
 	protected BearerTokenExtractor bearerTokenExtractor;

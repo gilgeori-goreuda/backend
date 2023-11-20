@@ -1,6 +1,6 @@
 package com.pd.gilgeorigoreuda.login.jwt;
 
-import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodAccessTokenException;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodRefreshTokenException;
 import com.pd.gilgeorigoreuda.login.exception.InvalidAccessTokenException;
@@ -33,11 +33,11 @@ public class JwtProvider {
         this.refreshExpirationTime = refreshExpirationTime;
     }
 
-    public MemberToken generateLoginToken(final String subject) {
-        String refreshToken = createToken(EMPTY_SUBJECT, refreshExpirationTime);
+    public MemberAccessRefreshToken generateLoginToken(final String subject) {
         String accessToken = createToken(subject, accessExpirationTime);
+        String refreshToken = createToken(EMPTY_SUBJECT, refreshExpirationTime);
 
-        return MemberToken.of(refreshToken, accessToken);
+        return MemberAccessRefreshToken.of(accessToken, refreshToken);
     }
 
     private String createToken(final String subject, final Long expirationTime) {
@@ -53,9 +53,9 @@ public class JwtProvider {
                 .compact();
     }
 
-    public void validateTokens(final MemberToken memberToken) {
-        validateRefreshToken(memberToken.getRefreshToken());
-        validateAccessToken(memberToken.getAccessToken());
+    public void validateTokens(final MemberAccessRefreshToken memberAccessRefreshToken) {
+        validateRefreshToken(memberAccessRefreshToken.getRefreshToken());
+        validateAccessToken(memberAccessRefreshToken.getAccessToken());
     }
 
     private void validateRefreshToken(final String refreshToken) {
@@ -91,7 +91,7 @@ public class JwtProvider {
                 .parseClaimsJws(token);
     }
 
-    public boolean isValidRefreshButInvalidAccessToken(final String refreshToken, final String accessToken) {
+    public boolean isValidRefreshButInvalidAccessToken(final String accessToken, final String refreshToken) {
         validateRefreshToken(refreshToken);
 
         try {
@@ -103,7 +103,7 @@ public class JwtProvider {
         return false;
     }
 
-    public boolean isValidRefreshAndValidAccessToken(final String refreshToken, final String accessToken) {
+    public boolean isValidRefreshAndValidAccessToken(final String accessToken, final String refreshToken) {
         try {
             validateRefreshToken(refreshToken);
             validateAccessToken(accessToken);
