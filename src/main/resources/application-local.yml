@@ -45,7 +45,7 @@ oauth2:
   provider:
     kakao:
       client-id: dd83fb5281e50c8508ffc20b8dc07799
-      redirect-url: http://localhost:8080/oauth2/callback/kakao
+      redirect-url: http://localhost:3000/oauth2/callback/kakao
       token-url: https://kauth.kakao.com/oauth/token
       user-info-url: https://kapi.kakao.com/v2/user/me
 
