@@ -25,9 +25,9 @@ public class SearchController {
             @RequestParam(required = false, name = "r_lat") final BigDecimal rLat,
             @RequestParam(required = false, name = "r_lng") final BigDecimal rLng,
             @RequestParam(required = false, name = "street_address") final String streetAddress,
-            @RequestParam(required = false, name = "food_types") final String foodTypes
+            @RequestParam(required = false, name = "food_type") final String foodType
     ) {
-        SearchStoreListResponse response = searchService.searchByLatLngAndFoodCategories(mLat, mLng, rLat, rLng, foodTypes);
+        SearchStoreListResponse response = searchService.searchByLatLngAndFoodCategories(mLat, mLng, rLat, rLng, streetAddress, foodType);
 
         return ResponseEntity
                 .ok()

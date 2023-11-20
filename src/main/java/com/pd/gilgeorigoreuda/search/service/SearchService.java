@@ -4,13 +4,16 @@ import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.search.dto.response.SearchStoreListResponse;
 import com.pd.gilgeorigoreuda.search.dto.response.SearchStoreResponse;
 import com.pd.gilgeorigoreuda.search.repository.SearchRepository;
+import com.pd.gilgeorigoreuda.statistics.event.KeywordEvent;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,6 +23,8 @@ import java.util.List;
 public class SearchService {
 
     private final SearchRepository searchRepository;
+    private final ApplicationEventPublisher publisher;
+
     private static final Double DISTANCE_1KM =0.00012754530697130809;
 
     public SearchStoreListResponse searchByLatLngAndFoodCategories(
@@ -27,12 +32,15 @@ public class SearchService {
             final BigDecimal memberLng,
             final BigDecimal referenceLat,
             final BigDecimal referenceLng,
+            final String streetAddress,
             final String foodTypeString
     ) {
-        List<FoodType> foodTypes = getFoodTypes(foodTypeString);
+        publisher.publishEvent(new KeywordEvent(streetAddress));
+
+        FoodType foodType = getFoodType(foodTypeString);
 
         List<SearchStoreResponse> searchStoreResponse = searchRepository
-                .findStoresByLatLngAndFoodTypes(referenceLat, referenceLng, foodTypes, DISTANCE_1KM)
+                .findStoresByLatLngAndFoodTypes(referenceLat, referenceLng, foodType, DISTANCE_1KM)
                 .stream()
                 .map(store -> mapToAddressSearchResponse(memberLat, memberLng, store))
                 .toList();
@@ -61,12 +69,8 @@ public class SearchService {
         return DistanceCalculator.calculateDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
     }
 
-    private List<FoodType> getFoodTypes(final String foodTypeString) {
-        String[] foodTypeArray = foodTypeString.split(",");
-
-        return Arrays.stream(foodTypeArray)
-                .map(FoodType::of)
-                .toList();
+    private FoodType getFoodType(final String foodTypeString) {
+        return FoodType.of(foodTypeString);
     }
 
 }
