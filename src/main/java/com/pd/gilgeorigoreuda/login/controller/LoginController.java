@@ -1,6 +1,6 @@
 package com.pd.gilgeorigoreuda.login.controller;
 
-import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.dto.request.LoginRequest;
 import com.pd.gilgeorigoreuda.login.dto.response.AccessTokenResponse;
 import com.pd.gilgeorigoreuda.login.service.LoginService;
@@ -20,53 +20,42 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class LoginController {
 
-    public static final int COOKIE_AGE_SECONDS = 604800;
-
     private final LoginService loginService;
 
     @PostMapping("/login/{provider}")
     public ResponseEntity<AccessTokenResponse> login(
             @PathVariable final String provider,
-            @RequestBody final LoginRequest loginRequest,
-            final HttpServletResponse response
+            @RequestBody final LoginRequest loginRequest
     ) {
-        MemberToken memberTokens = loginService.login(provider, loginRequest.getCode());
-
-        ResponseCookie cookie = ResponseCookie.from("refresh-token", memberTokens.getRefreshToken())
-                .maxAge(COOKIE_AGE_SECONDS)
-                .sameSite("None")
-                .secure(true)
-                .httpOnly(true)
-                .path("/")
-                .build();
-
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        MemberAccessRefreshToken memberAccessRefreshToken = loginService.login(provider, loginRequest.getCode());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(AccessTokenResponse.of(memberTokens.getAccessToken()));
+                .body(AccessTokenResponse.of(memberAccessRefreshToken.getAccessToken()));
     }
 
     @PostMapping("/token")
     public ResponseEntity<AccessTokenResponse> extendLogin(
-            @CookieValue("refresh-token") final String refreshToken,
             @RequestHeader("Authorization") final String authorizationHeader
     ) {
-        final String renewalRefreshToken = loginService.renewalAccessToken(refreshToken, authorizationHeader);
+        final String renewalAccessToken = loginService.renewalAccessToken(authorizationHeader);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(AccessTokenResponse.of(renewalRefreshToken));
+                .body(AccessTokenResponse.of(renewalAccessToken));
     }
 
     @DeleteMapping("/logout")
     // TODO: 권한 검증
     public ResponseEntity<Void> logout(
             // TODO: 로그인 유저 정보
-            @CookieValue("refresh-token") final String refreshToken
+            @RequestHeader("Authorization") final String authorizationHeader
     ) {
-        loginService.removeRefreshToken(refreshToken);
-        return ResponseEntity.noContent().build();
+        loginService.deleteMemberToken(authorizationHeader);
+
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 
 }

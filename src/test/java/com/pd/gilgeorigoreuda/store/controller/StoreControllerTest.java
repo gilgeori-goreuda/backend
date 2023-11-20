@@ -1,6 +1,6 @@
 package com.pd.gilgeorigoreuda.store.controller;
 
-import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.settings.ControllerTest;
 import com.pd.gilgeorigoreuda.store.dto.request.FoodCategoryRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
@@ -11,7 +11,6 @@ import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
 import com.pd.gilgeorigoreuda.store.service.StoreService;
 
 import jakarta.servlet.http.Cookie;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -40,7 +39,7 @@ import java.util.List;
 @AutoConfigureRestDocs
 class StoreControllerTest extends ControllerTest {
 
-    private static final MemberToken MEMBER_TOKEN = MemberToken.of("refreshToken", "accessToken");
+    private static final MemberAccessRefreshToken MEMBER_TOKEN = MemberAccessRefreshToken.of("refreshToken", "accessToken");
     private static final Cookie COOKIE = new Cookie("refresh-token", MEMBER_TOKEN.getRefreshToken());
 
 

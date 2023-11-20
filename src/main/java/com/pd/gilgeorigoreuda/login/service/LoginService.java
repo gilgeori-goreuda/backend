@@ -1,11 +1,11 @@
 package com.pd.gilgeorigoreuda.login.service;
 
 import com.pd.gilgeorigoreuda.login.domain.*;
-import com.pd.gilgeorigoreuda.login.exception.InvalidRefreshTokenException;
+import com.pd.gilgeorigoreuda.login.exception.InvalidAccessTokenException;
 import com.pd.gilgeorigoreuda.login.exception.RenewalAccessTokenFailException;
 import com.pd.gilgeorigoreuda.login.jwt.BearerTokenExtractor;
 import com.pd.gilgeorigoreuda.login.jwt.JwtProvider;
-import com.pd.gilgeorigoreuda.login.repository.RefreshTokenRepository;
+import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
 
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
@@ -21,14 +21,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class LoginService {
 
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final MemberTokenRepository memberTokenRepository;
     private final MemberRepository memberRepository;
     private final OauthProviders oauthProviders;
     private final JwtProvider jwtProvider;
     private final BearerTokenExtractor bearerExtractor;
 
-
-    public MemberToken login(final String providerName, final String code) {
+    public MemberAccessRefreshToken login(final String providerName, final String code) {
         OauthProvider provider = oauthProviders.mapping(providerName);
         OauthUserInfo userInfo = provider.getUserInfo(code);
 
@@ -42,15 +41,17 @@ public class LoginService {
                 userInfo.getProfileImageUrl()
         );
 
-        MemberToken memberToken = jwtProvider.generateLoginToken(member.getId().toString());
-        RefreshToken refreshToken = RefreshToken.builder()
-                .token(memberToken.getRefreshToken())
-                .memberId(member.getId())
-                .build();
+        MemberAccessRefreshToken memberAccessRefreshToken = jwtProvider.generateLoginToken(member.getId().toString());
 
-        refreshTokenRepository.save(refreshToken);
+        MemberToken memberToken = MemberToken.builder()
+                        .memberId(member.getId())
+                        .accessToken(memberAccessRefreshToken.getAccessToken())
+                        .refreshToken(memberAccessRefreshToken.getRefreshToken())
+                        .build();
 
-        return memberToken;
+        memberTokenRepository.save(memberToken);
+
+        return memberAccessRefreshToken;
     }
 
     private Member findMemberOrElseCreateMember(final String socialId, final String nickname, final String profileImageUrl) {
@@ -78,25 +79,37 @@ public class LoginService {
         );
     }
 
-    public String renewalAccessToken(final String refreshTokenRequest, final String authorizationHeader) {
-        String accessToken = bearerExtractor.extractAccessToken(authorizationHeader);
+    public String renewalAccessToken(final String authorizationHeader) {
+        MemberToken memberToken = getMemberTokenByAccessToken(authorizationHeader);
 
-        if (jwtProvider.isValidRefreshButInvalidAccessToken(refreshTokenRequest, accessToken)) {
-            RefreshToken refreshToken = refreshTokenRepository.findByToken(refreshTokenRequest)
-                    .orElseThrow(InvalidRefreshTokenException::new);
+        String accessToken = memberToken.getAccessToken();
+        String refreshToken = memberToken.getRefreshToken();
 
-            return jwtProvider.regenerateAccessToken(refreshToken.getMemberId().toString());
+        if (jwtProvider.isValidRefreshButInvalidAccessToken(refreshToken, accessToken)) {
+            return jwtProvider.regenerateAccessToken(memberToken.getMemberId().toString());
         }
 
-        if (jwtProvider.isValidRefreshAndValidAccessToken(refreshTokenRequest, accessToken)) {
-            return accessToken;
+        if (jwtProvider.isValidRefreshAndValidAccessToken(refreshToken, accessToken)) {
+            return memberToken.getAccessToken();
         }
 
         throw new RenewalAccessTokenFailException();
     }
 
-    public void removeRefreshToken(final String refreshToken) {
-        refreshTokenRepository.deleteById(refreshToken);
+    private MemberToken getMemberTokenByAccessToken(final String authorizationHeader) {
+        String extractedAccessToken = getExtractedAccessToken(authorizationHeader);
+
+        return memberTokenRepository.findByAccessToken(extractedAccessToken)
+                .orElseThrow(InvalidAccessTokenException::new);
+    }
+
+    private String getExtractedAccessToken(final String authorizationHeader) {
+        return bearerExtractor.extractAccessToken(authorizationHeader);
+    }
+
+    public void deleteMemberToken(final String authorizationHeader) {
+        String extractedAccessToken = getExtractedAccessToken(authorizationHeader);
+        memberTokenRepository.deleteByAccessToken(extractedAccessToken);
     }
 
 }

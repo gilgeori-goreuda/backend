@@ -1,6 +1,6 @@
 package com.pd.gilgeorigoreuda.login.jwt;
 
-import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodAccessTokenException;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodRefreshTokenException;
 import com.pd.gilgeorigoreuda.login.exception.InvalidAccessTokenException;
@@ -33,11 +33,11 @@ public class JwtProvider {
         this.refreshExpirationTime = refreshExpirationTime;
     }
 
-    public MemberToken generateLoginToken(final String subject) {
+    public MemberAccessRefreshToken generateLoginToken(final String subject) {
         String refreshToken = createToken(EMPTY_SUBJECT, refreshExpirationTime);
         String accessToken = createToken(subject, accessExpirationTime);
 
-        return MemberToken.of(refreshToken, accessToken);
+        return MemberAccessRefreshToken.of(refreshToken, accessToken);
     }
 
     private String createToken(final String subject, final Long expirationTime) {
@@ -53,9 +53,9 @@ public class JwtProvider {
                 .compact();
     }
 
-    public void validateTokens(final MemberToken memberToken) {
-        validateRefreshToken(memberToken.getRefreshToken());
-        validateAccessToken(memberToken.getAccessToken());
+    public void validateTokens(final MemberAccessRefreshToken memberAccessRefreshToken) {
+        validateRefreshToken(memberAccessRefreshToken.getRefreshToken());
+        validateAccessToken(memberAccessRefreshToken.getAccessToken());
     }
 
     private void validateRefreshToken(final String refreshToken) {

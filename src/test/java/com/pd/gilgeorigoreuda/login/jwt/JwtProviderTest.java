@@ -1,7 +1,6 @@
 package com.pd.gilgeorigoreuda.login.jwt;
 
-import com.pd.gilgeorigoreuda.common.exception.ExceptionType;
-import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodAccessTokenException;
 import com.pd.gilgeorigoreuda.login.exception.ExpiredPeriodRefreshTokenException;
 import com.pd.gilgeorigoreuda.login.exception.InvalidAccessTokenException;
@@ -38,7 +37,7 @@ class JwtProviderTest {
     @Autowired
     JwtProvider jwtProvider;
 
-    private MemberToken getMemberToken() {
+    private MemberAccessRefreshToken getMemberToken() {
         return jwtProvider.generateLoginToken(SUBJECT);
     }
 
@@ -62,21 +61,21 @@ class JwtProviderTest {
     @DisplayName("AccessToken과 RefreshToken 생성")
     void generateLoginToken() {
         // given
-        MemberToken memberTokens = getMemberToken();
+        MemberAccessRefreshToken memberAccessRefreshTokens = getMemberToken();
 
         // when, then
-        assertThat(jwtProvider.getSubject(memberTokens.getAccessToken())).isEqualTo(SUBJECT);
-        assertThat(jwtProvider.getSubject(memberTokens.getRefreshToken())).isNull();
+        assertThat(jwtProvider.getSubject(memberAccessRefreshTokens.getAccessToken())).isEqualTo(SUBJECT);
+        assertThat(jwtProvider.getSubject(memberAccessRefreshTokens.getRefreshToken())).isNull();
     }
 
     @DisplayName("AccessToken과 RefreshToken이 모두 유효한 토큰일 때 검증로직 성공")
     @Test
     void validateTokenSuccess() {
         // given
-        final MemberToken memberToken = getMemberToken();
+        final MemberAccessRefreshToken memberAccessRefreshToken = getMemberToken();
 
         // when & then
-        assertDoesNotThrow(() -> jwtProvider.validateTokens(memberToken));
+        assertDoesNotThrow(() -> jwtProvider.validateTokens(memberAccessRefreshToken));
     }
 
     @Test
@@ -85,10 +84,10 @@ class JwtProviderTest {
         // given
         String refreshToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(refreshToken, accessToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(ExpiredPeriodRefreshTokenException.class);
     }
 
@@ -98,10 +97,10 @@ class JwtProviderTest {
         // given
         String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, INVALID_SECRET_KEY);
         String accessToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(refreshToken, accessToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(InvalidRefreshTokenException.class);
     }
 
@@ -111,10 +110,10 @@ class JwtProviderTest {
         // given
         String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRED_TIME, SUBJECT, secretKey);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(refreshToken, accessToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(ExpiredPeriodAccessTokenException.class);
     }
 
@@ -124,10 +123,10 @@ class JwtProviderTest {
         // given
         String refreshToken = makeJwt(EXPIRATION_TIME, SUBJECT, secretKey);
         String accessToken = makeJwt(EXPIRATION_TIME, SUBJECT, INVALID_SECRET_KEY);
-        MemberToken memberToken = MemberToken.of(refreshToken, accessToken);
+        MemberAccessRefreshToken memberAccessRefreshToken = MemberAccessRefreshToken.of(refreshToken, accessToken);
 
         // when & then
-        assertThatThrownBy(() -> jwtProvider.validateTokens(memberToken))
+        assertThatThrownBy(() -> jwtProvider.validateTokens(memberAccessRefreshToken))
                 .isInstanceOf(InvalidAccessTokenException.class);
     }
 

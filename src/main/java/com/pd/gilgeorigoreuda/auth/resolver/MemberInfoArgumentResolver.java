@@ -3,10 +3,10 @@ package com.pd.gilgeorigoreuda.auth.resolver;
 import com.pd.gilgeorigoreuda.auth.MemberInfo;
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.auth.exception.RefreshTokenNotFoundException;
-import com.pd.gilgeorigoreuda.login.domain.MemberToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.jwt.BearerTokenExtractor;
 import com.pd.gilgeorigoreuda.login.jwt.JwtProvider;
-import com.pd.gilgeorigoreuda.login.repository.RefreshTokenRepository;
+import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +27,8 @@ public class MemberInfoArgumentResolver implements HandlerMethodArgumentResolver
     private static final String REFRESH_TOKEN = "refresh-token";
 
     private final JwtProvider jwtProvider;
-
     private final BearerTokenExtractor bearerTokenExtractor;
-
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final MemberTokenRepository memberTokenRepository;
 
     @Override
     public boolean supportsParameter(final MethodParameter parameter) {
@@ -50,7 +48,7 @@ public class MemberInfoArgumentResolver implements HandlerMethodArgumentResolver
         String refreshToken = extractRefreshToken(request.getCookies());
         String accessToken = bearerTokenExtractor.extractAccessToken(webRequest.getHeader(HttpHeaders.AUTHORIZATION));
 
-        jwtProvider.validateTokens(MemberToken.of(refreshToken, accessToken));
+        jwtProvider.validateTokens(MemberAccessRefreshToken.of(refreshToken, accessToken));
 
         Long memberId = Long.valueOf(jwtProvider.getSubject(accessToken));
 
@@ -71,7 +69,7 @@ public class MemberInfoArgumentResolver implements HandlerMethodArgumentResolver
 
     private boolean isValidRefreshToken(final Cookie cookie) {
         return REFRESH_TOKEN.equals(cookie.getName()) &&
-                refreshTokenRepository.existsById(cookie.getValue());
+                memberTokenRepository.existsById(cookie.getValue());
     }
 
 }
