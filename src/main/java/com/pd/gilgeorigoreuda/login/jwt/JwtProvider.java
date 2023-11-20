@@ -34,10 +34,10 @@ public class JwtProvider {
     }
 
     public MemberAccessRefreshToken generateLoginToken(final String subject) {
-        String refreshToken = createToken(EMPTY_SUBJECT, refreshExpirationTime);
         String accessToken = createToken(subject, accessExpirationTime);
+        String refreshToken = createToken(EMPTY_SUBJECT, refreshExpirationTime);
 
-        return MemberAccessRefreshToken.of(refreshToken, accessToken);
+        return MemberAccessRefreshToken.of(accessToken, refreshToken);
     }
 
     private String createToken(final String subject, final Long expirationTime) {
@@ -91,7 +91,7 @@ public class JwtProvider {
                 .parseClaimsJws(token);
     }
 
-    public boolean isValidRefreshButInvalidAccessToken(final String refreshToken, final String accessToken) {
+    public boolean isValidRefreshButInvalidAccessToken(final String accessToken, final String refreshToken) {
         validateRefreshToken(refreshToken);
 
         try {
@@ -103,7 +103,7 @@ public class JwtProvider {
         return false;
     }
 
-    public boolean isValidRefreshAndValidAccessToken(final String refreshToken, final String accessToken) {
+    public boolean isValidRefreshAndValidAccessToken(final String accessToken, final String refreshToken) {
         try {
             validateRefreshToken(refreshToken);
             validateAccessToken(accessToken);
