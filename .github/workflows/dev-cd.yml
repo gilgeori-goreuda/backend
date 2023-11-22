@@ -58,7 +58,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     if: ${{ needs.docker-build.result == 'success' }}
     needs: [ docker-build ]
     steps:
