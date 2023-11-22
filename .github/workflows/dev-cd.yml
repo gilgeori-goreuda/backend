@@ -73,14 +73,14 @@ jobs:
           key: ${{ secrets.DEV_SERVER_KEY }}
           port: ${{ secrets.DEV_SERVER_PORT }}
 
-        script: |
-          sudo docker pull sudongk/gilgeorigoreuda-dev:latest
-          sudo docker stop gilgeorigoreuda-dev || true
-          sudo docker container prune -f
-          
-          sudo docker run -d -p 8080:8080 \
-          -e "SPRING_PROFILE=dev" \
-          --name gilgeorigoreuda-dev \
-          sudongk/gilgeorigoreuda-dev:latest
-          
-          sudo docker image prune -a -f
+          script: |
+            sudo docker pull sudongk/gilgeorigoreuda-dev:latest
+            sudo docker stop gilgeorigoreuda-dev || true
+            sudo docker container prune -f
+            
+            sudo docker run -d -p 8080:8080 \
+            -e "SPRING_PROFILE=dev" \
+            --name gilgeorigoreuda-dev \
+            sudongk/gilgeorigoreuda-dev:latest
+            
+            sudo docker image prune -a -f
