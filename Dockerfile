@@ -2,7 +2,7 @@ FROM amazoncorretto:17-alpine-jdk
 
 ENV SPRING_PROFILE=${SPRING_PROFILE}
 
-ARG JAR_FILE=./backend/build/libs/gilgeori-goreuda-0.0.1-SNAPSHOT.jar
+ARG JAR_FILE=./build/libs/gilgeori-goreuda-0.0.1-SNAPSHOT.jar
 
 COPY ${JAR_FILE} app.jar
 
