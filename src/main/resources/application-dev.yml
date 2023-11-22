@@ -28,6 +28,9 @@ spring:
     jdbc:
       initialize-schema: embedded
 
+  main:
+    allow-bean-definition-overriding: true
+
 cloud:
   aws:
     credentials:
