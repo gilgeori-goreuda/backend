@@ -65,8 +65,15 @@ jobs:
     if: ${{ needs.docker-build.result == 'success' }}
     needs: [ docker-build ]
     steps:
-      - name: run docker
-        run: |
+      - name: Join EC2 dev server
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.DEV_SERVER_HOST }}
+          username: ${{ secrets.DEV_SERVER_USERNAME }}
+          key: ${{ secrets.DEV_SERVER_KEY }}
+          port: ${{ secrets.DEV_SERVER_PORT }}
+
+        script: |
           sudo docker pull sudongk/gilgeorigoreuda-dev:latest
           sudo docker stop gilgeorigoreuda-dev || true
           sudo docker container prune -f
