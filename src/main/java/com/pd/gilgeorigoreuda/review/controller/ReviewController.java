@@ -1,5 +1,8 @@
 package com.pd.gilgeorigoreuda.review.controller;
 
+import com.pd.gilgeorigoreuda.auth.MemberInfo;
+import com.pd.gilgeorigoreuda.auth.MemberOnly;
+import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewCommentCreateRequest;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewCreateRequest;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewUpdateRequest;
@@ -28,13 +31,14 @@ public class ReviewController {
 	private final ReviewService reviewService;
 	private final ReviewCommentService commentService;
 
-	@PostMapping(value = "/stores/{storeId}/members/{memberId}")
+	@MemberOnly
+	@PostMapping(value = "/stores/{storeId}")
 	public ResponseEntity<Void> createReview(
 			@PathVariable("storeId") final Long storeId,
-			@PathVariable("memberId") final Long memberId,
+			@MemberInfo final LoginMember loginMember,
 			@RequestBody @Valid final ReviewCreateRequest request
 	) {
-		ReviewCreateResponse response = reviewService.createReview(storeId, memberId, request);
+		ReviewCreateResponse response = reviewService.createReview(storeId, loginMember.getMemberId(), request);
 
 		return ResponseEntity
 				.created(URI.create("/api/v1/reviews/stores/" + storeId + "/reviews/" + response.getId()))
@@ -66,13 +70,14 @@ public class ReviewController {
 				.build();
 	}
 
-	@PostMapping("{reviewId}/members/{memberId}/comments")
+	@MemberOnly
+	@PostMapping("{reviewId}/comments")
 	public ResponseEntity<Void> saveComment(
 		@PathVariable("reviewId") final Long reviewId,
-		@PathVariable("memberId") final Long memberId,
+		@MemberInfo final LoginMember loginMember,
 		@RequestBody @Valid final ReviewCommentCreateRequest commentRequest
 	) {
-		commentService.saveComment(reviewId, memberId, commentRequest);
+		commentService.saveComment(reviewId, loginMember.getMemberId(), commentRequest);
 
 		return ResponseEntity
 				.ok()

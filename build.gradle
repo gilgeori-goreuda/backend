@@ -6,7 +6,7 @@ plugins {
     id 'jacoco'
 }
 
-group = 'com.pd'
+group = 'com.gilgeori-goreuda'
 version = '0.0.1-SNAPSHOT'
 
 java {

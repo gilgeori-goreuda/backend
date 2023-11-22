@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    master:
+      url: jdbc:mysql://52.79.138.134:3306/gilgeorigoreuda?characterEncoding=UTF-8
+      jdbc-url: jdbc:mysql://52.79.138.134:3306/gilgeorigoreuda?characterEncoding=UTF-8
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    slave:
+      url: jdbc:mysql://13.125.165.18:3306/gilgeorigoreuda?characterEncoding=UTF-8
+      jdbc-url: jdbc:mysql://13.125.165.18:3306/gilgeorigoreuda?characterEncoding=UTF-8
+      username: root
+      password: 1234
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  batch:
+    job:
+      enabled: false
+    jdbc:
+      initialize-schema: embedded
+
+cloud:
+  aws:
+    credentials:
+      accessKey: AKIAYEKHUA7HSDWVE5HD
+      secretKey: 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
+    region:
+      static: ap-northeast-2
+    stack:
+      auto: false
+    s3:
+      bucket: gilgeorigoreuda
+      folder: prod/
+
+oauth2:
+  provider:
+    kakao:
+      client-id: dd83fb5281e50c8508ffc20b8dc07799
+      redirect-url: http://localhost:3000/oauth2/callback/kakao
+      token-url: https://kauth.kakao.com/oauth/token
+      user-info-url: https://kapi.kakao.com/v2/user/me
+
+security:
+  jwt:
+    secret-key: gilgeorigoreudagilgeorigoreudagilgeorigoreudagilgeorigoreuda
+    access-expiration-time: 3600000 # 1시간
+    refresh-expiration-time: 86400000 # 24시간
+
