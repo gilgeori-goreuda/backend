@@ -39,7 +39,7 @@ cloud:
       auto: false
     s3:
       bucket: gilgeorigoreuda
-      folder: dev/
+      folder: prod/
 
 oauth2:
   provider:
