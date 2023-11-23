@@ -6,8 +6,6 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 
 import java.util.Map;
 
-
-
 @Slf4j
 public class RoutingDataSource extends AbstractRoutingDataSource {
 

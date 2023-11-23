@@ -31,4 +31,8 @@ public class MemberToken {
         this.refreshToken = refreshToken;
     }
 
+    public static MemberToken of(final Long memberId, final String accessToken, final String refreshToken) {
+        return new MemberToken(memberId, accessToken, refreshToken);
+    }
+
 }

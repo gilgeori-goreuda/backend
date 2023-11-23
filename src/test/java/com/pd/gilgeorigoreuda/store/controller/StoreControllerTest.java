@@ -1,6 +1,7 @@
 package com.pd.gilgeorigoreuda.store.controller;
 
 import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
+import com.pd.gilgeorigoreuda.login.domain.MemberToken;
 import com.pd.gilgeorigoreuda.settings.ControllerTest;
 import com.pd.gilgeorigoreuda.store.dto.request.FoodCategoryRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
@@ -10,7 +11,7 @@ import com.pd.gilgeorigoreuda.store.dto.response.StoreOwnerResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
 import com.pd.gilgeorigoreuda.store.service.StoreService;
 
-import jakarta.servlet.http.Cookie;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -35,23 +36,23 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 @AutoConfigureRestDocs
 class StoreControllerTest extends ControllerTest {
 
-    private static final MemberAccessRefreshToken MEMBER_TOKEN = MemberAccessRefreshToken.of("refreshToken", "accessToken");
-    private static final Cookie COOKIE = new Cookie("refresh-token", MEMBER_TOKEN.getRefreshToken());
-
+    private static final MemberAccessRefreshToken MEMBER_ACCESS_REFRESH_TOKEN = MemberAccessRefreshToken.of("refreshToken", "accessToken");
+    private static final MemberToken MEMBER_TOKEN = MemberToken.of(1L, "accessToken" ,"refreshToken");
 
     @MockBean
     private StoreService storeService;
 
-//    @BeforeEach
-//    void setUp() {
-//        given(refreshTokenRepository.existsById(any())).willReturn(true);
-//        doNothing().when(jwtProvider).validateTokens(any());
-//        given(jwtProvider.getSubject(any())).willReturn("1");
-//    }
+    @BeforeEach
+    void setUp() {
+        given(memberTokenRepository.findByAccessToken(any())).willReturn(Optional.of(MEMBER_TOKEN));
+        doNothing().when(jwtProvider).validateTokens(any());
+        given(jwtProvider.getSubject(any())).willReturn("1");
+    }
 
     private void makeStore() throws Exception {
         StoreCreateRequest storeCreateRequest = new StoreCreateRequest(
@@ -81,7 +82,7 @@ class StoreControllerTest extends ControllerTest {
                 get("/api/v1/stores/{storeId}", storeId)
                         .param("lat", lat)
                         .param("lng", lng)
-//                .header(AUTHORIZATION, MEMBER_TOKENS.getAccessToken())
+                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
         );
     }
@@ -89,7 +90,7 @@ class StoreControllerTest extends ControllerTest {
     private ResultActions performPostRequest(final StoreCreateRequest storeCreateRequest) throws Exception {
         return mockMvc.perform(
                 post("/api/v1/stores")
-//                .header(AUTHORIZATION, MEMBER_TOKENS.getAccessToken())
+                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(storeCreateRequest))
         );
@@ -98,7 +99,7 @@ class StoreControllerTest extends ControllerTest {
     private ResultActions performPutRequest(final StoreUpdateRequest storeUpdateRequest, final Long storeId) throws Exception {
         return mockMvc.perform(
                 put("/api/v1/stores/{storeId}", storeId)
-//                .header(AUTHORIZATION, MEMBER_TOKENS.getAccessToken())
+                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(storeUpdateRequest))
         );
@@ -107,7 +108,7 @@ class StoreControllerTest extends ControllerTest {
     private ResultActions performDeleteRequest(final Long storeId) throws Exception {
         return mockMvc.perform(
                 delete("/api/v1/stores/{storeId}", storeId)
-//                .header(AUTHORIZATION, MEMBER_TOKENS.getAccessToken())
+                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
         );
     }
