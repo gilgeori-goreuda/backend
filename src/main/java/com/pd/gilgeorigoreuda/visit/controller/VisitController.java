@@ -1,5 +1,8 @@
 package com.pd.gilgeorigoreuda.visit.controller;
 
+import com.pd.gilgeorigoreuda.auth.MemberInfo;
+import com.pd.gilgeorigoreuda.auth.MemberOnly;
+import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.visit.dto.request.VisitRequest;
 import com.pd.gilgeorigoreuda.visit.dto.request.VisitVerifyRequest;
 import com.pd.gilgeorigoreuda.visit.dto.response.VisitResponse;
@@ -16,28 +19,28 @@ public class VisitController {
 
     private final VisitService visitService;
 
-    // todo: 권한 확인
+    @MemberOnly
     @PostMapping("/stores/{storeId}")
     public ResponseEntity<VisitResponse> visit(
-            // todo: 유저 정보
             @PathVariable final Long storeId,
+            @MemberInfo final LoginMember loginMember,
             @RequestBody @Valid final VisitRequest visitRequest
     ) {
-        VisitResponse response = visitService.visit(1L, storeId, visitRequest);
+        VisitResponse response = visitService.visit(loginMember.getMemberId(), storeId, visitRequest);
 
         return ResponseEntity
                 .ok()
                 .body(response);
     }
 
-    // todo: 권한 확인
+    @MemberOnly
     @PostMapping("/verification/stores/{storeId}")
     public ResponseEntity<Void> verifyVisit(
-            // todo: 유저 정보
             @PathVariable final Long storeId,
+            @MemberInfo final LoginMember loginMember,
             @RequestBody @Valid final VisitVerifyRequest visitVerifyRequest
     ) {
-        visitService.verifyVisit(1L, storeId, visitVerifyRequest);
+        visitService.verifyVisit(loginMember.getMemberId(), storeId, visitVerifyRequest);
 
         return ResponseEntity
                 .ok()

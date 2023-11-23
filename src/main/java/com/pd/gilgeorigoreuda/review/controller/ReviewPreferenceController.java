@@ -1,5 +1,8 @@
 package com.pd.gilgeorigoreuda.review.controller;
 
+import com.pd.gilgeorigoreuda.auth.MemberInfo;
+import com.pd.gilgeorigoreuda.auth.MemberOnly;
+import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.review.service.ReviewPreferenceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +16,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/preferences")
 public class ReviewPreferenceController {
 
-    private static final Long TEST_USER_ID = 1L;
-
     private final ReviewPreferenceService reviewPreferenceService;
+
+    @MemberOnly
     @PostMapping("/reviews/{reviewId}/like")
-    public ResponseEntity<Void> addReviewLike(@PathVariable Long reviewId) {
-        reviewPreferenceService.addReviewLike(reviewId, TEST_USER_ID);
+    public ResponseEntity<Void> addReviewLike(
+            @PathVariable Long reviewId,
+            @MemberInfo final LoginMember loginMember) {
+        reviewPreferenceService.addReviewLike(reviewId, loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()
                 .build();
     }
 
+    @MemberOnly
     @PostMapping("/reviews/{reviewId}/hate")
-    public ResponseEntity<Void> addReviewHate(@PathVariable Long reviewId) {
-        reviewPreferenceService.addReviewHate(reviewId, TEST_USER_ID);
+    public ResponseEntity<Void> addReviewHate(
+            @PathVariable Long reviewId,
+            @MemberInfo final LoginMember loginMember) {
+        reviewPreferenceService.addReviewHate(reviewId, loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()
