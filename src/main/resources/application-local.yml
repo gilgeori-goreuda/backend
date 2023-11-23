@@ -8,11 +8,12 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
 
     replica:
-      jdbc-url: jdbc:mysql://13.125.165.18:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      url: jdbc:mysql://13.125.165.18:3306/gilgeorigoreuda?characterEncoding=UTF-8
+      jdbc-url: jdbc:mysql://13.125.235.14:3306/gilgeorigoreuda?characterEncoding=UTF-8
+      url: jdbc:mysql://13.125.235.14:3306/gilgeorigoreuda?characterEncoding=UTF-8
       username: root
       password: 1234
       driver-class-name: com.mysql.cj.jdbc.Driver
+
 
     flyway:
       enabled: true

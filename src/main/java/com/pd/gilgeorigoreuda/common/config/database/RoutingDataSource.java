@@ -25,7 +25,7 @@ public class RoutingDataSource extends AbstractRoutingDataSource {
             log.info("SLAVE");
             return DataSourceType.REPLICA;
         }
-
+            log.info("MASTER");
         return DataSourceType.SOURCE;
     }
 
