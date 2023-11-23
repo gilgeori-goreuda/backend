@@ -1,18 +1,9 @@
 spring:
   datasource:
-    master:
-      url: jdbc:mysql://52.79.138.134:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      jdbc-url: jdbc:mysql://52.79.138.134:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
-
-    slave:
-      url: jdbc:mysql://13.125.165.18:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      jdbc-url: jdbc:mysql://13.125.165.18:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://3.38.211.237:3306/gilgeorigoreuda?characterEncoding=UTF-8
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
