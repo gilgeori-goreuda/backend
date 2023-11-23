@@ -1,13 +1,16 @@
 package com.pd.gilgeorigoreuda.member.controller;
 
+import com.pd.gilgeorigoreuda.auth.MemberInfo;
+import com.pd.gilgeorigoreuda.auth.MemberOnly;
+import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.member.dto.response.MemberPreferenceStoreListResponse;
-import com.pd.gilgeorigoreuda.member.dto.response.MemberPreferenceStoreResponse;
 import com.pd.gilgeorigoreuda.member.dto.response.MemberReviewListResponse;
 import com.pd.gilgeorigoreuda.member.service.MemberService;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,22 +19,24 @@ public class MemberController {
 
     private final MemberService memberService;
 
-    @GetMapping("/{memberId}/reviews")
+    @MemberOnly
+    @GetMapping("/reviews")
     public ResponseEntity<MemberReviewListResponse> getMyReviews(
-            @PathVariable("memberId") final Long memberId
+            @MemberInfo final LoginMember loginMember
     ) {
-        MemberReviewListResponse response = memberService.getMyReviews(memberId);
+        MemberReviewListResponse response = memberService.getMyReviews(loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()
                 .body(response);
     }
 
-    @GetMapping("/{memberId}/preferences")
+    @MemberOnly
+    @GetMapping("/preferences")
     public ResponseEntity<MemberPreferenceStoreListResponse> getMyPreference(
-            @PathVariable("memberId") final Long memberId
+            @MemberInfo final LoginMember loginMember
     ) {
-        MemberPreferenceStoreListResponse response = memberService.getMyPreference(memberId);
+        MemberPreferenceStoreListResponse response = memberService.getMyPreference(loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()
