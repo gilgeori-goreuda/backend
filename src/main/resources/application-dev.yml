@@ -1,8 +1,8 @@
 spring:
   datasource:
-    url: jdbc:mysql://3.38.211.237:3306/gilgeorigoreuda?characterEncoding=UTF-8
+    url: jdbc:mysql://52.78.226.225:3306/gilgeorigoreuda?characterEncoding=UTF-8
     username: root
-    password: 1234
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
