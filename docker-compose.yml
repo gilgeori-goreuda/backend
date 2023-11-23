@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql
+    platform: linux/x86_64
+    container_name: dev-mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: gilgeorigoreuda
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
