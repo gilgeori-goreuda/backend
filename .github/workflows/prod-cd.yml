@@ -56,18 +56,15 @@ jobs:
           tags: sudongk/gilgeorigoreuda-prod:latest
           labels: ${{ steps.meta.outputs.labels }}
 
-  deploy:
+  deploy1:
     runs-on: ubuntu-latest
     if: ${{ needs.docker-build.result == 'success' }}
     needs: [ docker-build ]
-    strategy:
-      matrix:
-        host: [ ${{ secrets.PROD_SERVER_HOST_1 }}, ${{ secrets.PROD_SERVER_HOST_2 }}, ${{ secrets.PROD_SERVER_HOST_3 }} ]
     steps:
-      - name: Deploy to ${{ matrix.host }}
+      - name: Deploy to ${{ secrets.PROD_SERVER_HOST_1 }}
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ matrix.host }}
+          host: ${{ secrets.PROD_SERVER_HOST_1 }}
           username: ${{ secrets.PROD_SERVER_USERNAME }}
           key: ${{ secrets.PROD_SERVER_KEY }}
           port: ${{ secrets.PROD_SERVER_PORT }}
@@ -75,7 +72,89 @@ jobs:
 
           script: |
             sudo docker pull sudongk/gilgeorigoreuda-prod:latest
-            echo "디버깅 target host ${{ matrix.host }}"
+            echo "디버깅 target host ${{ secrets.PROD_SERVER_HOST_1 }}"
+            if sudo docker ps | grep ":8080"; then
+              export BEFORE_PORT=8080
+              export NEW_PORT=8081
+              export NEW_ACTUATOR_PORT=8089
+            else
+              export BEFORE_PORT=8081
+              export NEW_PORT=8080
+              export NEW_ACTUATOR_PORT=8088
+            fi
+            
+            echo "디버깅 before port $BEFORE_PORT"
+            echo "디버깅 new port $NEW_PORT"
+            echo "디버깅 new actuator $NEW_ACTUATOR_PORT"
+            
+            sudo docker run -d -p $NEW_PORT:8080 -p $NEW_ACTUATOR_PORT:8088 \
+            -e "SPRING_PROFILE=prod" \
+            --name gilgeorigoreuda-prod$NEW_PORT \
+            sudongk/gilgeorigoreuda-prod:latest
+            
+            sudo sh /home/ubuntu/bluegreen.sh \
+            $BEFORE_PORT \
+            $NEW_PORT \
+            $NEW_ACTUATOR_PORT
+
+  deploy2:
+    runs-on: ubuntu-latest
+    if: ${{ needs.docker-build.result == 'success' }}
+    needs: [ docker-build ]
+    steps:
+      - name: Deploy to ${{ secrets.PROD_SERVER_HOST_2 }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_SERVER_HOST_2 }}
+          username: ${{ secrets.PROD_SERVER_USERNAME }}
+          key: ${{ secrets.PROD_SERVER_KEY }}
+          port: ${{ secrets.PROD_SERVER_PORT }}
+          debug: true
+
+          script: |
+            sudo docker pull sudongk/gilgeorigoreuda-prod:latest
+            echo "디버깅 target host ${{ secrets.PROD_SERVER_HOST_2 }}"
+            if sudo docker ps | grep ":8080"; then
+              export BEFORE_PORT=8080
+              export NEW_PORT=8081
+              export NEW_ACTUATOR_PORT=8089
+            else
+              export BEFORE_PORT=8081
+              export NEW_PORT=8080
+              export NEW_ACTUATOR_PORT=8088
+            fi
+            
+            echo "디버깅 before port $BEFORE_PORT"
+            echo "디버깅 new port $NEW_PORT"
+            echo "디버깅 new actuator $NEW_ACTUATOR_PORT"
+            
+            sudo docker run -d -p $NEW_PORT:8080 -p $NEW_ACTUATOR_PORT:8088 \
+            -e "SPRING_PROFILE=prod" \
+            --name gilgeorigoreuda-prod$NEW_PORT \
+            sudongk/gilgeorigoreuda-prod:latest
+            
+            sudo sh /home/ubuntu/bluegreen.sh \
+            $BEFORE_PORT \
+            $NEW_PORT \
+            $NEW_ACTUATOR_PORT
+
+  deploy3:
+    runs-on: ubuntu-latest
+    if: ${{ needs.docker-build.result == 'success' }}
+    needs: [ docker-build ]
+    steps:
+      - name: Deploy to ${{ secrets.PROD_SERVER_HOST_3 }}
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PROD_SERVER_HOST_3 }}
+          username: ${{ secrets.PROD_SERVER_USERNAME }}
+          key: ${{ secrets.PROD_SERVER_KEY }}
+          port: ${{ secrets.PROD_SERVER_PORT }}
+          debug: true
+
+          script: |
+            sudo docker pull sudongk/gilgeorigoreuda-prod:latest
+            echo "디버깅 target host ${{ secrets.PROD_SERVER_HOST_3 }}"
             if sudo docker ps | grep ":8080"; then
               export BEFORE_PORT=8080
               export NEW_PORT=8081
