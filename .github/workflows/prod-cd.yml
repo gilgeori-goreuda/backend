@@ -92,6 +92,8 @@ jobs:
             --name gilgeorigoreuda-prod$NEW_PORT \
             sudongk/gilgeorigoreuda-prod:latest
             
+            sudo docker image prune -a -f
+            
             sudo sh /home/ubuntu/bluegreen.sh \
             $BEFORE_PORT \
             $NEW_PORT \
@@ -132,6 +134,8 @@ jobs:
             -e "SPRING_PROFILE=prod" \
             --name gilgeorigoreuda-prod$NEW_PORT \
             sudongk/gilgeorigoreuda-prod:latest
+            
+            sudo docker image prune -a -f
             
             sudo sh /home/ubuntu/bluegreen.sh \
             $BEFORE_PORT \

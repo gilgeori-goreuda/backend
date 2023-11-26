@@ -46,8 +46,11 @@ fi
 
 echo "nginx 설정 변경"
 export BACKEND_PORT=$NEW_PORT
-envsubst "${BACKEND_PORT}" < /home/ubuntu/nginx_config/default.template > /home/ubuntu/nginx_config/default.conf
-sudo docker cp /home/ubuntu/nginx_config/default.conf nginx:/etc/nginx/conf.d/
+echo $BACKEND_PORT
+echo pwd
+cd nginx_config
+envsubst "${BACKEND_PORT}" < default.template > default.conf
+sudo docker cp default.conf nginx:/etc/nginx/conf.d/
 sudo docker exec nginx nginx -s reload
 
 echo "기존 서버 종료"
