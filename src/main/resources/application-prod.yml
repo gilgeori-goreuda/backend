@@ -32,6 +32,9 @@ spring:
     jdbc:
       initialize-schema: never
 
+  main:
+    allow-bean-definition-overriding: true
+
 cloud:
   aws:
     credentials:
