@@ -38,10 +38,10 @@ do
   fi
 done
 
-if [ "$count" -eq 20 ]
-then
-	echo "새로운 서버 배포를 실패했습니다."
-	exit 1
+if [ $count -eq 20 ]
+  then
+    echo "새로운 서버 배포를 실패했습니다."
+    exit 1
 fi
 
 echo "nginx 설정 변경"
