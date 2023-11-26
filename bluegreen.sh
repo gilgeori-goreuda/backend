@@ -38,16 +38,16 @@ do
   fi
 done
 
-#if [ $count -eq 20 ]
-#  then
-#    echo "새로운 서버 배포를 실패했습니다."
-#    exit 1
-#fi
+if [ $count -eq 20 ]
+then
+  echo "새로운 서버 배포를 실패했습니다."
+  exit 1
+fi
 
 echo "nginx 설정 변경"
 export BACKEND_PORT=$NEW_PORT
-envsubst "${BACKEND_PORT}" < nginx_config/default.template > nginx_config/default.conf
-sudo docker cp nginx_config/default.conf nginx:/etc/nginx/conf.d/
+envsubst "${BACKEND_PORT}" < /home/ubuntu/nginx_config/default.template > /home/ubuntu/nginx_config/default.conf
+sudo docker cp /home/ubuntu/nginx_config/default.conf nginx:/etc/nginx/conf.d/
 sudo docker exec nginx nginx -s reload
 
 echo "기존 서버 종료"
