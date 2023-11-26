@@ -62,7 +62,10 @@ jobs:
     needs: [ docker-build ]
     strategy:
       matrix:
-        host: [ ${{ secrets.PROD_SERVER_HOST_1 }}, ${{ secrets.PROD_SERVER_HOST_2 }}, ${{ secrets.PROD_SERVER_HOST_3 }} ]
+        include:
+          - host: ${{ secrets.PROD_SERVER_HOST_1 }}
+          - host: ${{ secrets.PROD_SERVER_HOST_2 }}
+          - host: ${{ secrets.PROD_SERVER_HOST_3 }}
     steps:
       - name: Deploy to ${{ matrix.host }}
         uses: appleboy/ssh-action@master
