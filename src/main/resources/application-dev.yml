@@ -13,6 +13,10 @@ spring:
       hibernate:
         format_sql: true
 
+  flyway:
+    enabled: false
+    baseline-on-migrate: false
+
   batch:
     job:
       enabled: false
