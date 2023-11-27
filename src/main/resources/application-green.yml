@@ -20,6 +20,10 @@ spring:
   flyway:
     enabled: true
     baseline-on-migrate: true
+    baseline-version: 1
+    url: jdbc:mysql://52.79.138.134:3306/gilgeorigoreuda?characterEncoding=UTF-8
+    user: root
+    password: 1234
 
   jpa:
     hibernate:
