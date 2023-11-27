@@ -1,25 +1,9 @@
 spring:
   datasource:
-    source:
-      jdbc-url: jdbc:mysql://52.79.138.134:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      url: jdbc:mysql://52.79.138.134:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
-
-    replica:
-      jdbc-url: jdbc:mysql://13.125.235.14:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      url: jdbc:mysql://13.125.235.14:3306/gilgeorigoreuda?characterEncoding=UTF-8
-      username: root
-      password: 1234
-      driver-class-name: com.mysql.cj.jdbc.Driver
-
-
-    flyway:
-      enabled: true
-      baseline-on-migrate: true
-
-
+    url: jdbc:mysql://localhost:3306/gilgeorigoreuda?characterEncoding=UTF-8
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:

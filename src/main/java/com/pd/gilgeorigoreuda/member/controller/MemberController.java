@@ -3,10 +3,13 @@ package com.pd.gilgeorigoreuda.member.controller;
 import com.pd.gilgeorigoreuda.auth.MemberInfo;
 import com.pd.gilgeorigoreuda.auth.MemberOnly;
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
+import com.pd.gilgeorigoreuda.member.dto.response.MemberInfoResponse;
 import com.pd.gilgeorigoreuda.member.dto.response.MemberPreferenceStoreListResponse;
 import com.pd.gilgeorigoreuda.member.dto.response.MemberReviewListResponse;
 import com.pd.gilgeorigoreuda.member.service.MemberService;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MemberController {
 
     private final MemberService memberService;
-
+    
     @MemberOnly
     @GetMapping("/reviews")
     public ResponseEntity<MemberReviewListResponse> getMyReviews(
@@ -33,10 +36,22 @@ public class MemberController {
 
     @MemberOnly
     @GetMapping("/preferences")
-    public ResponseEntity<MemberPreferenceStoreListResponse> getMyPreference(
+    public ResponseEntity<MemberPreferenceStoreListResponse> getMyPreferredStores(
             @MemberInfo final LoginMember loginMember
     ) {
-        MemberPreferenceStoreListResponse response = memberService.getMyPreference(loginMember.getMemberId());
+        MemberPreferenceStoreListResponse response = memberService.getMyPreferredStores(loginMember.getMemberId());
+
+        return ResponseEntity
+                .ok()
+                .body(response);
+    }
+
+    @MemberOnly
+    @GetMapping
+    public ResponseEntity<MemberInfoResponse> getMemberInfoAndActiveInfo(
+            @MemberInfo final LoginMember loginMember
+    ) {
+        MemberInfoResponse response = memberService.getMemberInfoAndActiveInfo(loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()

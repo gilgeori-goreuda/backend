@@ -11,6 +11,6 @@ public enum MemberLevel {
 	INTERMEDIATE("길좀알"),
 	EXPERT("길잘알");
 
-	private final String name;
+	private final String level;
 
 }
