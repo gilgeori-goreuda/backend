@@ -16,7 +16,7 @@ import static com.pd.gilgeorigoreuda.common.config.database.DataSourceType.Key.R
 import static com.pd.gilgeorigoreuda.common.config.database.DataSourceType.Key.SOURCE_NAME;
 import static com.pd.gilgeorigoreuda.common.config.database.DataSourceType.Key.ROUTING_NAME;
 
-@Profile("prod")
+@Profile({"blue", "green"})
 @Configuration
 public class DataSourceConfiguration {
 
