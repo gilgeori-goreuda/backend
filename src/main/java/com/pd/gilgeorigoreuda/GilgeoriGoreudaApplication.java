@@ -9,7 +9,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class GilgeoriGoreudaApplication {
 
     public static void main(String[] args) {
+        SpringApplication application = new SpringApplication(GilgeoriGoreudaApplication.class);
+        application.setAllowBeanDefinitionOverriding(true);
         SpringApplication.run(GilgeoriGoreudaApplication.class, args);
     }
-
 }
