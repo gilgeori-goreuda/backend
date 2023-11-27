@@ -1,6 +1,7 @@
 package com.pd.gilgeorigoreuda.review.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
+import com.pd.gilgeorigoreuda.review.exception.NoAuthorityReviewException;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 
@@ -55,9 +56,9 @@ public class Review extends BaseTimeEntity {
 		this.reviewRating = reviewRating;
 	}
 
-	public void checkAuthor(final Long memberId) {
+	public void checkAuthority(final Long memberId) {
 		if (Objects.equals(this.member.getId(), memberId)) {
-			throw new RuntimeException("Mismatched Review");
+			throw new NoAuthorityReviewException();
 		}
 	}
 
