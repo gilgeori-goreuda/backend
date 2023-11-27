@@ -1,3 +1,0 @@
-[submodule "backend-secret"]
-	path = backend-secret
-	url = https://github.com/gilgeori-goreuda/backend-secret.git
