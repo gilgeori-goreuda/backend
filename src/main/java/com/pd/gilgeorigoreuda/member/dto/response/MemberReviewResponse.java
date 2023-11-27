@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.member.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pd.gilgeorigoreuda.review.domain.entity.Review;
 import com.pd.gilgeorigoreuda.review.domain.entity.ReviewImage;
 import lombok.Getter;
@@ -17,7 +18,10 @@ public class MemberReviewResponse {
     private Integer reviewRating;
     private Integer likeCount;
     private Integer hateCount;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;
+
     private List<String> imageUrl;
 
     private MemberReviewStoreResponse storeInfo;
