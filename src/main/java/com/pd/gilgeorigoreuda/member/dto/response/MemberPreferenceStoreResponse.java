@@ -14,7 +14,7 @@ public class MemberPreferenceStoreResponse {
 
     private Long preferenceId;
 
-    @JsonFormat(pattern = "yyyy-MM-dd@HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createdAt;
 
     private PreferredStoreInfoResponse preferredStoreInfo;
