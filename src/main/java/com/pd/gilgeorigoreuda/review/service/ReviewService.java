@@ -7,9 +7,14 @@ import com.pd.gilgeorigoreuda.review.dto.request.ReviewCreateRequest;
 import com.pd.gilgeorigoreuda.review.dto.request.ReviewUpdateRequest;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewCreateResponse;
 import com.pd.gilgeorigoreuda.review.dto.response.ReviewListResponse;
-import com.pd.gilgeorigoreuda.review.repository.ReviewImageRepository;
+import com.pd.gilgeorigoreuda.review.exception.NoSuchReviewException;
 import com.pd.gilgeorigoreuda.review.repository.ReviewRepository;
+
+import com.pd.gilgeorigoreuda.store.domain.entity.StoreVisitRecord;
+import com.pd.gilgeorigoreuda.visit.exception.NoSuchStoreVisitRecordException;
+import com.pd.gilgeorigoreuda.visit.repository.StoreVisitRecordRepository;
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,11 +30,14 @@ import java.util.List;
 public class ReviewService {
 
     private final ReviewRepository reviewRepository;
-    private final ReviewImageRepository reviewImageRepository;
     private final ImageService imageService;
+    private final StoreVisitRecordRepository storeVisitRecordRepository;
 
     @Transactional
     public ReviewCreateResponse createReview(final Long storeId, final Long memberId, final ReviewCreateRequest reviewCreateRequest) {
+        StoreVisitRecord storeVisitRecord = getStoreVisitRecord(storeId, memberId);
+        storeVisitRecord.isVerifiedVisitRecord();
+
         Review review = reviewCreateRequest.toEntity(memberId, storeId);
 
         List<ReviewImage> reviewImages = makeImages(reviewCreateRequest);
@@ -44,7 +52,7 @@ public class ReviewService {
     public void updateReview(final Long reviewId, final Long memberId, final ReviewUpdateRequest reviewUpdateRequest) {
         Review review = getReviewWithReviewImages(reviewId);
 
-        review.checkAuthor(memberId);
+        review.checkAuthority(memberId);
 
         List<ReviewImage> reviewImages = makeUpdatedImages(reviewUpdateRequest, review);
 
@@ -58,7 +66,7 @@ public class ReviewService {
     public void deleteReview(final Long reviewId, final Long memberId) {
         Review review = getReview(reviewId);
 
-        review.checkAuthor(memberId);
+        review.checkAuthority(memberId);
 
         reviewRepository.deleteById(reviewId);
     }
@@ -78,6 +86,7 @@ public class ReviewService {
                 .toList();
 
         deleteNotUsedOriginalImages(originalImages, updatedImages);
+
         return updatedImages;
     }
 
@@ -112,12 +121,17 @@ public class ReviewService {
 
     private Review getReview(final Long reviewId) {
         return reviewRepository.findById(reviewId)
-                .orElseThrow(() -> new RuntimeException("Review not found"));
+                .orElseThrow(NoSuchReviewException::new);
     }
 
     private Review getReviewWithReviewImages(final Long reviewId) {
         return reviewRepository.findReviewWithReviewImages(reviewId)
-                .orElseThrow();
+                .orElseThrow(NoSuchReviewException::new);
+    }
+
+    private StoreVisitRecord getStoreVisitRecord(Long storeId, Long memberId) {
+        return storeVisitRecordRepository.findByMemberIdAndStoreId(memberId, storeId)
+                .orElseThrow(NoSuchStoreVisitRecordException::new);
     }
 
 }

@@ -2,6 +2,7 @@ package com.pd.gilgeorigoreuda.store.domain.entity;
 
 import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+import com.pd.gilgeorigoreuda.visit.exception.NotVerifiedVisitRecordException;
 import com.pd.gilgeorigoreuda.visit.exception.TimeOutException;
 
 import jakarta.persistence.Column;
@@ -71,6 +72,12 @@ public class StoreVisitRecord extends BaseTimeEntity {
 
 	public void verifyVisit() {
 		this.isVisited = true;
+	}
+
+	public void isVerifiedVisitRecord() {
+		if (!this.isVisited) {
+			throw new NotVerifiedVisitRecordException();
+		}
 	}
 
 }
