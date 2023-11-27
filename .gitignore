@@ -47,15 +47,3 @@ logs/
 
 ## application-local.yml ##
 src/main/resources/application-local.yml
-
-## application-blue.yml ##
-src/main/resources/application-blue.yml
-
-## application-dev.yml ##
-src/main/resources/application-dev.yml
-
-## application-green.yml ##
-src/main/resources/application-green.yml
-
-## application-prod.yml ##
-src/main/resources/application-prod.yml
