@@ -175,6 +175,7 @@ jobs:
             
             sudo docker run -d -p $NEW_PORT:8080 -p $NEW_ACTUATOR_PORT:8088 \
             -e "SPRING_PROFILE=prod" \
+            --network=mynetwork \
             --name gilgeorigoreuda-prod$NEW_PORT \
             sudongk/gilgeorigoreuda-prod:latest
             
