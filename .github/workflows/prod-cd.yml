@@ -135,6 +135,7 @@ jobs:
             echo "디버깅 before port $BEFORE_PORT"
             echo "디버깅 new port $NEW_PORT"
             echo "디버깅 new actuator $NEW_ACTUATOR_PORT"
+            echo "디버깅 SPRING_PROFILE $SPRING_PROFILE"
             
             sudo docker run -d -p $NEW_PORT:$NEW_PORT -p $NEW_ACTUATOR_PORT:8088 \
             -e SPRING_PROFILE=$SPRING_PROFILE \
@@ -181,6 +182,7 @@ jobs:
             echo "디버깅 before port $BEFORE_PORT"
             echo "디버깅 new port $NEW_PORT"
             echo "디버깅 new actuator $NEW_ACTUATOR_PORT"
+            echo "디버깅 SPRING_PROFILE $SPRING_PROFILE"
             
             sudo docker run -d -p $NEW_PORT:$NEW_PORT -p $NEW_ACTUATOR_PORT:8088 \
             -e SPRING_PROFILE=$SPRING_PROFILE \
