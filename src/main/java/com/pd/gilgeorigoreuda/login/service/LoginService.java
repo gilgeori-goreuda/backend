@@ -8,6 +8,8 @@ import com.pd.gilgeorigoreuda.login.jwt.JwtProvider;
 import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
 
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+import com.pd.gilgeorigoreuda.member.domain.entity.MemberActiveInfo;
+import com.pd.gilgeorigoreuda.member.repository.MemberActiveInfoRepository;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -23,6 +25,7 @@ public class LoginService {
 
     private final MemberTokenRepository memberTokenRepository;
     private final MemberRepository memberRepository;
+    private final MemberActiveInfoRepository memberActiveInfoRepository;
     private final OauthProviders oauthProviders;
     private final JwtProvider jwtProvider;
     private final BearerTokenExtractor bearerExtractor;
@@ -40,6 +43,8 @@ public class LoginService {
                 userInfo.getNickname(),
                 userInfo.getProfileImageUrl()
         );
+
+        findMemberActiveInfoOrElseCreateMemberActiveInfo(member);
 
         MemberAccessRefreshToken memberAccessRefreshToken = jwtProvider.generateLoginToken(member.getId().toString());
 
@@ -75,6 +80,19 @@ public class LoginService {
                         .nickname(nickname + "/" + socialId)
                         .profileImageUrl(profileImageUrl)
                         .socialId(socialId)
+                        .build()
+        );
+    }
+
+    private void findMemberActiveInfoOrElseCreateMemberActiveInfo(final Member member) {
+        memberActiveInfoRepository.findByMemberId(member.getId())
+                .orElseGet(() -> createMemberActiveInfo(member));
+    }
+
+    private MemberActiveInfo createMemberActiveInfo(final Member member) {
+        return memberActiveInfoRepository.save(
+                MemberActiveInfo.builder()
+                        .member(member)
                         .build()
         );
     }

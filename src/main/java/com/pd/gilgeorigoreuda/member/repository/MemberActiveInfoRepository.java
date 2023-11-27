@@ -6,6 +6,8 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Optional;
+
 public interface MemberActiveInfoRepository extends JpaRepository<MemberActiveInfo, Long> {
 
     @Modifying(clearAutomatically = true)
@@ -41,4 +43,7 @@ public interface MemberActiveInfoRepository extends JpaRepository<MemberActiveIn
             "WHEN exp >= 21 THEN 'EXPERT' " +
             "end;", nativeQuery = true)
     void updateMemberLevel();
+
+    @Query("select mai from MemberActiveInfo mai where mai.member.id = :id")
+    Optional<MemberActiveInfo> findByMemberId(final Long id);
 }
