@@ -12,13 +12,11 @@ spring:
     properties:
       hibernate:
         format_sql: true
-
   batch:
     job:
       enabled: false
     jdbc:
       initialize-schema: embedded
-
 cloud:
   aws:
     credentials:
@@ -31,7 +29,6 @@ cloud:
     s3:
       bucket: gilgeorigoreuda
       folder: dev/
-
 oauth2:
   provider:
     kakao:
@@ -39,10 +36,8 @@ oauth2:
       redirect-url: http://localhost:3000/oauth2/callback/kakao
       token-url: https://kauth.kakao.com/oauth/token
       user-info-url: https://kapi.kakao.com/v2/user/me
-
 security:
   jwt:
     secret-key: gilgeorigoreudagilgeorigoreudagilgeorigoreudagilgeorigoreuda
     access-expiration-time: 3600000 # 1시간
     refresh-expiration-time: 86400000 # 24시간
-
