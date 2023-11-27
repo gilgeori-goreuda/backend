@@ -36,4 +36,7 @@ public class Member extends BaseTimeEntity {
 	@Column(name = "social_id", length = 30, nullable = false)
 	private String socialId;
 
+	@OneToOne(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+	private MemberActiveInfo memberActiveInfo;
+
 }
