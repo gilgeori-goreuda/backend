@@ -52,3 +52,12 @@ security:
     secret-key: gilgeorigoreudagilgeorigoreudagilgeorigoreudagilgeorigoreuda
     access-expiration-time: 3600000 # 1시간
     refresh-expiration-time: 86400000 # 24시간
+
+management:
+  endpoint:
+    health:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
