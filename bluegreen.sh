@@ -27,7 +27,7 @@ for count in {0..20}
 do
   echo "서버 상태 확인(${count}/20)";
 
-  UP=$(curl -s http://127.0.0.1:"${NEW_ACTUATOR_PORT}"/actuator/health-check)
+  UP=$(curl -s http://127.0.0.1:"${NEW_ACTUATOR_PORT}"/actuator/health)
 
   if [ "${UP}" != '{"status":"up"}' ]
   	then

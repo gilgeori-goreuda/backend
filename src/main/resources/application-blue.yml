@@ -70,6 +70,8 @@ security:
     refresh-expiration-time: 86400000 # 24시간
 
 management:
+  server:
+    port: 8089
   endpoint:
     health:
       enabled: true
