@@ -34,7 +34,7 @@ public enum ExceptionType {
 	TIME_OUT_EXCEPTION("V003", "인증 시간이 초과되었습니다. 2시간이 지난 방문 기록입니다.", TimeOutException.class),
 	TOO_LONG_DISTANCE_EXCEPTION("V004", "방문하기에 너무 먼 거리에 있습니다. 근처에 가서 다시 시도해주세요.", TooLongDistanceException.class),
 	NOT_VERIFIED_VISIT_RECORD_EXCEPTION("V005", "인증되지 않은 방문 기록입니다.", NotVerifiedVisitRecordException.class),
-
+	DUPLICATED_VISIT_RECORD_EXCEPTION("V006", "이미 인증된 방문 기록입니다.", DuplicatedVisitRecordException.class),
 
 	ALREADY_REPORTER_MEMBER_EXCEPTION("R001", "이미 신고한 가게입니다.", AlreadyReporterMemberException.class),
 	NO_SUCH_REPORT_EXCEPTION("R002", "존재하지 않는 신고입니다.", NoSuchReportException.class),
