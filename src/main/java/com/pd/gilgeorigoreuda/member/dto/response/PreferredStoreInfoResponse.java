@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodCategory;
 import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
-import com.pd.gilgeorigoreuda.store.domain.entity.StoreType;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

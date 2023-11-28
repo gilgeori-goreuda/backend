@@ -26,12 +26,14 @@ public class DataSourceConfiguration {
     public DataSource sourceDataSource() {
         return DataSourceBuilder.create().build();
     }
+
     @Bean
     @Qualifier(REPLICA_NAME)
     @ConfigurationProperties(prefix = "spring.datasource.replica")
     public DataSource replicaDataSource() {
         return DataSourceBuilder.create().build();
     }
+
     @Bean
     @Qualifier(ROUTING_NAME)
     public DataSource routingDataSource(
@@ -43,6 +45,7 @@ public class DataSourceConfiguration {
                 DataSourceType.REPLICA, replicaDataSource
         ));
     }
+
     @Bean
     @Primary
     public DataSource dataSource(

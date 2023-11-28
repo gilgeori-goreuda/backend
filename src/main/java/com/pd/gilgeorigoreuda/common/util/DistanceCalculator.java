@@ -7,8 +7,12 @@ public class DistanceCalculator {
     private static final int EARTH_RADIUS = 6371000;
     public static final double WALKING_SPEED = 5000.0 / 3600.0;;
 
-    public static int calculateDistance(final BigDecimal memberLat, final BigDecimal memberLng,
-                                           final BigDecimal storeLat, final BigDecimal storeLng) {
+    public static int calculateDistance(
+            final BigDecimal memberLat,
+            final BigDecimal memberLng,
+            final BigDecimal storeLat,
+            final BigDecimal storeLng
+    ) {
         double lat1 = Math.toRadians(memberLat.doubleValue());
         double lng1 = Math.toRadians(memberLng.doubleValue());
         double lat2 = Math.toRadians(storeLat.doubleValue());
