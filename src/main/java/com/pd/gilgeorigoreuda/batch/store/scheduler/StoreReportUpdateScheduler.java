@@ -22,7 +22,7 @@ public class StoreReportUpdateScheduler {
     private final JobLauncher jobLauncher;
     private final JobRegistry jobRegistry;
 
-    @Scheduled(cron = "0 0/30 * * * *")
+    @Scheduled(cron = "0 0/1 * * * *")
     public void updateStoreReport() {
         String time = LocalDateTime.now().toString();
 
