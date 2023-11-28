@@ -63,7 +63,7 @@ public class Store extends BaseTimeEntity {
 	@Builder.Default
 	private Double averageRating = 0.0;
 
-	@Column(name = "business_date", nullable = false, length = 20)
+	@Column(name = "business_date", nullable = false, length = 100)
 	private String businessDate;
 
 	@Column(name = "open_time", length = 10)
