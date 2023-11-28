@@ -11,7 +11,7 @@ public class MemberLevelScheduler {
 
     private final MemberLevelJob memberLevelJob;
 
-    @Scheduled(cron ="0 0/1 * * * ?")
+    @Scheduled(cron ="0/30 * * * * ?")
     public void runMemberLevelJob() {
         memberLevelJob.updateMemberLeverJob();
     }
