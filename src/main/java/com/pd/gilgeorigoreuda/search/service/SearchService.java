@@ -29,8 +29,6 @@ public class SearchService {
             final BigDecimal referenceLng,
             final FoodType foodType
     ) {
-//        FoodType foodType = getFoodType(foodType);
-
         List<SearchStoreResponse> searchStoreResponse = searchRepository
                 .findStoresByLatLngAndFoodTypes(referenceLat, referenceLng, foodType, DISTANCE_1KM)
                 .stream()
@@ -59,10 +57,6 @@ public class SearchService {
             final BigDecimal targetStoreLng
     ) {
         return DistanceCalculator.calculateDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
-    }
-
-    private FoodType getFoodType(final String foodTypeString) {
-        return FoodType.of(foodTypeString);
     }
 
 }
