@@ -21,9 +21,8 @@ public class KeywordSchedule {
     private final KeywordRepository keywordRepository;
     private final HotPlaceRepository hotPlaceRepository;
 
-    @Scheduled(fixedDelay = 3600000)
+    @Scheduled(fixedDelay = 60000)
     public void schedule() {
-
         Long rank = 1L;
 
         LocalDateTime startDayTime = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0).withNano(0);
@@ -46,6 +45,5 @@ public class KeywordSchedule {
         }
 
         hotPlaceRepository.saveAll(hotPlaces);
-
     }
 }
