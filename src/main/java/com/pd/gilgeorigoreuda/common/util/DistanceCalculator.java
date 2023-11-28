@@ -5,7 +5,8 @@ import java.math.BigDecimal;
 public class DistanceCalculator {
 
     private static final int EARTH_RADIUS = 6371000;
-    public static final double WALKING_SPEED = 5000.0 / 3600.0;;
+    public static final double WALKING_SPEED = 5000.0 / 3600.0;
+    public static final int ONE_HOUR = 3600;
 
     public static int calculateDistance(
             final BigDecimal memberLat,
@@ -33,7 +34,7 @@ public class DistanceCalculator {
     public static int calculateApproximateWalkingTime(final int distance) {
         double walkingTimeSeconds = (double) distance / WALKING_SPEED;
 
-        return (int) Math.ceil(walkingTimeSeconds / 60);
+        return (int) Math.ceil(walkingTimeSeconds / ONE_HOUR);
     }
 
 }
