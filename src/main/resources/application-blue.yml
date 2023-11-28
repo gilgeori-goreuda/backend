@@ -28,10 +28,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
+    show-sql: false
 
   batch:
     job:
