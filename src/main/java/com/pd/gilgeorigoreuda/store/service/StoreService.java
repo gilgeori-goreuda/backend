@@ -39,7 +39,7 @@ public class StoreService {
 
 	private static final Integer BOUNDARY = 10;
 
-	@Transactional(readOnly = false)
+	@Transactional
 	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest storeCreateRequest) {
 		StreetAddress streetAddress = StreetAddress.of(storeCreateRequest.getStreetAddress());
 
@@ -108,6 +108,14 @@ public class StoreService {
 		deleteImage(storeForDelete);
 	}
 
+	public StoreResponse getStore(final Long storeId, final BigDecimal memberLat, final BigDecimal memberLng) {
+		Store store = findStoreWithMemberAndCategories(storeId);
+
+		int distanceFromMember = getDistanceBetweenStoreAndMember(memberLat, memberLng, store.getLat(), store.getLng());
+
+		return StoreResponse.of(store, distanceFromMember);
+	}
+
 	private void deleteOriginalImage(final StoreUpdateRequest storeUpdateRequest, final Store storeForUpdate) {
 		if (!storeForUpdate.isSameImage(storeUpdateRequest.getImageUrl())) {
 			imageService.deleteSingleImage(storeForUpdate.getImageUrl());
@@ -116,15 +124,6 @@ public class StoreService {
 
 	private void deleteImage(final Store store) {
 		imageService.deleteSingleImage(store.getImageUrl());
-	}
-
-	@Transactional(readOnly = true)
-	public StoreResponse getStore(final Long storeId, final BigDecimal memberlat, final BigDecimal memberlng) {
-		Store store = findStoreWithMemberAndCategories(storeId);
-
-		int distanceFromMember = getDistanceBetweenStoreAndMember(memberlat, memberlng, store.getLat(), store.getLng());
-
-		return StoreResponse.of(store, distanceFromMember);
 	}
 
 	private void checkIsAlreadyExistInBoundary(final BigDecimal lat, final BigDecimal lng, final String largeAddress, final String mediumAddress) {
