@@ -71,9 +71,7 @@ class StoreServiceTest extends ServiceTest {
     void saveStore() {
         // given
 
-
         // when
-
 
         // then
     }
