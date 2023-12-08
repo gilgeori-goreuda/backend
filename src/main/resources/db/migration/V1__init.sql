@@ -1,3 +1,5 @@
+drop table if exists flyway_schema_history;
+
 create table flyway_schema_history
 (
     installed_rank int                                 not null
@@ -12,8 +14,10 @@ create table flyway_schema_history
     execution_time int                                 not null,
     success        tinyint(1)                          not null
 );
+
 create index flyway_schema_history_s_idx
     on flyway_schema_history (success);
+
 create table hot_places
 (
     id          bigint       not null
@@ -22,6 +26,7 @@ create table hot_places
     modified_at datetime(6)  not null,
     place       varchar(100) not null
 );
+
 create table keywords
 (
     id          bigint auto_increment
@@ -30,6 +35,7 @@ create table keywords
     modified_at datetime(6)  not null,
     keyword     varchar(100) not null
 );
+
 create table member_tokens
 (
     member_id     bigint       not null
@@ -37,6 +43,7 @@ create table member_tokens
     access_token  varchar(255) not null,
     refresh_token varchar(255) not null
 );
+
 create table members
 (
     id                bigint auto_increment
@@ -53,6 +60,7 @@ create table members
     constraint idx_member_social_id
         unique (social_id)
 );
+
 create table member_active_info
 (
     id                     bigint auto_increment
@@ -65,6 +73,7 @@ create table member_active_info
     constraint fk_member_active_info_member_id
         foreign key (member_id) references members (id)
 );
+
 create table stores
 (
     id                            bigint auto_increment
@@ -93,6 +102,7 @@ create table stores
     constraint fk_stores_member_id
         foreign key (member_id) references members (id)
 );
+
 create table food_categories
 (
     id        bigint auto_increment
@@ -102,6 +112,7 @@ create table food_categories
     constraint fk_food_categories_store_id
         foreign key (store_id) references stores (id)
 );
+
 create table reviews
 (
     id            bigint auto_increment
@@ -119,6 +130,7 @@ create table reviews
     constraint fk_review_store_id
         foreign key (store_id) references stores (id)
 );
+
 create table review_comments
 (
     id          bigint auto_increment
@@ -133,6 +145,7 @@ create table review_comments
     constraint fk_review_comment_review_id
         foreign key (review_id) references reviews (id)
 );
+
 create table review_images
 (
     id          bigint auto_increment
@@ -144,6 +157,7 @@ create table review_images
     constraint fk_review_image_review_id
         foreign key (review_id) references reviews (id)
 );
+
 create table review_preferences
 (
     id              bigint auto_increment
@@ -158,6 +172,7 @@ create table review_preferences
     constraint fk_review_preferences_review_id
         foreign key (review_id) references reviews (id)
 );
+
 create table store_preferences
 (
     id              bigint auto_increment
@@ -172,6 +187,7 @@ create table store_preferences
     constraint fk_store_preferences_store_id
         foreign key (store_id) references stores (id)
 );
+
 create table store_report_histories
 (
     id          bigint auto_increment
@@ -186,6 +202,7 @@ create table store_report_histories
     constraint fk_store_report_histories_store_id
         foreign key (store_id) references stores (id)
 );
+
 create table store_visit_records
 (
     id               bigint auto_increment
@@ -201,6 +218,7 @@ create table store_visit_records
     constraint fk_store_visit_records_store_id
         foreign key (store_id) references stores (id)
 );
+
 create index idx_store_large_medium_address_lat_lng
     on stores (large_address, medium_address, lat, lng);
 
