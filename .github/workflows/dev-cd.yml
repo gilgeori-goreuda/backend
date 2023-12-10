@@ -51,7 +51,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/gilgeorigoreuda-dev:latest
+          images: sudongk/gilgeorigoreuda-dev:latest
 
       - name: Build and push Docker image
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
@@ -59,7 +59,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/gilgeorigoreuda-dev:latest
+          tags: sudongk/gilgeorigoreuda-dev:latest
           labels: ${{ steps.meta.outputs.labels }}
 
   deploy:
@@ -81,7 +81,7 @@ jobs:
 
           script: |
             sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            export DOCKER_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export DOCKER_USERNAME=sudongk
             sudo chmod +x deploy.sh
             sudo ./deploy-dev.sh
             sudo docker image prune -a -f
