@@ -43,7 +43,7 @@ sleep 10
 EXIST=$(sudo docker compose -p compose-dev -f compose-dev.yml ps | grep Up)
 if [ -n "$EXIST" ]; then
   echo "deploy success"
-  rm -f /home/ubuntu/tmp/deploy.lock
+  rm -f /home/ubuntu/tmp/deploy-dev.lock
 else
   echo "deploy fail"
   rm -f /home/ubuntu/tmp/deploy-dev.lock
