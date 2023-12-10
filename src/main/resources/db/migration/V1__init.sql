@@ -1,3 +1,5 @@
+create database if not exists gilgeorigoreuda;
+
 drop table if exists flyway_schema_history;
 
 create table flyway_schema_history
