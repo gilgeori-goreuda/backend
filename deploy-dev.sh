@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # deploy.sh가 실행 중인지 확인
-if [ -e /tmp/deploy-dev.lock ]; then
+if [ -e /home/ubuntu/tmp/deploy-dev.lock ]; then
     echo "Deployment is in progress"
     exit 1
 fi
 
 # deploy.sh가 실행 중이지 않다면 lock 파일 생성
-touch /tmp/deploy-dev.lock
+touch /home/ubuntu/tmp/deploy-dev.lock
 
 # 이전 컨테이너 종료
 sudo docker compose -p compose-dev -f compose-dev.yml down
@@ -43,9 +43,9 @@ sleep 10
 EXIST=$(sudo docker compose -p compose-dev -f compose-dev.yml ps | grep Up)
 if [ -n "$EXIST" ]; then
   echo "deploy success"
-  rm -f /tmp/deploy.lock
+  rm -f /home/ubuntu/tmp/deploy.lock
 else
   echo "deploy fail"
-  rm -f /tmp/deploy-dev.lock
+  rm -f /home/ubuntu/tmp/deploy-dev.lock
   exit 1
 fi

@@ -16,6 +16,7 @@ services:
       - backend-dev
 
   backend-dev:
+    container_name: backend-dev
     image: sudongk/gilgeorigoreuda-dev:latest
     volumes:
       - /home/ubuntu/logs/:/logs/
