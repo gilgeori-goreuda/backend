@@ -1,0 +1,31 @@
+version: "3"
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    volumes:
+      - ./conf-dev/:/etc/nginx/conf.d/
+      - /home/ubuntu/nginx-logs/:/var/log/nginx/
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - gilgeorigoreuda-network
+    depends_on:
+      - backend-dev
+
+  backend-dev:
+    image: ${DOCKER_USERNAME}/gilgeorigoreuda-dev:latest
+    volumes:
+      - /home/ubuntu/logs/:/logs/
+    ports:
+        - 8080:8080
+    environment:
+      SPRING_PROFILE: dev
+    networks:
+      - gilgeorigoreuda-network
+
+networks:
+  gilgeorigoreuda-network:
+    external: true
