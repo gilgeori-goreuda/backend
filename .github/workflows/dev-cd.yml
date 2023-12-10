@@ -69,9 +69,6 @@ jobs:
     steps:
       - name: Join EC2 dev server
         uses: appleboy/ssh-action@master
-        env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
         with:
           host: ${{ secrets.DEV_SERVER_HOST }}
           username: ${{ secrets.DEV_SERVER_USERNAME }}
@@ -80,7 +77,6 @@ jobs:
           debug: true
 
           script: |
-            sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
             sudo chmod +x deploy-dev.sh
             sudo ./deploy-dev.sh
             sudo docker image prune -a -f
