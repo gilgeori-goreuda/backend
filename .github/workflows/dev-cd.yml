@@ -81,7 +81,6 @@ jobs:
 
           script: |
             sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
-            export DOCKER_USERNAME=sudongk
             sudo chmod +x deploy-dev.sh
             sudo ./deploy-dev.sh
             sudo docker image prune -a -f

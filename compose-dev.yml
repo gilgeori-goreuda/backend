@@ -16,7 +16,7 @@ services:
       - backend-dev
 
   backend-dev:
-    image: ${DOCKER_USERNAME}/gilgeorigoreuda-dev:latest
+    image: sudongk/gilgeorigoreuda-dev:latest
     volumes:
       - /home/ubuntu/logs/:/logs/
     ports:
