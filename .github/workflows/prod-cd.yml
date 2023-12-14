@@ -67,7 +67,7 @@ jobs:
     if: ${{ needs.docker-build.result == 'success' }}
     needs: [ docker-build ]
     steps:
-      - name: Deploy to ${{ PROD_SERVER_HOST }}
+      - name: Deploy to ${{ secrets.PROD_SERVER_HOST }}
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.PROD_SERVER_HOST }}
