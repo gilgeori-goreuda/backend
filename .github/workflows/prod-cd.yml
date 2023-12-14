@@ -70,7 +70,7 @@ jobs:
       - name: Deploy to ${{ PROD_SERVER_HOST }}
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ PROD_SERVER_HOST }}
+          host: ${{ secrets.PROD_SERVER_HOST }}
           username: ${{ secrets.PROD_SERVER_USERNAME }}
           key: ${{ secrets.PROD_SERVER_KEY }}
           port: ${{ secrets.PROD_SERVER_PORT }}
