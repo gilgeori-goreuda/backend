@@ -20,9 +20,9 @@ NETWORK_NAME="gilgeorigoreuda-network"
 sudo docker network inspect $NETWORK_NAME >/dev/null 2>&1
 
 if [ $? -eq 0 ]; then
-  echo "Network '$NETWORK_NAME' already exists, nothing to do here..."
+  echo "Network '$NETWORK_NAME' already exist"
 else
-  echo "Network '$NETWORK_NAME' does not exist, creating..."
+  echo "Network '$NETWORK_NAME' does not exist, create network"
   sudo docker network create $NETWORK_NAME
 
   if [ $? -eq 0 ]; then
@@ -30,10 +30,11 @@ else
   else
     echo "Failed to create network '$NETWORK_NAME'"
     exit 1
-  fi
+  fi인
 fi
 
 # 새로운 컨테이너 실행
+sudo docker compose -p compose-dev -f compose-dev.yml pull backend-dev
 sudo docker compose -p compose-dev -f compose-dev.yml up -d
 echo "새로운 compose-dev up"
 

@@ -67,44 +67,16 @@ jobs:
     if: ${{ needs.docker-build.result == 'success' }}
     needs: [ docker-build ]
     steps:
-      - name: Deploy to ${{ secrets.PROD_SERVER_HOST_1 }}
+      - name: Deploy to ${{ PROD_SERVER_HOST }}
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.PROD_SERVER_HOST_1 }}
+          host: ${{ PROD_SERVER_HOST }}
           username: ${{ secrets.PROD_SERVER_USERNAME }}
           key: ${{ secrets.PROD_SERVER_KEY }}
           port: ${{ secrets.PROD_SERVER_PORT }}
           debug: true
 
           script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/gilgeorigoreuda-prod:latest
-            echo "디버깅 target host ${{ secrets.PROD_SERVER_HOST_1 }}"
-            if sudo docker ps | grep ":8080"; then
-              export SPRING_PROFILE=blue
-              export BEFORE_PORT=8080
-              export NEW_PORT=8081
-              export NEW_ACTUATOR_PORT=8089
-            else
-              export SPRING_PROFILE=green
-              export BEFORE_PORT=8081
-              export NEW_PORT=8080
-              export NEW_ACTUATOR_PORT=8088
-            fi
-            
-            echo "디버깅 before port $BEFORE_PORT"
-            echo "디버깅 new port $NEW_PORT"
-            echo "디버깅 new actuator $NEW_ACTUATOR_PORT"
-            echo "디버깅 SPRING_PROFILE $SPRING_PROFILE"
-            
-            sudo docker run -d -p $NEW_PORT:$NEW_PORT -p $NEW_ACTUATOR_PORT:$NEW_ACTUATOR_PORT \
-            -e SPRING_PROFILE=$SPRING_PROFILE \
-            --network=mynetwork \
-            --name gilgeorigoreuda-prod$NEW_PORT \
-            ${{ secrets.DOCKERHUB_USERNAME }}/gilgeorigoreuda-prod:latest
-            
+            sudo chmod +x deploy-prod.sh
+            sudo ./deploy-prod.sh
             sudo docker image prune -a -f
-            
-            sudo sh /home/ubuntu/bluegreen.sh \
-            $BEFORE_PORT \
-            $NEW_PORT \
-            $NEW_ACTUATOR_PORT
