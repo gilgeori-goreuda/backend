@@ -7,6 +7,7 @@ services:
       - /home/ubuntu/logs/:/logs/
     ports:
       - 8080
+      - 8088
     environment:
       SPRING_PROFILE: blue
     networks:
@@ -19,6 +20,7 @@ services:
       - /home/ubuntu/logs/:/logs/
     ports:
       - 8080
+      - 8088
     environment:
       SPRING_PROFILE: blue
     networks:

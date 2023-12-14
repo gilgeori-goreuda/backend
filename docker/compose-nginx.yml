@@ -10,6 +10,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 8088:8088
 
 networks:
   gilgeorigoreuda-network:
