@@ -1,0 +1,29 @@
+version: "3"
+services:
+  backend-blue-a:
+    container_name: backend-blue-a
+    image: sudongk/gilgeorigoreuda-prod:latest
+    volumes:
+      - /home/ubuntu/logs/:/logs/
+    ports:
+      - 8080
+    environment:
+      SPRING_PROFILE: blue
+    networks:
+      - gilgeorigoreuda-network
+
+  backend-blue-b:
+    container_name: backend-blue-b
+    image: sudongk/gilgeorigoreuda-prod:latest
+    volumes:
+      - /home/ubuntu/logs/:/logs/
+    ports:
+      - 8080
+    environment:
+      SPRING_PROFILE: blue
+    networks:
+      - gilgeorigoreuda-network
+
+networks:
+  gilgeorigoreuda-network:
+    external: true
