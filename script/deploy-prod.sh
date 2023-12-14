@@ -63,7 +63,8 @@ if [ -n "$NEW_SERVER_UP" ]; then
   fi
 
   # nginx.config를 컨테이너에 맞게 변경해주고 reload 한다
-  envsubst '${AFTER_SERVER_COLOR}' < conf-prod/nginx.template > conf-prod/nginx.conf
+  envsubst "\${AFTER_SERVER_COLOR}" < conf-prod/nginx.template > conf-prod/nginx.conf
+  echo "nginx reload"
   sudo docker compose -f compose-nginx.yml exec nginx nginx -s reload
 
   # 이전 컨테이너 종료
