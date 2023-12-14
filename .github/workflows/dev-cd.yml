@@ -16,6 +16,12 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
       - uses: actions/checkout@v3
 
+      - name: Checkout submodules
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+          token: ${{ secrets.SUBMODULE_TOKEN }}
+
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
@@ -51,7 +57,7 @@ jobs:
         uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
         with:
           context: .
-          file: ./Dockerfile
+          file: ./docker/Dockerfile
           push: true
           tags: sudongk/gilgeorigoreuda-dev:latest
           labels: ${{ steps.meta.outputs.labels }}
@@ -71,13 +77,6 @@ jobs:
           debug: true
 
           script: |
-            sudo docker pull sudongk/gilgeorigoreuda-dev:latest
-            sudo docker stop gilgeorigoreuda-dev || true
-            sudo docker container prune -f
-            
-            sudo docker run -d -p 8080:8080 \
-            -e "SPRING_PROFILE=dev" \
-            --name gilgeorigoreuda-dev \
-            sudongk/gilgeorigoreuda-dev:latest
-            
+            sudo chmod +x deploy-dev.sh
+            sudo ./deploy-dev.sh
             sudo docker image prune -a -f

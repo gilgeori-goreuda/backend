@@ -1,0 +1,31 @@
+version: "3"
+services:
+  backend-green-a:
+    container_name: backend-green-a
+    image: sudongk/gilgeorigoreuda-prod:latest
+    volumes:
+      - /home/ubuntu/logs/:/logs/
+    ports:
+      - 8080
+      - 8088
+    environment:
+      SPRING_PROFILE: green
+    networks:
+      - gilgeorigoreuda-network
+
+  backend-green-b:
+    container_name: backend-green-b
+    image: sudongk/gilgeorigoreuda-prod:latest
+    volumes:
+      - /home/ubuntu/logs/:/logs/
+    ports:
+      - 8080
+      - 8088
+    environment:
+      SPRING_PROFILE: green
+    networks:
+      - gilgeorigoreuda-network
+
+networks:
+  gilgeorigoreuda-network:
+    external: true

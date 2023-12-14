@@ -5,8 +5,8 @@ NEW_PORT=$2
 NEW_ACTUATOR_PORT=$3
 
 echo "기존 포트 : $BEFORE_PORT"
-echo "새로운 포트: $NEW_PORT"
-echo "새로운 ACTUATOR_PORT: $NEW_ACTUATOR_PORT"
+echo "새로운 포트 : $NEW_PORT"
+echo "새로운 ACTUATOR_PORT : $NEW_ACTUATOR_PORT"
 
 # nginx 컨테이너 실행 확인
 if ! sudo docker ps | grep "nginx"; then
@@ -31,7 +31,6 @@ do
 
   if [ "${UP}" != '{"status":"up"}' ]
   	then
-  	  echo $count
   		sleep 10
   		continue
   	else
@@ -51,6 +50,7 @@ echo "디버깅 BACKEND_PORT : $BACKEND_PORT"
 cd nginx_config
 envsubst "\${BACKEND_PORT}" < default.template > default.conf
 sudo docker cp default.conf nginx:/etc/nginx/conf.d/
+echo "nginx reload"
 sudo docker exec nginx service nginx reload
 
 echo "기존 서버 종료"
