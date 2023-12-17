@@ -10,8 +10,8 @@ public class CorsConfig implements WebMvcConfigurer {
 
     // todo: 모든 출처 요청 허용 보안상 위험 -> 실제 운영 환경에서는 * 대신에 허용하려는 출처(도메인)를 명시
     private static final String LOCALHOST_FRONTEND = "http://localhost:3000";
-    private static final String DEV_SERVER = "https://dev.gilgeorigoreuda.com";
-    private static final String PROD_SERVER = "https://gilgeorigoreuda.com";
+    private static final String DEV_SERVER = "https://gilgeorigoreuda.site";
+    private static final String PROD_SERVER = "https://gilgeorigoreuda.site";
     private static final String PROD_SERVER_NGINX = "http://172.17.0.3:8080";
     private static final String PROD_SERVER_NGINX_2 = "http://172.17.0.3:8081";
     private static final String ACTUATOR_1 = "http://127.0.0.1:8088";
