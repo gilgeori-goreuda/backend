@@ -1,0 +1,3 @@
+FROM mysql
+
+ADD ./master.cnf /etc/mysql/my.cnf

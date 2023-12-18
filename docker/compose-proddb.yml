@@ -1,0 +1,59 @@
+version: "3"
+services:
+  master-db:
+    container_name: master-db
+    # 도커 이미지 빌드
+    build:
+      # 현재 디렉토리를 빌드 컨텍스트로 사용
+      context: ./
+      dockerfile: Dockerfile-master
+    # 컨테이너가 비정상적으로 종료되었을 때 자동으로 재시작
+    restart: always
+    # 컨테이너 내에서 사용할 환경 변수를 설정
+    environment:
+      MYSQL_DATABASE: 'gilgeorigoreuda'
+      # MySQL에서 사용될 사용자 이름을 설정
+      MYSQL_USER: 'user'
+      # MySQL에서 사용될 사용자의 비빌번호를 설정
+      MYSQL_PASSWORD: '1234'
+      # MySQL 루트 사용자의 비밀번호를 설정
+      MYSQL_ROOT_PASSWORD: '1234'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - '3306:3306'
+    # 데이터 영속을 위한 저장할 볼륨 정의 -> 볼륨은 컨테이너가 시작될 때 생성되고 컨테이너가 종료되어도 데이터가 유지된다.
+    volumes:
+      - ./mysql-prod-master:/var/lib/mysql
+      - ./mysql-prod-master:/var/lib/mysql-files
+    # 서비스가 연결될 네트워크를 지정
+    networks:
+      - gilgeorigoreuda-mysql-network
+
+  slave-db:
+    container_name: slave-db
+    build:
+      context: ./
+      dockerfile: Dockerfile-slave
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'gilgeorigoreuda'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: '1234'
+      MYSQL_ROOT_PASSWORD: '1234'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - '3307:3306'
+    volumes:
+      - ./mysql-prod-slave:/var/lib/mysql
+      - ./mysql-prod-slave:/var/lib/mysql-files
+    networks:
+      - gilgeorigoreuda-mysql-network
+
+# 네트워크를 정의
+networks:
+  gilgeorigoreuda-mysql-network:
+    external: true
