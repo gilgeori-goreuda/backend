@@ -10,6 +10,22 @@ upstream monitor-green {
 
 server {
     listen 80;
+    client_max_body_size 0;
+    server_name gilgeorigoreuda.store;
+    server_tokens off;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server{
+    listen 443 ssl;
+    client_max_body_size 0;
+    server_name gilgeorigoreuda.store;
+
+    ssl_certificate /etc/nginx/certs/fullchain.pem;
+    ssl_certificate_key /etc/nginx/certs/privkey.pem;
 
     location / {
         proxy_pass http://backend-green;
