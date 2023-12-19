@@ -5,6 +5,7 @@ services:
     image: nginx:latest
     restart: always
     volumes:
+      - /home/ubuntu/certs/:/etc/nginx/certs/
       - ./conf-prod/:/etc/nginx/conf.d/
       - /home/ubuntu/nginx-logs/:/var/log/nginx/
     ports:
