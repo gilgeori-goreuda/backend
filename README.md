@@ -78,3 +78,8 @@
 
 <img width="1344" alt="gilgeorigoreuda-infra-stack" src="https://github.com/gilgeori-goreuda/frontend/assets/82927161/d20944fb-d028-4840-9c17-2827abe454a0">
 
+## ⚙️ 서비스 아키텍처
+
+<img width="1344" alt="gilgeorigoreuda-service-architecture" src="https://github.com/gilgeori-goreuda/frontend/assets/82927161/aee94719-3150-4f25-b88a-d1e7d831a0d0">
+
+## 🔨 CI/CD Pipeline
