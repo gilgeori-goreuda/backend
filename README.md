@@ -80,6 +80,9 @@
 
 ## ⚙️ 서비스 아키텍처
 
-<img width="1344" alt="gilgeorigoreuda-service-architecture" src="https://github.com/gilgeori-goreuda/frontend/assets/82927161/aee94719-3150-4f25-b88a-d1e7d831a0d0">
+<img width="1344" alt="gilgeorigoreuda-service-architecture" src="https://github.com/gilgeori-goreuda/backend/assets/82927161/11a2fcff-77c8-4644-a771-5ec3f3040252">
 
 ## 🔨 CI/CD Pipeline
+
+<img width="1344" alt="gilgeorigoreuda-cicd-pipeline" src="https://github.com/gilgeori-goreuda/backend/assets/82927161/67ea7e63-189e-4a24-9556-cc12222ada39">
+
