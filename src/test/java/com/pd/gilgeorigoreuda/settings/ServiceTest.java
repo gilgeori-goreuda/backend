@@ -1,23 +1,36 @@
 package com.pd.gilgeorigoreuda.settings;
 
-import com.pd.gilgeorigoreuda.settings.builder.TestDataBuilder;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import com.pd.gilgeorigoreuda.image.service.ImageService;
+import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
+import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
+import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
+import com.pd.gilgeorigoreuda.store.service.StoreService;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoSettings;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.event.ApplicationEvents;
-import org.springframework.test.context.event.RecordApplicationEvents;
 import org.springframework.transaction.annotation.Transactional;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE)
-@RecordApplicationEvents
+@MockitoSettings
 @Transactional
 @ActiveProfiles("test")
 public abstract class ServiceTest {
 
-    @Autowired
-    protected TestDataBuilder testDataBuilder;
+    // Mock 을 주입 받을 객체
+    @InjectMocks
+    protected StoreService storeService;
 
-    @Autowired
-    protected ApplicationEvents applicationEvents;
+    // Mock 객체
+    @Mock
+    protected StoreRepository storeRepository;
+
+    @Mock
+    protected StoreNativeQueryRepository storeNativeQueryRepository;
+
+    @Mock
+    protected MemberRepository memberRepository;
+
+    @Mock
+    protected ImageService imageService;
 
 }
