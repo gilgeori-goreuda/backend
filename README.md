@@ -7,8 +7,21 @@
 ### 길거리를 고르다 ✅
 </div>
 
-## 🎤 길거리를 고르다 소개
-길거리를 고르다는 ~ 이 부분에 소개글과 화면 캡처
+## 🎤 소개
+<br><br>
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/5e3fb4e4-8c33-4164-9566-5007629a640b">
+<br><br><br>
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/f1f6789b-2024-4573-a6a5-d72a71a130da">
+<br><br><br>
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/3b315c83-6eab-4598-8984-d108d4551e1e">
+<br><br><br>
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/73c61061-e84b-4779-8156-671191b3d35e">
+<br><br><br>
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/bf0c7bb5-0415-499d-b9ec-579110d34eea">
+<br><br><br>
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/51396068-149f-47c8-b9f3-b705e1bf86c3">
+<br><br><br>
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/f3c6084d-e0c9-4f7b-96c1-d3e9424ad34c">
 
 ## 👨‍👩‍👧‍👦  팀원
 
