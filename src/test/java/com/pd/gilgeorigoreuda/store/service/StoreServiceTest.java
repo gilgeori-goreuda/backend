@@ -1,15 +1,10 @@
 package com.pd.gilgeorigoreuda.store.service;
 
-import com.pd.gilgeorigoreuda.image.service.ImageService;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
-import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import com.pd.gilgeorigoreuda.settings.ServiceTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.*;
-import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
-import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
@@ -18,18 +13,6 @@ import java.util.List;
 class StoreServiceTest extends ServiceTest {
 
     private final Integer TEST_BOUNDARY = 10;
-
-    @Autowired
-    private StoreRepository storeRepository;
-
-    @Autowired
-    private StoreNativeQueryRepository storeNativeQueryRepository;
-
-    @Autowired
-    private MemberRepository memberRepository;
-
-    @Autowired
-    private ImageService imageService;
 
     private Store makeStore() {
         return Store.builder()
