@@ -1,27 +1,23 @@
-<div align="center">
-  <a href="https://gilgeoirgoreuda.site/">
-    <img width="200px" src="https://github.com/gilgeori-goreuda/backend/assets/82927161/d63590d3-ce87-4ce1-b9e1-6c1fbf701c0c" alt="길거리고르다 이동하기"/>
-  </a>
-
-### 숨어있는 내 주변 길거리 음식들이 한눈에!!
-### 길거리를 고르다 ✅
-</div>
 
 ## 🎤 소개
+<br>
+<a href="https://gilgeoirgoreuda.site/">
+  <img src="https://img.shields.io/badge/💡-Gilgeorigoreuda_Site-EEEEEE?style=square"/>
+</a>
 <br><br>
-<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/5e3fb4e4-8c33-4164-9566-5007629a640b">
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/de5c0617-d8fc-4290-86b2-ee5cf93680c7">
 <br><br><br>
-<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/f1f6789b-2024-4573-a6a5-d72a71a130da">
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/f6976c9e-0bb4-4074-bbbb-cb5e8ff8720b">
 <br><br><br>
-<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/3b315c83-6eab-4598-8984-d108d4551e1e">
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/fb35aff0-4641-4d14-9971-68dcae638f39">
 <br><br><br>
-<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/73c61061-e84b-4779-8156-671191b3d35e">
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/05b110fe-a061-4a19-b43e-549c0cc4ba57">
 <br><br><br>
-<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/bf0c7bb5-0415-499d-b9ec-579110d34eea">
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/e45b3b03-9efc-4aff-bbcc-fe5faa665ecb">
 <br><br><br>
-<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/51396068-149f-47c8-b9f3-b705e1bf86c3">
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/81d0b6e8-e58d-497e-b4ab-85d6f46ca2fc">
 <br><br><br>
-<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/f3c6084d-e0c9-4f7b-96c1-d3e9424ad34c">
+<img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/ede75a0e-b7d2-4f73-a88d-4ca5d00f7faa">
 
 ## 👨‍👩‍👧‍👦  팀원
 
