@@ -1,6 +1,6 @@
 package com.pd.gilgeorigoreuda.settings;
 
-import com.pd.gilgeorigoreuda.settings.builder.TestDataBuilder;
+import com.pd.gilgeorigoreuda.settings.builder.DataBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 public abstract class IntegrationTest {
 
     @Autowired
-    protected TestDataBuilder testDataBuilder;
+    protected DataBuilder dataBuilder;
 
     @Autowired
     protected ApplicationEvents applicationEvents;

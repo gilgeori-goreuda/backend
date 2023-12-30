@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TestDataBuilder {
+public class DataBuilder {
 
     @Autowired
     private BuilderSupporter builderSupporter;
