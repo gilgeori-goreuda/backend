@@ -93,6 +93,8 @@ public class StoreService {
 
 		storeForUpdate.addFoodCategories(foodCategories);
 
+		storeRepository.save(storeForUpdate);
+
 		deleteOriginalImage(storeUpdateRequest, storeForUpdate);
 	}
 
@@ -134,17 +136,17 @@ public class StoreService {
 		}
 	}
 
-	private Store findStoreWithMemberAndCategories(Long storeId) {
+	private Store findStoreWithMemberAndCategories(final Long storeId) {
 		return storeRepository.findStoreWithMemberAndCategories(storeId)
 			.orElseThrow(NoSuchStoreException::new);
 	}
 
-	private Member findMember(Long memberId) {
+	private Member findMember(final Long memberId) {
 		return memberRepository.findById(memberId)
 			.orElseThrow(NoSuchMemberException::new);
 	}
 
-	private Store findStoreWithMember(Long storeId) {
+	private Store findStoreWithMember(final Long storeId) {
 		return storeRepository.findStoreWithMember(storeId)
 			.orElseThrow(NoSuchStoreException::new);
 	}

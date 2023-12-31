@@ -4,6 +4,7 @@ import com.pd.gilgeorigoreuda.settings.ServiceTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.*;
 import com.pd.gilgeorigoreuda.store.dto.request.FoodCategoryRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
+import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.exception.AlreadyExistInBoundaryException;
 import org.junit.jupiter.api.DisplayName;
@@ -30,6 +31,22 @@ class StoreServiceTest extends ServiceTest {
                 LocalTime.of(23, 0),
                 "현금",
                 "https://image.com",
+                "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
+                BigDecimal.valueOf(37.123456),
+                BigDecimal.valueOf(127.123456),
+                "서울특별시 강남구 언주로1",
+                new FoodCategoryRequest(List.of("붕어빵", "호떡"))
+        );
+    }
+
+    private StoreUpdateRequest makeStoreUpdateRequest() {
+        return new StoreUpdateRequest(
+                "수정된 붕어빵 가게",
+                "포장마차",
+                LocalTime.of(10, 0),
+                LocalTime.of(22, 30),
+                "현금",
+                "https://newimage.com",
                 "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
                 BigDecimal.valueOf(37.123456),
                 BigDecimal.valueOf(127.123456),
@@ -80,9 +97,40 @@ class StoreServiceTest extends ServiceTest {
 
         // when & then
         assertThatThrownBy(() -> storeService.saveStore(1L, storeCreateRequest))
-                .isInstanceOf(AlreadyExistInBoundaryException.class);
+                .isInstanceOf(AlreadyExistInBoundaryException.class)
+                .extracting("errorCode")
+                .isEqualTo("S006");
 
         then(storeRepository).should(never()).save(any(Store.class));
+    }
+
+    @Test
+    @DisplayName("가게 정보 업데이트 호출 시 id를 검증하고 save 메소드 호출")
+    void updateStore() {
+        // given
+        StoreUpdateRequest storeUpdateRequest = makeStoreUpdateRequest();
+        StreetAddress streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
+
+        given(storeRepository.findStoreWithMemberAndCategories(anyLong())).willReturn(Optional.of(ServiceTest.STORE));
+        given(memberRepository.findById(anyLong())).willReturn(Optional.of(ServiceTest.MEMBER));
+
+        given(storeNativeQueryRepository.isAlreadyExistInBoundary(
+                storeUpdateRequest.getLat(),
+                storeUpdateRequest.getLng(),
+                streetAddress.getLargeAddress(),
+                streetAddress.getMediumAddress(),
+                TEST_BOUNDARY)
+        ).willReturn(Optional.empty());
+
+        // when
+        storeService.updateStore(1L, 1L, storeUpdateRequest);
+
+        // then
+        assertAll(
+                () -> then(storeRepository).should(times(1)).findStoreWithMemberAndCategories(anyLong()),
+                () -> then(memberRepository).should(times(1)).findById(anyLong()),
+                () -> then(storeRepository).should(times(1)).save(any(Store.class))
+        );
     }
 
 }
