@@ -7,6 +7,7 @@ import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.exception.AlreadyExistInBoundaryException;
+import com.pd.gilgeorigoreuda.store.exception.NoSuchStoreException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -77,7 +78,17 @@ class StoreServiceTest extends ServiceTest {
 
         // then
         assertNotNull(response);
-        then(storeRepository).should(times(1)).save(any(Store.class));
+        assertAll(
+                () -> then(storeRepository).should(times(1)).save(any(Store.class)),
+                () -> then(storeNativeQueryRepository).should(times(1))
+                        .isAlreadyExistInBoundary(
+                            storeCreateRequest.getLat(),
+                            storeCreateRequest.getLng(),
+                            streetAddress.getLargeAddress(),
+                            streetAddress.getMediumAddress(),
+                            TEST_BOUNDARY
+                        )
+        );
     }
 
     @Test
@@ -106,13 +117,16 @@ class StoreServiceTest extends ServiceTest {
 
     @Test
     @DisplayName("가게 정보 업데이트 호출 시 id를 검증하고 save 메소드 호출")
-    void updateStore() {
+    void updateStoreSuccessful() {
         // given
         StoreUpdateRequest storeUpdateRequest = makeStoreUpdateRequest();
         StreetAddress streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
 
-        given(storeRepository.findStoreWithMemberAndCategories(anyLong())).willReturn(Optional.of(ServiceTest.STORE));
-        given(memberRepository.findById(anyLong())).willReturn(Optional.of(ServiceTest.MEMBER));
+        given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
+                .willReturn(Optional.of(ServiceTest.STORE));
+
+        given(memberRepository.findById(anyLong()))
+                .willReturn(Optional.of(ServiceTest.MEMBER));
 
         given(storeNativeQueryRepository.isAlreadyExistInBoundary(
                 storeUpdateRequest.getLat(),
@@ -131,6 +145,24 @@ class StoreServiceTest extends ServiceTest {
                 () -> then(memberRepository).should(times(1)).findById(anyLong()),
                 () -> then(storeRepository).should(times(1)).save(any(Store.class))
         );
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 가게 id로 가게 정보 업데이트 호출 시 예외가 발생한다.")
+    void shouldThrowExceptionWhenStoreIdIsInvalid() {
+        // given
+        StoreUpdateRequest storeUpdateRequest = makeStoreUpdateRequest();
+
+        given(storeRepository.findStoreWithMemberAndCategories(1L))
+                .willReturn(Optional.empty());
+
+        // when & then
+        assertThatThrownBy(() -> storeService.updateStore(1L, 1L, storeUpdateRequest))
+                .isInstanceOf(NoSuchStoreException.class)
+                .extracting("errorCode")
+                .isEqualTo("S001");
+
+        then(storeRepository).should(never()).save(any(Store.class));
     }
 
 }
