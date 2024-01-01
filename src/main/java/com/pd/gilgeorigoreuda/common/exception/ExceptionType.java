@@ -6,6 +6,7 @@ import java.util.Objects;
 import com.pd.gilgeorigoreuda.auth.exception.RefreshTokenNotFoundException;
 import com.pd.gilgeorigoreuda.image.exception.*;
 import com.pd.gilgeorigoreuda.login.exception.*;
+import com.pd.gilgeorigoreuda.member.exception.NoSuchMemberException;
 import com.pd.gilgeorigoreuda.review.exception.NoAuthorityReviewException;
 import com.pd.gilgeorigoreuda.review.exception.NoSuchReviewException;
 import com.pd.gilgeorigoreuda.store.exception.*;
@@ -62,6 +63,8 @@ public enum ExceptionType {
 
 	NO_SUCH_REVIEW_EXCEPTION("R001", "존재하지 않는 리뷰입니다.", NoSuchReviewException.class),
 	NO_AUTHORITY_REVIEW_EXCEPTION("R002", "해당 리뷰의 작성자가 아닙니다.", NoAuthorityReviewException.class),
+
+	NO_SUCH_MEMBER_EXCEPTION("M001", "존재하지 않는 회원입니다.", NoSuchMemberException.class),
 	;
 
 	private final String errorCode;

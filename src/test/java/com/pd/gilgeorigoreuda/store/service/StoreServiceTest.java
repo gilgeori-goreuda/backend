@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.service;
 
+import com.pd.gilgeorigoreuda.member.exception.NoSuchMemberException;
 import com.pd.gilgeorigoreuda.settings.ServiceTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.*;
 import com.pd.gilgeorigoreuda.store.dto.request.FoodCategoryRequest;
@@ -161,6 +162,27 @@ class StoreServiceTest extends ServiceTest {
                 .isInstanceOf(NoSuchStoreException.class)
                 .extracting("errorCode")
                 .isEqualTo("S001");
+
+        then(storeRepository).should(never()).save(any(Store.class));
+    }
+
+    @Test
+    @DisplayName("유효하지 않은 회원 id로 가게 정보 업데이트 호출 시 예외가 발생한다.")
+    void shouldThrowExceptionWhenMemberIdIsInvalid() {
+        // given
+        StoreUpdateRequest storeUpdateRequest = makeStoreUpdateRequest();
+
+        given(storeRepository.findStoreWithMemberAndCategories(any()))
+                .willReturn(Optional.of(StoreServiceTest.STORE));
+
+        given(memberRepository.findById(anyLong()))
+                .willReturn(Optional.empty());
+
+        // when & then
+        assertThatThrownBy(() -> storeService.updateStore(1L, 1L, storeUpdateRequest))
+                .isInstanceOf(NoSuchMemberException.class)
+                .extracting("errorCode")
+                .isEqualTo("M001");
 
         then(storeRepository).should(never()).save(any(Store.class));
     }
