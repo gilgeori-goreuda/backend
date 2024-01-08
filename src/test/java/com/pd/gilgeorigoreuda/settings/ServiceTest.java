@@ -50,6 +50,7 @@ public abstract class ServiceTest {
             .build();
 
     protected static final Store STORE = Store.builder()
+            .id(1L)
             .name("붕어빵 가게")
             .storeType(StoreType.of("포장마차"))
             .openTime(LocalTime.of(9, 0))

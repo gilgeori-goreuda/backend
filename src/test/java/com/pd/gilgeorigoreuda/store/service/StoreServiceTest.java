@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.service;
 
+import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.member.exception.NoSuchMemberException;
 import com.pd.gilgeorigoreuda.settings.ServiceTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.*;
@@ -7,6 +8,7 @@ import com.pd.gilgeorigoreuda.store.dto.request.FoodCategoryRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
+import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
 import com.pd.gilgeorigoreuda.store.exception.AlreadyExistInBoundaryException;
 import com.pd.gilgeorigoreuda.store.exception.NoSuchStoreException;
 import org.junit.jupiter.api.DisplayName;
@@ -24,6 +26,9 @@ import static org.mockito.BDDMockito.*;
 class StoreServiceTest extends ServiceTest {
 
     private static final Integer TEST_BOUNDARY = 10;
+
+    private static final BigDecimal memberLat = new BigDecimal("37.1234");
+    private static final BigDecimal memberLng = new BigDecimal("127.5678");
 
     private StoreCreateRequest makeStoreCreateRequest() {
         return new StoreCreateRequest(
@@ -118,7 +123,7 @@ class StoreServiceTest extends ServiceTest {
 
     @Test
     @DisplayName("가게 정보 업데이트 호출 시 id를 검증하고 save 메소드 호출")
-    void updateStoreSuccessful() {
+    void updateStoreSuccess() {
         // given
         StoreUpdateRequest storeUpdateRequest = makeStoreUpdateRequest();
         StreetAddress streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
@@ -185,6 +190,35 @@ class StoreServiceTest extends ServiceTest {
                 .isEqualTo("M001");
 
         then(storeRepository).should(never()).save(any(Store.class));
+    }
+
+    @Test
+    @DisplayName("storeId에 해당하는 Store 정보와 거리 정보를 반환한다.")
+    void getStoreSuccess() {
+        // given
+        given(storeRepository.findStoreWithMemberAndCategories(ServiceTest.STORE.getId()))
+                .willReturn(Optional.of(ServiceTest.STORE));
+
+        // when
+        StoreResponse storeResponse = storeService.getStore(1L, memberLat, memberLng);
+
+        // then
+        assertThat(storeResponse).isNotNull();
+        assertThat(storeResponse.getId()).isEqualTo(ServiceTest.STORE.getId());
+    }
+
+    @Test
+    @DisplayName("유효하지 않는 id로 가게 조회시 예외가 발생한다.")
+    void shouldThrowExceptionWhenStoreIdInvalid() {
+        // given
+        given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
+                .willReturn(Optional.empty());
+
+        // when & then
+        assertThatThrownBy(() -> storeService.getStore(1L, memberLat, memberLng))
+                .isInstanceOf(NoSuchStoreException.class)
+                .extracting("errorCode")
+                .isEqualTo("S001");
     }
 
 }
