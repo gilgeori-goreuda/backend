@@ -77,20 +77,7 @@ public class StoreService {
 
 		List<FoodCategory> foodCategories = storeUpdateRequest.getFoodCategories().toEntities();
 
-		storeForUpdate.updateStoreInfo(
-				storeUpdateRequest.getName(),
-				storeUpdateRequest.getStoreType(),
-				storeUpdateRequest.getOpenTime(),
-				storeUpdateRequest.getCloseTime(),
-				storeUpdateRequest.getPurchaseType(),
-				storeUpdateRequest.getBusinessDates(),
-				storeUpdateRequest.getImageUrl(),
-				storeUpdateRequest.getLat(),
-				storeUpdateRequest.getLng(),
-				storeUpdateRequest.getStreetAddress(),
-				member.getNickname()
-		);
-
+		storeForUpdate.updateStoreInfo(storeUpdateRequest, member.getNickname());
 		storeForUpdate.addFoodCategories(foodCategories);
 
 		storeRepository.save(storeForUpdate);
