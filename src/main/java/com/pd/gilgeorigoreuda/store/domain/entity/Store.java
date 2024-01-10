@@ -9,6 +9,7 @@ import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.store.dto.request.BusinessDateRequest;
 
+import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -122,28 +123,17 @@ public class Store extends BaseTimeEntity {
 		}
 	}
 
-	public void updateStoreInfo(
-			final String name,
-			final String storeType,
-			final LocalTime openTime,
-			final LocalTime closeTime,
-			final String purchaseType,
-			final String businessDates,
-			final String imageUrl,
-			final BigDecimal lat,
-			final BigDecimal lng,
-			final String streetAddress,
-			final String lastModifiedMemberNickname) {
-		this.name = name;
-		this.storeType = StoreType.of(storeType);
-		this.openTime = openTime;
-		this.closeTime = closeTime;
-		this.purchaseType = PurchaseType.of(purchaseType);
-		this.businessDate = BusinessDateRequest.of(businessDates).toString();
-		this.imageUrl = imageUrl;
-		this.lat = lat;
-		this.lng = lng;
-		this.streetAddress = StreetAddress.of(streetAddress);
+	public void updateStoreInfo(final StoreUpdateRequest storeUpdateRequest, final String lastModifiedMemberNickname) {
+		this.name = storeUpdateRequest.getName();
+		this.storeType = StoreType.of(storeUpdateRequest.getStoreType());
+		this.openTime = storeUpdateRequest.getOpenTime();
+		this.closeTime = storeUpdateRequest.getCloseTime();
+		this.purchaseType = PurchaseType.of(storeUpdateRequest.getPurchaseType());
+		this.businessDate = BusinessDateRequest.of(storeUpdateRequest.getBusinessDates()).toString();
+		this.imageUrl = storeUpdateRequest.getImageUrl();
+		this.lat = storeUpdateRequest.getLat();
+		this.lng = storeUpdateRequest.getLng();
+		this.streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
 		this.lastModifiedMemberNickname = lastModifiedMemberNickname;
 	}
 

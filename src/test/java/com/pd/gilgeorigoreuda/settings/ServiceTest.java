@@ -3,10 +3,7 @@ package com.pd.gilgeorigoreuda.settings;
 import com.pd.gilgeorigoreuda.image.service.ImageService;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
-import com.pd.gilgeorigoreuda.store.domain.entity.PurchaseType;
-import com.pd.gilgeorigoreuda.store.domain.entity.Store;
-import com.pd.gilgeorigoreuda.store.domain.entity.StoreType;
-import com.pd.gilgeorigoreuda.store.domain.entity.StreetAddress;
+import com.pd.gilgeorigoreuda.store.domain.entity.*;
 import com.pd.gilgeorigoreuda.store.dto.request.BusinessDateRequest;
 import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
 import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
@@ -14,11 +11,14 @@ import com.pd.gilgeorigoreuda.store.service.StoreService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @MockitoSettings
 @Transactional
@@ -31,6 +31,9 @@ public abstract class ServiceTest {
 
     // Mock 객체
     @Mock
+    protected ApplicationEventPublisher publisher;
+
+    @Mock
     protected StoreRepository storeRepository;
 
     @Mock
@@ -42,11 +45,22 @@ public abstract class ServiceTest {
     @Mock
     protected ImageService imageService;
 
+
     protected static final Member MEMBER = Member.builder()
             .id(1L)
             .nickname("nickname")
             .profileImageUrl("profileImageUrl")
             .socialId("socialId")
+            .build();
+
+    protected static final FoodCategory FOOD_CATEGORY1 = FoodCategory.builder()
+            .id(1L)
+            .foodType(FoodType.of("붕어빵"))
+            .build();
+
+    protected static final FoodCategory FOOD_CATEGORY2 = FoodCategory.builder()
+            .id(1L)
+            .foodType(FoodType.of("호떡"))
             .build();
 
     protected static final Store STORE = Store.builder()
@@ -62,6 +76,7 @@ public abstract class ServiceTest {
             .lng(BigDecimal.valueOf(127.123456))
             .streetAddress(StreetAddress.of("서울특별시 강남구 언주로1"))
             .member(MEMBER)
+            .foodCategories(new ArrayList<>(List.of(FOOD_CATEGORY1, FOOD_CATEGORY2)))
             .build();
 
 }
