@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.store.service;
 
-import com.pd.gilgeorigoreuda.image.domain.S3ImageDeleteEvent;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.member.exception.NoSuchMemberException;
 import com.pd.gilgeorigoreuda.settings.ServiceTest;

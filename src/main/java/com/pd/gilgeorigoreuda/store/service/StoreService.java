@@ -68,7 +68,8 @@ public class StoreService {
 
 		StreetAddress streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
 
-		checkIsAlreadyExistInBoundary(
+		checkIsAlreadyExistInBoundaryExceptTargetId(
+				storeId,
 				storeUpdateRequest.getLat(),
 				storeUpdateRequest.getLng(),
 				streetAddress.getLargeAddress(),
@@ -115,12 +116,32 @@ public class StoreService {
 		imageService.deleteSingleImage(store.getImageUrl());
 	}
 
-	private void checkIsAlreadyExistInBoundary(final BigDecimal lat, final BigDecimal lng, final String largeAddress, final String mediumAddress) {
-		Optional<Long> isAlreadyExistInBoundary = storeNativeQueryRepository.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY);
+	private void checkIsAlreadyExistInBoundary(
+			final BigDecimal lat,
+			final BigDecimal lng,
+			final String largeAddress,
+			final String mediumAddress
+	) {
+		storeNativeQueryRepository
+				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY)
+				.ifPresent(existingId -> {
+					throw new AlreadyExistInBoundaryException();
+				});
+	}
 
-		if (isAlreadyExistInBoundary.isPresent()) {
-			throw new AlreadyExistInBoundaryException();
-		}
+	private void checkIsAlreadyExistInBoundaryExceptTargetId(
+			final Long targetStoreId,
+			final BigDecimal lat,
+			final BigDecimal lng,
+			final String largeAddress,
+			final String mediumAddress
+	) {
+		storeNativeQueryRepository
+				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY)
+				.filter(existingId -> !existingId.equals(targetStoreId))
+				.ifPresent(existingId -> {
+					throw new AlreadyExistInBoundaryException();
+				});
 	}
 
 	private Store findStoreWithMemberAndCategories(final Long storeId) {
@@ -138,8 +159,12 @@ public class StoreService {
 			.orElseThrow(NoSuchStoreException::new);
 	}
 
-	private static int getDistanceBetweenStoreAndMember(final BigDecimal memberLat, final BigDecimal memberLng,
-														final BigDecimal targetStoreLat, final BigDecimal targetStoreLng) {
+	private static int getDistanceBetweenStoreAndMember(
+			final BigDecimal memberLat,
+			final BigDecimal memberLng,
+			final BigDecimal targetStoreLat,
+			final BigDecimal targetStoreLng
+	) {
 		return DistanceCalculator.calculateDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
 	}
 
