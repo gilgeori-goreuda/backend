@@ -69,7 +69,7 @@ public class StoreUpdateResponse {
 		this.foodCategories = foodCategories;
 	}
 
-	public static StoreUpdateResponse of(Store store) {
+	public static StoreUpdateResponse of(final Store store) {
 		return new StoreUpdateResponse(
 			store.getId(),
 			store.getName(),
@@ -90,7 +90,6 @@ public class StoreUpdateResponse {
 			store.getFoodCategories()
 				.stream()
 				.map(FoodCategory::getFoodType)
-				.map(FoodType::getFoodName)
 				.toList()
 		);
 	}

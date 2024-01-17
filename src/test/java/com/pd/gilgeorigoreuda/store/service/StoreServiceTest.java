@@ -368,7 +368,7 @@ class StoreServiceTest extends ServiceTest {
                             .extracting("foodType")
                             .usingRecursiveComparison()
                             .ignoringCollectionOrder()
-                            .isEqualTo(List.of(FoodType.of("오뎅"), FoodType.of("타코야끼")));
+                            .isEqualTo(List.of("오뎅", "타코야끼"));
                 }
             );
         }

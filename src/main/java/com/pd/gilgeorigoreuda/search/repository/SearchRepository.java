@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.search.repository;
 
-import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,7 +17,7 @@ public interface SearchRepository extends JpaRepository<Store, Long> {
         List<Store> findStoresByLatLngAndFoodTypes(
                 @Param("lat") final BigDecimal lat,
                 @Param("lng") final BigDecimal lng,
-                @Param("foodType") final FoodType foodType,
+                @Param("foodType") final String foodType,
                 @Param("distance") final Double distance
         );
 
