@@ -4,7 +4,6 @@ import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.search.dto.response.SearchStoreListResponse;
 import com.pd.gilgeorigoreuda.search.dto.response.SearchStoreResponse;
 import com.pd.gilgeorigoreuda.search.repository.SearchRepository;
-import com.pd.gilgeorigoreuda.store.domain.entity.FoodType;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +26,7 @@ public class SearchService {
             final BigDecimal memberLng,
             final BigDecimal referenceLat,
             final BigDecimal referenceLng,
-            final FoodType foodType
+            final String foodType
     ) {
         List<SearchStoreResponse> searchStoreResponse = searchRepository
                 .findStoresByLatLngAndFoodTypes(referenceLat, referenceLng, foodType, DISTANCE_1KM)

@@ -55,12 +55,12 @@ public abstract class ServiceTest {
 
     protected static final FoodCategory FOOD_CATEGORY1 = FoodCategory.builder()
             .id(1L)
-            .foodType(FoodType.of("붕어빵"))
+            .foodType(FoodType.of("붕어빵").getFoodName())
             .build();
 
     protected static final FoodCategory FOOD_CATEGORY2 = FoodCategory.builder()
             .id(1L)
-            .foodType(FoodType.of("호떡"))
+            .foodType(FoodType.of("호떡").getFoodName())
             .build();
 
     protected static final Store STORE = Store.builder()

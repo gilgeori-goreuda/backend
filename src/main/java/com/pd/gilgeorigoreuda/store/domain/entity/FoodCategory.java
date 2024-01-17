@@ -2,8 +2,6 @@ package com.pd.gilgeorigoreuda.store.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
@@ -30,9 +28,8 @@ public class FoodCategory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "food_type", nullable = false)
-	@Enumerated(EnumType.STRING)
-	private FoodType foodType;
+	@Column(name = "food_type", nullable = false, length = 50)
+	private String foodType;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_food_categories_store_id"))

@@ -18,7 +18,7 @@ public class SearchParameter {
     private BigDecimal mLng;
     private BigDecimal rLat;
     private BigDecimal rLng;
-    private FoodType foodType;
+    private String foodType;
 
     public static SearchParameter of(
             final String mLat,
@@ -44,8 +44,8 @@ public class SearchParameter {
         }
     }
 
-    private static FoodType initFoodType(final String foodType) {
-        return Objects.equals(foodType, "") ? null : FoodType.of(foodType);
+    private static String initFoodType(final String foodType) {
+        return Objects.equals(foodType, "") ? null : FoodType.of(foodType).getFoodName();
     }
 
 }

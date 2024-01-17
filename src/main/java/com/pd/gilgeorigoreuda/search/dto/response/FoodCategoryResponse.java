@@ -10,9 +10,9 @@ import lombok.NoArgsConstructor;
 public class FoodCategoryResponse {
 
     private Long id;
-    private FoodType foodType;
+    private String foodType;
 
-    private FoodCategoryResponse(final Long id, final FoodType foodType) {
+    private FoodCategoryResponse(final Long id, final String foodType) {
         this.id = id;
         this.foodType = foodType;
     }
