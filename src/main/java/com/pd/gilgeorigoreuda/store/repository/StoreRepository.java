@@ -47,8 +47,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 			"from reviews where store_id = s.id " +
 			"group by store_id) " +
 			"where id " +
-			"in(select store_id from reviews " +
-			"where store_id = s.id group by store_id)",
+			"in(select store_id from reviews where store_id = s.id group by store_id)",
 			nativeQuery = true)
 	void updateAllStoresAvgRating();
 
@@ -59,8 +58,7 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 			"from store_visit_records where store_id = s.id " +
 			"group by store_id) " +
 			"where id " +
-			"in(select store_id from store_visit_records " +
-			"where store_id = s.id group by store_id)",
+			"in(select store_id from store_visit_records where store_id = s.id group by store_id)",
 			nativeQuery = true)
 	void updateAllStoresVisitCount();
 
@@ -71,15 +69,15 @@ public interface StoreRepository extends JpaRepository<Store, Long> {
 			"from store_report_histories where store_id = s.id " +
 			"group by store_id) " +
 			"where id " +
-			"in(select store_id from store_report_histories " +
-			"where store_id = s.id group by store_id)",
+			"in(select store_id from store_report_histories where store_id = s.id group by store_id)",
 			nativeQuery = true)
 	void updateAllStoresReportCount();
 
 	@Modifying(clearAutomatically = true)
 	@Query(value = "update stores s " +
 			"set is_blocked = true " +
-			"where total_report_count >:count", nativeQuery = true)
+			"where total_report_count >:count",
+			nativeQuery = true)
 	void updateBlockedStore(@Param("count") int count);
 
 }

@@ -54,7 +54,6 @@ public class PreferredStoreInfoResponse {
                 store.getFoodCategories()
                         .stream()
                         .map(FoodCategory::getFoodType)
-                        .map(FoodType::getFoodName)
                         .toList()
         );
     }

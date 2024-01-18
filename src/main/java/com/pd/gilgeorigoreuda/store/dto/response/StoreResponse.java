@@ -108,7 +108,6 @@ public class StoreResponse {
 				store.getFoodCategories()
 						.stream()
 						.map(FoodCategory::getFoodType)
-						.map(FoodType::getFoodName)
 						.toList(),
 				store.getLastModifiedMemberNickname(),
 				StoreOwnerResponse.of(store.getMember())

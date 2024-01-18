@@ -23,7 +23,7 @@ public class FoodCategoryRequest {
 	public List<FoodCategory> toEntities() {
 		return foodCategories.stream()
 			.map(foodCategory -> FoodCategory.builder()
-				.foodType(FoodType.of(foodCategory))
+				.foodType(FoodType.of(foodCategory).getFoodName())
 				.build())
 			.toList();
 	}

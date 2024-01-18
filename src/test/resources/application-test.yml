@@ -18,6 +18,9 @@ spring:
     jdbc:
       initialize-schema: embedded
 
+  flyway:
+    enabled: false
+
 cloud:
   aws:
     credentials:

@@ -2,7 +2,6 @@ package com.pd.gilgeorigoreuda.store.service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.image.service.ImageService;
@@ -37,7 +36,7 @@ public class StoreService {
 	private final MemberRepository memberRepository;
 	private final ImageService imageService;
 
-	private static final Integer BOUNDARY = 10;
+	private static final Integer BOUNDARY_10M = 10;
 
 	@Transactional
 	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest storeCreateRequest) {
@@ -68,7 +67,8 @@ public class StoreService {
 
 		StreetAddress streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
 
-		checkIsAlreadyExistInBoundary(
+		checkIsAlreadyExistInBoundaryExceptTargetId(
+				storeId,
 				storeUpdateRequest.getLat(),
 				storeUpdateRequest.getLng(),
 				streetAddress.getLargeAddress(),
@@ -77,21 +77,10 @@ public class StoreService {
 
 		List<FoodCategory> foodCategories = storeUpdateRequest.getFoodCategories().toEntities();
 
-		storeForUpdate.updateStoreInfo(
-				storeUpdateRequest.getName(),
-				storeUpdateRequest.getStoreType(),
-				storeUpdateRequest.getOpenTime(),
-				storeUpdateRequest.getCloseTime(),
-				storeUpdateRequest.getPurchaseType(),
-				storeUpdateRequest.getBusinessDates(),
-				storeUpdateRequest.getImageUrl(),
-				storeUpdateRequest.getLat(),
-				storeUpdateRequest.getLng(),
-				storeUpdateRequest.getStreetAddress(),
-				member.getNickname()
-		);
-
+		storeForUpdate.updateStoreInfo(storeUpdateRequest, member.getNickname());
 		storeForUpdate.addFoodCategories(foodCategories);
+
+		storeRepository.save(storeForUpdate);
 
 		deleteOriginalImage(storeUpdateRequest, storeForUpdate);
 	}
@@ -126,31 +115,55 @@ public class StoreService {
 		imageService.deleteSingleImage(store.getImageUrl());
 	}
 
-	private void checkIsAlreadyExistInBoundary(final BigDecimal lat, final BigDecimal lng, final String largeAddress, final String mediumAddress) {
-		Optional<Long> isAlreadyExistInBoundary = storeNativeQueryRepository.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY);
-
-		if (isAlreadyExistInBoundary.isPresent()) {
-			throw new AlreadyExistInBoundaryException();
-		}
+	private void checkIsAlreadyExistInBoundary(
+			final BigDecimal lat,
+			final BigDecimal lng,
+			final String largeAddress,
+			final String mediumAddress
+	) {
+		storeNativeQueryRepository
+				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY_10M)
+				.ifPresent(existingId -> {
+					throw new AlreadyExistInBoundaryException();
+				});
 	}
 
-	private Store findStoreWithMemberAndCategories(Long storeId) {
+	private void checkIsAlreadyExistInBoundaryExceptTargetId(
+			final Long targetStoreId,
+			final BigDecimal lat,
+			final BigDecimal lng,
+			final String largeAddress,
+			final String mediumAddress
+	) {
+		storeNativeQueryRepository
+				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY_10M)
+				.filter(existingId -> !existingId.equals(targetStoreId))
+				.ifPresent(existingId -> {
+					throw new AlreadyExistInBoundaryException();
+				});
+	}
+
+	private Store findStoreWithMemberAndCategories(final Long storeId) {
 		return storeRepository.findStoreWithMemberAndCategories(storeId)
 			.orElseThrow(NoSuchStoreException::new);
 	}
 
-	private Member findMember(Long memberId) {
+	private Member findMember(final Long memberId) {
 		return memberRepository.findById(memberId)
 			.orElseThrow(NoSuchMemberException::new);
 	}
 
-	private Store findStoreWithMember(Long storeId) {
+	private Store findStoreWithMember(final Long storeId) {
 		return storeRepository.findStoreWithMember(storeId)
 			.orElseThrow(NoSuchStoreException::new);
 	}
 
-	private static int getDistanceBetweenStoreAndMember(final BigDecimal memberLat, final BigDecimal memberLng,
-														final BigDecimal targetStoreLat, final BigDecimal targetStoreLng) {
+	private static int getDistanceBetweenStoreAndMember(
+			final BigDecimal memberLat,
+			final BigDecimal memberLng,
+			final BigDecimal targetStoreLat,
+			final BigDecimal targetStoreLng
+	) {
 		return DistanceCalculator.calculateDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
 	}
 
