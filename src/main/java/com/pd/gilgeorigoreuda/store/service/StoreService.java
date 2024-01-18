@@ -2,7 +2,6 @@ package com.pd.gilgeorigoreuda.store.service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.image.service.ImageService;
@@ -37,7 +36,7 @@ public class StoreService {
 	private final MemberRepository memberRepository;
 	private final ImageService imageService;
 
-	private static final Integer BOUNDARY = 10;
+	private static final Integer BOUNDARY_10M = 10;
 
 	@Transactional
 	public StoreCreateResponse saveStore(final Long memberId, final StoreCreateRequest storeCreateRequest) {
@@ -123,7 +122,7 @@ public class StoreService {
 			final String mediumAddress
 	) {
 		storeNativeQueryRepository
-				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY)
+				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY_10M)
 				.ifPresent(existingId -> {
 					throw new AlreadyExistInBoundaryException();
 				});
@@ -137,7 +136,7 @@ public class StoreService {
 			final String mediumAddress
 	) {
 		storeNativeQueryRepository
-				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY)
+				.isAlreadyExistInBoundary(lat, lng, largeAddress, mediumAddress, BOUNDARY_10M)
 				.filter(existingId -> !existingId.equals(targetStoreId))
 				.ifPresent(existingId -> {
 					throw new AlreadyExistInBoundaryException();

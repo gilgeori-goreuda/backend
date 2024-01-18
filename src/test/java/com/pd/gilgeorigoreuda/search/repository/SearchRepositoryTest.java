@@ -1,19 +1,15 @@
 package com.pd.gilgeorigoreuda.search.repository;
 
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
-import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import com.pd.gilgeorigoreuda.settings.RepositoryTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.*;
-import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,7 +18,6 @@ class SearchRepositoryTest extends RepositoryTest {
 
     private static final BigDecimal REFERENCE_LAT = new BigDecimal("37.565366567584924");
     private static final BigDecimal REFERENCE_LNG = new BigDecimal("126.97718688550951");
-    private static final Double DISTANCE_1KM = 0.00012754530697130809;
     private static final Integer BOUNDARY_1KM = 1000;
 
     @BeforeEach
@@ -52,8 +47,16 @@ class SearchRepositoryTest extends RepositoryTest {
                 .member(member)
                 .foodCategories(
                         Arrays.asList(
-                                FoodCategory.builder().foodType(FoodType.ODENG.getFoodName()).build(),
-                                FoodCategory.builder().foodType(FoodType.BUNGEOPPANG.getFoodName()).build()
+                                FoodCategory.builder()
+                                        .id(1L)
+                                        .foodType(FoodType.ODENG.getFoodName())
+                                        .store(Store.builder().id(1L).build())
+                                        .build(),
+                                FoodCategory.builder()
+                                        .id(2L)
+                                        .foodType(FoodType.BUNGEOPPANG.getFoodName())
+                                        .store(Store.builder().id(1L).build())
+                                        .build()
                         )
                 )
                 .totalReportCount(0)
@@ -79,8 +82,16 @@ class SearchRepositoryTest extends RepositoryTest {
                 .member(member)
                 .foodCategories(
                         Arrays.asList(
-                                FoodCategory.builder().foodType(FoodType.ODENG.getFoodName()).build(),
-                                FoodCategory.builder().foodType(FoodType.EGGBREAD.getFoodName()).build()
+                                FoodCategory.builder()
+                                        .id(3L)
+                                        .foodType(FoodType.ODENG.getFoodName())
+                                        .store(Store.builder().id(2L).build())
+                                        .build(),
+                                FoodCategory.builder()
+                                        .id(4L)
+                                        .foodType(FoodType.EGGBREAD.getFoodName())
+                                        .store(Store.builder().id(2L).build())
+                                        .build()
                         )
                 )
                 .totalReportCount(0)
@@ -97,7 +108,7 @@ class SearchRepositoryTest extends RepositoryTest {
                 .openTime(LocalTime.of(10, 0))
                 .closeTime(LocalTime.of(20, 0))
                 .purchaseType(PurchaseType.CASH)
-                .imageUrl("http://image2.com")
+                .imageUrl("http://image3.com")
                 .lat(new BigDecimal("37.56479901162554"))
                 .lng(new BigDecimal("126.97756057734291"))
                 .streetAddress(StreetAddress.of("서울특별시 중구 세종대로353"))
@@ -106,7 +117,11 @@ class SearchRepositoryTest extends RepositoryTest {
                 .member(member)
                 .foodCategories(
                         Arrays.asList(
-                                FoodCategory.builder().foodType(FoodType.TANGHURU.getFoodName()).build()
+                                FoodCategory.builder()
+                                        .id(5L)
+                                        .foodType(FoodType.TANGHURU.getFoodName())
+                                        .store(Store.builder().id(3L).build())
+                                        .build()
                         )
                 )
                 .totalReportCount(0)
@@ -123,7 +138,7 @@ class SearchRepositoryTest extends RepositoryTest {
                 .openTime(LocalTime.of(10, 0))
                 .closeTime(LocalTime.of(20, 0))
                 .purchaseType(PurchaseType.CASH)
-                .imageUrl("http://image3.com")
+                .imageUrl("http://image4.com")
                 .lat(new BigDecimal("37.57603352407639"))
                 .lng(new BigDecimal("126.9732441149734"))
                 .streetAddress(StreetAddress.of("서울특별시 중구 세종대로77"))
@@ -132,8 +147,16 @@ class SearchRepositoryTest extends RepositoryTest {
                 .member(member)
                 .foodCategories(
                         Arrays.asList(
-                                FoodCategory.builder().foodType(FoodType.FIRED.getFoodName()).build(),
-                                FoodCategory.builder().foodType(FoodType.HOTTEOK.getFoodName()).build()
+                                FoodCategory.builder()
+                                        .id(6L)
+                                        .foodType(FoodType.FIRED.getFoodName())
+                                        .store(Store.builder().id(4L).build())
+                                        .build(),
+                                FoodCategory.builder()
+                                        .id(7L)
+                                        .foodType(FoodType.HOTTEOK.getFoodName())
+                                        .store(Store.builder().id(4L).build())
+                                        .build()
                         )
                 )
                 .totalReportCount(0)
@@ -148,14 +171,42 @@ class SearchRepositoryTest extends RepositoryTest {
     }
 
     @Test
-    @DisplayName("거리 1km 이내의 오뎅 가게들을 찾는다.")
-    public void findStoresByLatLngAndFoodType() {
-        // given
-
-        // when
+    @DisplayName("음식 카테고리 조건이 null 인 경우 반경 1km 이내의 모든 가게들을 찾는다.")
+    public void searchStoresByLatLngWithoutFoodTypeMustContainsAllStores() {
+        // given & when
+        List<Store> result = searchRepository.searchStoresByLatLngAndFoodType(REFERENCE_LAT, REFERENCE_LNG, null, BOUNDARY_1KM);
 
         // then
+        assertThat(result).hasSize(3)
+                .extracting(Store::getId)
+                .contains(1L, 2L, 3L);
+    }
 
+    @Test
+    @DisplayName("반경 1km 이내의 오뎅 카테고리를 포함한 가게들을 찾는다.")
+    public void searchStoresByLatLngAndWithFoodType() {
+        // given & when
+        List<Store> result = searchRepository.searchStoresByLatLngAndFoodType(REFERENCE_LAT, REFERENCE_LNG, FoodType.ODENG.getFoodName(), BOUNDARY_1KM);
+
+        // then
+        assertThat(result).hasSize(2)
+                .flatExtracting(Store::getFoodCategories)
+                .extracting(FoodCategory::getFoodType)
+                .contains(FoodType.ODENG.getFoodName())
+                .doesNotContainSequence(FoodType.TANGHURU.getFoodName(), FoodType.FIRED.getFoodName(), FoodType.HOTTEOK.getFoodName());
+    }
+
+    @Test
+    @DisplayName("반경 1km 밖에 있는 가게는 포함하지 않는다.")
+    public void searchStoresByLatLngAndFoodTypeMustNotContainsOutOfBoundary() {
+        // given & when
+        List<Store> result = searchRepository.searchStoresByLatLngAndFoodType(REFERENCE_LAT, REFERENCE_LNG, null, BOUNDARY_1KM);
+
+        // then
+        assertThat(result).hasSize(3)
+                .extracting(Store::getId)
+                .contains(1L, 2L, 3L)
+                .doesNotContain(4L);
     }
 
 }
