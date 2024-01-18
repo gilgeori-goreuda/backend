@@ -19,7 +19,7 @@ public class SearchService {
 
     private final SearchRepository searchRepository;
 
-    private static final Double DISTANCE_1KM =0.00012754530697130809;
+    private static final Integer BOUNDARY_1KM = 10;
 
     public SearchStoreListResponse searchByLatLngAndFoodCategories(
             final BigDecimal memberLat,
@@ -29,7 +29,7 @@ public class SearchService {
             final String foodType
     ) {
         List<SearchStoreResponse> searchStoreResponse = searchRepository
-                .findStoresByLatLngAndFoodTypes(referenceLat, referenceLng, foodType, DISTANCE_1KM)
+                .searchStoresByLatLngAndFoodType(referenceLat, referenceLng, foodType, BOUNDARY_1KM)
                 .stream()
                 .map(store -> mapToAddressSearchResponse(memberLat, memberLng, store))
                 .toList();
