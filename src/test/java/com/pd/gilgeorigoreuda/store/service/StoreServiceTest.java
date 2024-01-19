@@ -10,11 +10,13 @@ import com.pd.gilgeorigoreuda.store.dto.request.StoreUpdateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreCreateResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreResponse;
 import com.pd.gilgeorigoreuda.store.exception.AlreadyExistInBoundaryException;
+import com.pd.gilgeorigoreuda.store.exception.NoOwnerMemberException;
 import com.pd.gilgeorigoreuda.store.exception.NoSuchStoreException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
@@ -25,6 +27,7 @@ import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.SoftAssertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
+import static org.mockito.Mockito.*;
 
 class StoreServiceTest extends ServiceTest {
 
@@ -230,6 +233,10 @@ class StoreServiceTest extends ServiceTest {
 
         private final Member member = ServiceTest.MEMBER;
         private final Store store = ServiceTest.STORE;
+
+        // Store 객체의 메소드 isSameImage를 Mocking 하기 위한 Store Mock 객체
+        private final Store mockStore = mock(Store.class);
+
         private StoreUpdateRequest newImageRequest;
         private StoreUpdateRequest sameImageRequest;
         private StoreUpdateRequest newCategoryRequest;
@@ -294,7 +301,7 @@ class StoreServiceTest extends ServiceTest {
         void deleteOriginalImageWhenImageIsChanged() {
             // given
             given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
-                    .willReturn(Optional.of(store));
+                    .willReturn(Optional.of(mockStore));
 
             given(memberRepository.findById(anyLong()))
                     .willReturn(Optional.of(member));
@@ -307,11 +314,13 @@ class StoreServiceTest extends ServiceTest {
                     TEST_BOUNDARY)
             ).willReturn(Optional.empty());
 
+            given(mockStore.isSameImage(mockStore.getImageUrl())).willReturn(false);
+
             // when
-            storeService.updateStore(member.getId(), store.getId(), newImageRequest);
+            storeService.updateStore(member.getId(), mockStore.getId(), newImageRequest);
 
             // then
-            then(imageService).should(times(1)).deleteSingleImage(anyString());
+            then(imageService).should(times(1)).deleteSingleImage(mockStore.getImageUrl());
         }
 
         @Test
@@ -319,7 +328,7 @@ class StoreServiceTest extends ServiceTest {
         void notDeleteOriginalImageWhenImageIsNotChanged() {
             // given
             given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
-                    .willReturn(Optional.of(store));
+                    .willReturn(Optional.of(mockStore));
 
             given(memberRepository.findById(anyLong()))
                     .willReturn(Optional.of(member));
@@ -332,8 +341,10 @@ class StoreServiceTest extends ServiceTest {
                     TEST_BOUNDARY)
             ).willReturn(Optional.empty());
 
+            given(mockStore.isSameImage(mockStore.getImageUrl())).willReturn(true);
+
             // when
-            storeService.updateStore(member.getId(), store.getId(), sameImageRequest);
+            storeService.updateStore(member.getId(), mockStore.getId(), sameImageRequest);
 
             // then
             then(imageService).should(never()).deleteSingleImage(anyString());
@@ -371,6 +382,68 @@ class StoreServiceTest extends ServiceTest {
                             .isEqualTo(List.of("오뎅", "타코야끼"));
                 }
             );
+        }
+    }
+
+    @Nested
+    @DisplayName("가게 삭제 테스트")
+    class DeleteStore {
+
+        private final Member member = ServiceTest.MEMBER;
+        private final Store store = ServiceTest.STORE;
+
+        // Store 객체의 메소드를 Mocking 하기 위한 Store Mock 객체
+        private final Store storeMock = mock(Store.class);
+
+
+        @Test
+        @DisplayName("가게 제보자인 경우만 삭제 성공")
+        void deleteStoreSuccessWhenMemberIsReporter() {
+            // given
+            given(storeRepository.findStoreWithMember(anyLong()))
+                    .willReturn(Optional.of(storeMock));
+
+            given(storeMock.isOwner(member.getId()))
+                    .willReturn(true);
+
+            // when
+            storeService.deleteStore(member.getId(), storeMock.getId());
+
+            // then
+            then(storeRepository).should(times(1)).deleteById(anyLong());
+        }
+
+        @Test
+        @DisplayName("가게 제보자가 아닌 경우 삭제 실패")
+        void deleteStoreFailWhenMemberIsNotReporter() {
+            // given
+            given(storeRepository.findStoreWithMember(anyLong()))
+                    .willReturn(Optional.of(storeMock));
+
+            given(storeMock.isOwner(member.getId()))
+                    .willReturn(false);
+
+            // when & then
+            assertThatThrownBy(() -> storeService.deleteStore(member.getId(), storeMock.getId()))
+                    .isInstanceOf(NoOwnerMemberException.class)
+                    .extracting("errorCode")
+                    .isEqualTo("S005");
+
+            then(storeRepository).should(never()).deleteById(anyLong());
+        }
+
+        @Test
+        @DisplayName("가게 삭제 시 기존 이미지 삭제")
+        void deleteOriginalImageWhenStoreIsDeleted() {
+            // given
+            given(storeRepository.findStoreWithMember(anyLong()))
+                    .willReturn(Optional.of(store));
+
+            // when
+            storeService.deleteStore(member.getId(), store.getId());
+
+            // then
+            then(imageService).should(times(1)).deleteSingleImage(anyString());
         }
     }
 
