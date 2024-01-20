@@ -198,35 +198,6 @@ class StoreServiceTest extends ServiceTest {
         then(storeRepository).should(never()).save(any(Store.class));
     }
 
-    @Test
-    @DisplayName("storeId에 해당하는 Store 정보 반환")
-    void getStoreSuccess() {
-        // given
-        given(storeRepository.findStoreWithMemberAndCategories(ServiceTest.STORE.getId()))
-                .willReturn(Optional.of(ServiceTest.STORE));
-
-        // when
-        StoreResponse storeResponse = storeService.getStore(1L, memberLat, memberLng);
-
-        // then
-        assertThat(storeResponse).isNotNull();
-        assertThat(storeResponse.getId()).isEqualTo(ServiceTest.STORE.getId());
-    }
-
-    @Test
-    @DisplayName("유효하지 않는 id로 가게 조회시 예외가 발생")
-    void shouldThrowExceptionWhenStoreIdInvalid() {
-        // given
-        given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
-                .willReturn(Optional.empty());
-
-        // when & then
-        assertThatThrownBy(() -> storeService.getStore(1L, memberLat, memberLng))
-                .isInstanceOf(NoSuchStoreException.class)
-                .extracting("errorCode")
-                .isEqualTo("S001");
-    }
-
     @Nested
     @DisplayName("가게 정보 변경 시 카테고리, 이미지 업데이트 테스트")
     class UpdateStoreInfo {
@@ -373,14 +344,14 @@ class StoreServiceTest extends ServiceTest {
 
             // then
             assertSoftly(
-                softly -> {
-                    softly.assertThat(store.getFoodCategories()).hasSize(2);
-                    softly.assertThat(store.getFoodCategories())
-                            .extracting("foodType")
-                            .usingRecursiveComparison()
-                            .ignoringCollectionOrder()
-                            .isEqualTo(List.of("오뎅", "타코야끼"));
-                }
+                    softly -> {
+                        softly.assertThat(store.getFoodCategories()).hasSize(2);
+                        softly.assertThat(store.getFoodCategories())
+                                .extracting("foodType")
+                                .usingRecursiveComparison()
+                                .ignoringCollectionOrder()
+                                .isEqualTo(List.of("오뎅", "타코야끼"));
+                    }
             );
         }
     }
@@ -445,6 +416,50 @@ class StoreServiceTest extends ServiceTest {
             // then
             then(imageService).should(times(1)).deleteSingleImage(anyString());
         }
+    }
+
+    @Test
+    @DisplayName("storeId에 해당하는 Store 정보 반환")
+    void getStoreSuccess() {
+        // given
+        given(storeRepository.findStoreWithMemberAndCategories(ServiceTest.STORE.getId()))
+                .willReturn(Optional.of(ServiceTest.STORE));
+
+        // when
+        StoreResponse storeResponse = storeService.getStore(1L, memberLat, memberLng);
+
+        // then
+        assertThat(storeResponse).isNotNull();
+        assertThat(storeResponse.getId()).isEqualTo(ServiceTest.STORE.getId());
+    }
+
+    @Test
+    @DisplayName("유효하지 않는 id로 가게 조회시 예외가 발생")
+    void shouldThrowExceptionWhenStoreIdInvalid() {
+        // given
+        given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
+                .willReturn(Optional.empty());
+
+        // when & then
+        assertThatThrownBy(() -> storeService.getStore(1L, memberLat, memberLng))
+                .isInstanceOf(NoSuchStoreException.class)
+                .extracting("errorCode")
+                .isEqualTo("S001");
+    }
+
+    @Test
+    @DisplayName("가게 정보 반환 시 가게와 사용자의 거리 반환")
+    void getStoreWithDistance() {
+        // given
+        given(storeRepository.findStoreWithMemberAndCategories(ServiceTest.STORE.getId()))
+                .willReturn(Optional.of(ServiceTest.STORE));
+
+        // when
+        StoreResponse storeResponse = storeService.getStore(1L, memberLat, memberLng);
+
+        // then
+        assertThat(storeResponse).isNotNull();
+        assertThat(storeResponse.getDistanceFromMember()).isNotNull();
     }
 
 }
