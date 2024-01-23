@@ -1,9 +1,9 @@
 version: "3"
 services:
   mysqldb:
+    container_name: mysql-dev-db
     image: mysql
     platform: linux/x86_64
-    container_name: dev-mysql:latest
     restart: always
     environment:
       MYSQL_DATABASE: gilgeorigoreuda
