@@ -19,7 +19,7 @@ public class SearchService {
 
     private final SearchRepository searchRepository;
 
-    private static final Integer BOUNDARY_1KM = 10;
+    private static final Integer BOUNDARY_1KM = 1000;
 
     public SearchStoreListResponse searchByLatLngAndFoodCategories(
             final BigDecimal memberLat,
