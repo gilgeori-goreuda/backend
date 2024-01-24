@@ -30,11 +30,11 @@ else
   else
     echo "Failed to create network '$NETWORK_NAME'"
     exit 1
-  fi인
+  fi
 fi
 
 # 새로운 컨테이너 실행
-sudo docker compose -p compose-dev -f compose-dev.yml pull backend-dev
+sudo docker compose -p compose-dev -f compose-dev.yml pull
 sudo docker compose -p compose-dev -f compose-dev.yml up -d
 echo "새로운 compose-dev up"
 
