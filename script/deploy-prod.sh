@@ -8,7 +8,7 @@ fi
 # deploy.sh가 실행 중이지 않다면 lock 파일 생성
 touch /home/ubuntu/tmp/deploy-prod.lock
 
-# blue 컨테이너를 체크한다.
+# blue 컨테이너 체크
 BLUE_SERVER_UP=$(sudo docker compose -p compose-blue -f compose-blue.yml ps | grep Up)
 
 # 컨테이너 스위칭
@@ -28,7 +28,7 @@ fi
 
 sleep 10
 
-# 네트워크가 존재 확인
+# 도커 네트워크 존재 확인
 NETWORK_NAME="gilgeorigoreuda-network"
 
 sudo docker network inspect $NETWORK_NAME >/dev/null 2>&1
@@ -47,7 +47,7 @@ else
   fi
 fi
 
-# 새로운 버전 서버 실행 확인
+# 새로운 컨테이너가 제대로 떴는지 확인
 NEW_SERVER_UP=$(sudo docker compose -p compose-${AFTER_SERVER_COLOR} -f compose-${AFTER_SERVER_COLOR}.yml ps | grep Up)
 
 if [ -n "$NEW_SERVER_UP" ]; then
@@ -62,7 +62,7 @@ if [ -n "$NEW_SERVER_UP" ]; then
     echo "compose-nginx is already up."
   fi
 
-  # nginx.config를 컨테이너에 맞게 변경해주고 reload 한다
+  # nginx.config를 컨테이너에 맞게 설정 변경해주고 nginx service reload
   envsubst '$AFTER_SERVER_COLOR' < conf-prod/nginx-${AFTER_SERVER_COLOR}.template > conf-prod/nginx.conf
   echo "nginx reload"
   sudo docker compose -p compose-nginx -f compose-nginx.yml exec nginx nginx -s reload
