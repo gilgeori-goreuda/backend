@@ -11,7 +11,7 @@ public class StoreAvgUpdateScheduler {
 
     private final StoreAvgJob storeAvgJob;
 
-    @Scheduled(cron = "0 0/3 * * * ?")
+    @Scheduled(cron = "0 0 5 * * ?")
     public void updateStoreAvg() {
         storeAvgJob.run();
     }
