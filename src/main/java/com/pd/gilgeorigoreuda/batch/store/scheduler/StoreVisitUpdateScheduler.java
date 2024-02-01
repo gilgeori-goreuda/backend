@@ -11,7 +11,7 @@ public class StoreVisitUpdateScheduler {
 
     private final StoreVisitJob storeVisitJob;
 
-    @Scheduled(cron = "0 0/5 * * * ?")
+    @Scheduled(cron = "0 0 5 * * ?")
     public void updateStoreVisit() {
         storeVisitJob.run();
     }
