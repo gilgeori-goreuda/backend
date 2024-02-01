@@ -13,32 +13,31 @@ import java.time.LocalDateTime;
 
 public interface StoreRepository extends JpaRepository<Store, Long> {
 
-	@Query("select s "
-		+ "from Store s "
-		+ "left join fetch s.member m "
-		+ "left join fetch s.foodCategories fc "
-		+ "where s.id = :storeId")
+	@Query("SELECT s "
+		+ "FROM Store s "
+		+ "LEFT JOIN FETCH s.member m "
+		+ "LEFT JOIN FETCH s.foodCategories fc "
+		+ "WHERE s.id = :storeId")
 	Optional<Store> findStoreWithMemberAndCategories(@Param("storeId") final Long storeId);
 
-	@Query("select s "
-		+ "from Store s "
-		+ "left join fetch s.member m "
-		+ "where s.id = :storeId")
+	@Query("SELECT s "
+		+ "FROM Store s "
+		+ "LEFT JOIN FETCH s.member m "
+		+ "WHERE s.id = :storeId")
 	Optional<Store> findStoreWithMember(@Param("storeId") final Long storeId);
 
-	@Query("select s " +
-		"from Store s " +
-		"where s.createdAt >= :startDay and s.createdAt <= :endDay " +
-		"order by s.createdAt desc " +
-		"limit 10")
-	List<Store> findAllByBetweenDay(@Param("startDay") final LocalDateTime startDay, @Param("endDay") final LocalDateTime endDay);
+	@Query("SELECT s " +
+		"FROM Store s " +
+		"WHERE s.createdAt >= :startDay AND s.createdAt <= :endDay " +
+		"ORDER BY s.createdAt DESC " +
+		"LIMIT 10")
+	List<Store> findStoresByBetweenDay(@Param("startDay") final LocalDateTime startDay, @Param("endDay") final LocalDateTime endDay);
 
-	@Query("select s " +
-		"from Store s " +
-		"order by ((0.713 * (s.averageRating / 5)) + (0.287 * (s.totalVisitCount * 0.01))) " +
-		"desc " +
-		"limit 10")
-	List<Store> findStoresByWeightedAverageRating();
+	@Query("SELECT s " +
+		"FROM Store s " +
+		"ORDER BY ((0.713 * (s.averageRating / 5)) + (0.287 * (s.totalVisitCount * 0.01))) DESC " +
+		"LIMIT 10")
+	List<Store> findStoresByRateAndVisitCount();
 
 	@Modifying(clearAutomatically = true)
 	@Query(value = "update stores s " +

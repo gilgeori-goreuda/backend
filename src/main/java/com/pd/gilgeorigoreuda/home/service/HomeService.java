@@ -21,7 +21,7 @@ public class HomeService {
         LocalDateTime startDay = LocalDateTime.now().minusDays(7);
         LocalDateTime endDay = LocalDateTime.now();
 
-        List<PlaceResponse> placeResponseList = storeRepository.findAllByBetweenDay(startDay, endDay)
+        List<PlaceResponse> placeResponseList = storeRepository.findStoresByBetweenDay(startDay, endDay)
                 .stream()
                 .map(PlaceResponse::of)
                 .toList();
@@ -30,7 +30,7 @@ public class HomeService {
     }
 
     public PlaceListResponse getHotPlace() {
-        List<PlaceResponse> placeResponseList = storeRepository.findStoresByWeightedAverageRating()
+        List<PlaceResponse> placeResponseList = storeRepository.findStoresByRateAndVisitCount()
                 .stream()
                 .map(PlaceResponse::of)
                 .toList();
