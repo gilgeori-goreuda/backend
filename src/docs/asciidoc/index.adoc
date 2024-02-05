@@ -81,3 +81,26 @@ include::{snippets}/store-controller-test/delete-store/path-parameters.adoc[]
 
 ==== Response
 include::{snippets}/store-controller-test/delete-store/http-response.adoc[]
+
+== 가게 방문 API
+
+=== 가게 방문 기록 제보(생성) (POST /visit/stores/{storeId})
+
+==== Request
+include::{snippets}/visit-controller-test/visit-success/http-request.adoc[]
+include::{snippets}/visit-controller-test/visit-success/request-headers.adoc[]
+include::{snippets}/visit-controller-test/visit-success/path-parameters.adoc[]
+include::{snippets}/visit-controller-test/visit-success/request-fields.adoc[]
+
+==== Response
+include::{snippets}/visit-controller-test/visit-success/http-response.adoc[]
+include::{snippets}/visit-controller-test/visit-success/response-fields.adoc[]
+
+
+=== 가게 방문 검증 (POST /visit/verification/stores/{storeId})
+
+==== Request
+include::{snippets}/visit-controller-test/verify-visit-success/http-request.adoc[]
+include::{snippets}/visit-controller-test/verify-visit-success/request-headers.adoc[]
+include::{snippets}/visit-controller-test/verify-visit-success/path-parameters.adoc[]
+include::{snippets}/visit-controller-test/verify-visit-success/request-fields.adoc[]

@@ -19,16 +19,13 @@ import org.springframework.restdocs.mockmvc.RestDocumentationResultHandler;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.pd.gilgeorigoreuda.store.controller.StoreController;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
 
-@WebMvcTest({
-	StoreController.class,
-})
+@WebMvcTest
 @Import(RestDocsConfiguration.class)
 @ExtendWith(RestDocumentationExtension.class)
 @MockBean(JpaMetamodelMappingContext.class)

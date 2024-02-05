@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.visit.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pd.gilgeorigoreuda.store.domain.entity.StoreVisitRecord;
 
 import lombok.Getter;
@@ -12,7 +13,10 @@ import java.time.LocalDateTime;
 public class VisitResponse {
 
     private Long visitRecordId;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime visitRecordTime;
+
     private Boolean isVisited;
     private Integer walkingDistance;
     private Integer approximateWalkingTime;
