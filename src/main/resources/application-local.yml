@@ -13,11 +13,17 @@ spring:
       hibernate:
         format_sql: true
 
+  flyway:
+    enabled: false
+
   batch:
     job:
-      enabled: false
+      enabled: true
     jdbc:
       initialize-schema: embedded
+
+  main:
+    allow-bean-definition-overriding: true
 
 cloud:
   aws:
@@ -45,3 +51,8 @@ security:
     secret-key: gilgeorigoreudagilgeorigoreudagilgeorigoreudagilgeorigoreuda
     access-expiration-time: 3600000 # 1시간
     refresh-expiration-time: 86400000 # 24시간
+
+management:
+  endpoint:
+    health:
+      enabled: false

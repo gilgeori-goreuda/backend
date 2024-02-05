@@ -21,6 +21,9 @@ spring:
   flyway:
     enabled: false
 
+  main:
+    allow-bean-definition-overriding: true
+
 cloud:
   aws:
     credentials:
@@ -47,3 +50,8 @@ security:
     secret-key: gilgeorigoreudagilgeorigoreudagilgeorigoreudagilgeorigoreuda
     access-expiration-time: 3600000
     refresh-expiration-time: 86400000
+
+management:
+  endpoint:
+    health:
+      enabled: false

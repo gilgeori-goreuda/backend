@@ -16,6 +16,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.MvcResult;
@@ -38,6 +39,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+@WebMvcTest(StoreController.class)
 @AutoConfigureRestDocs
 class StoreControllerTest extends ControllerTest {
 
@@ -197,6 +199,8 @@ class StoreControllerTest extends ControllerTest {
                                 )
                         )
                 );
+
+        then(storeService).should(times(1)).saveStore(anyLong(), any(StoreCreateRequest.class));
     }
 
     @Nested
@@ -705,7 +709,7 @@ class StoreControllerTest extends ControllerTest {
                 )
         );
 
-        when(storeService.getStore(anyLong(), any(BigDecimal.class), any(BigDecimal.class))).thenReturn(storeResponse);
+        given(storeService.getStore(anyLong(), any(BigDecimal.class), any(BigDecimal.class))).willReturn(storeResponse);
 
         // when
         ResultActions resultActions = performGetRequest(1L, "37.123456", "127.123456");
@@ -805,13 +809,15 @@ class StoreControllerTest extends ControllerTest {
                                 )
                         )).andReturn();
 
-        final StoreResponse response = objectMapper.readValue(
+        StoreResponse response = objectMapper.readValue(
                 mvcResult.getResponse().getContentAsString(),
                 StoreResponse.class
         );
 
         assertThat(response).usingRecursiveComparison()
                 .isEqualTo(storeResponse);
+
+        then(storeService).should(times(1)).getStore(anyLong(), any(BigDecimal.class), any(BigDecimal.class));
     }
 
     @Test
@@ -902,6 +908,8 @@ class StoreControllerTest extends ControllerTest {
                                 )
                         )
                 );
+
+        then(storeService).should(times(1)).updateStore(anyLong(), eq(1L), any(StoreUpdateRequest.class));
     }
 
     @Test
@@ -926,6 +934,8 @@ class StoreControllerTest extends ControllerTest {
                                 )
                         )
                 );
+
+        then(storeService).should(times(1)).deleteStore(anyLong(), eq(1L));
     }
 
 }
