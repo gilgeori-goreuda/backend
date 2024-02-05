@@ -1,10 +1,7 @@
 
 ## 🎤 소개
-<br>
-<a href="https://gilgeoirgoreuda.site/">
-  <img src="https://img.shields.io/badge/💡-Gilgeorigoreuda_Site-EEEEEE?style=square"/>
-</a>
-<br><br>
+[![codecov](https://codecov.io/gh/gilgeori-goreuda/backend/graph/badge.svg?token=YVJL1SJQ3I)](https://codecov.io/gh/gilgeori-goreuda/backend)
+
 <img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/de5c0617-d8fc-4290-86b2-ee5cf93680c7">
 <br><br><br>
 <img width="1344" alt="gilgeorigoreuda-backend-stack" src="https://github.com/gilgeori-goreuda/backend/assets/82498610/f6976c9e-0bb4-4074-bbbb-cb5e8ff8720b">
