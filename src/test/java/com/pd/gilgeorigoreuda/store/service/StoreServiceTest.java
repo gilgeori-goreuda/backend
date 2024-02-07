@@ -16,18 +16,18 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
 import java.math.BigDecimal;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+import static com.pd.gilgeorigoreuda.settings.fixtures.MemberFixtures.*;
+import static com.pd.gilgeorigoreuda.settings.fixtures.StoreFixtures.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.SoftAssertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.*;
-import static org.mockito.Mockito.*;
 
 class StoreServiceTest extends ServiceTest {
 
@@ -83,10 +83,10 @@ class StoreServiceTest extends ServiceTest {
                 TEST_BOUNDARY)
         ).willReturn(Optional.empty());
 
-        given(storeRepository.save(any(Store.class))).willReturn(ServiceTest.STORE);
+        given(storeRepository.save(any(Store.class))).willReturn(BUNGEOPPANG());
 
         // when
-        StoreCreateResponse response = storeService.saveStore(1L, storeCreateRequest);
+        StoreCreateResponse response = storeService.saveStore(BUNGEOPPANG().getId(), storeCreateRequest);
 
         // then
         assertNotNull(response);
@@ -116,10 +116,10 @@ class StoreServiceTest extends ServiceTest {
                 streetAddress.getLargeAddress(),
                 streetAddress.getMediumAddress(),
                 TEST_BOUNDARY)
-        ).willReturn(Optional.of(1L));
+        ).willReturn(Optional.of(BUNGEOPPANG().getId()));
 
         // when & then
-        assertThatThrownBy(() -> storeService.saveStore(1L, storeCreateRequest))
+        assertThatThrownBy(() -> storeService.saveStore(BUNGEOPPANG().getId(), storeCreateRequest))
                 .isInstanceOf(AlreadyExistInBoundaryException.class)
                 .extracting("errorCode")
                 .isEqualTo("S006");
@@ -135,10 +135,10 @@ class StoreServiceTest extends ServiceTest {
         StreetAddress streetAddress = StreetAddress.of(storeUpdateRequest.getStreetAddress());
 
         given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
-                .willReturn(Optional.of(ServiceTest.STORE));
+                .willReturn(Optional.of(BUNGEOPPANG()));
 
         given(memberRepository.findById(anyLong()))
-                .willReturn(Optional.of(ServiceTest.MEMBER));
+                .willReturn(Optional.of(KIM()));
 
         given(storeNativeQueryRepository.isAlreadyExistInBoundary(
                 storeUpdateRequest.getLat(),
@@ -149,7 +149,7 @@ class StoreServiceTest extends ServiceTest {
         ).willReturn(Optional.empty());
 
         // when
-        storeService.updateStore(1L, 1L, storeUpdateRequest);
+        storeService.updateStore(KIM().getId(), BUNGEOPPANG().getId(), storeUpdateRequest);
 
         // then
         assertAll(
@@ -163,13 +163,14 @@ class StoreServiceTest extends ServiceTest {
     @DisplayName("유효하지 않은 가게 id로 가게 정보 업데이트 호출 시 예외가 발생")
     void shouldThrowExceptionWhenStoreIdIsInvalid() {
         // given
+        final Long invalidStoreId = 1L;
         StoreUpdateRequest storeUpdateRequest = makeStoreUpdateRequest();
 
-        given(storeRepository.findStoreWithMemberAndCategories(1L))
+        given(storeRepository.findStoreWithMemberAndCategories(invalidStoreId))
                 .willReturn(Optional.empty());
 
         // when & then
-        assertThatThrownBy(() -> storeService.updateStore(1L, 1L, storeUpdateRequest))
+        assertThatThrownBy(() -> storeService.updateStore(KIM().getId(), invalidStoreId, storeUpdateRequest))
                 .isInstanceOf(NoSuchStoreException.class)
                 .extracting("errorCode")
                 .isEqualTo("S001");
@@ -181,16 +182,17 @@ class StoreServiceTest extends ServiceTest {
     @DisplayName("유효하지 않은 회원 id로 가게 정보 업데이트 호출 시 예외가 발생")
     void shouldThrowExceptionWhenMemberIdIsInvalid() {
         // given
+        final Long invalidMemberId = 1L;
         StoreUpdateRequest storeUpdateRequest = makeStoreUpdateRequest();
 
         given(storeRepository.findStoreWithMemberAndCategories(any()))
-                .willReturn(Optional.of(StoreServiceTest.STORE));
+                .willReturn(Optional.of(BUNGEOPPANG()));
 
         given(memberRepository.findById(anyLong()))
                 .willReturn(Optional.empty());
 
         // when & then
-        assertThatThrownBy(() -> storeService.updateStore(1L, 1L, storeUpdateRequest))
+        assertThatThrownBy(() -> storeService.updateStore(invalidMemberId, BUNGEOPPANG().getId(), storeUpdateRequest))
                 .isInstanceOf(NoSuchMemberException.class)
                 .extracting("errorCode")
                 .isEqualTo("M001");
@@ -202,8 +204,8 @@ class StoreServiceTest extends ServiceTest {
     @DisplayName("가게 정보 변경 시 카테고리, 이미지 업데이트 테스트")
     class UpdateStoreInfo {
 
-        private final Member member = ServiceTest.MEMBER;
-        private final Store store = ServiceTest.STORE;
+        private final Member member = KIM();
+        private final Store store = BUNGEOPPANG();
 
         // Store 객체의 메소드 isSameImage를 Mocking 하기 위한 Store Mock 객체
         private final Store mockStore = mock(Store.class);
@@ -214,48 +216,48 @@ class StoreServiceTest extends ServiceTest {
 
         private StoreUpdateRequest makeNewImageStoreUpdateRequest() {
             return new StoreUpdateRequest(
-                    "수정된 붕어빵 가게",
+                    "강남역 2번 출구 10M 앞",
                     "포장마차",
                     LocalTime.of(10, 0),
                     LocalTime.of(22, 30),
                     "현금",
                     "https://newImage.com",
                     "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
-                    BigDecimal.valueOf(37.123456),
-                    BigDecimal.valueOf(127.123456),
-                    "서울특별시 강남구 언주로1",
-                    new FoodCategoryRequest(List.of("붕어빵", "호떡"))
+                    BigDecimal.valueOf(37.49732853932101),
+                    BigDecimal.valueOf(127.02821485508554),
+                    "서울특별시 강남구 강남대로 396",
+                    new FoodCategoryRequest(List.of("붕어빵", "계란빵"))
             );
         }
 
         private StoreUpdateRequest makeSameImageStoreUpdateRequest() {
             return new StoreUpdateRequest(
-                    "수정된 붕어빵 가게",
+                    "강남역 2번 출구 10M 앞",
                     "포장마차",
                     LocalTime.of(10, 0),
                     LocalTime.of(22, 30),
                     "현금",
                     "https://image.com",
                     "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
-                    BigDecimal.valueOf(37.123456),
-                    BigDecimal.valueOf(127.123456),
-                    "서울특별시 강남구 언주로1",
-                    new FoodCategoryRequest(List.of("붕어빵", "호떡"))
+                    BigDecimal.valueOf(37.49732853932101),
+                    BigDecimal.valueOf(127.02821485508554),
+                    "서울특별시 강남구 강남대로 396",
+                    new FoodCategoryRequest(List.of("붕어빵", "계란빵"))
             );
         }
 
         private StoreUpdateRequest makeNewCategoryStoreUpdateRequest() {
             return new StoreUpdateRequest(
-                    "수정된 붕어빵 가게",
+                    "강남역 2번 출구 10M 앞",
                     "포장마차",
                     LocalTime.of(10, 0),
                     LocalTime.of(22, 30),
                     "현금",
                     "https://image.com",
                     "monday,tuesday,wednesday,thursday,friday,saturday,sunday",
-                    BigDecimal.valueOf(37.123456),
-                    BigDecimal.valueOf(127.123456),
-                    "서울특별시 강남구 언주로1",
+                    BigDecimal.valueOf(37.49732853932101),
+                    BigDecimal.valueOf(127.02821485508554),
+                    "서울특별시 강남구 강남대로 396",
                     new FoodCategoryRequest(List.of("오뎅", "타코야끼"))
             );
         }
@@ -360,8 +362,8 @@ class StoreServiceTest extends ServiceTest {
     @DisplayName("가게 삭제 테스트")
     class DeleteStore {
 
-        private final Member member = ServiceTest.MEMBER;
-        private final Store store = ServiceTest.STORE;
+        private final Member member = KIM();
+        private final Store store = BUNGEOPPANG();
 
         // Store 객체의 메소드를 Mocking 하기 위한 Store Mock 객체
         private final Store storeMock = mock(Store.class);
@@ -422,26 +424,27 @@ class StoreServiceTest extends ServiceTest {
     @DisplayName("storeId에 해당하는 Store 정보 반환")
     void getStoreSuccess() {
         // given
-        given(storeRepository.findStoreWithMemberAndCategories(ServiceTest.STORE.getId()))
-                .willReturn(Optional.of(ServiceTest.STORE));
+        given(storeRepository.findStoreWithMemberAndCategories(BUNGEOPPANG().getId()))
+                .willReturn(Optional.of(BUNGEOPPANG()));
 
         // when
-        StoreResponse storeResponse = storeService.getStore(1L, memberLat, memberLng);
+        StoreResponse storeResponse = storeService.getStore(BUNGEOPPANG().getId(), memberLat, memberLng);
 
         // then
         assertThat(storeResponse).isNotNull();
-        assertThat(storeResponse.getId()).isEqualTo(ServiceTest.STORE.getId());
+        assertThat(storeResponse.getId()).isEqualTo(BUNGEOPPANG().getId());
     }
 
     @Test
     @DisplayName("유효하지 않는 id로 가게 조회시 예외가 발생")
     void shouldThrowExceptionWhenStoreIdInvalid() {
         // given
+        final Long invalidStoreId = 1L;
         given(storeRepository.findStoreWithMemberAndCategories(anyLong()))
                 .willReturn(Optional.empty());
 
         // when & then
-        assertThatThrownBy(() -> storeService.getStore(1L, memberLat, memberLng))
+        assertThatThrownBy(() -> storeService.getStore(invalidStoreId, memberLat, memberLng))
                 .isInstanceOf(NoSuchStoreException.class)
                 .extracting("errorCode")
                 .isEqualTo("S001");
@@ -451,11 +454,11 @@ class StoreServiceTest extends ServiceTest {
     @DisplayName("가게 정보 반환 시 가게와 사용자의 거리 반환")
     void getStoreWithDistance() {
         // given
-        given(storeRepository.findStoreWithMemberAndCategories(ServiceTest.STORE.getId()))
-                .willReturn(Optional.of(ServiceTest.STORE));
+        given(storeRepository.findStoreWithMemberAndCategories(BUNGEOPPANG().getId()))
+                .willReturn(Optional.of(BUNGEOPPANG()));
 
         // when
-        StoreResponse storeResponse = storeService.getStore(1L, memberLat, memberLng);
+        StoreResponse storeResponse = storeService.getStore(BUNGEOPPANG().getId(), memberLat, memberLng);
 
         // then
         assertThat(storeResponse).isNotNull();
