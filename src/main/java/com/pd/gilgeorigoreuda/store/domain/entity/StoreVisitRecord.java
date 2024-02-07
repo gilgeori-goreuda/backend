@@ -53,7 +53,7 @@ public class StoreVisitRecord extends BaseTimeEntity {
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_visit_records_member_id"))
 	private Member member;
 
-	public static StoreVisitRecord from (final Long memberId, final Long storeId, final Integer walkingDistance) {
+	public static StoreVisitRecord of(final Long memberId, final Long storeId, final Integer walkingDistance) {
 		return StoreVisitRecord.builder()
 				.walkingDistance(walkingDistance)
 				.member(Member.builder().id(memberId).build())
