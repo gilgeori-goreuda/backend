@@ -36,6 +36,8 @@ class StoreServiceTest extends ServiceTest {
     private static final BigDecimal memberLat = new BigDecimal("37.1234");
     private static final BigDecimal memberLng = new BigDecimal("127.5678");
 
+    private static final int WALKING_DISTANCE = 100;
+
     private StoreCreateRequest makeStoreCreateRequest() {
         return new StoreCreateRequest(
                 "붕어빵 가게",
@@ -427,6 +429,9 @@ class StoreServiceTest extends ServiceTest {
         given(storeRepository.findStoreWithMemberAndCategories(BUNGEOPPANG().getId()))
                 .willReturn(Optional.of(BUNGEOPPANG()));
 
+        given(distanceCalculator.getDistance(any(BigDecimal.class), any(BigDecimal.class), any(BigDecimal.class), any(BigDecimal.class)))
+                .willReturn(WALKING_DISTANCE);
+
         // when
         StoreResponse storeResponse = storeService.getStore(BUNGEOPPANG().getId(), memberLat, memberLng);
 
@@ -456,6 +461,9 @@ class StoreServiceTest extends ServiceTest {
         // given
         given(storeRepository.findStoreWithMemberAndCategories(BUNGEOPPANG().getId()))
                 .willReturn(Optional.of(BUNGEOPPANG()));
+
+        given(distanceCalculator.getDistance(any(BigDecimal.class), any(BigDecimal.class), any(BigDecimal.class), any(BigDecimal.class)))
+                .willReturn(WALKING_DISTANCE);
 
         // when
         StoreResponse storeResponse = storeService.getStore(BUNGEOPPANG().getId(), memberLat, memberLng);

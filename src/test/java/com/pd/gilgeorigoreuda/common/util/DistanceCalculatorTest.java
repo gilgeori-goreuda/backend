@@ -3,12 +3,18 @@ package com.pd.gilgeorigoreuda.common.util;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.*;
 
+@MockitoSettings
 class DistanceCalculatorTest {
+
+    @InjectMocks
+    private DistanceCalculator distanceCalculator;
 
     @ParameterizedTest
     @ValueSource(strings = {
@@ -26,7 +32,7 @@ class DistanceCalculatorTest {
 
         int boundary = Integer.parseInt(parts[4]);
 
-        double calculatedDistance = DistanceCalculator.calculateDistance(lat1, lng1, lat2, lng2);
+        double calculatedDistance = distanceCalculator.getDistance(lat1, lng1, lat2, lng2);
 
         assertThat(calculatedDistance).isLessThanOrEqualTo(boundary);
     }
@@ -47,7 +53,7 @@ class DistanceCalculatorTest {
 
         int boundary = Integer.parseInt(parts[4]);
 
-        double calculatedDistance = DistanceCalculator.calculateDistance(lat1, lng1, lat2, lng2);
+        double calculatedDistance = distanceCalculator.getDistance(lat1, lng1, lat2, lng2);
 
         assertThat(calculatedDistance).isGreaterThan(boundary);
     }
@@ -68,7 +74,7 @@ class DistanceCalculatorTest {
 
         int targetDistance = Integer.parseInt(parts[4]);
 
-        double calculatedDistance = DistanceCalculator.calculateDistance(lat1, lng1, lat2, lng2);
+        double calculatedDistance = distanceCalculator.getDistance(lat1, lng1, lat2, lng2);
 
         assertThat(calculatedDistance).isEqualTo(targetDistance);
     }

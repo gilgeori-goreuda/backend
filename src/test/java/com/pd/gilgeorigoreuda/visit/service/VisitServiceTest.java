@@ -23,8 +23,10 @@ class VisitServiceTest extends ServiceTest {
 
     private static final int VALID_BOUNDARY_METER = 300;
     private static final int VALID_TIME_HOUR = 2;
-    public static final int MAX_APPROXIMATE_WALKING_TIME_HOUR = 4;
-    public static final int EXCEED_WALKING_TIME_HOUR = 6;
+    private static final int VALID_WALKING_TIME_HOUR = 4;
+    private static final int INVALID_WALKING_TIME_HOUR = 6;
+    private static final int VALID_WALKING_DISTANCE = 100;
+    private static final int INVALID_WALKING_DISTANCE = 999999999;
 
 
     private VisitRequest makeVisitRequest() {
@@ -46,6 +48,12 @@ class VisitServiceTest extends ServiceTest {
 
         given(storeVisitRecordRepository.findByMemberIdAndStoreId(KIM().getId(), BUNGEOPPANG().getId()))
                 .willReturn(Optional.empty());
+
+        given(distanceCalculator.getDistance(any(BigDecimal.class), any(BigDecimal.class), any(BigDecimal.class), any(BigDecimal.class)))
+                .willReturn(VALID_WALKING_DISTANCE);
+
+        given(distanceCalculator.getApproximateWalkingTime(VALID_WALKING_DISTANCE))
+                .willReturn(VALID_WALKING_TIME_HOUR);
 
         given(storeVisitRecordRepository.save(any(StoreVisitRecord.class)))
                 .willReturn(KIMS_BUNGEOPPANG_VISIT_RECORD());
