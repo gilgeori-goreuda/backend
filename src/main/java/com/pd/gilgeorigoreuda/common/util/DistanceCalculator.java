@@ -1,14 +1,17 @@
 package com.pd.gilgeorigoreuda.common.util;
 
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
+@Component
 public class DistanceCalculator {
 
     private static final int EARTH_RADIUS = 6371000;
     public static final double WALKING_SPEED = 5000.0 / 3600.0;
     public static final int ONE_HOUR = 3600;
 
-    public static int calculateDistance(
+    public int getDistance(
             final BigDecimal startLatitude,
             final BigDecimal startLongitude,
             final BigDecimal destinationLatitude,
@@ -35,7 +38,7 @@ public class DistanceCalculator {
         return (int) Math.round(EARTH_RADIUS * centralAngle);
     }
 
-    public static int calculateApproximateWalkingTime(final int distance) {
+    public int getApproximateWalkingTime(final int distance) {
         // 거리를 보행 속도로 나누어 보행 시간 (초)을 계산
         double walkingTimeSeconds = (double) distance / WALKING_SPEED;
 

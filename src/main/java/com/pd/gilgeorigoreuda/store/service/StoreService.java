@@ -35,6 +35,7 @@ public class StoreService {
 	private final StoreNativeQueryRepository storeNativeQueryRepository;
 	private final MemberRepository memberRepository;
 	private final ImageService imageService;
+	private final DistanceCalculator distanceCalculator;
 
 	private static final Integer BOUNDARY_10M = 10;
 
@@ -158,13 +159,13 @@ public class StoreService {
 			.orElseThrow(NoSuchStoreException::new);
 	}
 
-	private static int getDistanceBetweenStoreAndMember(
+	private int getDistanceBetweenStoreAndMember(
 			final BigDecimal memberLat,
 			final BigDecimal memberLng,
 			final BigDecimal targetStoreLat,
 			final BigDecimal targetStoreLng
 	) {
-		return DistanceCalculator.calculateDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
+		return distanceCalculator.getDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.settings;
 
+import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.image.service.ImageService;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
@@ -52,5 +53,8 @@ public abstract class ServiceTest {
 
     @Mock
     protected StoreVisitRecordRepository storeVisitRecordRepository;
+
+    @Mock
+    protected DistanceCalculator distanceCalculator;
 
 }

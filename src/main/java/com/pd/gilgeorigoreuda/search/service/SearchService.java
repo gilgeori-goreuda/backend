@@ -18,6 +18,7 @@ import java.util.List;
 public class SearchService {
 
     private final SearchRepository searchRepository;
+    private final DistanceCalculator distanceCalculator;
 
     private static final Integer BOUNDARY_1KM = 1000;
 
@@ -55,7 +56,7 @@ public class SearchService {
             final BigDecimal targetStoreLat,
             final BigDecimal targetStoreLng
     ) {
-        return DistanceCalculator.calculateDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
+        return distanceCalculator.getDistance(memberLat, memberLng, targetStoreLat, targetStoreLng);
     }
 
 }

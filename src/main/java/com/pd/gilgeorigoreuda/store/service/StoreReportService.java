@@ -22,10 +22,10 @@ import java.util.Optional;
 public class StoreReportService {
 
     private final StoreReportHistoryRepository storeReportRepository;
+    private final DistanceCalculator distanceCalculator;
 
     @Transactional
-    public void addStoreReport(ReportCreateRequest reportCreateRequest, Long storeId,
-                                Long memberId) {
+    public void addStoreReport(final ReportCreateRequest reportCreateRequest, final Long storeId, final Long memberId) {
         Optional<StoreReportHistory> reportAlreadyReported =
                 storeReportRepository.findReportAlreadyReported(storeId, memberId);
 
@@ -47,7 +47,7 @@ public class StoreReportService {
         BigDecimal storeLat = reportLimitDistance.get().getLat();
         BigDecimal storeLng = reportLimitDistance.get().getLng();
 
-        int betweenDistance = DistanceCalculator.calculateDistance(memberLat, memberLng, storeLat, storeLng);
+        int betweenDistance = distanceCalculator.getDistance(memberLat, memberLng, storeLat, storeLng);
         if(betweenDistance > 100) {
             throw new LimitDistanceReportException();
         }
@@ -62,10 +62,11 @@ public class StoreReportService {
         if (!reportForDelete.isRepoter(memberId)) {
             throw new NoRepoterMemberException();
         }
+
         storeReportRepository.deleteById(reportForDelete.getId());
     }
 
-    private StoreReportHistory findReportWithMemberConditionReportId(Long reportId) {
+    private StoreReportHistory findReportWithMemberConditionReportId(final Long reportId) {
         return storeReportRepository.findReportWithMemberConditionReportId(reportId)
                 .orElseThrow(NoSuchReportException::new);
     }
