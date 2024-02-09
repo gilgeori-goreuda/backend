@@ -61,17 +61,15 @@ public class StoreVisitRecord extends BaseTimeEntity {
 				.build();
 	}
 
-	public void checkTimeOut(int validTime) {
-		LocalDateTime startVisitTime = this.getCreatedAt();
-		LocalDateTime endVisitTime = LocalDateTime.now();
-
-		if (startVisitTime.plusHours(validTime).isBefore(endVisitTime)) {
-			throw new TimeOutException();
-		}
-	}
-
 	public void verifyVisit() {
 		this.isVisited = true;
+	}
+
+	public boolean checkTimeOut(final int validTimeHour) {
+		LocalDateTime currentDateTime = LocalDateTime.now();
+		LocalDateTime visitEndTime = this.getCreatedAt().plusHours(validTimeHour);
+
+		return visitEndTime.isBefore(currentDateTime);
 	}
 
 	public void isVerifiedVisitRecord() {
