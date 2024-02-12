@@ -90,5 +90,5 @@
 
 ## 🔨 CI/CD Pipeline
 
-<img width="1344" alt="gilgeorigoreuda-cicd-pipeline" src="https://github.com/gilgeori-goreuda/backend/assets/82927161/67ea7e63-189e-4a24-9556-cc12222ada39">
+<img width="1344" alt="gilgeorigoreuda-cicd-pipeline" src="https://github.com/gilgeori-goreuda/backend/assets/82927161/e4273740-79b1-4e16-89b1-5bb17dd98d0d">
 
