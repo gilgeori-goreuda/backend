@@ -12,6 +12,7 @@ import com.pd.gilgeorigoreuda.review.repository.ReviewRepository;
 
 import com.pd.gilgeorigoreuda.store.domain.entity.StoreVisitRecord;
 import com.pd.gilgeorigoreuda.visit.exception.NoSuchStoreVisitRecordException;
+import com.pd.gilgeorigoreuda.visit.exception.NotVerifiedVisitRecordException;
 import com.pd.gilgeorigoreuda.visit.repository.StoreVisitRecordRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -36,7 +37,8 @@ public class ReviewService {
     @Transactional
     public ReviewCreateResponse createReview(final Long storeId, final Long memberId, final ReviewCreateRequest reviewCreateRequest) {
         StoreVisitRecord storeVisitRecord = getStoreVisitRecord(storeId, memberId);
-        storeVisitRecord.isVerifiedVisitRecord();
+        checkIsVerifiedRecord(storeVisitRecord);
+
 
         Review review = reviewCreateRequest.toEntity(memberId, storeId);
 
@@ -132,6 +134,12 @@ public class ReviewService {
     private StoreVisitRecord getStoreVisitRecord(Long storeId, Long memberId) {
         return storeVisitRecordRepository.findByMemberIdAndStoreId(memberId, storeId)
                 .orElseThrow(NoSuchStoreVisitRecordException::new);
+    }
+
+    private void checkIsVerifiedRecord(StoreVisitRecord storeVisitRecord) {
+        if (!storeVisitRecord.isVerifiedVisitRecord()) {
+            throw new NotVerifiedVisitRecordException();
+        }
     }
 
 }

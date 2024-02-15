@@ -8,9 +8,7 @@ import java.util.Optional;
 
 public interface StoreVisitRecordRepository extends JpaRepository<StoreVisitRecord, Long> {
 
-    @Query("select svr from StoreVisitRecord svr " +
-            "where svr.member.id = :memberId " +
-            "and svr.store.id = :storeId")
+    @Query("SELECT svr FROM StoreVisitRecord svr WHERE svr.member.id = :memberId AND svr.store.id = :storeId")
     Optional<StoreVisitRecord> findByMemberIdAndStoreId(final Long memberId, final Long storeId);
 
 }

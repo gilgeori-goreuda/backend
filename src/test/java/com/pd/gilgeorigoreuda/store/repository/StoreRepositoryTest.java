@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.store.repository;
 
-import com.pd.gilgeorigoreuda.common.entity.BaseTimeEntity;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
 import com.pd.gilgeorigoreuda.settings.RepositoryTest;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
@@ -13,7 +12,7 @@ import java.util.List;
 import static com.pd.gilgeorigoreuda.settings.fixtures.MemberFixtures.*;
 import static com.pd.gilgeorigoreuda.settings.fixtures.StoreFixtures.*;
 import static org.assertj.core.api.SoftAssertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 class StoreRepositoryTest extends RepositoryTest {
 
@@ -67,7 +66,7 @@ class StoreRepositoryTest extends RepositoryTest {
         List<Store> stores = storeRepository.findStoresByBetweenDay(LocalDateTime.now().minusDays(7), LocalDateTime.now());
 
         // then
-        assertEquals(2, stores.size());
+        assertThat(stores).size().isEqualTo(2);
     }
 
     @Test
