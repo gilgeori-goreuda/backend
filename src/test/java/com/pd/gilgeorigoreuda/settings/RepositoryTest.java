@@ -8,6 +8,7 @@ import com.pd.gilgeorigoreuda.settings.builder.BuilderSupporter;
 import com.pd.gilgeorigoreuda.settings.builder.DataBuilder;
 import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
 import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
+import com.pd.gilgeorigoreuda.visit.repository.StoreVisitRecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -39,5 +40,8 @@ public abstract class RepositoryTest {
 
     @Autowired
     protected StoreNativeQueryRepository storeNativeQueryRepository;
+
+    @Autowired
+    protected StoreVisitRecordRepository storeVisitRecordRepository;
 
 }
