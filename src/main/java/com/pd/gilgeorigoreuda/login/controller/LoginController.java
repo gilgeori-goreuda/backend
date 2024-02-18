@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.login.controller;
 
+import com.pd.gilgeorigoreuda.auth.MemberOnly;
 import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.dto.request.LoginRequest;
 import com.pd.gilgeorigoreuda.login.dto.response.AccessTokenResponse;
@@ -11,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.HttpHeaders.*;
 
 @Slf4j
 @RestController
@@ -31,9 +34,10 @@ public class LoginController {
                 .body(AccessTokenResponse.of(memberAccessRefreshToken.getAccessToken()));
     }
 
+    @MemberOnly
     @PostMapping("/token")
     public ResponseEntity<AccessTokenResponse> extendLogin(
-            @RequestHeader("Authorization") final String authorizationHeader
+            @RequestHeader(AUTHORIZATION) final String authorizationHeader
     ) {
         final String regeneratedAccessToken = loginService.regenerateAccessToken(authorizationHeader);
 
@@ -42,11 +46,11 @@ public class LoginController {
                 .body(AccessTokenResponse.of(regeneratedAccessToken));
     }
 
+    @MemberOnly
     @DeleteMapping("/logout")
-    // TODO: 권한 검증
     public ResponseEntity<Void> logout(
             // TODO: 로그인 유저 정보
-            @RequestHeader("Authorization") final String authorizationHeader
+            @RequestHeader(AUTHORIZATION) final String authorizationHeader
     ) {
         loginService.deleteMemberToken(authorizationHeader);
 

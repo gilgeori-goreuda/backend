@@ -37,6 +37,38 @@
 | 서버 에러
 |===
 
+== 로그인 및 회원가입 API
+
+=== 로그인 또는 회원가입 (POST /login/{provider})
+
+==== Request
+include::{snippets}/login-controller-test/login-success/http-request.adoc[]
+include::{snippets}/login-controller-test/login-success/path-parameters.adoc[]
+include::{snippets}/login-controller-test/login-success/request-fields.adoc[]
+
+==== Response
+include::{snippets}/login-controller-test/login-success/http-response.adoc[]
+include::{snippets}/login-controller-test/login-success/response-fields.adoc[]
+
+=== 토큰 갱신 (POST /token)
+
+==== Request
+include::{snippets}/login-controller-test/extend-login-success/http-request.adoc[]
+include::{snippets}/login-controller-test/extend-login-success/request-headers.adoc[]
+
+==== Response
+include::{snippets}/login-controller-test/extend-login-success/http-response.adoc[]
+include::{snippets}/login-controller-test/extend-login-success/response-fields.adoc[]
+
+=== 로그아웃 (DELETE /logout)
+
+==== Request
+include::{snippets}/login-controller-test/logout-success/http-request.adoc[]
+include::{snippets}/login-controller-test/logout-success/request-headers.adoc[]
+
+==== Response
+include::{snippets}/login-controller-test/logout-success/http-response.adoc[]
+
 == 가게 API
 
 === 가게 제보(생성) (POST /stores)
