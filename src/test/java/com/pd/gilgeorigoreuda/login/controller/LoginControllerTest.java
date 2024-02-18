@@ -58,6 +58,13 @@ class LoginControllerTest extends ControllerTest {
         );
     }
 
+    private ResultActions performLogoutRequest(final String accessToken) throws Exception {
+        return mockMvc.perform(
+                delete("/logout")
+                        .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
+        );
+    }
+
     @Test
     @DisplayName("로그인 성공")
     void loginSuccess() throws Exception {
@@ -105,6 +112,26 @@ class LoginControllerTest extends ControllerTest {
                                 ),
                                 responseFields(
                                         fieldWithPath("accessToken").description("갱신된 액세스 토큰")
+                                )
+                        )
+                );
+    }
+
+    @Test
+    @DisplayName("로그아웃 성공")
+    void logoutSuccess() throws Exception {
+        // given
+        doNothing().when(loginService).deleteMemberToken(any());
+
+        // when
+        ResultActions result = performLogoutRequest(anyString());
+
+        // then
+        result.andExpect(status().isNoContent())
+                .andDo(
+                        restDocs.document(
+                                requestHeaders(
+                                        headerWithName(AUTHORIZATION).description("액세스 토큰")
                                 )
                         )
                 );
