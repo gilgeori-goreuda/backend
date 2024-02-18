@@ -50,6 +50,16 @@ include::{snippets}/login-controller-test/login-success/request-fields.adoc[]
 include::{snippets}/login-controller-test/login-success/http-response.adoc[]
 include::{snippets}/login-controller-test/login-success/response-fields.adoc[]
 
+=== 토큰 갱신 (POST /token)
+
+==== Request
+include::{snippets}/login-controller-test/extend-login-success/http-request.adoc[]
+include::{snippets}/login-controller-test/extend-login-success/request-headers.adoc[]
+
+==== Response
+include::{snippets}/login-controller-test/extend-login-success/http-response.adoc[]
+include::{snippets}/login-controller-test/extend-login-success/response-fields.adoc[]
+
 == 가게 API
 
 === 가게 제보(생성) (POST /stores)

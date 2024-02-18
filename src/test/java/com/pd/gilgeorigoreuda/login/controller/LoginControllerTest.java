@@ -51,6 +51,13 @@ class LoginControllerTest extends ControllerTest {
         );
     }
 
+    private ResultActions performExtendLoginRequest(final String accessToken) throws Exception {
+        return mockMvc.perform(
+                post("/token")
+                        .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
+        );
+    }
+
     @Test
     @DisplayName("로그인 성공")
     void loginSuccess() throws Exception {
@@ -74,6 +81,30 @@ class LoginControllerTest extends ControllerTest {
                                 ),
                                 responseFields(
                                         fieldWithPath("accessToken").description("액세스 토큰")
+                                )
+                        )
+                );
+    }
+
+    @Test
+    @DisplayName("토큰 갱신 성공")
+    void extendLoginSuccess() throws Exception {
+        // given
+        given(loginService.regenerateAccessToken(any())).willReturn("newAccessToken");
+
+        // when
+        ResultActions result = performExtendLoginRequest(anyString());
+
+        // then
+        result.andExpect(status().isCreated())
+                .andExpect(jsonPath("accessToken").exists())
+                .andDo(
+                        restDocs.document(
+                                requestHeaders(
+                                        headerWithName(AUTHORIZATION).description("액세스 토큰")
+                                ),
+                                responseFields(
+                                        fieldWithPath("accessToken").description("갱신된 액세스 토큰")
                                 )
                         )
                 );
