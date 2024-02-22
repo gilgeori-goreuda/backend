@@ -2,7 +2,13 @@ package com.pd.gilgeorigoreuda.settings;
 
 import com.pd.gilgeorigoreuda.common.util.DistanceCalculator;
 import com.pd.gilgeorigoreuda.image.service.ImageService;
+import com.pd.gilgeorigoreuda.login.domain.OauthProvider;
+import com.pd.gilgeorigoreuda.login.jwt.BearerTokenExtractor;
+import com.pd.gilgeorigoreuda.login.jwt.JwtProvider;
+import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
+import com.pd.gilgeorigoreuda.login.service.LoginService;
 import com.pd.gilgeorigoreuda.member.domain.entity.Member;
+import com.pd.gilgeorigoreuda.member.repository.MemberActiveInfoRepository;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import com.pd.gilgeorigoreuda.store.domain.entity.*;
 import com.pd.gilgeorigoreuda.store.dto.request.BusinessDateRequest;
@@ -35,6 +41,9 @@ public abstract class ServiceTest {
     @InjectMocks
     protected VisitService visitService;
 
+    @InjectMocks
+    protected LoginService loginService;
+
     // Mock 객체
     @Mock
     protected ApplicationEventPublisher publisher;
@@ -56,5 +65,20 @@ public abstract class ServiceTest {
 
     @Mock
     protected DistanceCalculator distanceCalculator;
+
+    @Mock
+    protected MemberTokenRepository memberTokenRepository;
+
+    @Mock
+    protected MemberActiveInfoRepository memberActiveInfoRepository;
+
+    @Mock
+    protected OauthProvider oauthProvider;
+
+    @Mock
+    protected JwtProvider jwtProvider;
+
+    @Mock
+    protected BearerTokenExtractor bearerTokenExtractor;
 
 }
