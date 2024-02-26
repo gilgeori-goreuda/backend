@@ -13,11 +13,9 @@ import com.pd.gilgeorigoreuda.member.repository.MemberActiveInfoRepository;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -34,17 +32,13 @@ public class LoginService {
         OauthProvider provider = oauthProviders.mapping(providerName);
         OauthUserInfo userInfo = provider.getUserInfo(code);
 
-        log.info("socialId : {}", userInfo.getSocialId());
-        log.info("nickname : {}", userInfo.getNickname());
-        log.info("profileImageUrl : {}", userInfo.getProfileImageUrl());
-
         Member member = findMemberOrElseCreateMember(
                 userInfo.getSocialId(),
                 userInfo.getNickname(),
                 userInfo.getProfileImageUrl()
         );
 
-        findMemberActiveInfoOrElseCreateMemberActiveInfo(member);
+        createMemberActiveInfoIfNull(member);
 
         MemberAccessRefreshToken memberAccessRefreshToken = jwtProvider.generateLoginToken(member.getId().toString());
 
@@ -84,7 +78,7 @@ public class LoginService {
         );
     }
 
-    private void findMemberActiveInfoOrElseCreateMemberActiveInfo(final Member member) {
+    private void createMemberActiveInfoIfNull(final Member member) {
         memberActiveInfoRepository.findByMemberId(member.getId())
                 .orElseGet(() -> createMemberActiveInfo(member));
     }
