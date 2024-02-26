@@ -8,13 +8,13 @@
     <include resource="info-appender.xml"/>
     <include resource="warn-appender.xml"/>
     <include resource="error-appender.xml"/>
-    <include resource="loki-appender.xml"/>
+<!--    <include resource="loki-appender.xml"/>-->
 
     <root level="info">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="FILE-INFO"/>
         <appender-ref ref="FILE-ERROR"/>
         <appender-ref ref="FILE-WARN"/>
-        <appender-ref ref="LOKI"/>
+<!--        <appender-ref ref="LOKI"/>-->
     </root>
 </configuration>
