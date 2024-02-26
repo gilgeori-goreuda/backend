@@ -75,6 +75,6 @@ public abstract class ServiceTest {
     protected JwtProvider jwtProvider;
 
     @Mock
-    protected BearerTokenExtractor bearerTokenExtractor;
+    protected BearerTokenExtractor bearerExtractor;
 
 }

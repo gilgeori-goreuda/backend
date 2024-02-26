@@ -9,8 +9,8 @@ public class MemberTokenFixtures {
     public static  MemberToken KIM_TOKEN() {
         return MemberToken.builder()
                 .memberId(KIM().getId())
-                .accessToken("accessToken")
-                .refreshToken("refreshToken")
+                .accessToken("AccessToken")
+                .refreshToken("RefreshToken")
                 .build();
     }
 
