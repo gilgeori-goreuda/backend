@@ -5,6 +5,8 @@ import com.pd.gilgeorigoreuda.settings.RepositoryTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static com.pd.gilgeorigoreuda.settings.fixtures.MemberTokenFixtures.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -37,6 +39,25 @@ class MemberTokenRepositoryTest extends RepositoryTest {
 
         // then
         assertThat(memberTokenRepository.findByAccessToken(accessToken)).isEmpty();
+    }
+
+    @Test
+    @DisplayName("MemberId를 통해 AccessToken을 업데이트")
+    void updateAccessToken() {
+        // given
+        MemberToken KIM_TOKEN = dataBuilder.buildMemberToken(KIM_TOKEN());
+        MemberToken LEE_TOKEN = dataBuilder.buildMemberToken(LEE_TOKEN());
+        Long memberId = KIM_TOKEN.getMemberId();
+        String newAccessToken = "Kims New AccessToken";
+
+        // when
+        memberTokenRepository.updateAccessToken(memberId, newAccessToken);
+
+        // then
+        memberTokenRepository.findByAccessToken(newAccessToken)
+                .ifPresent(
+                        newMemberToken -> assertThat(newMemberToken.getAccessToken()).isEqualTo(newAccessToken)
+                );
     }
 
 }
