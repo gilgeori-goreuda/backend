@@ -25,4 +25,18 @@ class MemberTokenRepositoryTest extends RepositoryTest {
 
     }
 
+    @Test
+    @DisplayName("AccessToken을 통해 MemberToken 객체 삭제")
+    void deleteByAccessToken() {
+        // given
+        MemberToken KIM_TOKEN = dataBuilder.buildMemberToken(KIM_TOKEN());
+        String accessToken = KIM_TOKEN.getAccessToken();
+
+        // when
+        memberTokenRepository.deleteByAccessToken(accessToken);
+
+        // then
+        assertThat(memberTokenRepository.findByAccessToken(accessToken)).isEmpty();
+    }
+
 }
