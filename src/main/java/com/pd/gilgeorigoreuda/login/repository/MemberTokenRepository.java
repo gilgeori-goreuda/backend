@@ -14,7 +14,7 @@ public interface MemberTokenRepository extends JpaRepository<MemberToken, Long> 
     @Query("delete from MemberToken mt where mt.accessToken = :accessToken")
     void deleteByAccessToken(@Param("accessToken") final String accessToken);
 
-    @Modifying
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("update MemberToken mt set mt.accessToken = :accessToken where mt.memberId = :memberId")
     void updateAccessToken(@Param("memberId") final Long memberId, @Param("accessToken") final String accessToken);
 
