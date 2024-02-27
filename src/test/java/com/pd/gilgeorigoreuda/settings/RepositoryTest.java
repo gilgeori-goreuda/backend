@@ -2,6 +2,7 @@ package com.pd.gilgeorigoreuda.settings;
 
 import static org.springframework.test.annotation.DirtiesContext.*;
 
+import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import com.pd.gilgeorigoreuda.search.repository.SearchRepository;
 import com.pd.gilgeorigoreuda.settings.builder.BuilderSupporter;
@@ -43,5 +44,8 @@ public abstract class RepositoryTest {
 
     @Autowired
     protected StoreVisitRecordRepository storeVisitRecordRepository;
+
+    @Autowired
+    protected MemberTokenRepository memberTokenRepository;
 
 }
