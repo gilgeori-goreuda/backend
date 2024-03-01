@@ -6,7 +6,6 @@ import com.pd.gilgeorigoreuda.login.domain.OauthUserInfo;
 import com.pd.gilgeorigoreuda.login.domain.oauthuserinfo.KakaoUserInfo;
 import com.pd.gilgeorigoreuda.login.exception.InvalidAuthorizationCodeException;
 import com.pd.gilgeorigoreuda.login.exception.NotSupportedOauthServiceException;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -15,7 +14,6 @@ import org.springframework.util.MultiValueMap;
 
 import java.util.Optional;
 
-@Slf4j
 @Component
 public class KakaoOauthProvider implements OauthProvider {
 
@@ -85,9 +83,6 @@ public class KakaoOauthProvider implements OauthProvider {
                 accessTokenRequestEntity,
                 OauthAccessToken.class
         );
-
-        log.info("accessTokenResponse.getAccessToken : {}", accessTokenResponse.getBody().getAccessToken());
-        log.info("accessTokenResponse.getRefreshToken : {}", accessTokenResponse.getBody().getRefreshToken());
 
         return Optional.ofNullable(accessTokenResponse.getBody())
                 .orElseThrow(InvalidAuthorizationCodeException::new)
