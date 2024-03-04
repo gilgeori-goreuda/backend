@@ -84,7 +84,7 @@ class StoreControllerTest extends ControllerTest {
                 get("/api/v1/stores/{storeId}", storeId)
                         .param("lat", lat)
                         .param("lng", lng)
-                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
+                        .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
         );
     }
@@ -92,7 +92,7 @@ class StoreControllerTest extends ControllerTest {
     private ResultActions performPostRequest(final StoreCreateRequest storeCreateRequest) throws Exception {
         return mockMvc.perform(
                 post("/api/v1/stores")
-                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
+                        .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(storeCreateRequest))
         );
@@ -101,7 +101,7 @@ class StoreControllerTest extends ControllerTest {
     private ResultActions performPutRequest(final StoreUpdateRequest storeUpdateRequest, final Long storeId) throws Exception {
         return mockMvc.perform(
                 put("/api/v1/stores/{storeId}", storeId)
-                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
+                        .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(storeUpdateRequest))
         );
@@ -110,7 +110,7 @@ class StoreControllerTest extends ControllerTest {
     private ResultActions performDeleteRequest(final Long storeId) throws Exception {
         return mockMvc.perform(
                 delete("/api/v1/stores/{storeId}", storeId)
-                .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
+                        .header(AUTHORIZATION, MEMBER_ACCESS_REFRESH_TOKEN.getAccessToken())
                         .contentType(APPLICATION_JSON)
         );
     }

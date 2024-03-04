@@ -136,3 +136,14 @@ include::{snippets}/visit-controller-test/verify-visit-success/http-request.adoc
 include::{snippets}/visit-controller-test/verify-visit-success/request-headers.adoc[]
 include::{snippets}/visit-controller-test/verify-visit-success/path-parameters.adoc[]
 include::{snippets}/visit-controller-test/verify-visit-success/request-fields.adoc[]
+
+
+=== 가게 검색 (GET /search?mLat=&mLng=&rLat=&rLng=&foodType=)
+
+==== request
+include::{snippets}/search-controller-test/search-by-lat-lng-and-food-categories/http-request.adoc[]
+include::{snippets}/search-controller-test/search-by-lat-lng-and-food-categories/query-parameters.adoc[]
+
+==== response
+include::{snippets}/search-controller-test/search-by-lat-lng-and-food-categories/http-response.adoc[]
+include::{snippets}/search-controller-test/search-by-lat-lng-and-food-categories/response-fields.adoc[]
