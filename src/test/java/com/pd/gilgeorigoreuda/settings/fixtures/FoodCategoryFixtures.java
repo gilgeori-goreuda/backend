@@ -35,4 +35,18 @@ public class FoodCategoryFixtures {
                 .build();
     }
 
+    public static FoodCategory TACOYAKI_CATEGORY() {
+        return FoodCategory.builder()
+                .id(5L)
+                .foodType(FoodType.of("타코야끼").getFoodName())
+                .build();
+    }
+
+    public static FoodCategory TANGHURU_CATEGORY() {
+        return FoodCategory.builder()
+                .id(6L)
+                .foodType(FoodType.of("탕후루").getFoodName())
+                .build();
+    }
+
 }
