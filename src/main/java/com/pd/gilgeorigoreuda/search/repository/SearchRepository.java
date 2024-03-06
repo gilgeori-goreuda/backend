@@ -10,11 +10,18 @@ import java.util.List;
 
 public interface SearchRepository extends JpaRepository<Store, Long> {
 
-        @Query("SELECT s FROM Store s " +
-                "LEFT JOIN FETCH s.foodCategories fc " +
-                "WHERE FUNCTION('acos', FUNCTION('cos', FUNCTION('radians', :lat)) * FUNCTION('cos', FUNCTION('radians', s.lat)) * FUNCTION('cos', FUNCTION('radians', :lng) - FUNCTION('radians', s.lng)) + FUNCTION('sin', FUNCTION('radians', :lat)) * FUNCTION('sin', FUNCTION('radians', s.lat))) " +
-                "* 6371 * 1000 <= :boundary " +
-                "AND (:foodType IS NULL OR fc.foodType = :foodType)"
+        @Query(
+                """
+                SELECT s FROM Store s \s
+                LEFT JOIN FETCH s.foodCategories fc \s
+                WHERE \s
+                    FUNCTION('acos', \s
+                        FUNCTION('cos', FUNCTION('radians', :lat)) * FUNCTION('cos', FUNCTION('radians', s.lat)) * \s
+                        FUNCTION('cos', FUNCTION('radians', :lng) - FUNCTION('radians', s.lng)) + \s
+                        FUNCTION('sin', FUNCTION('radians', :lat)) * FUNCTION('sin', FUNCTION('radians', s.lat))\s
+                    ) * 6371 * 1000 <= :boundary \s
+                    AND (:foodType IS NULL OR fc.foodType = :foodType) \s
+                """
         )
         List<Store> searchStoresByLatLngAndFoodType(
                 @Param("lat") final BigDecimal lat,
