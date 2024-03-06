@@ -10,6 +10,8 @@ import com.pd.gilgeorigoreuda.login.repository.MemberTokenRepository;
 import com.pd.gilgeorigoreuda.login.service.LoginService;
 import com.pd.gilgeorigoreuda.member.repository.MemberActiveInfoRepository;
 import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
+import com.pd.gilgeorigoreuda.search.repository.SearchRepository;
+import com.pd.gilgeorigoreuda.search.service.SearchService;
 import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
 import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
 import com.pd.gilgeorigoreuda.store.service.StoreService;
@@ -36,6 +38,9 @@ public abstract class ServiceTest {
 
     @InjectMocks
     protected LoginService loginService;
+
+    @InjectMocks
+    protected SearchService searchService;
 
     // Mock 객체
     @Mock
@@ -76,5 +81,8 @@ public abstract class ServiceTest {
 
     @Mock
     protected BearerTokenExtractor bearerExtractor;
+
+    @Mock
+    protected SearchRepository searchRepository;
 
 }
