@@ -36,7 +36,7 @@ import static org.springframework.restdocs.headers.HeaderDocumentation.*;
 @AutoConfigureRestDocs
 class VisitControllerTest extends ControllerTest {
 
-    private static final MemberAccessRefreshToken MEMBER_ACCESS_REFRESH_TOKEN = MemberAccessRefreshToken.of("refreshToken", "accessToken");
+    private static final MemberAccessRefreshToken MEMBER_ACCESS_REFRESH_TOKEN = MemberAccessRefreshToken.of("accessToken", "refreshToken");
     private static final MemberToken MEMBER_TOKEN = MemberToken.of(1L, "accessToken", "refreshToken");
 
     private static final Long STORE_ID = 1L;

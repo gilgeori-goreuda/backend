@@ -1,6 +1,6 @@
 package com.pd.gilgeorigoreuda.auth.resolver;
 
-import com.pd.gilgeorigoreuda.auth.MemberInfo;
+import com.pd.gilgeorigoreuda.auth.annotation.MemberInfo;
 import com.pd.gilgeorigoreuda.auth.domain.Authority;
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.login.domain.MemberToken;

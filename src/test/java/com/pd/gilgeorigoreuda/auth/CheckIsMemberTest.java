@@ -1,5 +1,7 @@
 package com.pd.gilgeorigoreuda.auth;
 
+import com.pd.gilgeorigoreuda.auth.annotation.MemberOnly;
+import com.pd.gilgeorigoreuda.auth.aop.CheckIsMember;
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.auth.exception.UnAuthorizedException;
 import org.aspectj.lang.JoinPoint;

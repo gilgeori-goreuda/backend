@@ -147,3 +147,24 @@ include::{snippets}/search-controller-test/search-by-lat-lng-and-food-categories
 ==== response
 include::{snippets}/search-controller-test/search-by-lat-lng-and-food-categories/http-response.adoc[]
 include::{snippets}/search-controller-test/search-by-lat-lng-and-food-categories/response-fields.adoc[]
+
+
+== 가게 좋아요/싫어요 API
+
+=== 가게 좋아요 요청 (POST /api/v1/preferences/stores/{storeId}/like)
+
+==== Request
+include::{snippets}/store-preference-controller-test/add-store-like/http-request.adoc[]
+include::{snippets}/store-preference-controller-test/add-store-like/path-parameters.adoc[]
+
+==== Response
+include::{snippets}/store-preference-controller-test/add-store-like/http-response.adoc[]
+
+=== 가게 싫어요 요청 (POST /api/v1/preferences/stores/{storeId}/hate)
+
+==== Request
+include::{snippets}/store-preference-controller-test/add-store-hate/http-request.adoc[]
+include::{snippets}/store-preference-controller-test/add-store-hate/path-parameters.adoc[]
+
+==== Response
+include::{snippets}/store-preference-controller-test/add-store-hate/http-response.adoc[]

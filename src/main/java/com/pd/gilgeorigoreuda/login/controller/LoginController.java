@@ -1,6 +1,6 @@
 package com.pd.gilgeorigoreuda.login.controller;
 
-import com.pd.gilgeorigoreuda.auth.MemberOnly;
+import com.pd.gilgeorigoreuda.auth.annotation.MemberOnly;
 import com.pd.gilgeorigoreuda.login.domain.MemberAccessRefreshToken;
 import com.pd.gilgeorigoreuda.login.dto.request.LoginRequest;
 import com.pd.gilgeorigoreuda.login.dto.response.AccessTokenResponse;

@@ -1,7 +1,7 @@
 package com.pd.gilgeorigoreuda.review.controller;
 
-import com.pd.gilgeorigoreuda.auth.MemberInfo;
-import com.pd.gilgeorigoreuda.auth.MemberOnly;
+import com.pd.gilgeorigoreuda.auth.annotation.MemberInfo;
+import com.pd.gilgeorigoreuda.auth.annotation.MemberOnly;
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.review.service.ReviewPreferenceService;
 import lombok.RequiredArgsConstructor;
