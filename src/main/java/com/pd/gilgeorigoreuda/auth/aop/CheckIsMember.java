@@ -1,4 +1,4 @@
-package com.pd.gilgeorigoreuda.auth;
+package com.pd.gilgeorigoreuda.auth.aop;
 
 import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.auth.exception.UnAuthorizedException;
@@ -13,7 +13,7 @@ import java.util.Arrays;
 @Component
 public class CheckIsMember {
 
-    @Before("@annotation(com.pd.gilgeorigoreuda.auth.MemberOnly)")
+    @Before("@annotation(com.pd.gilgeorigoreuda.auth.annotation.MemberOnly)")
     public void check(final JoinPoint joinPoint) {
         if (joinPoint.getArgs().length == 0) {
             return;
