@@ -16,6 +16,8 @@ import com.pd.gilgeorigoreuda.store.domain.entity.StoreVisitRecord;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class DataBuilder {
 
@@ -32,6 +34,10 @@ public class DataBuilder {
 
     public Member buildMember(final Member member) {
         return builderSupporter.memberRepository().save(member);
+    }
+
+    public List<Member> buildMembers(final List<Member> members) {
+        return builderSupporter.memberRepository().saveAll(members);
     }
 
     public ReviewComment buildReviewComment(final ReviewComment reviewComment) {
@@ -62,12 +68,20 @@ public class DataBuilder {
         return builderSupporter.storePreferenceRepository().save(storePreference);
     }
 
+    public List<StorePreference> buildStorePreferences(final List<StorePreference> storePreferences) {
+        return builderSupporter.storePreferenceRepository().saveAll(storePreferences);
+    }
+
     public StoreReportHistory buildStoreReportHistory(final StoreReportHistory storeReportHistory) {
         return builderSupporter.storeReportHistoryRepository().save(storeReportHistory);
     }
 
     public Store buildStore(final Store store) {
         return builderSupporter.storeRepository().save(store);
+    }
+
+    public List<Store> buildStores(final List<Store> stores) {
+        return builderSupporter.storeRepository().saveAll(stores);
     }
 
     public StoreVisitRecord buildStoreVisitRecord(final StoreVisitRecord storeVisitRecord) {
