@@ -13,13 +13,16 @@ import com.pd.gilgeorigoreuda.member.repository.MemberRepository;
 import com.pd.gilgeorigoreuda.search.repository.SearchRepository;
 import com.pd.gilgeorigoreuda.search.service.SearchService;
 import com.pd.gilgeorigoreuda.store.repository.StoreNativeQueryRepository;
+import com.pd.gilgeorigoreuda.store.repository.StorePreferenceRepository;
 import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
+import com.pd.gilgeorigoreuda.store.service.StorePreferenceService;
 import com.pd.gilgeorigoreuda.store.service.StoreService;
 import com.pd.gilgeorigoreuda.visit.repository.StoreVisitRecordRepository;
 import com.pd.gilgeorigoreuda.visit.service.VisitService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoSettings;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
@@ -41,6 +44,9 @@ public abstract class ServiceTest {
 
     @InjectMocks
     protected SearchService searchService;
+
+    @InjectMocks
+    protected StorePreferenceService storePreferenceService;
 
     // Mock 객체
     @Mock
@@ -84,5 +90,8 @@ public abstract class ServiceTest {
 
     @Mock
     protected SearchRepository searchRepository;
+
+    @Mock
+    protected StorePreferenceRepository storePreferenceRepository;
 
 }

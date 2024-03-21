@@ -61,7 +61,7 @@ class StorePreferenceControllerTest extends ControllerTest {
         Long storeId = 1L;
         Long memberId = MEMBER_TOKEN.getMemberId();
 
-        doNothing().when(storePreferenceService).addStoreLike(storeId, memberId);
+        doNothing().when(storePreferenceService).storeLike(storeId, memberId);
 
         // when
         ResultActions resultActions = performPostLikeRequest(storeId);
@@ -77,7 +77,7 @@ class StorePreferenceControllerTest extends ControllerTest {
                         )
                 );
 
-        then(storePreferenceService).should(times(1)).addStoreLike(storeId, memberId);
+        then(storePreferenceService).should(times(1)).storeLike(storeId, memberId);
     }
 
     @Test
@@ -87,7 +87,7 @@ class StorePreferenceControllerTest extends ControllerTest {
         Long storeId = 1L;
         Long memberId = MEMBER_TOKEN.getMemberId();
 
-        doNothing().when(storePreferenceService).addStoreHate(storeId, memberId);
+        doNothing().when(storePreferenceService).storeHate(storeId, memberId);
 
         // when
         ResultActions resultActions = performPostHateRequest(storeId);
@@ -103,7 +103,7 @@ class StorePreferenceControllerTest extends ControllerTest {
                         )
                 );
 
-        then(storePreferenceService).should(times(1)).addStoreHate(storeId, memberId);
+        then(storePreferenceService).should(times(1)).storeHate(storeId, memberId);
     }
 
 }
