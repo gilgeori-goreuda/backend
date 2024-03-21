@@ -10,14 +10,14 @@ import java.util.Optional;
 
 public interface StorePreferenceRepository extends JpaRepository<StorePreference, Long> {
 
-    @Query("select p from StorePreference p " +
-            "left join fetch p.store s " +
-            "left join fetch p.member m " +
-            "left join fetch p.store.foodCategories fc " +
-            "where p.member.id = :memberId and p.preferenceType = 'PREFERRED'")
+    @Query("SELECT p FROM StorePreference p " +
+            "LEFT JOIN FETCH p.store s " +
+            "LEFT JOIN FETCH p.member m " +
+            "LEFT JOIN FETCH p.store.foodCategories fc " +
+            "WHERE p.member.id = :memberId AND p.preferenceType = 'PREFERRED'")
     List<StorePreference> findMyPreferredStores(@Param("memberId") final Long memberId);
 
-    @Query(value = "select * from store_preferences where store_id = :storeId and member_id = :memberId", nativeQuery = true)
+    @Query("SELECT p FROM StorePreference p WHERE p.store.id = :storeId AND p.member.id = :memberId")
     Optional<StorePreference> findByStoreIdAndMemberId(@Param("storeId") final Long storeId, @Param("memberId") final Long memberId);
 
 }
