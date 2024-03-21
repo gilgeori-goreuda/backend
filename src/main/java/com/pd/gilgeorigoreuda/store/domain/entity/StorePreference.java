@@ -45,7 +45,7 @@ public class StorePreference extends BaseTimeEntity {
 	@JoinColumn(name = "member_id", foreignKey = @ForeignKey(name = "fk_store_preferences_member_id"))
 	private Member member;
 
-	public void changePreference(StorePreferenceType preferenceType) {
+	public void changePreference(final StorePreferenceType preferenceType) {
 		this.preferenceType = preferenceType;
 	}
 

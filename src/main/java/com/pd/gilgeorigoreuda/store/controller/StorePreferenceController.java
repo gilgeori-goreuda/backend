@@ -20,7 +20,7 @@ public class StorePreferenceController {
     public ResponseEntity<Void> addStoreLike(
             @PathVariable Long storeId,
             @MemberInfo final LoginMember loginMember) {
-        storePreferenceService.addStoreLike(storeId, loginMember.getMemberId());
+        storePreferenceService.storeLike(storeId, loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()
@@ -32,7 +32,7 @@ public class StorePreferenceController {
     public ResponseEntity<Void> addStoreHate(
             @PathVariable Long storeId,
             @MemberInfo final LoginMember loginMember) {
-        storePreferenceService.addStoreHate(storeId, loginMember.getMemberId());
+        storePreferenceService.storeHate(storeId, loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()
