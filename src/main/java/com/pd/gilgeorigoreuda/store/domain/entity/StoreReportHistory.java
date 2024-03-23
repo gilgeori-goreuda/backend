@@ -42,7 +42,8 @@ public class StoreReportHistory extends BaseTimeEntity {
 	@JoinColumn(name = "store_id", foreignKey = @ForeignKey(name = "fk_store_report_histories_store_id"))
 	private Store store;
 
-	public boolean isRepoter(Long memberId){
+	public boolean isReporter(final Long memberId){
 		return this.member.getId().equals(memberId);
 	}
+
 }

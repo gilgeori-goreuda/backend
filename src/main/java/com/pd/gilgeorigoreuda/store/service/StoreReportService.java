@@ -8,13 +8,12 @@ import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryListResponse;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryResponse;
 import com.pd.gilgeorigoreuda.store.exception.*;
 import com.pd.gilgeorigoreuda.store.repository.StoreReportHistoryRepository;
+import com.pd.gilgeorigoreuda.store.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -22,57 +21,69 @@ import java.util.Optional;
 public class StoreReportService {
 
     private final StoreReportHistoryRepository storeReportRepository;
+    private final StoreRepository storeRepository;
     private final DistanceCalculator distanceCalculator;
+
+    private static final Integer BOUNDARY_100M = 100;
 
     @Transactional
     public void addStoreReport(final ReportCreateRequest reportCreateRequest, final Long storeId, final Long memberId) {
-        Optional<StoreReportHistory> reportAlreadyReported =
-                storeReportRepository.findReportAlreadyReported(storeId, memberId);
+        checkIsExistStoreReportHistory(storeId, memberId);
 
-        if (reportCreateRequest.content() == null || reportCreateRequest.content().isEmpty()) {
-            throw new NullReportException();
-        }
+        Store targetStore = findTargetStore(storeId);
 
-        if (reportAlreadyReported.isPresent()) {
-            throw new AlreadyReporterMemberException();
-        }
-
-        BigDecimal memberLat = reportCreateRequest.lat();
-        BigDecimal memberLng = reportCreateRequest.lng();
-        
-        Optional<Store> reportLimitDistance = storeReportRepository.findReportLimitDistance(storeId);
-        if (!reportLimitDistance.isPresent()) {
-            throw new NoSuchStoreException();
-        }
-        BigDecimal storeLat = reportLimitDistance.get().getLat();
-        BigDecimal storeLng = reportLimitDistance.get().getLng();
-
-        int betweenDistance = distanceCalculator.getDistance(memberLat, memberLng, storeLat, storeLng);
-        if(betweenDistance > 100) {
-            throw new LimitDistanceReportException();
-        }
+        checkIsValidDistanceForReport(reportCreateRequest, targetStore);
 
         storeReportRepository.save(reportCreateRequest.toEntity(storeId, memberId));
     }
 
     @Transactional
     public void deleteReport(final Long reportId, final Long memberId) {
-        StoreReportHistory reportForDelete = findReportWithMemberConditionReportId(reportId);
+        StoreReportHistory reportForDelete = findStoreReportHistory(reportId);
 
-        if (!reportForDelete.isRepoter(memberId)) {
-            throw new NoRepoterMemberException();
-        }
+        checkIsReporter(memberId, reportForDelete);
 
         storeReportRepository.deleteById(reportForDelete.getId());
     }
 
-    private StoreReportHistory findReportWithMemberConditionReportId(final Long reportId) {
-        return storeReportRepository.findReportWithMemberConditionReportId(reportId)
+    private static void checkIsReporter(Long memberId, StoreReportHistory reportForDelete) {
+        if (!reportForDelete.isReporter(memberId)) {
+            throw new NoRepoterMemberException();
+        }
+    }
+
+    private void checkIsValidDistanceForReport(final ReportCreateRequest reportCreateRequest, final Store targetStore) {
+        int betweenDistance = distanceCalculator.getDistance(
+                reportCreateRequest.getMemberLat(),
+                reportCreateRequest.getMemberLng(),
+                targetStore.getLat(),
+                targetStore.getLng()
+        );
+
+        if(betweenDistance > BOUNDARY_100M) {
+            throw new TooLongDistanceToReportException();
+        }
+    }
+
+    private Store findTargetStore(Long storeId) {
+        return storeRepository.findById(storeId)
+                .orElseThrow(NoSuchStoreException::new);
+    }
+
+    private void checkIsExistStoreReportHistory(final Long storeId, final Long memberId) {
+        storeReportRepository.findStoreReportHistoryByStoreIdAndMemberId(storeId, memberId)
+                .ifPresent(report -> {
+                    throw new AlreadyReportedException();
+                });
+    }
+
+    private StoreReportHistory findStoreReportHistory(final Long reportId) {
+        return storeReportRepository.findStoreReportHistoryByReportId(reportId)
                 .orElseThrow(NoSuchReportException::new);
     }
 
     public StoreReportHistoryListResponse checkMemberReportList(final Long memberId){
-        List<StoreReportHistoryResponse> results = storeReportRepository.findReportWithMemberConditionMemberId(memberId)
+        List<StoreReportHistoryResponse> results = storeReportRepository.findStoreReportHistoriesByMemberId(memberId)
                 .stream()
                 .map(StoreReportHistoryResponse::of)
                 .toList();
@@ -80,7 +91,7 @@ public class StoreReportService {
         return StoreReportHistoryListResponse.of(results);
     }
     public StoreReportHistoryListResponse checkStoreReportList(final Long storeId){
-        List<StoreReportHistoryResponse> results = storeReportRepository.findReportWithMemberConditionStoreId(storeId)
+        List<StoreReportHistoryResponse> results = storeReportRepository.findStoreReportHistoriesByStoreId(storeId)
                 .stream()
                 .map(StoreReportHistoryResponse::of)
                 .toList();

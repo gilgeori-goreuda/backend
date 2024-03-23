@@ -56,29 +56,6 @@ class StoreControllerTest extends ControllerTest {
         given(jwtProvider.getSubject(any())).willReturn("1");
     }
 
-    private void makeStore() throws Exception {
-        StoreCreateRequest storeCreateRequest = new StoreCreateRequest(
-                "붕어빵 가게",
-                "포장마차",
-                LocalTime.of(10, 0),
-                LocalTime.of(20, 0),
-                "현금",
-                "https://www.image.com",
-                "월,수,금,토,일",
-                new BigDecimal("37.123456"),
-                new BigDecimal("127.123456"),
-                "경기도 용인시 수지구 죽전동 123-456",
-                new FoodCategoryRequest(
-                        List.of("붕어빵", "떡뽁이", "어묵")
-                )
-        );
-
-        when(storeService.saveStore(anyLong(), any(StoreCreateRequest.class)))
-                .thenReturn(StoreCreateResponse.of(1L));
-
-        performPostRequest(storeCreateRequest);
-    }
-
     private ResultActions performGetRequest(final Long storeId, final String lat, final String lng) throws Exception {
         return mockMvc.perform(
                 get("/api/v1/stores/{storeId}", storeId)
@@ -682,7 +659,7 @@ class StoreControllerTest extends ControllerTest {
     @DisplayName("회원은 가게 정보를 조회 수 있다.")
     void getStore() throws Exception {
         // given
-        makeStore();
+//        makeStore();
 
         StoreResponse storeResponse = new StoreResponse(
                 1L,

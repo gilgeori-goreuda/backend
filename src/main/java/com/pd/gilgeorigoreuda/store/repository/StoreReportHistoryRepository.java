@@ -1,6 +1,5 @@
 package com.pd.gilgeorigoreuda.store.repository;
 
-import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.store.domain.entity.StoreReportHistory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -12,37 +11,28 @@ import java.util.Optional;
 public interface StoreReportHistoryRepository extends JpaRepository<StoreReportHistory, Long> {
 
 
-	@Query("select sr "
-			+ "from StoreReportHistory sr "
-			+ "left join fetch sr.member m "
-			+ "where sr.id = :reportId "
+	@Query("SELECT sr from StoreReportHistory sr LEFT JOIN FETCH sr.member m WHERE sr.id = :reportId")
+	Optional<StoreReportHistory> findStoreReportHistoryByReportId(@Param("reportId") final Long reportId);
+
+	@Query("SELECT sr "
+			+ "FROM StoreReportHistory sr "
+			+ "LEFT JOIN FETCH sr.member m "
+			+ "LEFT JOIN FETCH sr.store s "
+			+ "WHERE sr.member.id = :memberId")
+	List<StoreReportHistory> findStoreReportHistoriesByMemberId(@Param("memberId") final Long memberId);
+
+	@Query("SELECT sr "
+			+ "FROM StoreReportHistory sr "
+			+ "LEFT JOIN FETCH sr.store s "
+			+ "LEFT JOIN FETCH sr.member m "
+			+ "WHERE sr.store.id = :storeId ")
+	List<StoreReportHistory> findStoreReportHistoriesByStoreId(@Param("storeId") final Long storeId);
+
+	@Query("SELECT sr "
+			+ "FROM StoreReportHistory sr "
+			+ "WHERE sr.store.id = :storeId "
+			+ "AND sr.member.id = :memberId"
 	)
-	Optional<StoreReportHistory> findReportWithMemberConditionReportId(@Param("reportId") Long reportId);
+	Optional<StoreReportHistory> findStoreReportHistoryByStoreIdAndMemberId(@Param("storeId") final Long storeId, @Param("memberId") final Long memberId);
 
-	@Query("select sr "
-			+ "from StoreReportHistory sr "
-			+ "left join fetch sr.member m "
-			+ "left join fetch sr.store "
-			+ "where sr.member.id = :memberId ")
-	List<StoreReportHistory> findReportWithMemberConditionMemberId(@Param("memberId") Long memberId);
-
-	@Query("select sr "
-			+ "from StoreReportHistory sr "
-			+ "left join fetch sr.store s"
-			+ "left join fetch sr.member "
-			+ "where sr.store.id = :storeId ")
-	List<StoreReportHistory> findReportWithMemberConditionStoreId(@Param("storeId") Long storeId);
-
-	@Query("select sr "
-			+ "from StoreReportHistory  sr "
-			+ "where sr.store.id = :storeId and "
-			+ "sr.member.id = :memberId"
-	)
-	Optional<StoreReportHistory> findReportAlreadyReported(@Param("storeId") Long storeId, @Param("memberId") Long memberId);
-
-	@Query("select s "
-			+ "from Store s "
-			+ "where s.id = :storeId"
-	)
-	Optional<Store> findReportLimitDistance(@Param("storeId") Long storeId);
 }
