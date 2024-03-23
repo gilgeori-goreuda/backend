@@ -39,8 +39,8 @@ public enum ExceptionType {
 
 	ALREADY_REPORTER_MEMBER_EXCEPTION("R001", "이미 신고한 가게입니다.", AlreadyReporterMemberException.class),
 	NO_SUCH_REPORT_EXCEPTION("R002", "존재하지 않는 신고입니다.", NoSuchReportException.class),
-	LIMIT_DISTANCE_REPORT_EXCEPTION("R003", "신고하려는 가게와 사용자의 위치가 100m를 초과했습니다.", LimitDistanceReportException.class),
-	NULL_REPORT_EXCEPTION("S004", "신고내용이 없습니다.", NullReportException.class),
+	LIMIT_DISTANCE_REPORT_EXCEPTION("R003", "신고하려는 가게와 사용자의 위치가 100m를 초과했습니다.", TooLongDistanceToReportException.class),
+	ALREADY_REPORTED_EXCEPTION("R004", "이미 신고한 내역이 있는 가게입니다.", AlreadyReportedException.class),
 
 	IMAGE_NULL_EXCEPTION("I001", "업로드할 이미지 파일이 없습니다.", ImageNullException.class),
 	INVALID_IMAGE_PATH_EXCEPTION("I002", "이미지를 저장할 경로가 올바르지 않습니다.", InvalidImagePathException.class),
