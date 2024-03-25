@@ -27,7 +27,7 @@ public class StoreReportService {
     private static final Integer BOUNDARY_100M = 100;
 
     @Transactional
-    public void addStoreReport(final ReportCreateRequest reportCreateRequest, final Long storeId, final Long memberId) {
+    public void createStoreReport(final ReportCreateRequest reportCreateRequest, final Long storeId, final Long memberId) {
         checkIsExistStoreReportHistory(storeId, memberId);
 
         Store targetStore = findTargetStore(storeId);

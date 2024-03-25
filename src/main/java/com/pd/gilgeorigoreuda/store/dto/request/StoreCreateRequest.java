@@ -23,7 +23,7 @@ public class StoreCreateRequest {
 
 	// todo: validateMessage 분리
 	@NotBlank(message = "가게 이름을 입력해주세요.")
-	@Size(min = 1, max = 50, message = "가게 이름은 1에서 50자 사이여야 합니다.")
+	@Size(max = 50, message = "가게 이름은 1에서 50자 사이여야 합니다.")
 	private String name;
 
 	@NotBlank(message = "가게 타입을 선택해주세요.")

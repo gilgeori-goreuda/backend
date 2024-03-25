@@ -1,5 +1,6 @@
 package com.pd.gilgeorigoreuda.store.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.pd.gilgeorigoreuda.store.domain.entity.Store;
 import com.pd.gilgeorigoreuda.store.domain.entity.StoreReportHistory;
 import jakarta.persistence.Column;
@@ -17,15 +18,21 @@ public class StoreReportHistoryResponse {
     private String content;
     private StoreReportMemberResponse member;
     private StoreReportStoreResponse store;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime modifiedAt;
 
-    public StoreReportHistoryResponse(final Long id,
-                                      final String content,
-                                      final StoreReportMemberResponse member,
-                                      final StoreReportStoreResponse store,
-                                      final LocalDateTime createdAt,
-                                      final LocalDateTime modifiedAt) {
+    public StoreReportHistoryResponse(
+            final Long id,
+            final String content,
+            final StoreReportMemberResponse member,
+            final StoreReportStoreResponse store,
+            final LocalDateTime createdAt,
+            final LocalDateTime modifiedAt
+    ) {
         this.id = id;
         this.content = content;
         this.member = member;

@@ -168,3 +168,47 @@ include::{snippets}/store-preference-controller-test/add-store-hate/path-paramet
 
 ==== Response
 include::{snippets}/store-preference-controller-test/add-store-hate/http-response.adoc[]
+
+== 가게 신고 API
+
+=== 가게 신고 생성 (POST /api/v1/reports/stores/{storeId})
+
+==== Request
+include::{snippets}/store-report-controller-test/create-store-report-success/http-request.adoc[]
+include::{snippets}/store-report-controller-test/create-store-report-success/path-parameters.adoc[]
+include::{snippets}/store-report-controller-test/create-store-report-success/request-fields.adoc[]
+include::{snippets}/store-report-controller-test/create-store-report-success/request-headers.adoc[]
+
+==== Response
+include::{snippets}/store-report-controller-test/create-store-report-success/http-response.adoc[]
+
+=== 사용자가 신고한 가게 조회 (GET /api/v1/reports/stores/memberCheck)
+
+==== Request
+include::{snippets}/store-report-controller-test/check-member-report-list/http-request.adoc[]
+include::{snippets}/store-report-controller-test/check-member-report-list/request-headers.adoc[]
+
+==== Response
+include::{snippets}/store-report-controller-test/check-member-report-list/http-response.adoc[]
+include::{snippets}/store-report-controller-test/check-member-report-list/response-fields.adoc[]
+
+== 해당 가게 신고 접수된 리스트 조회 (GET /api/v1/reports/stores/{storeId})
+
+=== Request
+include::{snippets}/store-report-controller-test/check-store-report-list/http-request.adoc[]
+include::{snippets}/store-report-controller-test/check-store-report-list/path-parameters.adoc[]
+include::{snippets}/store-report-controller-test/check-store-report-list/request-headers.adoc[]
+
+=== Response
+include::{snippets}/store-report-controller-test/check-store-report-list/http-response.adoc[]
+include::{snippets}/store-report-controller-test/check-store-report-list/response-fields.adoc[]
+
+== 가게 신고 내역 삭제 (DELETE /api/v1/reports/stores/{storeId})
+
+=== Request
+include::{snippets}/store-report-controller-test/delete-store-report-success/http-request.adoc[]
+include::{snippets}/store-report-controller-test/delete-store-report-success/path-parameters.adoc[]
+include::{snippets}/store-report-controller-test/delete-store-report-success/request-headers.adoc[]
+
+=== Response
+include::{snippets}/store-report-controller-test/delete-store-report-success/http-response.adoc[]
