@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class ReportCreateRequest {
 
     @NotBlank(message = "신고 내용을 입력해주세요.")
-    @Size(min = 1, max = 300, message = "신고 내용은 1에서 300자 사이여야 합니다.")
+    @Size(max = 300, message = "신고 내용은 1에서 300자 사이여야 합니다.")
     private String content;
 
     @NotNull(message = "위도를 입력해주세요.")

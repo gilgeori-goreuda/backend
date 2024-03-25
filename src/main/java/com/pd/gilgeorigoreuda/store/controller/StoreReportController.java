@@ -6,6 +6,7 @@ import com.pd.gilgeorigoreuda.auth.domain.LoginMember;
 import com.pd.gilgeorigoreuda.store.dto.request.ReportCreateRequest;
 import com.pd.gilgeorigoreuda.store.dto.response.StoreReportHistoryListResponse;
 import com.pd.gilgeorigoreuda.store.service.StoreReportService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,12 +20,12 @@ public class StoreReportController {
 
     @MemberOnly
     @PostMapping("/stores/{storeId}")
-    public ResponseEntity<Void> addStoreReport(
+    public ResponseEntity<Void> createStoreReport(
             @PathVariable final Long storeId,
             @MemberInfo final LoginMember loginMember,
-            @RequestBody final ReportCreateRequest reportCreateRequest
+            @Valid @RequestBody final ReportCreateRequest reportCreateRequest
     ) {
-        storeReportService.addStoreReport(reportCreateRequest, storeId, loginMember.getMemberId());
+        storeReportService.createStoreReport(reportCreateRequest, storeId, loginMember.getMemberId());
 
         return ResponseEntity
                 .ok()
@@ -48,7 +49,6 @@ public class StoreReportController {
     @GetMapping("/stores/memberCheck")
     public ResponseEntity<StoreReportHistoryListResponse> checkMemberReportList(
             @MemberInfo final LoginMember loginMember
-
     ) {
         StoreReportHistoryListResponse storeReportHistoryListResponse =
                 storeReportService.checkMemberReportList(loginMember.getMemberId());
